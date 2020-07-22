@@ -1,15 +1,23 @@
 //this is homepage
 import React from 'react'
 import GoogleLogin from 'react-google-login'
+import InfiniteCarousel from 'react-leaf-carousel';
 import styles from './css/Homepage.module.css'
-import logo from './imgurl/logo.png'
-import profile from './imgurl/profile.png'
+import dum1 from './imgurl/dum1.jpeg'
+import dum2 from './imgurl/dum2.jpeg'
+import dum3 from './imgurl/dum3.jpeg'
+import dum4 from './imgurl/dum4.jpeg'
+import dum5 from './imgurl/dum5.jpeg'
+import dum6 from './imgurl/dum6.jpeg'
+import dum7 from './imgurl/dum7.jpeg'
+
 export default class Homepage extends React.Component {
   responseGoogle = (response) => {
     console.log(response);
     console.log(response.profileObj);
   }
   render() {
+    const arr = [dum1, dum2, dum3, dum4, dum5, dum6, dum7]
     return (
       <div>
         {/* navbar code */}
@@ -73,7 +81,7 @@ export default class Homepage extends React.Component {
 
         <div style={{ height: "450px", width: "100%", border: "1px solid black" }}>
 
-          <div style={{ padding: "10%", marginLeft: "100px" }}>
+          <div style={{ padding: "10%", marginLeft: "30px" }}>
             <h3>Book <strike>Hotels</strike> Vacation Rentals</h3>
             <h3>Top Holiday Homes - Villas, Apartments & Homestays</h3>
             <form class="form-inline" role="form" style={{ padding: "10px", border: "1px solid black" }}>
@@ -103,6 +111,48 @@ export default class Homepage extends React.Component {
         </div>
 
 
+        {/* Top destination cards */}
+        <div className={styles.topdes}>
+          <div className={styles.head}><div style={{ fontSize: "25px" }}>Top Destinations</div></div>
+          <div className={styles.cara}>
+            <InfiniteCarousel
+              breakpoints={[
+                {
+                  breakpoint: 500,
+                  settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                  },
+                },
+                {
+                  breakpoint: 768,
+                  settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                  },
+                },
+              ]}
+              dots={true}
+              showSides={true}
+              sidesOpacity={.5}
+              sideSize={.1}
+              slidesToScroll={4}
+              slidesToShow={4}
+              scrollOnDevice={true}
+            >
+
+              {
+                arr.map(item => (
+                  <div><img src={item} height="150px" alt="" /></div>
+                ))
+              }
+            </InfiniteCarousel>
+
+          </div>
+        </div>
+
+
+
 
 
 
@@ -118,5 +168,3 @@ export default class Homepage extends React.Component {
 
 
 
-// <input type="text" />
-// <input type="text" />
