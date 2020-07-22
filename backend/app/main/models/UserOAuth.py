@@ -7,7 +7,8 @@ class UserOAuth(db.Model):
     user_id = db.Column(db.Integer,db.ForeignKey(AllUser.id))
     provider = db.Column(db.String(200))
     provider_id = db.Column(db.String(200),unique=True)
-    access_token = db.Column(db.String(200))
-    refresh_token = db.Column(db.String(200))
+    access_token = db.Column(db.TEXT)
+    refresh_token = db.Column(db.TEXT)
     data = db.Column(db.JSON())
-  
+
+    
