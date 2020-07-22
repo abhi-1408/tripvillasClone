@@ -68,6 +68,40 @@ export default class Homepage extends React.Component {
         </div>
 
 
+        {/* adding searchbar and larger image */}
+
+        <div style={{ height: "450px", width: "100%", border: "1px solid black" }}>
+
+          <div style={{ padding: "10%", marginLeft: "100px" }}>
+            <h3>Book <strike>Hotels</strike> Vacation Rentals</h3>
+            <h3>Top Holiday Homes - Villas, Apartments & Homestays</h3>
+            <div style={{ height: "56px", width: "900px", border: "1px solid black", padding: "10px" }}>
+              <input type="text" />
+              <input type="text" />
+              <select class="custom-select" style={{ width: "180px", borderRadius: "0px" }}>
+                <option selected>Select Guests</option>
+                <option value="1">1 guest</option>
+                <option value="2">2 guests</option>
+                <option value="3">3 guests</option>
+                <option value="4">4 guests</option>
+                <option value="5">5 guests</option>
+                <option value="6">6 guests</option>
+                <option value="7">7 guests</option>
+                <option value="8">8 guests</option>
+                <option value="9">9 guests</option>
+                <option value="10">10 guests</option>
+              </select>
+              <button type="button" class="btn btn-primary" style={{ borderRadius: "0px" }}>SEARCH</button>
+            </div>
+          </div>
+
+        </div>
+
+
+
+
+
+
 
       </div>
     )
