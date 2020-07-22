@@ -1,6 +1,9 @@
 from ..models import db
 from ..models.AllUserModel import AllUser
+# from ..models.UserOAuth import *
+# from ..models.Verification import *
 import json
+import jwt
 
 
 def register_user(data):
@@ -26,11 +29,14 @@ def register_user(data):
         )
 
     try:
+        print('HERE')
+        key = 'masai'
+        encoded_pwd = jwt.encode({"password":password},key)
         us = AllUser(
             first_name=data['first_name'],
             last_name=data['last_name'],
             email=data['email'],
-            password=data['password'],
+            password=encoded_pwd,
             mobile=data['mobile'],
             
         )
@@ -54,31 +60,21 @@ def login_user(credentials):
     except Exception as err:
         return ({'error': True, 'error_found': format(err)})
 
-    if email == "" or password == "":
-        return (
-            {'error': True, 'error_found': 'one or more field is empty'}
-        )
-    elif type(email) != str or type(password) != str:
-        return (
-            {'error': True, 'error_found': 'Insert valid data type'}
-        )
-
     try:
-        results = AllUser.query.filter(AllUser.email==email,AllUser.password==password).first()
+        key = 'masai'
+        results = AllUser.query.filter(AllUser.email==email).first()
         flag = 0
-        # for result in results:
-        #     if result['email'] == email:
-        #         if result['password'] == password:
-        if results:
-            flag=1
+        if results != None:
+            decode_pwd = jwt.decode(results.password,key)
+            if password == decode_pwd['password']:
+                flag=1
             
 
         if(flag==1):
             return ({'error':False,'message':'login successful'})
         else:
             return ({'error':False,'message':'login failed'})
-    # except:
-    #     return {"error": True}
+    
     except Exception as err:
         return ({'error': True, 'error_found': format(err)})
 
