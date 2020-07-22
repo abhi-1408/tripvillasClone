@@ -151,7 +151,32 @@ export default class Homepage extends React.Component {
           </div>
         </div>
 
+        {/* manage cards */}
 
+        <div >
+
+          <div className="row container-fluid">
+            <div className="col p-5 col-12 col-sm-12 col-lg-6">
+              <div class="card shadow-lg p-3 mb-5 bg-white rounded " style={{ width: "28rem", height: "400px", float: "left", marginLeft: "90px" }}>
+                <div class="card-body">
+                  <h5 class="card-title text-center">Fully Managed Communities By Tripvillas</h5>
+                  {/* static icons */}
+                </div>
+              </div>
+            </div>
+
+            <div class="col col-12 col-sm-12 col-lg-6" style={{ border: "1px solid black" }}>
+
+            </div>
+
+          </div>
+
+
+
+
+
+
+        </div>
 
 
 
