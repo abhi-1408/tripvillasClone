@@ -7,6 +7,6 @@ class AllUser(db.Model):
     first_name = db.Column(db.String(200))
     last_name = db.Column(db.String(200))
     email = db.Column(db.String(200),unique=True)
-    password = db.Column(db.String(200))
+    password = db.Column(db.TEXT)
     mobile = db.Column(db.String(10),unique=True)
   
