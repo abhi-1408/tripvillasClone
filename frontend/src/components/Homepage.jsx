@@ -204,8 +204,46 @@ export default class Homepage extends React.Component {
         </div>
 
 
+        {/* vacation ideas */}
 
+        <div className={styles.topdes}>
+          <div className={styles.head}><div style={{ fontSize: "25px" }}>Vacation Ideas</div></div>
+          <div className={styles.cara}>
+            <InfiniteCarousel
+              breakpoints={[
+                {
+                  breakpoint: 500,
+                  settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                  },
+                },
+                {
+                  breakpoint: 768,
+                  settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                  },
+                },
+              ]}
+              dots={true}
+              showSides={true}
+              sidesOpacity={.5}
+              sideSize={.1}
+              slidesToScroll={4}
+              slidesToShow={4}
+              scrollOnDevice={true}
+            >
 
+              {
+                arr.map(item => (
+                  <div><img src={item} height="150px" alt="" /></div>
+                ))
+              }
+            </InfiniteCarousel>
+
+          </div>
+        </div>
 
 
 
