@@ -156,8 +156,8 @@ export default class Homepage extends React.Component {
         <div >
 
           <div className="row container-fluid">
-            <div className="col p-5 col-12 col-sm-12 col-lg-6">
-              <div class="card shadow-lg p-3 mb-5 bg-white rounded " style={{ width: "28rem", height: "400px", float: "left", marginLeft: "90px" }}>
+            <div className="col p-5 ">
+              <div class="card shadow-lg p-3 mb-5 bg-white rounded " style={{ width: "28rem", height: "400px", marginLeft: "90px" }}>
                 <div class="card-body">
                   <h5 class="card-title text-center">Fully Managed Communities By Tripvillas</h5>
                   {/* static icons */}
@@ -165,18 +165,46 @@ export default class Homepage extends React.Component {
               </div>
             </div>
 
-            <div class="col col-12 col-sm-12 col-lg-6" style={{ border: "1px solid black" }}>
+            <div class="col" style={{ border: "1px solid black" }}>
 
             </div>
-
           </div>
 
-
-
-
-
-
         </div>
+
+
+        {/* two static card */}
+
+        <div className="container p-5">
+          <div className="row">
+            <div class="col ">
+              <div class="card " style={{ width: "30rem" }}>
+                <div class="card-body">
+                  <h5 class="card-title text-center">Holiday Home Investment Opportunities</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <div className="text-center">
+                    <button type="button" class="btn btn-primary">EXPLORE INVESTMENT OPPORTUNITIES</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col ">
+              <div class="card " style={{ width: "30rem" }}>
+                <div class="card-body">
+                  <h5 class="card-title text-center">Are you a holiday home owner/manager?</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <div className="text-center">
+                    <button type="button" class="btn btn-primary">LIST YOUR PROPERTY</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
 
 
 
