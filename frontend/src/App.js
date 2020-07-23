@@ -1,9 +1,13 @@
 import React from 'react'
 import './App.css'
-import Homepage from './Components/Homepage'
+
+import Navbar from './components/Navbar'
+import Homepage from './components/Homepage'
+
 function App() {
   return (
     <div>
+      <Navbar />
       <Homepage />
     </div>
   )

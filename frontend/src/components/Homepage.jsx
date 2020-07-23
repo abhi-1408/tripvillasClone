@@ -1,6 +1,8 @@
 import React from 'react'
-import GoogleLogin from 'react-google-login'
 import InfiniteCarousel from 'react-leaf-carousel';
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css";
+import Navbar from './Navbar'
 import styles from './css/Homepage.module.css'
 import dum1 from './imgurl/dum1.jpeg'
 import dum2 from './imgurl/dum2.jpeg'
@@ -11,71 +13,46 @@ import dum6 from './imgurl/dum6.jpeg'
 import dum7 from './imgurl/dum7.jpeg'
 
 export default class Homepage extends React.Component {
-  responseGoogle = (response) => {
-    console.log(response);
-    console.log(response.profileObj);
+  // responseGoogle = (response) => {
+  //   console.log(response);
+  //   console.log(response.profileObj);
+  // }
+
+  state = {
+
+    startDate: new Date(),
+
+    endDate: new Date()
+
   }
+
+  handleChange1 = (date) => {
+
+    this.setState({
+
+      startDate: date
+
+    })
+
+  }
+
+  handleChange2 = (date1) => {
+
+    this.setState({
+
+      endDate: date1
+
+    })
+
+  }
+
+
+
+
   render() {
     const arr = [dum1, dum2, dum3, dum4, dum5, dum6, dum7]
     return (
       <div>
-        {/* navbar code */}
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <a class="navbar-brand" href="#">tripvillas</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dropdown
-              </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">SIGNUP</a>
-                  <a class="dropdown-item" href="#">SIGNIN</a>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  AED
-              </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dropdown
-              </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-
-                </div>
-              </li>
-            </ul>
-          </div>
-        </nav>
-
-
-        {/* googleauth */}
-
-        <div>
-          <GoogleLogin
-            clientId="222606975118-9e6c9p3ek68d8ei2in3i1l6ator9ait5.apps.googleusercontent.com"
-            buttonText="Login"
-            onSuccess={this.responseGoogle}
-            onFailure={this.responseGoogle}
-            cookiePolicy={'single_host_origin'}
-
-          />
-        </div>
-
-
         {/* adding searchbar and larger image */}
 
         <div id={styles.largeimg} style={{ height: "480px", width: "100%", border: "1px solid black" }}>
@@ -87,7 +64,13 @@ export default class Homepage extends React.Component {
               <div class="form-group">
                 <label class="sr-only" for="searchZipcode">Zipcode</label>
                 <input type="text" class="form-control input-lg input-search" placeholder="location" />
-                <input type="text" class="form-control input-lg input-search" placeholder="checkin checkout" />
+
+                <DatePicker className={styles.datepick} selected={this.state.startDate} onChange={this.handleChange1} />
+                <DatePicker className={styles.datepick} selected={this.state.endDate} onChange={this.handleChange2} />
+
+
+
+                {/* <input type="text" class="form-control input-lg input-search" placeholder="checkin checkout" /> */}
 
                 <select class="custom-select" style={{ width: "180px", borderRadius: "0px" }}>
                   <option selected>Select Guests</option>
@@ -282,10 +265,8 @@ export default class Homepage extends React.Component {
           <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
         </div>
 
-
-
-
-
+        <DatePicker selected={this.state.startDate} onChange={this.handleChange1} />
+        <DatePicker selected={this.state.endDate} onChange={this.handleChange2} />
 
       </div>
     )
