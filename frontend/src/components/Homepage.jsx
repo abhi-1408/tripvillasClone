@@ -79,12 +79,12 @@ export default class Homepage extends React.Component {
 
         {/* adding searchbar and larger image */}
 
-        <div style={{ height: "450px", width: "100%", border: "1px solid black" }}>
+        <div id={styles.largeimg} style={{ height: "480px", width: "100%", border: "1px solid black" }}>
 
-          <div style={{ padding: "10%", marginLeft: "30px" }}>
+          <div style={{ padding: "10%", marginLeft: "30px", color: "white" }}>
             <h3>Book <strike>Hotels</strike> Vacation Rentals</h3>
             <h3>Top Holiday Homes - Villas, Apartments & Homestays</h3>
-            <form class="form-inline" role="form" style={{ padding: "10px", border: "1px solid black" }}>
+            <form class="form-inline text-center" role="form" style={{ padding: "10px", border: "1px solid black", backgroundColor: "white" }}>
               <div class="form-group">
                 <label class="sr-only" for="searchZipcode">Zipcode</label>
                 <input type="text" class="form-control input-lg input-search" placeholder="location" />
@@ -143,7 +143,11 @@ export default class Homepage extends React.Component {
 
               {
                 arr.map(item => (
-                  <div><img src={item} height="150px" alt="" /></div>
+                  <div>
+                    <div className="text-center" style={{ color: "white", backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(${item})`, height: "170px", width: "240px", backgroundRepeat: "no-repeat" }}>
+                      <h1 id={styles.smallcard}>Image titile</h1>
+                    </div>
+                  </div>
                 ))
               }
             </InfiniteCarousel>
@@ -237,7 +241,11 @@ export default class Homepage extends React.Component {
 
               {
                 arr.map(item => (
-                  <div><img src={item} height="150px" alt="" /></div>
+                  <div>
+                    <div className="text-center" style={{ fontSize: "10px", color: "white", backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(${item})`, height: "170px", width: "240px", backgroundRepeat: "no-repeat" }}>
+                      <h1 id={styles.smallcard}>Image titile</h1>
+                    </div>
+                  </div>
                 ))
               }
             </InfiniteCarousel>
@@ -245,6 +253,35 @@ export default class Homepage extends React.Component {
           </div>
         </div>
 
+
+        {/* footer */}
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Asia</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Europe</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">North America</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">South America </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Africa </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Oceania </a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+        </div>
 
 
 
