@@ -28,4 +28,4 @@ def a_filter():
     data =request.get_json()
     r = filter_data(data)
 
-    return 'filtering'
+    return json.dumps(r)
