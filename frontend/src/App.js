@@ -5,7 +5,7 @@ import Filterpage from './components/Filterpage'
 function App() {
   return (
     <div>
-      <Filterpage />
+      <Homepage />
     </div>
   )
 }

@@ -70,13 +70,42 @@ export default class FilterPage extends React.Component {
                             {
                                 data.map(item => {
                                     return (
-                                        <div class="card mb-3" style={{ width: "600px", height: "300px" }}>
+                                        // <div class="card mb-3" style={{ width: "600px", height: "300px" }}>
+                                        //     <div class="row no-gutters" >
+                                        //         <div class="col-lg">
+                                        //             <img src={item.images_mid_large[0]} class="img-fluid " alt="..." />
+                                        //         </div>
+                                        //         <div class="col-md-8"  >
+                                        //             <div class="card-body">
+                                        //                 <h5 class="card-title">{item.title}</h5>
+                                        //                 <h6><a href="">{item.location_name}</a></h6>
+                                        //                 {
+                                        //                     item.prop_tags.map(item => {
+                                        //                         return <div>
+                                        //                             <div style={{ float: "left", margin: "10px", border: "1px solid grey", padding: "5px" }}>
+                                        //                                 <small class="text-muted">{item}</small>
+                                        //                             </div>
+                                        //                         </div>
+                                        //                     })
+                                        //                 }
+                                        //                 <div class="card-text m-3">
+                                        //                     <h5>{item.total_price}</h5>
+                                        //                 </div>
+                                        //                 <div style={{ border: "1px solid orange", padding: "5px", textTransform: "uppercase", width: "230px" }}>
+                                        //                     <small class="text-muted">{item.cancellation_policy_name} CANCELLATION POLICY</small>
+                                        //                 </div>
+                                        //             </div>
+                                        //         </div>
+                                        //     </div>
+                                        // </div>
+
+                                        <div class="card mt-5">
                                             <div class="row no-gutters">
-                                                <div class="col-md-4">
-                                                    <img src={item.images_mid_large[0]} class="card-img" height="300px" alt="..." />
+                                                <div class="col-auto p-3">
+                                                    <img src={item.images_mid_large[0]} width="300px" height="100%" class="img-fluid" alt="" />
                                                 </div>
-                                                <div class="col-md-8">
-                                                    <div class="card-body">
+                                                <div class="col">
+                                                    <div class="card-block px-2">
                                                         <h5 class="card-title">{item.title}</h5>
                                                         <h6><a href="">{item.location_name}</a></h6>
                                                         {
