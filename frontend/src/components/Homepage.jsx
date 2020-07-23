@@ -1,5 +1,3 @@
-//this is homepage
-
 import React from 'react'
 import InfiniteCarousel from 'react-leaf-carousel';
 import DatePicker from "react-datepicker"
