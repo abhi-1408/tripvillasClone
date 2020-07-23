@@ -1,5 +1,3 @@
-//this is homepage
-
 import React from 'react'
 import GoogleLogin from 'react-google-login'
 import InfiniteCarousel from 'react-leaf-carousel';
