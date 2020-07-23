@@ -1,7 +1,8 @@
 from . import user
-from flask import request
+from flask import request,redirect,jsonify
 from ..services.alluser import register_user,login_user
 from ..services.useroauth import user_o_auth_check
+from ..services.verification import user_reset_query,user_reset_response
 import json
 
 
@@ -31,3 +32,22 @@ def oauth_signup():
 
     return json.dumps(res)
 
+
+@user.route('/reset_password/',methods=['GET'])
+def reset_request():
+    email = request.args['email']
+    res = user_reset_query(email)
+    
+    # return json.dumps(res)
+    return json.dumps('/user/reset/'+res['message']['token']+'/'+email)
+    # return redirect('/user/reset/'+res.decode("utf-8")+'/'+email)
+    # return json.dumps( {'error': False, 'message': {'token':res.decode('utf-8'),'email':email}})
+   
+
+@user.route('/reset/<token>/<email>',methods=['GET','POST'])
+def reset_resp(token,email):
+    data = request.get_json()
+    res = user_reset_response(email,data['new_password'],token)
+
+    return json.dumps(res)
+    # return res
