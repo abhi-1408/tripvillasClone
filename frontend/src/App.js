@@ -1,13 +1,9 @@
 import React from 'react'
-import logo from './logo.svg'
 import './App.css'
-import { Filterpage } from './Components/Filterpage'
-import { Homepage } from './Components/Homepage'
-
+import Homepage from './components/Homepage'
 function App() {
   return (
-    <div className='App'>
-      <Filterpage />
+    <div>
       <Homepage />
     </div>
   )
