@@ -1,0 +1,1323 @@
+[
+  {
+    "city_slug": "delhi-589",
+    "total_price": "AED572.00",
+    "discounted_price": "AED572.00",
+    "offer": 0,
+    "nights": 2,
+    "ac": true,
+    "cook_on_call": true,
+    "s_13": {
+      "total_price": 1001,
+      "offer": 0,
+      "discounted_price": 1001,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "cancellation_policy_name": "Stringent",
+    "cancellation_policy_desc": "No charges will be levied if booking is canceled 61 days prior to check-in. If cancellation is done between 30 to 60 days prior to check-in, 50% of the total booking amount will be charged. Post that, there will be no refund.",
+    "s_23": {
+      "total_price": 1771,
+      "offer": 0,
+      "discounted_price": 1771,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_29": {
+      "total_price": 2233,
+      "offer": 0,
+      "discounted_price": 2233,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_24": {
+      "total_price": 1848,
+      "offer": 0,
+      "discounted_price": 1848,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "review_rating": null,
+    "created_on": "2012-12-21 00:51:10",
+    "s_27": {
+      "total_price": 2079,
+      "offer": 0,
+      "discounted_price": 2079,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_20": {
+      "total_price": 1540,
+      "offer": 0,
+      "discounted_price": 1540,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_21": {
+      "total_price": 1617,
+      "offer": 0,
+      "discounted_price": 1617,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_22": {
+      "total_price": 1694,
+      "offer": 0,
+      "discounted_price": 1694,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "parking": false,
+    "spa": false,
+    "number_of_rooms": 2,
+    "s_28": {
+      "total_price": 2156,
+      "offer": 0,
+      "discounted_price": 2156,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "id": "41653679",
+    "min_night": 1,
+    "min_lead_time": 1,
+    "city": "delhi",
+    "check_in": "2020-07-24",
+    "property_type": "Apartment",
+    "review_count": 0,
+    "title": "South Delhi Homestay And Apartment 2Bhk",
+    "images_mid_large": [
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_640x960/41653679/c14760ff731b11e99d280a8e1b1ce4da_mob_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_640x960/41653679/b52fc645731b11e99d280a8e1b1ce4da_mob_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_640x960/41653679/09c6ec39731b11e99d280a8e1b1ce4da_mob_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_640x960/41653679/1578b3b9731b11e99d280a8e1b1ce4da_mob_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_640x960/41653679/1fd65f2d731b11e99d280a8e1b1ce4da_mob_thumbnail.jpeg"
+    ],
+    "number_of_bathrooms": 2,
+    "country_slug": "india",
+    "occupancy": 4,
+    "s_10": {
+      "total_price": 770,
+      "offer": 0,
+      "discounted_price": 770,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "functional_kitchen": true,
+    "state": "delhi",
+    "score": 105,
+    "rates": 77,
+    "lng": 77.22496,
+    "lat": 28.635308,
+    "location": { "lat": 28.635308, "lon": 77.22496 },
+    "pets": true,
+    "internet": true,
+    "units": 3,
+    "s_12": {
+      "total_price": 924,
+      "offer": 0,
+      "discounted_price": 924,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "dish_washer": true,
+    "instant_bookable": true,
+    "premium": false,
+    "s_25": {
+      "total_price": 1925,
+      "offer": 0,
+      "discounted_price": 1925,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "gym": false,
+    "images_large": [
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/41653679/c14760ff731b11e99d280a8e1b1ce4da_watermarked_image_1024.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/41653679/b52fc645731b11e99d280a8e1b1ce4da_watermarked_image_1024.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/41653679/09c6ec39731b11e99d280a8e1b1ce4da_watermarked_image_1024.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/41653679/1578b3b9731b11e99d280a8e1b1ce4da_watermarked_image_1024.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/41653679/1fd65f2d731b11e99d280a8e1b1ce4da_watermarked_image_1024.jpeg"
+    ],
+    "s_15": {
+      "total_price": 1155,
+      "offer": 0,
+      "discounted_price": 1155,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "max_price_in_usd": 146,
+    "s_19": {
+      "total_price": 1463,
+      "offer": 0,
+      "discounted_price": 1463,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_18": {
+      "total_price": 1386,
+      "offer": 0,
+      "discounted_price": 1386,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "images_small": [
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_100x100/41653679/c14760ff731b11e99d280a8e1b1ce4da_thumbnail_100x100.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_100x100/41653679/b52fc645731b11e99d280a8e1b1ce4da_thumbnail_100x100.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_100x100/41653679/09c6ec39731b11e99d280a8e1b1ce4da_thumbnail_100x100.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_100x100/41653679/1578b3b9731b11e99d280a8e1b1ce4da_thumbnail_100x100.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_100x100/41653679/1fd65f2d731b11e99d280a8e1b1ce4da_thumbnail_100x100.jpeg"
+    ],
+    "s_30": {
+      "total_price": 2310,
+      "offer": 0,
+      "discounted_price": 2310,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "active": true,
+    "s_3": {
+      "total_price": 231,
+      "offer": 0,
+      "discounted_price": 231,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_17": {
+      "total_price": 1309,
+      "offer": 0,
+      "discounted_price": 1309,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_16": {
+      "total_price": 1232,
+      "offer": 0,
+      "discounted_price": 1232,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_11": {
+      "total_price": 847,
+      "offer": 0,
+      "discounted_price": 847,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "images_medium": [
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_280x210/41653679/c14760ff731b11e99d280a8e1b1ce4da_mid_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_280x210/41653679/b52fc645731b11e99d280a8e1b1ce4da_mid_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_280x210/41653679/09c6ec39731b11e99d280a8e1b1ce4da_mid_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_280x210/41653679/1578b3b9731b11e99d280a8e1b1ce4da_mid_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_280x210/41653679/1fd65f2d731b11e99d280a8e1b1ce4da_mid_thumbnail.jpeg"
+    ],
+    "refrigerator": true,
+    "s_4": {
+      "total_price": 308,
+      "offer": 0,
+      "discounted_price": 308,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_1": {
+      "discounted_price": 77,
+      "total_price": 77,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "offer": 0
+    },
+    "state_slug": "delhi-10",
+    "television": true,
+    "s_2": {
+      "total_price": 154,
+      "offer": 0,
+      "discounted_price": 154,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_5": {
+      "total_price": 385,
+      "offer": 0,
+      "discounted_price": 385,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "housekeeping": true,
+    "s_7": {
+      "total_price": 539,
+      "offer": 0,
+      "discounted_price": 539,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_6": {
+      "total_price": 462,
+      "offer": 0,
+      "discounted_price": 462,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_9": {
+      "total_price": 693,
+      "offer": 0,
+      "discounted_price": 693,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "country": "india",
+    "s_26": {
+      "total_price": 2002,
+      "offer": 0,
+      "discounted_price": 2002,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_14": {
+      "total_price": 1078,
+      "offer": 0,
+      "discounted_price": 1078,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "swimming_pool": false,
+    "washing_machine": true,
+    "s_8": {
+      "total_price": 616,
+      "offer": 0,
+      "discounted_price": 616,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "availability_pct": 66.67,
+    "slug": "41653679-south-delhi-homestay-and-apartment-2bhk",
+    "prop_tags": [
+      "Apartment",
+      "2 Bedrooms",
+      "2 Bathrooms",
+      "Max 4 Guests",
+      "Wifi",
+      "TV",
+      "AC"
+    ],
+    "url": "/holiday-home/41653679-south-delhi-homestay-and-apartment-2bhk/",
+    "location_name": "Delhi, Delhi, India"
+  },
+
+  {
+    "city_slug": "delhi-589",
+    "total_price": "AED572.00",
+    "discounted_price": "AED572.00",
+    "offer": 0,
+    "nights": 2,
+    "ac": true,
+    "cook_on_call": true,
+    "s_13": {
+      "total_price": 1001,
+      "offer": 0,
+      "discounted_price": 1001,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "cancellation_policy_name": "Stringent",
+    "cancellation_policy_desc": "No charges will be levied if booking is canceled 61 days prior to check-in. If cancellation is done between 30 to 60 days prior to check-in, 50% of the total booking amount will be charged. Post that, there will be no refund.",
+    "s_23": {
+      "total_price": 1771,
+      "offer": 0,
+      "discounted_price": 1771,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_29": {
+      "total_price": 2233,
+      "offer": 0,
+      "discounted_price": 2233,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_24": {
+      "total_price": 1848,
+      "offer": 0,
+      "discounted_price": 1848,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "review_rating": null,
+    "created_on": "2012-12-21 00:51:10",
+    "s_27": {
+      "total_price": 2079,
+      "offer": 0,
+      "discounted_price": 2079,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_20": {
+      "total_price": 1540,
+      "offer": 0,
+      "discounted_price": 1540,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_21": {
+      "total_price": 1617,
+      "offer": 0,
+      "discounted_price": 1617,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_22": {
+      "total_price": 1694,
+      "offer": 0,
+      "discounted_price": 1694,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "parking": false,
+    "spa": false,
+    "number_of_rooms": 2,
+    "s_28": {
+      "total_price": 2156,
+      "offer": 0,
+      "discounted_price": 2156,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "id": "41653679",
+    "min_night": 1,
+    "min_lead_time": 1,
+    "city": "delhi",
+    "check_in": "2020-07-24",
+    "property_type": "Apartment",
+    "review_count": 0,
+    "title": "South Delhi Homestay And Apartment 2Bhk",
+    "images_mid_large": [
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_640x960/41653679/c14760ff731b11e99d280a8e1b1ce4da_mob_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_640x960/41653679/b52fc645731b11e99d280a8e1b1ce4da_mob_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_640x960/41653679/09c6ec39731b11e99d280a8e1b1ce4da_mob_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_640x960/41653679/1578b3b9731b11e99d280a8e1b1ce4da_mob_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_640x960/41653679/1fd65f2d731b11e99d280a8e1b1ce4da_mob_thumbnail.jpeg"
+    ],
+    "number_of_bathrooms": 2,
+    "country_slug": "india",
+    "occupancy": 4,
+    "s_10": {
+      "total_price": 770,
+      "offer": 0,
+      "discounted_price": 770,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "functional_kitchen": true,
+    "state": "delhi",
+    "score": 105,
+    "rates": 77,
+    "lng": 77.22496,
+    "lat": 28.635308,
+    "location": { "lat": 28.635308, "lon": 77.22496 },
+    "pets": true,
+    "internet": true,
+    "units": 3,
+    "s_12": {
+      "total_price": 924,
+      "offer": 0,
+      "discounted_price": 924,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "dish_washer": true,
+    "instant_bookable": true,
+    "premium": false,
+    "s_25": {
+      "total_price": 1925,
+      "offer": 0,
+      "discounted_price": 1925,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "gym": false,
+    "images_large": [
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/41653679/c14760ff731b11e99d280a8e1b1ce4da_watermarked_image_1024.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/41653679/b52fc645731b11e99d280a8e1b1ce4da_watermarked_image_1024.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/41653679/09c6ec39731b11e99d280a8e1b1ce4da_watermarked_image_1024.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/41653679/1578b3b9731b11e99d280a8e1b1ce4da_watermarked_image_1024.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/41653679/1fd65f2d731b11e99d280a8e1b1ce4da_watermarked_image_1024.jpeg"
+    ],
+    "s_15": {
+      "total_price": 1155,
+      "offer": 0,
+      "discounted_price": 1155,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "max_price_in_usd": 146,
+    "s_19": {
+      "total_price": 1463,
+      "offer": 0,
+      "discounted_price": 1463,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_18": {
+      "total_price": 1386,
+      "offer": 0,
+      "discounted_price": 1386,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "images_small": [
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_100x100/41653679/c14760ff731b11e99d280a8e1b1ce4da_thumbnail_100x100.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_100x100/41653679/b52fc645731b11e99d280a8e1b1ce4da_thumbnail_100x100.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_100x100/41653679/09c6ec39731b11e99d280a8e1b1ce4da_thumbnail_100x100.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_100x100/41653679/1578b3b9731b11e99d280a8e1b1ce4da_thumbnail_100x100.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_100x100/41653679/1fd65f2d731b11e99d280a8e1b1ce4da_thumbnail_100x100.jpeg"
+    ],
+    "s_30": {
+      "total_price": 2310,
+      "offer": 0,
+      "discounted_price": 2310,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "active": true,
+    "s_3": {
+      "total_price": 231,
+      "offer": 0,
+      "discounted_price": 231,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_17": {
+      "total_price": 1309,
+      "offer": 0,
+      "discounted_price": 1309,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_16": {
+      "total_price": 1232,
+      "offer": 0,
+      "discounted_price": 1232,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_11": {
+      "total_price": 847,
+      "offer": 0,
+      "discounted_price": 847,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "images_medium": [
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_280x210/41653679/c14760ff731b11e99d280a8e1b1ce4da_mid_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_280x210/41653679/b52fc645731b11e99d280a8e1b1ce4da_mid_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_280x210/41653679/09c6ec39731b11e99d280a8e1b1ce4da_mid_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_280x210/41653679/1578b3b9731b11e99d280a8e1b1ce4da_mid_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_280x210/41653679/1fd65f2d731b11e99d280a8e1b1ce4da_mid_thumbnail.jpeg"
+    ],
+    "refrigerator": true,
+    "s_4": {
+      "total_price": 308,
+      "offer": 0,
+      "discounted_price": 308,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_1": {
+      "discounted_price": 77,
+      "total_price": 77,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "offer": 0
+    },
+    "state_slug": "delhi-10",
+    "television": true,
+    "s_2": {
+      "total_price": 154,
+      "offer": 0,
+      "discounted_price": 154,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_5": {
+      "total_price": 385,
+      "offer": 0,
+      "discounted_price": 385,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "housekeeping": true,
+    "s_7": {
+      "total_price": 539,
+      "offer": 0,
+      "discounted_price": 539,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_6": {
+      "total_price": 462,
+      "offer": 0,
+      "discounted_price": 462,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_9": {
+      "total_price": 693,
+      "offer": 0,
+      "discounted_price": 693,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "country": "india",
+    "s_26": {
+      "total_price": 2002,
+      "offer": 0,
+      "discounted_price": 2002,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_14": {
+      "total_price": 1078,
+      "offer": 0,
+      "discounted_price": 1078,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "swimming_pool": false,
+    "washing_machine": true,
+    "s_8": {
+      "total_price": 616,
+      "offer": 0,
+      "discounted_price": 616,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "availability_pct": 66.67,
+    "slug": "41653679-south-delhi-homestay-and-apartment-2bhk",
+    "prop_tags": [
+      "Apartment",
+      "2 Bedrooms",
+      "2 Bathrooms",
+      "Max 4 Guests",
+      "Wifi",
+      "TV",
+      "AC"
+    ],
+    "url": "/holiday-home/41653679-south-delhi-homestay-and-apartment-2bhk/",
+    "location_name": "Delhi, Delhi, India"
+  },
+  {
+    "city_slug": "delhi-589",
+    "total_price": "AED572.00",
+    "discounted_price": "AED572.00",
+    "offer": 0,
+    "nights": 2,
+    "ac": true,
+    "cook_on_call": true,
+    "s_13": {
+      "total_price": 1001,
+      "offer": 0,
+      "discounted_price": 1001,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "cancellation_policy_name": "Stringent",
+    "cancellation_policy_desc": "No charges will be levied if booking is canceled 61 days prior to check-in. If cancellation is done between 30 to 60 days prior to check-in, 50% of the total booking amount will be charged. Post that, there will be no refund.",
+    "s_23": {
+      "total_price": 1771,
+      "offer": 0,
+      "discounted_price": 1771,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_29": {
+      "total_price": 2233,
+      "offer": 0,
+      "discounted_price": 2233,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_24": {
+      "total_price": 1848,
+      "offer": 0,
+      "discounted_price": 1848,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "review_rating": null,
+    "created_on": "2012-12-21 00:51:10",
+    "s_27": {
+      "total_price": 2079,
+      "offer": 0,
+      "discounted_price": 2079,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_20": {
+      "total_price": 1540,
+      "offer": 0,
+      "discounted_price": 1540,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_21": {
+      "total_price": 1617,
+      "offer": 0,
+      "discounted_price": 1617,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_22": {
+      "total_price": 1694,
+      "offer": 0,
+      "discounted_price": 1694,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "parking": false,
+    "spa": false,
+    "number_of_rooms": 2,
+    "s_28": {
+      "total_price": 2156,
+      "offer": 0,
+      "discounted_price": 2156,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "id": "41653679",
+    "min_night": 1,
+    "min_lead_time": 1,
+    "city": "delhi",
+    "check_in": "2020-07-24",
+    "property_type": "Apartment",
+    "review_count": 0,
+    "title": "South Delhi Homestay And Apartment 2Bhk",
+    "images_mid_large": [
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_640x960/41653679/c14760ff731b11e99d280a8e1b1ce4da_mob_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_640x960/41653679/b52fc645731b11e99d280a8e1b1ce4da_mob_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_640x960/41653679/09c6ec39731b11e99d280a8e1b1ce4da_mob_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_640x960/41653679/1578b3b9731b11e99d280a8e1b1ce4da_mob_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_640x960/41653679/1fd65f2d731b11e99d280a8e1b1ce4da_mob_thumbnail.jpeg"
+    ],
+    "number_of_bathrooms": 2,
+    "country_slug": "india",
+    "occupancy": 4,
+    "s_10": {
+      "total_price": 770,
+      "offer": 0,
+      "discounted_price": 770,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "functional_kitchen": true,
+    "state": "delhi",
+    "score": 105,
+    "rates": 77,
+    "lng": 77.22496,
+    "lat": 28.635308,
+    "location": { "lat": 28.635308, "lon": 77.22496 },
+    "pets": true,
+    "internet": true,
+    "units": 3,
+    "s_12": {
+      "total_price": 924,
+      "offer": 0,
+      "discounted_price": 924,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "dish_washer": true,
+    "instant_bookable": true,
+    "premium": false,
+    "s_25": {
+      "total_price": 1925,
+      "offer": 0,
+      "discounted_price": 1925,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "gym": false,
+    "images_large": [
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/41653679/c14760ff731b11e99d280a8e1b1ce4da_watermarked_image_1024.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/41653679/b52fc645731b11e99d280a8e1b1ce4da_watermarked_image_1024.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/41653679/09c6ec39731b11e99d280a8e1b1ce4da_watermarked_image_1024.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/41653679/1578b3b9731b11e99d280a8e1b1ce4da_watermarked_image_1024.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/41653679/1fd65f2d731b11e99d280a8e1b1ce4da_watermarked_image_1024.jpeg"
+    ],
+    "s_15": {
+      "total_price": 1155,
+      "offer": 0,
+      "discounted_price": 1155,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "max_price_in_usd": 146,
+    "s_19": {
+      "total_price": 1463,
+      "offer": 0,
+      "discounted_price": 1463,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_18": {
+      "total_price": 1386,
+      "offer": 0,
+      "discounted_price": 1386,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "images_small": [
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_100x100/41653679/c14760ff731b11e99d280a8e1b1ce4da_thumbnail_100x100.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_100x100/41653679/b52fc645731b11e99d280a8e1b1ce4da_thumbnail_100x100.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_100x100/41653679/09c6ec39731b11e99d280a8e1b1ce4da_thumbnail_100x100.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_100x100/41653679/1578b3b9731b11e99d280a8e1b1ce4da_thumbnail_100x100.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_100x100/41653679/1fd65f2d731b11e99d280a8e1b1ce4da_thumbnail_100x100.jpeg"
+    ],
+    "s_30": {
+      "total_price": 2310,
+      "offer": 0,
+      "discounted_price": 2310,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "active": true,
+    "s_3": {
+      "total_price": 231,
+      "offer": 0,
+      "discounted_price": 231,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_17": {
+      "total_price": 1309,
+      "offer": 0,
+      "discounted_price": 1309,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_16": {
+      "total_price": 1232,
+      "offer": 0,
+      "discounted_price": 1232,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_11": {
+      "total_price": 847,
+      "offer": 0,
+      "discounted_price": 847,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "images_medium": [
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_280x210/41653679/c14760ff731b11e99d280a8e1b1ce4da_mid_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_280x210/41653679/b52fc645731b11e99d280a8e1b1ce4da_mid_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_280x210/41653679/09c6ec39731b11e99d280a8e1b1ce4da_mid_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_280x210/41653679/1578b3b9731b11e99d280a8e1b1ce4da_mid_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_280x210/41653679/1fd65f2d731b11e99d280a8e1b1ce4da_mid_thumbnail.jpeg"
+    ],
+    "refrigerator": true,
+    "s_4": {
+      "total_price": 308,
+      "offer": 0,
+      "discounted_price": 308,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_1": {
+      "discounted_price": 77,
+      "total_price": 77,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "offer": 0
+    },
+    "state_slug": "delhi-10",
+    "television": true,
+    "s_2": {
+      "total_price": 154,
+      "offer": 0,
+      "discounted_price": 154,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_5": {
+      "total_price": 385,
+      "offer": 0,
+      "discounted_price": 385,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "housekeeping": true,
+    "s_7": {
+      "total_price": 539,
+      "offer": 0,
+      "discounted_price": 539,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_6": {
+      "total_price": 462,
+      "offer": 0,
+      "discounted_price": 462,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_9": {
+      "total_price": 693,
+      "offer": 0,
+      "discounted_price": 693,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "country": "india",
+    "s_26": {
+      "total_price": 2002,
+      "offer": 0,
+      "discounted_price": 2002,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_14": {
+      "total_price": 1078,
+      "offer": 0,
+      "discounted_price": 1078,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "swimming_pool": false,
+    "washing_machine": true,
+    "s_8": {
+      "total_price": 616,
+      "offer": 0,
+      "discounted_price": 616,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "availability_pct": 66.67,
+    "slug": "41653679-south-delhi-homestay-and-apartment-2bhk",
+    "prop_tags": [
+      "Apartment",
+      "2 Bedrooms",
+      "2 Bathrooms",
+      "Max 4 Guests",
+      "Wifi",
+      "TV",
+      "AC"
+    ],
+    "url": "/holiday-home/41653679-south-delhi-homestay-and-apartment-2bhk/",
+    "location_name": "Delhi, Delhi, India"
+  },
+  {
+    "city_slug": "delhi-589",
+    "total_price": "AED572.00",
+    "discounted_price": "AED572.00",
+    "offer": 0,
+    "nights": 2,
+    "ac": true,
+    "cook_on_call": true,
+    "s_13": {
+      "total_price": 1001,
+      "offer": 0,
+      "discounted_price": 1001,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "cancellation_policy_name": "Stringent",
+    "cancellation_policy_desc": "No charges will be levied if booking is canceled 61 days prior to check-in. If cancellation is done between 30 to 60 days prior to check-in, 50% of the total booking amount will be charged. Post that, there will be no refund.",
+    "s_23": {
+      "total_price": 1771,
+      "offer": 0,
+      "discounted_price": 1771,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_29": {
+      "total_price": 2233,
+      "offer": 0,
+      "discounted_price": 2233,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_24": {
+      "total_price": 1848,
+      "offer": 0,
+      "discounted_price": 1848,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "review_rating": null,
+    "created_on": "2012-12-21 00:51:10",
+    "s_27": {
+      "total_price": 2079,
+      "offer": 0,
+      "discounted_price": 2079,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_20": {
+      "total_price": 1540,
+      "offer": 0,
+      "discounted_price": 1540,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_21": {
+      "total_price": 1617,
+      "offer": 0,
+      "discounted_price": 1617,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_22": {
+      "total_price": 1694,
+      "offer": 0,
+      "discounted_price": 1694,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "parking": false,
+    "spa": false,
+    "number_of_rooms": 2,
+    "s_28": {
+      "total_price": 2156,
+      "offer": 0,
+      "discounted_price": 2156,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "id": "41653679",
+    "min_night": 1,
+    "min_lead_time": 1,
+    "city": "delhi",
+    "check_in": "2020-07-24",
+    "property_type": "Apartment",
+    "review_count": 0,
+    "title": "South Delhi Homestay And Apartment 2Bhk",
+    "images_mid_large": [
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_640x960/41653679/c14760ff731b11e99d280a8e1b1ce4da_mob_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_640x960/41653679/b52fc645731b11e99d280a8e1b1ce4da_mob_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_640x960/41653679/09c6ec39731b11e99d280a8e1b1ce4da_mob_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_640x960/41653679/1578b3b9731b11e99d280a8e1b1ce4da_mob_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_640x960/41653679/1fd65f2d731b11e99d280a8e1b1ce4da_mob_thumbnail.jpeg"
+    ],
+    "number_of_bathrooms": 2,
+    "country_slug": "india",
+    "occupancy": 4,
+    "s_10": {
+      "total_price": 770,
+      "offer": 0,
+      "discounted_price": 770,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "functional_kitchen": true,
+    "state": "delhi",
+    "score": 105,
+    "rates": 77,
+    "lng": 77.22496,
+    "lat": 28.635308,
+    "location": { "lat": 28.635308, "lon": 77.22496 },
+    "pets": true,
+    "internet": true,
+    "units": 3,
+    "s_12": {
+      "total_price": 924,
+      "offer": 0,
+      "discounted_price": 924,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "dish_washer": true,
+    "instant_bookable": true,
+    "premium": false,
+    "s_25": {
+      "total_price": 1925,
+      "offer": 0,
+      "discounted_price": 1925,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "gym": false,
+    "images_large": [
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/41653679/c14760ff731b11e99d280a8e1b1ce4da_watermarked_image_1024.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/41653679/b52fc645731b11e99d280a8e1b1ce4da_watermarked_image_1024.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/41653679/09c6ec39731b11e99d280a8e1b1ce4da_watermarked_image_1024.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/41653679/1578b3b9731b11e99d280a8e1b1ce4da_watermarked_image_1024.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/41653679/1fd65f2d731b11e99d280a8e1b1ce4da_watermarked_image_1024.jpeg"
+    ],
+    "s_15": {
+      "total_price": 1155,
+      "offer": 0,
+      "discounted_price": 1155,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "max_price_in_usd": 146,
+    "s_19": {
+      "total_price": 1463,
+      "offer": 0,
+      "discounted_price": 1463,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_18": {
+      "total_price": 1386,
+      "offer": 0,
+      "discounted_price": 1386,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "images_small": [
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_100x100/41653679/c14760ff731b11e99d280a8e1b1ce4da_thumbnail_100x100.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_100x100/41653679/b52fc645731b11e99d280a8e1b1ce4da_thumbnail_100x100.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_100x100/41653679/09c6ec39731b11e99d280a8e1b1ce4da_thumbnail_100x100.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_100x100/41653679/1578b3b9731b11e99d280a8e1b1ce4da_thumbnail_100x100.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_100x100/41653679/1fd65f2d731b11e99d280a8e1b1ce4da_thumbnail_100x100.jpeg"
+    ],
+    "s_30": {
+      "total_price": 2310,
+      "offer": 0,
+      "discounted_price": 2310,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "active": true,
+    "s_3": {
+      "total_price": 231,
+      "offer": 0,
+      "discounted_price": 231,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_17": {
+      "total_price": 1309,
+      "offer": 0,
+      "discounted_price": 1309,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_16": {
+      "total_price": 1232,
+      "offer": 0,
+      "discounted_price": 1232,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_11": {
+      "total_price": 847,
+      "offer": 0,
+      "discounted_price": 847,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "images_medium": [
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_280x210/41653679/c14760ff731b11e99d280a8e1b1ce4da_mid_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_280x210/41653679/b52fc645731b11e99d280a8e1b1ce4da_mid_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_280x210/41653679/09c6ec39731b11e99d280a8e1b1ce4da_mid_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_280x210/41653679/1578b3b9731b11e99d280a8e1b1ce4da_mid_thumbnail.jpeg",
+      "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_280x210/41653679/1fd65f2d731b11e99d280a8e1b1ce4da_mid_thumbnail.jpeg"
+    ],
+    "refrigerator": true,
+    "s_4": {
+      "total_price": 308,
+      "offer": 0,
+      "discounted_price": 308,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_1": {
+      "discounted_price": 77,
+      "total_price": 77,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "offer": 0
+    },
+    "state_slug": "delhi-10",
+    "television": true,
+    "s_2": {
+      "total_price": 154,
+      "offer": 0,
+      "discounted_price": 154,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_5": {
+      "total_price": 385,
+      "offer": 0,
+      "discounted_price": 385,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "housekeeping": true,
+    "s_7": {
+      "total_price": 539,
+      "offer": 0,
+      "discounted_price": 539,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_6": {
+      "total_price": 462,
+      "offer": 0,
+      "discounted_price": 462,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_9": {
+      "total_price": 693,
+      "offer": 0,
+      "discounted_price": 693,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "country": "india",
+    "s_26": {
+      "total_price": 2002,
+      "offer": 0,
+      "discounted_price": 2002,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "s_14": {
+      "total_price": 1078,
+      "offer": 0,
+      "discounted_price": 1078,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "swimming_pool": false,
+    "washing_machine": true,
+    "s_8": {
+      "total_price": 616,
+      "offer": 0,
+      "discounted_price": 616,
+      "min_room": 4,
+      "min_occupancy": 8,
+      "check_out": true
+    },
+    "availability_pct": 66.67,
+    "slug": "41653679-south-delhi-homestay-and-apartment-2bhk",
+    "prop_tags": [
+      "Apartment",
+      "2 Bedrooms",
+      "2 Bathrooms",
+      "Max 4 Guests",
+      "Wifi",
+      "TV",
+      "AC"
+    ],
+    "url": "/holiday-home/41653679-south-delhi-homestay-and-apartment-2bhk/",
+    "location_name": "Delhi, Delhi, India"
+  }
+]
