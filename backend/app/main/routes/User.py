@@ -28,6 +28,10 @@ def signup():
 @user.route('/oauth_signin',methods=['POST'])
 def oauth_signup():
     data = request.get_json()
+    # data = data.loads()
+    # data = request.form.to_dict()
+    # payload = json.loads(data)
+    # print('/////********data is',data['Da'])
     res = user_o_auth_check(data)
 
     return json.dumps(res)

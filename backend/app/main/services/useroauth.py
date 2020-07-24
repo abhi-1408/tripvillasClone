@@ -9,7 +9,7 @@ import jwt
 def user_o_auth_check(data):
     try:
         first_name = data['profileObj']['name'],
-        last_name = data['profileObj']['familyName'],
+        last_name = data['profileObj']['givenName'],
         email = data['profileObj']['email']
         password = None
         mobile = ""
@@ -35,7 +35,7 @@ def user_o_auth_check(data):
         result = AllUser.query.filter(AllUser.email == email).first()
 
         if result != None:
-            return {'error': False, 'message': 'login successfully'}
+            return {'error': False, 'message': 'login successfully','status':True,'username':first_name}
             #already registered in my db from oauth
         else:
             user = AllUser(first_name = first_name, last_name = last_name, email = email, password = password, mobile = mobile)
@@ -52,7 +52,7 @@ def user_o_auth_check(data):
             
 
         return (
-            {'error': False, 'message': 'login & registered successfully'}
+            {'error': False, 'message': 'login & registered successfully','status':True,'username':first_name}
         )
     except Exception as err:
         return {'error': True, 'error_found': format(err)}
