@@ -64,16 +64,18 @@ def login_user(credentials):
         key = 'masai'
         results = AllUser.query.filter(AllUser.email==email).first()
         flag = 0
+        first_name = ""
         if results != None:
             decode_pwd = jwt.decode(results.password,key)
             if password == decode_pwd['password']:
+                first_name = results.first_name
                 flag=1
             
 
         if(flag==1):
-            return ({'error':False,'message':'login successful'})
+            return ({'error':False,'message':'login successful','status':True,'username':first_name})
         else:
-            return ({'error':False,'message':'login failed'})
+            return ({'error':False,'message':'credentials mismatch','status':False})
     
     except Exception as err:
         return ({'error': True, 'error_found': format(err)})
