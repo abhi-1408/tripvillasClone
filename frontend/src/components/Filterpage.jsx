@@ -1,6 +1,27 @@
 import React from 'react'
-import data from './data.json'
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css";
+import data from './data1.json'
+import styles from './css/Filterpage.module.css'
 export default class FilterPage extends React.Component {
+
+    state = {
+        startDate: new Date(),
+        endDate: new Date()
+    }
+
+    handleChange1 = (date) => {
+        this.setState({
+            startDate: date
+        })
+    }
+
+    handleChange2 = (date1) => {
+        this.setState({
+            endDate: date1
+        })
+    }
+
 
     render() {
         return (
@@ -61,8 +82,21 @@ export default class FilterPage extends React.Component {
                                         <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">APPLY FILTERS</button>
                                     </div>
                                     <div className="col">
-                                        <button type="button" class="btn btn-outline-secondary">MODIFY SEARCH</button>
+                                        <button type="button" class="btn btn-outline-secondary ml-5" data-toggle="modal" data-target="#modify" >MODIFY SEARCH</button>
                                     </div>
+                                </div>
+                            </div>
+                            <hr />
+
+                            <div className="m-3">
+                                <small className="m-3 text-muted mr-5 ml-3">Total results {data.length}</small>
+                                <div style={{ float: "right" }}>
+                                    <label for="sortby"><small className="text-muted ">Sort By</small></label>
+                                    <select className="ml-1" id="sortby">
+                                        <option value="relevance">Relevance</option>
+                                        <option value="low">Price (Low to High)</option>
+                                        <option value="high">Price (High to low)</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -70,58 +104,28 @@ export default class FilterPage extends React.Component {
                             {
                                 data.map(item => {
                                     return (
-                                        // <div class="card mb-3" style={{ width: "600px", height: "300px" }}>
-                                        //     <div class="row no-gutters" >
-                                        //         <div class="col-lg">
-                                        //             <img src={item.images_mid_large[0]} class="img-fluid " alt="..." />
-                                        //         </div>
-                                        //         <div class="col-md-8"  >
-                                        //             <div class="card-body">
-                                        //                 <h5 class="card-title">{item.title}</h5>
-                                        //                 <h6><a href="">{item.location_name}</a></h6>
-                                        //                 {
-                                        //                     item.prop_tags.map(item => {
-                                        //                         return <div>
-                                        //                             <div style={{ float: "left", margin: "10px", border: "1px solid grey", padding: "5px" }}>
-                                        //                                 <small class="text-muted">{item}</small>
-                                        //                             </div>
-                                        //                         </div>
-                                        //                     })
-                                        //                 }
-                                        //                 <div class="card-text m-3">
-                                        //                     <h5>{item.total_price}</h5>
-                                        //                 </div>
-                                        //                 <div style={{ border: "1px solid orange", padding: "5px", textTransform: "uppercase", width: "230px" }}>
-                                        //                     <small class="text-muted">{item.cancellation_policy_name} CANCELLATION POLICY</small>
-                                        //                 </div>
-                                        //             </div>
-                                        //         </div>
-                                        //     </div>
-                                        // </div>
 
-                                        <div class="card mt-5">
+                                        <div class="card mb-3 shadow-lg p-3 mb-5 bg-white rounded" style={{ maxWidth: "740px" }}>
                                             <div class="row no-gutters">
-                                                <div class="col-auto p-3">
-                                                    <img src={item.images_mid_large[0]} width="300px" height="100%" class="img-fluid" alt="" />
+                                                <div class="col-md-4 mt-4">
+                                                    <div style={{ backgroundImage: `url(${item.images_mid_large[0]})`, height: "100%", backgroundSize: "cover" }}></div>
+                                                    {/* <img src={item.images_mid_large[0]} class="card-img" alt="..." /> */}
                                                 </div>
-                                                <div class="col">
-                                                    <div class="card-block px-2">
-                                                        <h5 class="card-title">{item.title}</h5>
+                                                <div class="col-md-8">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title"><a style={{ color: "black" }} href="">{item.title}</a></h5>
                                                         <h6><a href="">{item.location_name}</a></h6>
                                                         {
                                                             item.prop_tags.map(item => {
-                                                                return <div>
-                                                                    <div style={{ float: "left", margin: "10px", border: "1px solid grey", padding: "5px" }}>
-                                                                        <small class="text-muted">{item}</small>
-                                                                    </div>
+                                                                return <div style={{ float: "left", margin: "10px", border: "1px solid grey", padding: "5px" }}>
+                                                                    <small class="text-muted">{item}</small>
                                                                 </div>
+
                                                             })
                                                         }
-                                                        <div class="card-text m-3">
-                                                            <h5>{item.total_price}</h5>
-                                                        </div>
-                                                        <div style={{ border: "1px solid orange", padding: "5px", textTransform: "uppercase", width: "230px" }}>
-                                                            <small class="text-muted">{item.cancellation_policy_name} CANCELLATION POLICY</small>
+                                                        <div style={{ clear: "both" }}>
+                                                            <p><h5>{item.total_price}</h5></p>
+                                                            <small class="text-muted mt-3" style={{ border: "1px solid orange", padding: "5px", textTransform: "uppercase", color: "orange", width: "230px" }}>{item.cancellation_policy_name} CANCELLATION POLICY</small>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -459,6 +463,54 @@ export default class FilterPage extends React.Component {
                                 </div>
                             </div>
                         </div>
+
+
+
+                        {/* modify search modal */}
+                        <div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">MODIFY SEARCH</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="form-group">
+                                                <input type="text" class=" m-3" id={styles.location} placeholder="LOCATION" />
+                                                <DatePicker className={styles.datepick} selected={this.state.startDate} onChange={this.handleChange1} />
+                                                <DatePicker className={styles.datepick} selected={this.state.endDate} onChange={this.handleChange2} />
+                                                <div className="m-3">
+                                                    <select class="custom-select" style={{ width: "180px", borderRadius: "0px" }}>
+                                                        <option selected>Select Guests</option>
+                                                        <option value="1">1 guest</option>
+                                                        <option value="2">2 guests</option>
+                                                        <option value="3">3 guests</option>
+                                                        <option value="4">4 guests</option>
+                                                        <option value="5">5 guests</option>
+                                                        <option value="6">6 guests</option>
+                                                        <option value="7">7 guests</option>
+                                                        <option value="8">8 guests</option>
+                                                        <option value="9">9 guests</option>
+                                                        <option value="10">10 guests</option>
+                                                    </select>
+                                                </div>
+                                                <div className="m-3">
+                                                    <button type="button" class="btn btn-primary" style={{ borderRadius: "0px" }}>SEARCH</button>
+
+                                                    <button type="button" class="btn btn-secondary ml-3" data-dismiss="modal">CANCEL</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
 
 
                         <div className="col">
