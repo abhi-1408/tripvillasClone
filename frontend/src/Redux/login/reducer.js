@@ -4,7 +4,7 @@ const initialState = {
     auth_logged: false,
     user_loggedin: "",
     message_logged: "",
-    error_logged: false
+    error_logged: false,
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -16,6 +16,7 @@ export default (state = initialState, { type, payload }) => {
                 ...state,
                 ...initialState
             }
+
 
         case "LOGIN_SUCCESS":
             let { message, username } = payload
