@@ -10,6 +10,7 @@ from . import CategoryModel
 from . import HotelModel
 from . import RoomMetaModel
 from . import BookingModel
+from . import BookedSlotModel
 from . import RatingNReviewModel
 
 
