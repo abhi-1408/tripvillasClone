@@ -3,8 +3,12 @@ import './App.css'
 import { Link, Switch, Route } from 'react-router-dom'
 import { Navbar } from './components/Navbar'
 import { Homepage } from './components/Homepage'
+
+import { Propertypage } from './components/Propertypage'
+
 import { FilterPage } from './components/Filterpage'
 import { Routes } from './Routes/Routes'
+
 
 function App() {
   return (
