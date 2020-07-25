@@ -4,21 +4,31 @@ import { Link, Switch, Route } from 'react-router-dom'
 import { Navbar } from './components/Navbar'
 import { Homepage } from './components/Homepage'
 import { FilterPage } from './components/Filterpage'
+import { Routes } from './Routes/Routes'
 
 function App() {
   return (
     <div>
-      <Navbar />
-      <Link to='/homepage' >HOMEPAGE</Link>
+      {/* <Navbar /> */}
+      {/* <Link to='/homepage' >HOMEPAGE</Link>
       <Link to='/filterby' >FILTER BY</Link>
       <Switch>
         <Route path='/homepage' render={(props) => <Homepage {...props} />} />
         <Route path='/filterby' exact render={(props) => <FilterPage {...props} />} />
-        {/* <Route render={(props) => <div><h2>trying</h2></div>} /> */}
-      </Switch>
-      <FilterPage />
-
+      </Switch> */}
+      {/* <FilterPage /> */}
       {/* <Homepage /> */}
+      <div>
+        <Link to='/homepage' >HOMEPAGE</Link>
+        <Link to='/filterby' >FILTER BY</Link>
+      </div>
+      <div>
+        <Routes />
+      </div>
+
+
+
+
     </div>
   )
 }
