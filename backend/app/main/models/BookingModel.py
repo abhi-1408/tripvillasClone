@@ -1,11 +1,13 @@
 from . import db
 from .HotelModel import Hotel
+from .AllUserModel import AllUser
 
 
 class Booking(db.Model):
     __table__name = 'booking'
     id = db.Column(db.Integer, primary_key = True)
     hotel_id = db.Column(db.Integer,db.ForeignKey(Hotel.id))
+    user_id = db.Column(db.Integer,db.ForeignKey(AllUser.id))
     customer_name = db.Column(db.String(200))
     customer_mobile = db.Column(db.String(10))
     total_price = db.Column(db.Float)
