@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import { Register_Fetch } from '../Redux/register/action'
 import { Login_Fetch, Login_Google_Fetch } from '../Redux/login/action'
+import { Logout_User } from '../Redux/login/action'
 
 export const Navbar = () => {
     const [r_email, setREmail] = useState("")
@@ -62,9 +63,17 @@ export const Navbar = () => {
         dispatch(Login_Google_Fetch(response))
     }
 
+
+    //let log = useSelector((state) => state.login);
+    // let { user_loggedin, auth_logged, error_logged, message_logged } = log
+    // let dispatch = useDispatch()
+    const handleLogout = () => {
+        dispatch(Logout_User())
+    }
+
     return (
         <div>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav class="navbar navbar-expand-lg navbar-dark " style={{ backgroundColor: "black" }}>
                 <a class="navbar-brand" href="#">tripvillas</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -74,7 +83,7 @@ export const Navbar = () => {
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Dropdown
+                                Profile
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal">SIGNIN</a>
@@ -100,8 +109,15 @@ export const Navbar = () => {
                                 <a class="dropdown-item" href="#">Another action</a>
 
                             </div>
+                        </li>
+
+
+                        <li>
+                            {auth_logged ? <div><h6 style={{ color: "white", float: "left", marginLeft: "700px", marginTop: "10px" }} >Hi {user_loggedin}</h6>  <button className="btn btn-secondary ml-3" onClick={handleLogout} >LOGOUT</button></div> : ""}
+                            {/* {error_logged ? <h4>${message_logged}</h4> : ""} */}
 
                         </li>
+
                     </ul>
                 </div>
             </nav>
@@ -121,6 +137,11 @@ export const Navbar = () => {
                         <div class="modal-body">
                             {/* <form> */}
                             <div class="form-group">
+                                {/* logged in user:
+                                {auth_logged ? <h2>{user_loggedin}</h2> : ""} */}
+                                {error_logged ? <div className="text-center p-2" style={{ border: "1px solid red", color: "red", backgroundColor: "pink" }}>{message_logged}</div> : ""}
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Email address</label>
                                 <input type="email" name="l_email" value={l_email} onChange={(e) => handleChgLogin(e)} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
                                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
@@ -133,18 +154,14 @@ export const Navbar = () => {
                             <div>
                                 <GoogleLogin
                                     clientId="222606975118-9e6c9p3ek68d8ei2in3i1l6ator9ait5.apps.googleusercontent.com"
-                                    buttonText="Login"
+                                    buttonText=""
                                     onSuccess={responseGoogle}
                                     onFailure={responseGoogle}
                                     cookiePolicy={'single_host_origin'}
+                                    style={{ textAlign: "center" }}
                                 />
                             </div>
                             {/* </form> */}
-                        </div>
-                        <div class="form-group">
-                            logged in user:
-                            {auth_logged ? <h2>{user_loggedin}</h2> : ""}
-                            {error_logged ? <h2>{message_logged}</h2> : ""}
                         </div>
                     </div>
                 </div>
