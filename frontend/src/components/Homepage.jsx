@@ -60,36 +60,29 @@ export const Homepage = (props) => {
 
 
 
-  let log = useSelector((state) => state.login);
-  let { user_loggedin, auth_logged, error_logged, message_logged } = log
-  let dispatch = useDispatch()
-  const handleLogout = () => {
-    dispatch(Logout_User())
-  }
+  // let log = useSelector((state) => state.login);
+  // let { user_loggedin, auth_logged, error_logged, message_logged } = log
+  // let dispatch = useDispatch()
+  // const handleLogout = () => {
+  //   dispatch(Logout_User())
+  // }
 
   const arr = [dum1, dum2, dum3, dum4, dum5, dum6, dum7]
   return (
 
     <div>
-
-      {/* display logged in user */}
-      <div>
-        {auth_logged ? <h2>logged in user:{user_loggedin}  <button className="btn btn-secondary" onClick={handleLogout} >LOGOUT</button></h2> : ""}
-        {error_logged ? <h2>{message_logged}</h2> : ""}
-
-      </div>
-
       {/* adding searchbar and larger image */}
 
-      <div id={styles.largeimg} style={{ height: "480px", width: "100%", border: "1px solid black" }}>
+      <div id={styles.largeimg} style={{ height: "446px", width: "100%" }}>
 
         <div style={{ padding: "10%", marginLeft: "30px", color: "white" }}>
-          <h3>Book <strike>Hotels</strike> Vacation Rentals</h3>
+          <h3 className="mt-3">Book <strike>Hotels</strike> Vacation Rentals</h3>
           <h3>Top Holiday Homes - Villas, Apartments & Homestays</h3>
           <form class="form-inline text-center" role="form" style={{ padding: "10px", border: "1px solid black", backgroundColor: "white" }}>
             <div class="form-group">
               <label class="sr-only" for="searchZipcode">Zipcode</label>
               <input type="text" class="form-control input-lg input-search" value={location} onChange={(e) => handleLocationChg(e)} placeholder="location" />
+
 
               <DatePicker className={styles.datepick} selected={startDate} onChange={handleChange1} />
               <DatePicker className={styles.datepick} selected={endDate} onChange={handleChange2} />

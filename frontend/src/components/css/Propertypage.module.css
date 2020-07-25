@@ -1,0 +1,73 @@
+#main {
+  height: 2836.65px;
+  width: 1015.5px;
+  border: 2px solid white;
+}
+
+#top {
+  height: 67.5px;
+  width: 905px;
+  /* border: 1px solid black;
+  background-color: blue; */
+  margin-left: 40px;
+  margin-top: 40px;
+}
+
+.image {
+  height: 446px;
+  width: 558px;
+  border: 1px solid white;
+  margin-left: 40px;
+  float: left;
+  margin-right: 40px;
+}
+
+#box {
+  display: flexbox;
+  display: flex;
+}
+
+#form {
+  border: 1px solid white;
+  display: flex;
+  width: 337px;
+}
+
+#pic1 {
+  height: 298px;
+  width: 558px;
+  border: 1px solid white;
+}
+
+#pic2 {
+  height: 148px;
+  width: 278px;
+  border: 1px solid white;
+  float: left;
+}
+
+#pic3 {
+  height: 148px;
+  width: 278px;
+  border: 1px solid white;
+  float: left;
+}
+
+.cara {
+  height: 446px;
+  width: 558px;
+  margin-left: 40px;
+  float: left;
+}
+
+.price {
+  padding: 20px;
+}
+
+.datepick {
+  width: 130px;
+}
+
+#searchbut {
+  width: 240px;
+}
