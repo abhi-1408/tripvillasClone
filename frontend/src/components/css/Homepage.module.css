@@ -17,10 +17,15 @@
 }
 
 #largeimg {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+  background-image: linear-gradient(
+      rgba(34, 34, 34, 0.6),
+      rgba(34, 34, 34, 0.6)
+    ),
     url('../imgurl/home.jpg');
   background-repeat: no-repeat;
-  background-size: 100% 125%;
+  background-size: 100% 145%;
+  /* background-attachment: fixed; */
+  background-position: center;
 }
 
 #smallcard {
