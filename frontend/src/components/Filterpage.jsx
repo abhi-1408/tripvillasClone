@@ -28,13 +28,57 @@ export const FilterPage = (props) => {
     const { data, filters, filter_list } = common
     let dispatch = useDispatch()
 
-    // let history = useHistory()
+    let history = useHistory()
     // let params = useParams()
     useEffect(() => {
-        // console.log('*****his***', history, '***********paramas******', params, '********props******', props)
-        dispatch(Load_Data())
+        console.log('props are', props)
+        console.log('******history is****', history)
+        // console.log('*******params *******', params)
+
+        // dispatch(Load_Data())
+        let s = history.location.search
+        if (s.length > 0) {
+            s = s.slice(1)
+            let arr_param = s.split('&')
+            console.log('array params', arr_param)
+            arr_param.map(ele => {
+                let temp = ele.split('=')
+                if (temp[0] == "sort_by") {
+                    filters[temp[0]] = temp[1]
+                }
+                else {
+
+                    filters[temp[0]] = temp[1] == 'true' ? true : false
+                }
+            })
+
+            let temp_dict = {}
+            for (let key in filters) {
+                if (key == "sort_by" && filters[key] != false) {
+                    // filters[key] = e.target.value
+                    temp_dict['sort_by'] = filters[key]
+                    // s = s + "sort_by=" + filters[key].toString()
+                }
+                else if (filters[key] == true) {
+                    temp_dict[key] = true
+                    // s = s + key.toString() + '=' + temp_dict[key].toString() + '&'
+                }
+                // if (filters[key] == true) {
+                //     temp_dict[key] = true
+                // }
+            }
+            console.log('temp dict is', temp_dict)
+            // history.push(s)
+            dispatch(Save_Filter(filters))
+            dispatch(Load_Filtered_Data(temp_dict))
+        }
+        else {
+            dispatch(Load_Data())
+        }
         console.log('*****data', data)
     }, [])
+
+
 
     const handleCheck = (e) => {
         console.log('checkbox', e.target.name, e.target.checked)
@@ -45,24 +89,80 @@ export const FilterPage = (props) => {
     const handleApplyFilter = e => {
         let temp_dict = {}
         for (let key in filters) {
-            if (filters[key] == true) {
+            if (key == "sort_by" && filters[key] != false) {
+                // filters[key] = e.target.value
+                temp_dict['sort_by'] = filters[key]
+                // s = s + "sort_by=" + filters[key].toString()
+            }
+            else if (filters[key] == true) {
                 temp_dict[key] = true
+                // s = s + key.toString() + '=' + temp_dict[key].toString() + '&'
             }
         }
-        props.match.params = temp_dict
+        // props.match.params = temp_dict
         // <Redirect to={`/filterby/{}`}
+        let s = history.location.pathname
+        s = s + '?'
+        for (let q in temp_dict) {
+            s = s + q.toString() + '=' + temp_dict[q].toString() + '&'
+        }
+        s = s.slice(0, -1)
+        history.push(s)
         dispatch(Load_Filtered_Data(temp_dict))
+        dispatch(Save_Filter(filters))
 
     }
 
     const handleSortBy = e => {
         let temp_dict = {}
+        let s = "?"
         for (let key in filters) {
-            if (filters[key] == true) {
+            if (key == "sort_by") {
+                filters[key] = e.target.value
+                temp_dict['sort_by'] = e.target.value
+                s = s + "sort_by=" + e.target.value.toString()
+            }
+            else if (filters[key] == true) {
                 temp_dict[key] = true
+                s = s + key.toString() + '=' + temp_dict[key].toString() + '&'
             }
         }
-        temp_dict['sort_by'] = e.target.value
+        // temp_dict['sort_by'] = e.target.value
+        // s = s + "sort_by=" + e.target.value.toString()
+        // s = s.slice(0, -1)
+
+        // let s = history.location.search
+        let path = history.location.pathname
+        // if (s.length > 0) {
+        //     s = s.slice(1)
+        //     let arr_param = s.split('&')
+        //     let final = ""
+        //     // console.log('array params', arr_param)
+        //     let flag = 0
+        //     arr_param.map(ele => {
+        //         let temp = ele.split('=')
+
+        //         if (temp == 'sort_by') {
+        //             final = final + 'sort_by' + e.target.value.toString()
+        //             flag = 1
+        //         }
+        //         else {
+        //             final = final + ele
+        //         }
+        //     })
+
+
+        //     if (flag == 0) {
+        //         final = final + '?sort_by=' + e.target.value.toString()
+        //     }
+
+        //     s = final
+        // }
+        // else {
+        //     s = s + '?sort_by=' + e.target.value.toString()
+        // }
+        history.push(path + s)
+        dispatch(Save_Filter(filters))
         dispatch(Load_Filtered_Data(temp_dict))
 
     }
@@ -113,8 +213,8 @@ export const FilterPage = (props) => {
                             <small className="m-3 text-muted mr-5 ml-3">Total results {data.length}</small>
                             <div style={{ float: "right" }}>
                                 <label for="sortby"><small className="text-muted ">Sort By</small></label>
-                                <select className="ml-1" id="sortby" onChange={e => handleSortBy(e)}>
-                                    <option value="relevance">Relevance</option>
+                                <select className="ml-1" id="sortby" value={filters['sort_by']} onChange={e => handleSortBy(e)}>
+                                    <option value="relevance" >Relevance</option>
                                     <option value="asc">Price (Low to High)</option>
                                     <option value="desc">Price (High to low)</option>
                                 </select>
@@ -172,7 +272,7 @@ export const FilterPage = (props) => {
                                                 filter_list.map(ele => {
                                                     return (
                                                         <div class="form-check m-3">
-                                                            <input type="checkbox" class="form-check-input" id={ele} name={ele} onChange={(e) => handleCheck(e)} />
+                                                            <input type="checkbox" class="form-check-input" id={ele} name={ele} checked={filters[ele]} onChange={(e) => handleCheck(e)} />
                                                             <small class="text-muted"><label class="form-check-label" for="exampleCheck1">{ele}</label></small>
                                                         </div>
                                                     )
