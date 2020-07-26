@@ -31,7 +31,7 @@ export const Login_Fetch = (info) => {
   return (dispatch) => {
     return axios({
       method: 'post',
-      url: 'http://221646a81d84.ngrok.io/user/signin',
+      url: 'http://c562fcfe8d0c.ngrok.io/user/signin',
       data: info,
     })
       .then((res) => res.data)
@@ -55,7 +55,7 @@ export const Login_Google_Fetch = (info) => {
   return (dispatch) => {
     return axios({
       method: 'post',
-      url: 'http://221646a81d84.ngrok.io/user/oauth_signin',
+      url: 'http://c562fcfe8d0c.ngrok.io/user/oauth_signin',
       data: info,
     })
       .then((res) => res.data)
