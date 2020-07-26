@@ -13,7 +13,16 @@ from datetime import datetime as dt
 
 def load_hotel():
     # link = "https://www.tripvillas.com/api/webapp/search/?q=Delhi,%20India&lat=28.68627380000001&lng=77.2217831&check_in=26-Jul-2020&check_out=28-Jul-2020"
-    link ="https://www.tripvillas.com/api/webapp/search/?q=Delhi%20India&lat=28.68627380000001&lng=77.2217831&check_in=26-Jul-2020&check_out=28-Jul-2020"
+    # link ="https://www.tripvillas.com/api/webapp/search/?q=Delhi%20India&lat=28.68627380000001&lng=77.2217831&check_in=26-Jul-2020&check_out=28-Jul-2020"
+    # link = "https://www.tripvillas.com/api/webapp/search/?q=Goa,INDIA&check_in=28-Jul-2020&check_out=30-Jul-2020"
+    # link = "https://www.tripvillas.com/api/webapp/search/?q=Galle,Southern%20Province,SRI%20LANKA&check_in=28-Jul-2020&check_out=30-Jul-2020"
+    # link = "https://www.tripvillas.com/api/webapp/search/?q=Phuket,THAILAND&check_in=28-Jul-2020&check_out=30-Jul-2020"
+    # link = "https://www.tripvillas.com/api/webapp/search/?q=Kandy,Central%20Province,SRI%20LANKA&check_in=28-Jul-2020&check_out=30-Jul-2020"
+    # link = "https://www.tripvillas.com/api/webapp/search/?q=Lonavala,Maharashtra,INDIA&check_in=28-Jul-2020&check_out=30-Jul-2020"
+    # link = "https://www.tripvillas.com/api/webapp/search/?q=Kerala,INDIA&check_in=28-Jul-2020&check_out=30-Jul-2020"
+    # link = "https://www.tripvillas.com/api/webapp/search/?q=Himachal%20Pradesh,INDIA&check_in=28-Jul-2020&check_out=30-Jul-2020"
+    # link = "https://www.tripvillas.com/api/webapp/search/?q=Bali,INDONESIA&check_in=28-Jul-2020&check_out=30-Jul-2020"
+    link = "https://www.tripvillas.com/api/webapp/search/?q=Cape%20Town,Western%20Cape,SOUTH%20AFRICA&check_in=28-Jul-2020&check_out=30-Jul-2020"
     r = requests.get(url = link)
     data = r.json()
 
