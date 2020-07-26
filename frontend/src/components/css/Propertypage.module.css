@@ -66,8 +66,16 @@
 
 .datepick {
   width: 130px;
+  border-radius: 0;
+  margin-top: 20px;
+}
+.datepick1 {
+  width: 130px;
+  border-radius: 0;
+  margin: 20px;
 }
 
 #searchbut {
-  width: 240px;
+  width: 270px;
+  height: 50px;
 }
