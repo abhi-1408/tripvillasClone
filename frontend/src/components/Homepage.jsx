@@ -1,7 +1,7 @@
 import React from 'react'
-import InfiniteCarousel from 'react-leaf-carousel';
-import DatePicker from "react-datepicker"
-import "react-datepicker/dist/react-datepicker.css";
+import InfiniteCarousel from 'react-leaf-carousel'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 import Navbar from './Navbar'
 import styles from './css/Homepage.module.css'
 import dum1 from './imgurl/dum1.jpeg'
@@ -24,10 +24,7 @@ export const Homepage = (props) => {
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
   const [guest, setGuest] = useState(0)
-  const [location, setLocation] = useState("")
-
-
-
+  const [location, setLocation] = useState('')
 
   const handleChange1 = (date) => {
     setStartDate(date)
@@ -37,28 +34,21 @@ export const Homepage = (props) => {
   const handleChange2 = (date) => {
     if (date >= startDate) {
       setEndDate(date)
-    }
-    else {
+    } else {
       setEndDate(startDate)
       setStartDate(date)
     }
-
   }
 
-  const handleGuestChg = e => {
+  const handleGuestChg = (e) => {
     console.log('select', e.target.value)
     setGuest(e.target.value)
   }
 
-  const handleLocationChg = e => {
+  const handleLocationChg = (e) => {
     console.log('locn chng', e.target.value)
     setLocation(e.target.value)
-
   }
-
-
-
-
 
   // let log = useSelector((state) => state.login);
   // let { user_loggedin, auth_logged, error_logged, message_logged } = log
@@ -69,52 +59,86 @@ export const Homepage = (props) => {
 
   const arr = [dum1, dum2, dum3, dum4, dum5, dum6, dum7]
   return (
-
     <div>
       {/* adding searchbar and larger image */}
 
-      <div id={styles.largeimg} style={{ height: "446px", width: "100%" }}>
-
-        <div style={{ padding: "10%", marginLeft: "30px", color: "white" }}>
-          <h3 className="mt-3">Book <strike>Hotels</strike> Vacation Rentals</h3>
+      <div id={styles.largeimg} style={{ height: '446px', width: '100%' }}>
+        <div style={{ padding: '10%', marginLeft: '30px', color: 'white' }}>
+          <h3 className='mt-3'>
+            Book <strike>Hotels</strike> Vacation Rentals
+          </h3>
           <h3>Top Holiday Homes - Villas, Apartments & Homestays</h3>
-          <form class="form-inline text-center" role="form" style={{ padding: "10px", border: "1px solid black", backgroundColor: "white" }}>
-            <div class="form-group">
-              <label class="sr-only" for="searchZipcode">Zipcode</label>
-              <input type="text" class="form-control input-lg input-search" value={location} onChange={(e) => handleLocationChg(e)} placeholder="location" />
+          <form
+            class='form-inline text-center'
+            role='form'
+            style={{
+              padding: '10px',
+              border: '1px solid black',
+              backgroundColor: 'white',
+            }}
+          >
+            <div class='form-group'>
+              <label class='sr-only' for='searchZipcode'>
+                Zipcode
+              </label>
+              <input
+                type='text'
+                class='form-control input-lg input-search'
+                value={location}
+                onChange={(e) => handleLocationChg(e)}
+                placeholder='location'
+              />
 
-
-              <DatePicker className={styles.datepick} selected={startDate} onChange={handleChange1} />
-              <DatePicker className={styles.datepick} selected={endDate} onChange={handleChange2} />
-
-
+              <DatePicker
+                className={styles.datepick}
+                selected={startDate}
+                onChange={handleChange1}
+              />
+              <DatePicker
+                className={styles.datepick}
+                selected={endDate}
+                onChange={handleChange2}
+              />
 
               {/* <input type="text" class="form-control input-lg input-search" placeholder="checkin checkout" /> */}
 
-              <select class="custom-select" onChange={(e) => handleGuestChg(e)} style={{ width: "180px", borderRadius: "0px" }}>
-                <option selected value="0">Select Guests</option>
-                <option value="1">1 guest</option>
-                <option value="2">2 guests</option>
-                <option value="3">3 guests</option>
-                <option value="4">4 guests</option>
-                <option value="5">5 guests</option>
-                <option value="6">6 guests</option>
-                <option value="7">7 guests</option>
-                <option value="8">8 guests</option>
-                <option value="9">9 guests</option>
-                <option value="10">10 guests</option>
+              <select
+                class='custom-select'
+                onChange={(e) => handleGuestChg(e)}
+                style={{ width: '180px', borderRadius: '0px' }}
+              >
+                <option selected value='0'>
+                  Select Guests
+                </option>
+                <option value='1'>1 guest</option>
+                <option value='2'>2 guests</option>
+                <option value='3'>3 guests</option>
+                <option value='4'>4 guests</option>
+                <option value='5'>5 guests</option>
+                <option value='6'>6 guests</option>
+                <option value='7'>7 guests</option>
+                <option value='8'>8 guests</option>
+                <option value='9'>9 guests</option>
+                <option value='10'>10 guests</option>
               </select>
-              <button id={styles.searchbut} type="button" class="btn btn-primary" style={{ borderRadius: "0px" }}>SEARCH</button>
+              <button
+                id={styles.searchbut}
+                type='button'
+                class='btn btn-primary'
+                style={{ borderRadius: '0px' }}
+              >
+                SEARCH
+              </button>
             </div>
           </form>
         </div>
-
       </div>
-
 
       {/* Top destination cards */}
       <div className={styles.topdes}>
-        <div className={styles.head}><div style={{ fontSize: "25px" }}>Top Destinations</div></div>
+        <div className={styles.head}>
+          <div style={{ fontSize: '25px' }}>Top Destinations</div>
+        </div>
         <div className={styles.cara}>
           <InfiniteCarousel
             breakpoints={[
@@ -135,84 +159,104 @@ export const Homepage = (props) => {
             ]}
             dots={true}
             showSides={true}
-            sidesOpacity={.5}
-            sideSize={.1}
+            sidesOpacity={0.5}
+            sideSize={0.1}
             slidesToScroll={4}
             slidesToShow={4}
             scrollOnDevice={true}
           >
-
-            {
-              arr.map(item => (
-                <div>
-                  <div className="text-center" style={{ color: "white", backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(${item})`, height: "170px", width: "240px", backgroundRepeat: "no-repeat" }}>
-                    <h1 id={styles.smallcard}>Image titile</h1>
-                  </div>
+            {arr.map((item) => (
+              <div>
+                <div
+                  className='text-center'
+                  style={{
+                    color: 'white',
+                    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(${item})`,
+                    height: '170px',
+                    width: '240px',
+                    backgroundRepeat: 'no-repeat',
+                  }}
+                >
+                  <h1 id={styles.smallcard}>Image titile</h1>
                 </div>
-              ))
-            }
+              </div>
+            ))}
           </InfiniteCarousel>
-
         </div>
       </div>
 
       {/* manage cards */}
 
-      <div >
-
-        <div className="row container-fluid">
-          <div className="col p-5 ">
-            <div class="card shadow-lg p-3 mb-5 bg-white rounded " style={{ width: "28rem", height: "400px", marginLeft: "90px" }}>
-              <div class="card-body">
-                <h5 class="card-title text-center">Fully Managed Communities By Tripvillas</h5>
+      <div>
+        <div className='row container-fluid'>
+          <div className='col p-5 '>
+            <div
+              class='card shadow-lg p-3 mb-5 bg-white rounded '
+              style={{ width: '28rem', height: '400px', marginLeft: '90px' }}
+            >
+              <div class='card-body'>
+                <h5 class='card-title text-center'>
+                  Fully Managed Communities By Tripvillas
+                </h5>
                 {/* static icons */}
               </div>
             </div>
           </div>
 
-          <div class="col" style={{ border: "1px solid black" }}>
-
-          </div>
+          <div class='col' style={{ border: '1px solid black' }}></div>
         </div>
-
       </div>
-
 
       {/* two static card */}
 
-      <div className="container p-5">
-        <div className="row">
-          <div class="col ">
-            <div class="card " style={{ width: "30rem" }}>
-              <div class="card-body">
-                <h5 class="card-title text-center">Holiday Home Investment Opportunities</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <div className="text-center">
-                  <button type="button" class="btn btn-primary">EXPLORE INVESTMENT OPPORTUNITIES</button>
+      <div className='container p-5'>
+        <div className='row'>
+          <div class='col '>
+            <div class='card ' style={{ width: '30rem' }}>
+              <div class='card-body'>
+                <h5 class='card-title text-center'>
+                  Holiday Home Investment Opportunities
+                </h5>
+                <p class='card-text'>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <div className='text-center'>
+                  <button type='button' class='btn btn-primary'>
+                    EXPLORE INVESTMENT OPPORTUNITIES
+                  </button>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="col ">
-            <div class="card " style={{ width: "30rem" }}>
-              <div class="card-body">
-                <h5 class="card-title text-center">Are you a holiday home owner/manager?</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <div className="text-center">
-                  <button type="button" class="btn btn-primary">LIST YOUR PROPERTY</button>
+          <div className='col '>
+            <div class='card ' style={{ width: '30rem' }}>
+              <div class='card-body'>
+                <h5 class='card-title text-center'>
+                  Are you a holiday home owner/manager?
+                </h5>
+                <p class='card-text'>
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <div className='text-center'>
+                  <button type='button' class='btn btn-primary'>
+                    LIST YOUR PROPERTY
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
 
       {/* vacation ideas */}
 
       <div className={styles.topdes}>
-        <div className={styles.head}><div style={{ fontSize: "25px" }}>Vacation Ideas</div></div>
+        <div className={styles.head}>
+          <div style={{ fontSize: '25px' }}>Vacation Ideas</div>
+        </div>
         <div className={styles.cara}>
           <InfiniteCarousel
             breakpoints={[
@@ -233,64 +277,145 @@ export const Homepage = (props) => {
             ]}
             dots={true}
             showSides={true}
-            sidesOpacity={.5}
-            sideSize={.1}
+            sidesOpacity={0.5}
+            sideSize={0.1}
             slidesToScroll={4}
             slidesToShow={4}
             scrollOnDevice={true}
           >
-
-            {
-              arr.map(item => (
-                <div>
-                  <div className="text-center" style={{ fontSize: "10px", color: "white", backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(${item})`, height: "170px", width: "240px", backgroundRepeat: "no-repeat" }}>
-                    <h1 id={styles.smallcard}>Image titile</h1>
-                  </div>
+            {arr.map((item) => (
+              <div>
+                <div
+                  className='text-center'
+                  style={{
+                    fontSize: '10px',
+                    color: 'white',
+                    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(${item})`,
+                    height: '170px',
+                    width: '240px',
+                    backgroundRepeat: 'no-repeat',
+                  }}
+                >
+                  <h1 id={styles.smallcard}>Image titile</h1>
                 </div>
-              ))
-            }
+              </div>
+            ))}
           </InfiniteCarousel>
-
         </div>
       </div>
 
-
       {/* footer */}
 
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Asia</a>
+      <ul class='nav nav-tabs' id='myTab' role='tablist'>
+        <li class='nav-item'>
+          <a
+            class='nav-link active'
+            id='home-tab'
+            data-toggle='tab'
+            href='#home'
+            role='tab'
+            aria-controls='home'
+            aria-selected='true'
+          >
+            Asia
+          </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Europe</a>
+        <li class='nav-item'>
+          <a
+            class='nav-link'
+            id='profile-tab'
+            data-toggle='tab'
+            href='#profile'
+            role='tab'
+            aria-controls='profile'
+            aria-selected='false'
+          >
+            Europe
+          </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">North America</a>
+        <li class='nav-item'>
+          <a
+            class='nav-link'
+            id='contact-tab'
+            data-toggle='tab'
+            href='#contact'
+            role='tab'
+            aria-controls='contact'
+            aria-selected='false'
+          >
+            North America
+          </a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">South America </a>
+        <li class='nav-item'>
+          <a
+            class='nav-link'
+            id='contact-tab'
+            data-toggle='tab'
+            href='#contact'
+            role='tab'
+            aria-controls='contact'
+            aria-selected='false'
+          >
+            South America{' '}
+          </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Africa </a>
+        <li class='nav-item'>
+          <a
+            class='nav-link'
+            id='contact-tab'
+            data-toggle='tab'
+            href='#contact'
+            role='tab'
+            aria-controls='contact'
+            aria-selected='false'
+          >
+            Africa{' '}
+          </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Oceania </a>
+        <li class='nav-item'>
+          <a
+            class='nav-link'
+            id='contact-tab'
+            data-toggle='tab'
+            href='#contact'
+            role='tab'
+            aria-controls='contact'
+            aria-selected='false'
+          >
+            Oceania{' '}
+          </a>
         </li>
       </ul>
-      <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+      <div class='tab-content' id='myTabContent'>
+        <div
+          class='tab-pane fade show active'
+          id='home'
+          role='tabpanel'
+          aria-labelledby='home-tab'
+        >
+          ...
+        </div>
+        <div
+          class='tab-pane fade'
+          id='profile'
+          role='tabpanel'
+          aria-labelledby='profile-tab'
+        >
+          ...
+        </div>
+        <div
+          class='tab-pane fade'
+          id='contact'
+          role='tabpanel'
+          aria-labelledby='contact-tab'
+        >
+          ...
+        </div>
       </div>
 
       {/* <DatePicker selected={this.state.startDate} onChange={this.handleChange1} />
       <DatePicker selected={this.state.endDate} onChange={this.handleChange2} /> */}
-
     </div>
   )
 }
-
-
-
-
