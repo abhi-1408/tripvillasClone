@@ -14,13 +14,23 @@ export const FilterPage = (props) => {
     console.log('PROPS ARE:', props)
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
+    const [location_search, setLocationSearch] = useState("")
 
     const handleChange1 = (date) => {
+        // console.log(date)
         setStartDate(date)
     }
 
     const handleChange2 = (date) => {
-        setEndDate(date)
+        // console.log(date)
+        // setEndDate(date)
+        if (date >= startDate) {
+            setEndDate(date)
+        }
+        else {
+            setEndDate(startDate)
+            setStartDate(date)
+        }////
     }
 
     // const [data,setData] = useState([])
@@ -46,6 +56,12 @@ export const FilterPage = (props) => {
                 if (temp[0] == "sort_by") {
                     filters[temp[0]] = temp[1]
                 }
+                else if (temp[0] == "check_in") {
+                    filters[temp[0]] = temp[1]
+                }
+                else if (temp[0] == "check_out") {
+                    filters[temp[0]] = temp[1]
+                }
                 else {
 
                     filters[temp[0]] = temp[1] == 'true' ? true : false
@@ -58,6 +74,12 @@ export const FilterPage = (props) => {
                     // filters[key] = e.target.value
                     temp_dict['sort_by'] = filters[key]
                     // s = s + "sort_by=" + filters[key].toString()
+                }
+                else if (key == 'check_in' && filters[key] != false) {
+                    temp_dict['check_in'] = filters[key]
+                }
+                else if (key == 'check_out' && filters[key] != false) {
+                    temp_dict['check_out'] = filters[key]
                 }
                 else if (filters[key] == true) {
                     temp_dict[key] = true
@@ -94,6 +116,12 @@ export const FilterPage = (props) => {
                 temp_dict['sort_by'] = filters[key]
                 // s = s + "sort_by=" + filters[key].toString()
             }
+            else if (key == 'check_in' && filters[key] != false) {
+                temp_dict['check_in'] = filters[key]
+            }
+            else if (key == 'check_out' && filters[key] != false) {
+                temp_dict['check_out'] = filters[key]
+            }
             else if (filters[key] == true) {
                 temp_dict[key] = true
                 // s = s + key.toString() + '=' + temp_dict[key].toString() + '&'
@@ -120,7 +148,15 @@ export const FilterPage = (props) => {
             if (key == "sort_by") {
                 filters[key] = e.target.value
                 temp_dict['sort_by'] = e.target.value
-                s = s + "sort_by=" + e.target.value.toString()
+                s = s + "sort_by=" + e.target.value.toString() + '&'
+            }
+            else if (key == 'check_in' && filters[key] != false) {
+                temp_dict['check_in'] = filters[key]
+                s = s + "check_in=" + filters[key] + '&'
+            }
+            else if (key == 'check_out' && filters[key] != false) {
+                temp_dict['check_out'] = filters[key]
+                s = s + "sort_by=" + filters[key] + '&'
             }
             else if (filters[key] == true) {
                 temp_dict[key] = true
@@ -165,6 +201,42 @@ export const FilterPage = (props) => {
         dispatch(Save_Filter(filters))
         dispatch(Load_Filtered_Data(temp_dict))
 
+    }
+
+    const handleModifySearch = () => {
+        console.log('handle search clicked')
+        let temp_dict = {}
+        for (let key in filters) {
+            if (key == "sort_by" && filters[key] != false) {
+                // filters[key] = e.target.value
+                temp_dict['sort_by'] = filters[key]
+                // s = s + "sort_by=" + filters[key].toString()
+            }
+            else if (filters[key] == true) {
+                temp_dict[key] = true
+                // s = s + key.toString() + '=' + temp_dict[key].toString() + '&'
+            }
+        }
+        // props.match.params = temp_dict
+        // <Redirect to={`/filterby/{}`}
+        let s = history.location.pathname
+        s = s + '?'
+        for (let q in temp_dict) {
+            s = s + q.toString() + '=' + temp_dict[q].toString() + '&'
+        }
+        let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
+        let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
+        s = s + 'check_in=' + sd + '&check_out=' + ed
+        temp_dict['check_in'] = sd
+        temp_dict['check_out'] = ed
+        filters['check_in'] = sd
+        filters['check_out'] = ed
+        filters['start_date'] = startDate
+        filters['end_date'] = endDate
+        // // s = s.slice(0, -1)
+        history.push(s)
+        dispatch(Load_Filtered_Data(temp_dict))
+        dispatch(Save_Filter(filters))
     }
 
 
@@ -235,7 +307,11 @@ export const FilterPage = (props) => {
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="card-body">
-                                                    <h5 class="card-title"><a style={{ color: "black" }} href="">{item.title}</a></h5>
+                                                    <h5 class="card-title">
+                                                        {/* <a style={{ color: "black" }} href=""> */}
+                                                        <Link to={`/property/${item.id}`} >{item.title}</Link>
+                                                        {/* </a> */}
+                                                    </h5>
                                                     <h6><a href="">{item.location_name}</a></h6>
                                                     {
                                                         item.prop_tags.map(ele => {
@@ -576,9 +652,9 @@ export const FilterPage = (props) => {
                                 <div class="modal-body">
                                     <form>
                                         <div class="form-group">
-                                            <input type="text" class=" m-3" id={styles.location} placeholder="LOCATION" />
-                                            <DatePicker className={styles.datepick} selected={startDate} onChange={handleChange1} />
-                                            <DatePicker className={styles.datepick} selected={endDate} onChange={handleChange2} />
+                                            <input type="text" class=" m-3" id={styles.location} value={location_search} placeholder="LOCATION" />
+                                            <DatePicker className={styles.datepick} selected={startDate} value={startDate} onChange={handleChange1} />
+                                            <DatePicker className={styles.datepick} selected={endDate} value={endDate} onChange={handleChange2} />
                                             <div className="m-3">
                                                 <select class="custom-select" style={{ width: "180px", borderRadius: "0px" }}>
                                                     <option selected>Select Guests</option>
@@ -595,7 +671,7 @@ export const FilterPage = (props) => {
                                                 </select>
                                             </div>
                                             <div className="m-3">
-                                                <button type="button" class="btn btn-primary" style={{ borderRadius: "0px" }}>SEARCH</button>
+                                                <button type="button" class="btn btn-primary" onClick={handleModifySearch} style={{ borderRadius: "0px" }}>SEARCH</button>
 
                                                 <button type="button" class="btn btn-secondary ml-3" data-dismiss="modal">CANCEL</button>
                                             </div>

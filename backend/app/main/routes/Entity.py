@@ -41,6 +41,25 @@ def e_recomm():
 
     return json.dumps(res)
 
+
+@entity.route('/getrecommendrating',methods=['POST'])
+def e_recomm_rat():
+    data = request.get_json()
+    res = get_recommended_property_by_rating(data)
+
+    return json.dumps(res)
+
+
+@entity.route('/getrecommendcity',methods=['POST'])
+def e_recomm_city():
+    data = request.get_json()
+    res = get_recommended_property_by_city(data)
+
+    return json.dumps(res)
+
+
+
+
 @entity.route('/addreview',methods=['POST'])
 def r_add_rev():
     data = request.get_json()
