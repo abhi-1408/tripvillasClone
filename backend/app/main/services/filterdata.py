@@ -187,8 +187,11 @@ def filter_data(data):
             temp_dict['prop_tags'] = room.prop_tags
             temp_dict['url'] = room.url
             temp_dict['location_name'] = room.location_name
-            if data['state'] in temp_dict['state']:
-                temp.append(temp_dict)
+            if 'state' in data:
+                if data['state'] in temp_dict['state']:
+                    temp.append(temp_dict)
+            # else:
+            #     temp.append(temp_dict)
 
     return {"error": False, "message":'filtered data',"data":temp}
     # except:
