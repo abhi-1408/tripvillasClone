@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import InfiniteCarousel from 'react-leaf-carousel'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -14,6 +14,9 @@ import dum7 from './imgurl/dum7.jpeg'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import { Login_Fetch, Logout_User } from '../Redux/login/action'
+import { Load_Filtered_Data, Reset_filter, Save_Filter } from "../Redux/common/action";
+import { Redirect, useHistory, Link } from 'react-router-dom'
+import { Reset_All } from '../Redux/common/action'
 
 export const Homepage = (props) => {
   // responseGoogle = (response) => {
@@ -23,11 +26,19 @@ export const Homepage = (props) => {
 
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
+  const [search_location, setSearchLocation] = useState("delhi")
   const [guest, setGuest] = useState(0)
-  const [location, setLocation] = useState('')
+  // const [location, setLocation] = useState('')
 
   const handleChange1 = (date) => {
-    setStartDate(date)
+    if (endDate < date) {
+      setEndDate(date)
+      setStartDate(date)
+    }
+    else {
+
+      setStartDate(date)
+    }
     console.log('handle 1 clicked date is', startDate)
   }
 
@@ -47,7 +58,31 @@ export const Homepage = (props) => {
 
   const handleLocationChg = (e) => {
     console.log('locn chng', e.target.value)
-    setLocation(e.target.value)
+    setSearchLocation(e.target.value)
+  }
+
+  let dispatch = useDispatch()
+  let history = useHistory()
+  let com = useSelector(state => state.common)
+  const { filters } = com
+
+  const handleSearch = () => {
+    console.log('handle search clicked')
+    let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
+    let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
+    dispatch(Reset_filter())
+    filters['state'] = search_location
+    filters['start_date'] = startDate
+    filters['end_date'] = endDate
+    dispatch(Save_Filter(filters))
+    dispatch(Load_Filtered_Data({ "state": search_location, "check_in": sd, "check_out": ed }))
+    // return <Redirect to='/filterby' />
+    setTimeout(() => {
+      let s = ''
+      s = s + '?state=' + search_location + '&' + 'check_in=' + sd + '&check_out=' + ed;
+      history.push('/filterby' + s)
+
+    }, 2000)
   }
 
   // let log = useSelector((state) => state.login);
@@ -56,8 +91,13 @@ export const Homepage = (props) => {
   // const handleLogout = () => {
   //   dispatch(Logout_User())
   // }
+  useEffect(() => {
+    dispatch(Reset_All())
+  }, [])
 
   const arr = [dum1, dum2, dum3, dum4, dum5, dum6, dum7]
+  const title = ['delhi', 'goa', 'southern_province', 'phuket', 'kerala', 'bali', 'himachal pradesh']
+
   return (
     <div>
       {/* adding searchbar and larger image */}
@@ -84,7 +124,7 @@ export const Homepage = (props) => {
               <input
                 type='text'
                 class='form-control input-lg input-search'
-                value={location}
+                value={search_location}
                 onChange={(e) => handleLocationChg(e)}
                 placeholder='location'
               />
@@ -126,6 +166,7 @@ export const Homepage = (props) => {
                 type='button'
                 class='btn btn-primary'
                 style={{ borderRadius: '0px' }}
+                onClick={handleSearch}
               >
                 SEARCH
               </button>
@@ -165,7 +206,7 @@ export const Homepage = (props) => {
             slidesToShow={4}
             scrollOnDevice={true}
           >
-            {arr.map((item) => (
+            {arr.map((item, ind) => (
               <div>
                 <div
                   className='text-center'
@@ -177,7 +218,7 @@ export const Homepage = (props) => {
                     backgroundRepeat: 'no-repeat',
                   }}
                 >
-                  <h1 id={styles.smallcard}>Image titile</h1>
+                  <h1 id={styles.smallcard}><Link class="text-light" style={{ textDecoration: 'none' }} to={`/holiday/${title[ind]}`}>{title[ind]}</Link></h1>
                 </div>
               </div>
             ))}
@@ -283,7 +324,7 @@ export const Homepage = (props) => {
             slidesToShow={4}
             scrollOnDevice={true}
           >
-            {arr.map((item) => (
+            {arr.map((item, ind) => (
               <div>
                 <div
                   className='text-center'
@@ -296,7 +337,7 @@ export const Homepage = (props) => {
                     backgroundRepeat: 'no-repeat',
                   }}
                 >
-                  <h1 id={styles.smallcard}>Image titile</h1>
+                  <h1 id={styles.smallcard}>{title[ind]}</h1>
                 </div>
               </div>
             ))}

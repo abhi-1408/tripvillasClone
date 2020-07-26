@@ -13,7 +13,7 @@ import { Routes } from './Routes/Routes'
 function App() {
   return (
     <div>
-      {/* <Navbar /> */}
+      <Navbar />
       {/* <Link to='/homepage' >HOMEPAGE</Link>
       <Link to='/filterby' >FILTER BY</Link>
       <Switch>
@@ -22,10 +22,11 @@ function App() {
       </Switch> */}
       {/* <FilterPage /> */}
       {/* <Homepage /> */}
-      <div>
+      {/* <div>
         <Link to='/homepage' >HOMEPAGE</Link>
-        <Link to='/filterby' >FILTER BY</Link>
-      </div>
+        <Link to='/filterby?state=delhi' >FILTER BY</Link>
+      </div> */}
+
       <div>
         <Routes />
       </div>

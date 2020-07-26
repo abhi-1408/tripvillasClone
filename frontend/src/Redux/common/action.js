@@ -34,6 +34,12 @@ export const Save_Filter = (data) => {
     }
 }
 
+export const Reset_filter = () => {
+    return {
+        type: "RESET_FILTER",
+    }
+}
+
 
 export const Apply_Filters = (info) => {
     return dispatch => {
@@ -97,3 +103,62 @@ export const Load_Specific_Property = (info) => {
     }
 }
 
+export const Apply_Recommended_State = (data) => {
+    return {
+        type: "RECOMMENDED_STATE",
+        payload: data
+    }
+}
+
+export const Apply_Recommended_Review = (data) => {
+    return {
+        type: "RECOMMENDED_REVIEW",
+        payload: data
+    }
+}
+
+export const Reset_All = (data) => {
+    return {
+        type: "RESET_ALL",
+
+    }
+}
+
+export const Load_Recommended_Rating = (info) => {
+    return dispatch => {
+        return axios({
+            method: "post",
+            url: "http://c562fcfe8d0c.ngrok.io/entity/getrecommendrating",
+            data: info
+        })
+            .then((res) => res.data)
+            .then((data) => {
+                dispatch(Apply_Recommended_Review(data))
+            })
+            .catch((err) => {
+                console.log(err)
+
+            })
+    }
+}
+
+
+
+export const Load_Recommended_State = (info) => {
+    return dispatch => {
+        return axios({
+            method: "post",
+            url: "http://c562fcfe8d0c.ngrok.io/entity/getrecommendcity",
+            data: info
+        })
+            .then((res) => res.data)
+            .then((data) => {
+                dispatch(Apply_Recommended_State(data))
+                dispatch(Load_Recommended_Rating(info))
+            })
+            .catch((err) => {
+                console.log(err)
+
+            })
+    }
+}

@@ -9,6 +9,7 @@ from ..models.BookedSlotModel import BookedSlot
 from ..models import db
 from sqlalchemy.orm import sessionmaker
 from  sqlalchemy.sql.expression import func
+from sqlalchemy import desc
 
 
 
@@ -286,7 +287,7 @@ def get_recommended_property(data):
 
 def get_recommended_property_by_city(data):
 
-    results = Hotel.query.filter(Hotel.city.like(data['city'])).all()
+    results = Hotel.query.filter(Hotel.state.like(data['state'])).all()
 
     res = []
     
@@ -295,7 +296,7 @@ def get_recommended_property_by_city(data):
         hotel_id = hotel.id
         room = RoomMeta.query.filter(RoomMeta.hotel_id==hotel_id).first()
         temp_dict['id'] = hotel.id
-        added_in_res.add(hotel.id)
+        # added_in_res.add(hotel.id)
         temp_dict['title'] = hotel.title
         temp_dict['category_id'] = 1
         # temp_dict['created_on'] = hotel.created_on
@@ -361,7 +362,7 @@ def get_recommended_property_by_city(data):
 
 def get_recommended_property_by_rating(data):
 
-    results = Hotel.query.filter(Hotel.city.like(data['city'])).order_by(Hotel.review_rating).all()
+    results = Hotel.query.filter(Hotel.state.like(data['state'])).order_by(desc(Hotel.review_rating)).all()
 
     res = []
     for hotel in results:
@@ -369,7 +370,7 @@ def get_recommended_property_by_rating(data):
         hotel_id = hotel.id
         room = RoomMeta.query.filter(RoomMeta.hotel_id==hotel_id).first()
         temp_dict['id'] = hotel.id
-        added_in_res.add(hotel.id)
+        # added_in_res.add(hotel.id)
         temp_dict['title'] = hotel.title
         temp_dict['category_id'] = 1
         # temp_dict['created_on'] = hotel.created_on
