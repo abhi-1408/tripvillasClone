@@ -1,0 +1,37 @@
+#searchbut {
+  width: 170px;
+}
+
+#topdestination {
+  font-size: 70px;
+}
+
+.cara {
+  padding: 50px;
+}
+
+.head {
+  padding: 10px;
+  margin-left: 70px;
+  margin-top: 20px;
+}
+
+#largeimg {
+  background-image: linear-gradient(
+      rgba(34, 34, 34, 0.6),
+      rgba(34, 34, 34, 0.6)
+    ),
+    url('../imgurl/home.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 145%;
+  /* background-attachment: fixed; */
+  background-position: center;
+}
+
+#smallcard {
+  color: 'white';
+}
+
+.datepick {
+  width: 190px;
+}
