@@ -180,8 +180,8 @@ export const Holidayhomes = (props) => {
             {
               recommended_state.map(ele => (
 
-                <div class='card ' style={{ width: '15rem' }}>
-                  <img class='card-img-top' src={dum3} alt='Card image cap' />
+                <div class='card ' style={{ width: '15rem', height: "400px" }}>
+                  <img class='card-img-top' style={{ width: "200px", height: "200px", objectFit: "contain" }} src={ele['image_medium'][1]} alt='Card image cap' />
                   <div class='card-body'>
                     <h5 class='card-title'>#id <Link to={`/property/${ele['id']}`} >{ele['id']}</Link></h5>
                     <h5 class='card-title'>Price: {ele['total_price']}</h5>
@@ -236,8 +236,8 @@ export const Holidayhomes = (props) => {
           {
             recommended_review.map(ele => {
               return (
-                <div class='card ' style={{ width: '15rem' }}>
-                  <img class='card-img-top' src={dum3} alt='Card image cap' />
+                <div class='card ' style={{ width: '15rem', height: "400px" }}>
+                  <img class='card-img-top' style={{ width: "200px", height: "200px", objectFit: "contain" }} src={ele['image_medium'][1]} alt='Card image cap' />
                   <div class='card-body'>
                     <h5 class='card-title'>#id <Link to={`/property/${ele['id']}`} >{ele['id']}</Link></h5>
                     <h5 class='card-title'>Rating: {ele['review_rating']}</h5>

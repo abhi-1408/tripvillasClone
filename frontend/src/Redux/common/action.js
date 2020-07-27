@@ -162,3 +162,30 @@ export const Load_Recommended_State = (info) => {
             })
     }
 }
+
+export const Specific_Hotel_Available = (data) => {
+    return {
+        type: "AVAILABLE_HOTEL",
+        payload: data
+    }
+}
+
+export const Specific_Hotel_Available_On_Date = (info) => {
+    return dispatch => {
+        return axios({
+            method: "post",
+            url: "http://c562fcfe8d0c.ngrok.io/admin/avaispecific",
+            data: info
+        })
+            .then((res) => res.data)
+            .then((data) => {
+                dispatch(Specific_Hotel_Available(data))
+            })
+            .catch((err) => {
+                console.log(err)
+
+            })
+    }
+}
+
+

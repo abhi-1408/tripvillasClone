@@ -96,7 +96,7 @@ export const Homepage = (props) => {
   }, [])
 
   const arr = [dum1, dum2, dum3, dum4, dum5, dum6, dum7]
-  const title = ['delhi', 'goa', 'southern_province', 'phuket', 'kerala', 'bali', 'himachal pradesh']
+  const title = ['delhi', 'goa', 'southern province', 'phuket', 'kerala', 'bali', 'himachal pradesh']
 
   return (
     <div>

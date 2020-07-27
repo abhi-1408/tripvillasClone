@@ -6,7 +6,9 @@ const initialState = {
     filter_list: ["swimming_pool", "ac", "internet", "television", "parking", "housekeeping", "functional_kitchen", "washing_machine", "dish_washer"],
     property_data: [],
     recommended_state: [],
-    recommended_review: []
+    recommended_review: [],
+    message: "available on selected dates",
+    message_flag: true
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -51,6 +53,13 @@ export default (state = initialState, { type, payload }) => {
 
             }
 
+        case "AVAILABLE_HOTEL":
+            return {
+                ...state,
+                message: payload['message'],
+                message_flag: payload['flag']
+
+            }
         case "RESET_ALL":
             return {
                 ...state,

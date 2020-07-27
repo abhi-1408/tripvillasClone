@@ -318,3 +318,22 @@ def available(data):
 
     
 #     return 'not present'
+
+
+def specific_hotel_available(data):
+    
+    
+    stmt = "select DATE(booked_for_date) as bd,hotel_id,count(*),number_of_rooms,number_of_rooms - count(*) as available from booked_slot join hotel on booked_slot.hotel_id=hotel.id  where booked_for_date between (:checkin) and (:checkout) and hotel_id = (:hotel_id) group by hotel_id,booked_for_date"
+    arg = ({"checkin":data['check_in'],"checkout":data['check_out'],"hotel_id":data['hotel_id']})
+    result = db.session.execute(stmt,arg)
+
+
+    for item in result:
+        if item.available == 0:
+            return {"flag":False,"message":"not available on selected dates"}
+    
+    return {"flag":True,"message":"available on selected dates"}
+    
+        
+
+    
