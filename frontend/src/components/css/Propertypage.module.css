@@ -65,14 +65,14 @@
 }
 
 .datepick {
-  width: 130px;
-  border-radius: 0;
+  width: 100px;
+
   margin-top: 20px;
 }
 .datepick1 {
-  width: 130px;
-  border-radius: 0;
-  margin: 20px;
+  width: 100px;
+
+  margin-left: 30px;
 }
 
 #searchbut {
