@@ -370,7 +370,7 @@ export const FilterPage = (props) => {
                                                         })
                                                     }
                                                     <div style={{ clear: "both" }}>
-                                                        <p><h5>{item.total_price}</h5></p>
+                                                        <p><h5>$ {item.total_price}</h5></p>
                                                         <small class="text-muted mt-3" style={{ border: "1px solid orange", padding: "5px", textTransform: "uppercase", color: "orange", width: "230px" }}>{item.cancellation_policy_name} CANCELLATION POLICY</small>
                                                     </div>
                                                 </div>

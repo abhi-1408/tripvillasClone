@@ -1,7 +1,7 @@
 from . import admin
 from flask import request,redirect,jsonify
 import json
-from ..services.hotel import create_hotel,get_hotel,create_booking,available
+from ..services.hotel import create_hotel,get_hotel,create_booking,available,specific_hotel_available
 from ..services.roommeta import create_room
 from ..services.filterdata import filter_data
 
@@ -60,3 +60,11 @@ def a_avai():
 #     res = test(data)
 
 #     return json.dumps(res)
+
+@admin.route('/avaispecific',methods=['POST'])
+def a_avai_spec():
+    data = request.get_json()
+    res = specific_hotel_available(data)
+
+    return json.dumps(res)
+
