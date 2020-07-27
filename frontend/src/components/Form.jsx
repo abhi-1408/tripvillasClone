@@ -1,9 +1,78 @@
 import React, { Component } from "react"
+import styles from "./Form.module.css"
 
 export default class Form extends Component{
     render(){
     return(
         <div>
+            <div  style={{float:"left",width:"66.66%",paddingRight:"20px",paddingLeft:"20px"}}>
+                {/* static card */}
+                <div className={styles.card}>
+                    <div>Book Tension Free</div>
+                    <div>
+                        <li>Your payments are secured by Tripvillas.</li>
+                        <li>The amounts are released to verified owners in advance while new owners are paid post your check-in and confirmation.</li>
+                        <li>You can contact us if you face any issues during checkin or your stay.</li>
+                    </div>
+                </div>
+                {/* cards */}
+
+                <div style={{margin:"20px 0px 20px 0px",padding:"10px 10px 10px 10px",boxShadow:"2px 2px 5px 0px"}} >  
+                    <div style={{textAlign:"left"}} >
+                        <img src="https://via.placeholder.com/200x100.png"  />
+                    </div>
+                </div>
+
+
+                <div className="card-group" style={{padding:"10px 10px 10px 10px"}} >
+                        <div class="card">
+                            <div class="card-body">
+                                Check In
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                            Check Out
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                Guests
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                Units
+                            </div>
+                        </div>
+                    </div>
+
+                <div style={{textAlign:"left",marginTop:"20px",padding:"20px 20px 20px 20px",boxShadow:"2px 2px 5px 0px"}} >
+                    <div>Sub Total...........................................................................................</div>
+                    <div>Discount.............................................................................................</div>
+                    <div>Tax..................................................................................................</div>
+                    <hr/>
+                    <div>Total................................................................................................</div>
+                </div>
+
+
+                <div style={{padding:"20px 20px 20px 20px"}} >
+                    <div style={{textAlign:"left",fontWeight:"bolder"}} >Rate Plan</div>
+                    <div style={{textAlign:"left"}}>No meals provided (European Plan)</div>
+
+                    <div style={{textAlign:"left",fontWeight:"bolder",marginTop:"20px"}}>Stringent Cancellation Policy</div>
+                    <div style={{textAlign:"left"}}>No charges will be levied if booking is canceled 61 days prior to check-in. If cancellation is done between 30 to 60 days prior to check-in, 50% of the total booking amount will be charged. Post that, there will be no refund.</div>
+                    <div style={{textAlign:"left",fontWeight:"bolder",marginTop:"20px"}}>House Rules</div>
+                    <div style={{textAlign:"left"}}>Pets not allowed.</div>
+                </div>
+
+            </div>
+
+                
+
+            
+
+
 
             <div style={{width:"33.33%", float:"right",paddingRight:"20px"}} >
             <form>
