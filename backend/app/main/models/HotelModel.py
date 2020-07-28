@@ -25,6 +25,7 @@ class Hotel(db.Model):
     city = db.Column(db.String(200))
     state = db.Column(db.String(200))
     number_of_rooms = db.Column(db.Integer)
+    matching = db.Column(db.Integer)
     min_night = db.Column(db.Integer,default = 1)
     min_lead_time = db.Column(db.Integer, default = 1)
 
