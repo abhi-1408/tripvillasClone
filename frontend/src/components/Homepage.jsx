@@ -14,9 +14,14 @@ import dum7 from './imgurl/dum7.jpeg'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import { Login_Fetch, Logout_User } from '../Redux/login/action'
-import { Load_Filtered_Data, Reset_filter, Save_Filter } from "../Redux/common/action";
+import {
+  Load_Filtered_Data,
+  Reset_filter,
+  Save_Filter,
+} from '../Redux/common/action'
 import { Redirect, useHistory, Link } from 'react-router-dom'
 import { Reset_All } from '../Redux/common/action'
+import $ from 'jquery'
 
 export const Homepage = (props) => {
   // responseGoogle = (response) => {
@@ -26,7 +31,7 @@ export const Homepage = (props) => {
 
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
-  const [search_location, setSearchLocation] = useState("delhi")
+  const [search_location, setSearchLocation] = useState('delhi')
   const [guest, setGuest] = useState(0)
   // const [location, setLocation] = useState('')
 
@@ -34,9 +39,7 @@ export const Homepage = (props) => {
     if (endDate < date) {
       setEndDate(date)
       setStartDate(date)
-    }
-    else {
-
+    } else {
       setStartDate(date)
     }
     console.log('handle 1 clicked date is', startDate)
@@ -63,25 +66,48 @@ export const Homepage = (props) => {
 
   let dispatch = useDispatch()
   let history = useHistory()
-  let com = useSelector(state => state.common)
+  let com = useSelector((state) => state.common)
   const { filters } = com
 
   const handleSearch = () => {
     console.log('handle search clicked')
-    let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
-    let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
+    let sd =
+      startDate.getFullYear() +
+      '-' +
+      (startDate.getMonth() + 1) +
+      '-' +
+      startDate.getDate()
+    let ed =
+      endDate.getFullYear() +
+      '-' +
+      (endDate.getMonth() + 1) +
+      '-' +
+      endDate.getDate()
     dispatch(Reset_filter())
     filters['state'] = search_location
     filters['start_date'] = startDate
     filters['end_date'] = endDate
     dispatch(Save_Filter(filters))
-    dispatch(Load_Filtered_Data({ "state": search_location, "check_in": sd, "check_out": ed }))
+    dispatch(
+      Load_Filtered_Data({
+        state: search_location,
+        check_in: sd,
+        check_out: ed,
+      })
+    )
     // return <Redirect to='/filterby' />
     setTimeout(() => {
       let s = ''
-      s = s + '?state=' + search_location + '&' + 'check_in=' + sd + '&check_out=' + ed;
+      s =
+        s +
+        '?state=' +
+        search_location +
+        '&' +
+        'check_in=' +
+        sd +
+        '&check_out=' +
+        ed
       history.push('/filterby' + s)
-
     }, 2000)
   }
 
@@ -96,7 +122,15 @@ export const Homepage = (props) => {
   }, [])
 
   const arr = [dum1, dum2, dum3, dum4, dum5, dum6, dum7]
-  const title = ['delhi', 'goa', 'southern province', 'phuket', 'kerala', 'bali', 'himachal pradesh']
+  const title = [
+    'delhi',
+    'goa',
+    'southern province',
+    'phuket',
+    'kerala',
+    'bali',
+    'himachal pradesh',
+  ]
 
   return (
     <div>
@@ -218,7 +252,15 @@ export const Homepage = (props) => {
                     backgroundRepeat: 'no-repeat',
                   }}
                 >
-                  <h1 id={styles.smallcard}><Link class="text-light" style={{ textDecoration: 'none' }} to={`/holiday/${title[ind]}`}>{title[ind]}</Link></h1>
+                  <h1 id={styles.smallcard}>
+                    <Link
+                      class='text-light'
+                      style={{ textDecoration: 'none' }}
+                      to={`/holiday/${title[ind]}`}
+                    >
+                      {title[ind]}
+                    </Link>
+                  </h1>
                 </div>
               </div>
             ))}
