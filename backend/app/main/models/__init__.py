@@ -12,6 +12,7 @@ from . import RoomMetaModel
 from . import BookingModel
 from . import BookedSlotModel
 from . import RatingNReviewModel
+from . import PaymentGatewayModel
 
 
 

@@ -178,6 +178,32 @@ export const Load_Recommended_Rating = (info) => {
     }
 }
 
+export const Booking_Confirmed = (data) => {
+    return {
+        type: "BOOKING_CONFIRMED",
+        payload: data
+
+    }
+}
+
+export const Update_in_Booking = (info) => {
+    return dispatch => {
+        return axios({
+            method: "post",
+            url: "http://64651181e1b6.ngrok.io/admin/create_booking",
+            data: info
+        })
+            .then((res) => res.data)
+            .then((data) => {
+                dispatch(Booking_Confirmed(data))
+            })
+            .catch((err) => {
+                console.log(err)
+
+            })
+    }
+}
+
 
 
 export const Load_Recommended_State = (info) => {
@@ -206,8 +232,17 @@ export const Specific_Hotel_Available = (data) => {
     }
 }
 
+export const Event_Check = (data) => {
+    return {
+        type: "CHECK",
+        payload: data
+    }
+}
+
 export const Specific_Hotel_Available_On_Date = (info) => {
+
     return dispatch => {
+        dispatch(Event_Check(info))
         return axios({
             method: "post",
             url: "http://64651181e1b6.ngrok.io/admin/avaispecific",

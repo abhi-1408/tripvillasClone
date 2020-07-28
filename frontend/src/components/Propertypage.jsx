@@ -18,6 +18,8 @@ export const Propertypage = (props) => {
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
 
+    let log = useSelector((state) => state.login);
+    let { auth_logged } = log
     let common = useSelector((state) => state.common);
     const { property_data, filters, message, message_flag } = common
     let dispatch = useDispatch()
@@ -26,11 +28,19 @@ export const Propertypage = (props) => {
         setStartDate(filters['start_date'])
         setEndDate(filters['end_date'])
         dispatch(Load_Specific_Property({ "id": props.match.params.id }))
-        let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
-        let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
+        let sd = filters['start_date'].getFullYear() + "-" + (filters['start_date'].getMonth() + 1) + "-" + filters['start_date'].getDate();
+        let ed = filters['end_date'].getFullYear() + "-" + (filters['end_date'].getMonth() + 1) + "-" + filters['end_date'].getDate();
         dispatch(Specific_Hotel_Available_On_Date({ "check_in": sd, "check_out": ed, "hotel_id": props.match.params['id'] }))
 
     }, [])
+
+    // useEffect(() => {
+    //     if (!auth_logged) {
+    //         console.log('NOT LOGGED IN')
+    //         window.$('#exampleModal').modal('open')
+    //         // alert('hi')
+    //     }
+    // })
 
 
     // const loadRazorpay = () => {
@@ -92,23 +102,32 @@ export const Propertypage = (props) => {
     let history = useHistory()
 
     const handleBook = () => {
-        let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
-        let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
+        if (!auth_logged) {
+            console.log('NOT LOGGED IN')
+            window.$('#exampleModal').modal('show')
 
-        dispatch(LoadBookingData([{
-            "property": property_data[0], "check_in": sd,
-            "check_out": ed,
-            "guests": 1,
-            "units": 1,
-            "total_cost": {
-                "sub_total": property_data[0]['total_price'],
-                "discount": "0",
-                "tax": "1500",
-                "cleaning_tax": "400",
-                "total": property_data[0]['total_price'] + 1500 + 400
-            }
-        }]))
-        history.push('/book/' + props.match.params.id)
+            // alert('hi')
+        }
+        else {
+
+            let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
+            let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
+
+            dispatch(LoadBookingData([{
+                "property": property_data[0], "check_in": sd,
+                "check_out": ed,
+                "guests": 1,
+                "units": 1,
+                "total_cost": {
+                    "sub_total": property_data[0]['total_price'],
+                    "discount": "0",
+                    "tax": "1500",
+                    "cleaning_tax": "400",
+                    "total": property_data[0]['total_price'] + 1500 + 400
+                }
+            }]))
+            history.push('/book/' + props.match.params.id)
+        }
     }
 
 
@@ -124,7 +143,7 @@ export const Propertypage = (props) => {
         let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
         let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
         dispatch(Specific_Hotel_Available_On_Date({ "check_in": sd, "check_out": ed, "hotel_id": props.match.params['id'] }))
-        console.log('handle 1 clicked date is', startDate)
+        console.log('start date clicked date is', startDate)
     }
 
     const handleChange2 = (date) => {
@@ -137,8 +156,15 @@ export const Propertypage = (props) => {
         let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
         let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
         dispatch(Specific_Hotel_Available_On_Date({ "check_in": sd, "check_out": ed, "hotel_id": props.match.params['id'] }))
-
+        console.log('end date clicked')
     }
+
+    // useEffect(() => {
+    //     let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
+    //     let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
+    //     dispatch(Specific_Hotel_Available_On_Date({ "check_in": sd, "check_out": ed, "hotel_id": props.match.params['id'] }))
+
+    // }, startDate)
 
     return (
         <div>
@@ -810,22 +836,26 @@ export const Propertypage = (props) => {
                                     <option selected value='0'>
                                         Select Units
                       </option>
-                                    <option value='1 unit'>1 units</option>
-                                    <option value='2 units'>2 units</option>
-                                    <option value='3 units'>3 units</option>
+                                    {}
+                                    {Array.from(Array(item.number_of_rooms), (e, i) => {
+                                        return <option value='{i+1} unit'>{i + 1} units</option>
+                                    })}
+
+                                    {/* <option value='2 units'>2 units</option>
+                                    <option value='3 units'>3 units</option> */}
                                 </select>
 
                                 <DatePicker
                                     className={styles.datepick}
                                     selected={startDate}
                                     value={startDate}
-                                    onChange={handleChange1}
+                                    onSelect={handleChange1}
                                 />
                                 <DatePicker
                                     className={styles.datepick1}
                                     selected={endDate}
                                     value={endDate}
-                                    onChange={handleChange2}
+                                    onSelect={handleChange2}
                                 />
 
                                 <select
