@@ -8,7 +8,8 @@ const initialState = {
     recommended_state: [],
     recommended_review: [],
     message: "available on selected dates",
-    message_flag: true
+    message_flag: true,
+    property_review: []
 }
 
 export default (state = initialState, { type, payload }) => {

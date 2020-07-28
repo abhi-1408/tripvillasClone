@@ -30,7 +30,7 @@ export const Register_Fetch = (info) => {
     return dispatch => {
         return axios({
             method: "post",
-            url: "http://c562fcfe8d0c.ngrok.io/user/signup",
+            url: "http://64651181e1b6.ngrok.io/user/signup",
             data: info
         })
             .then((res) => res.data)
