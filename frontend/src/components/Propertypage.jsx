@@ -9,12 +9,17 @@ import home from './imgurl/home.jpg'
 import dum3 from './imgurl/dum3.jpeg'
 import dum2 from './imgurl/dum2.jpeg'
 import { useDispatch, useSelector } from "react-redux";
-import { Load_Specific_Property, Specific_Hotel_Available_On_Date } from '../Redux/common/action'
+import { Load_Specific_Property, Specific_Hotel_Available_On_Date, LoadBookingData } from '../Redux/common/action'
+import { useHistory } from 'react-router'
+
+
 export const Propertypage = (props) => {
     console.log('props of property page', props)
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
 
+    let log = useSelector((state) => state.login);
+    let { auth_logged } = log
     let common = useSelector((state) => state.common);
     const { property_data, filters, message, message_flag } = common
     let dispatch = useDispatch()
@@ -23,70 +28,107 @@ export const Propertypage = (props) => {
         setStartDate(filters['start_date'])
         setEndDate(filters['end_date'])
         dispatch(Load_Specific_Property({ "id": props.match.params.id }))
-        let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
-        let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
+        let sd = filters['start_date'].getFullYear() + "-" + (filters['start_date'].getMonth() + 1) + "-" + filters['start_date'].getDate();
+        let ed = filters['end_date'].getFullYear() + "-" + (filters['end_date'].getMonth() + 1) + "-" + filters['end_date'].getDate();
         dispatch(Specific_Hotel_Available_On_Date({ "check_in": sd, "check_out": ed, "hotel_id": props.match.params['id'] }))
 
     }, [])
 
-
-    const loadRazorpay = () => {
-        return new Promise((resolve => {
-
-            const script = document.createElement('script')
-            script.src = "https://checkout.razorpay.com/v1/checkout.js"
-            script.onload = () => {
-                resolve(true)
-            }
-            script.onerror = () => {
-                resolve(false)
-            }
-            document.body.appendChild(script)
-        }))
+    // useEffect(() => {
+    //     if (!auth_logged) {
+    //         console.log('NOT LOGGED IN')
+    //         window.$('#exampleModal').modal('open')
+    //         // alert('hi')
+    //     }
+    // })
 
 
-    }
+    // const loadRazorpay = () => {
+    //     return new Promise((resolve => {
 
-    async function displayRazorpay() {
+    //         const script = document.createElement('script')
+    //         script.src = "https://checkout.razorpay.com/v1/checkout.js"
+    //         script.onload = () => {
+    //             resolve(true)
+    //         }
+    //         script.onerror = () => {
+    //             resolve(false)
+    //         }
+    //         document.body.appendChild(script)
+    //     }))
 
-        const res = await loadRazorpay()
 
-        if (!res) {
-            alert('RAZOR PAY NOT AVAILABLE')
-            return
+    // }
+
+    // async function displayRazorpay() {
+
+    //     const res = await loadRazorpay()
+
+    //     if (!res) {
+    //         alert('RAZOR PAY NOT AVAILABLE')
+    //         return
+    //     }
+
+    //     const data = await fetch('http://c562fcfe8d0c.ngrok.io/admin/rorder', { method: 'POST' }).then(t => t.json())
+    //     console.log('got data from razor pay as', data)
+    //     var options = {
+    //         "key": "rzp_test_yGOdC4iCgylsNj", // Enter the Key ID generated from the Dashboard
+    //         "amount": property_data['total_price'], // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    //         "currency": data['currency'],
+    //         "name": "Trip Villas ",
+    //         "description": "Property id:" + props.match.params.id.toString(),
+    //         "order_id": data['id'], //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    //         "handler": function (response) {
+    //             alert(response.razorpay_payment_id);
+    //             // alert(response.razorpay_order_id);
+    //             // alert(response.razorpay_signature)
+    //         },
+    //         "prefill": {
+    //             "name": "Gaurav Kumar",
+    //             "email": "gaurav.kumar@example.com",
+    //             "contact": "9999999999"
+    //         },
+    //         "notes": {
+    //             "address": "Razorpay Corporate Office"
+    //         },
+    //         "theme": {
+    //             "color": "#F37254"
+    //         }
+    //     };
+    //     var rzp1 = new window.Razorpay(options);
+    //     rzp1.open()
+    // }
+
+    let history = useHistory()
+
+    const handleBook = () => {
+        if (!auth_logged) {
+            console.log('NOT LOGGED IN')
+            window.$('#exampleModal').modal('show')
+
+            // alert('hi')
         }
+        else {
 
-        const data = await fetch('http://c562fcfe8d0c.ngrok.io/admin/rorder', { method: 'POST' }).then(t => t.json())
-        console.log('got data from razor pay as', data)
-        var options = {
-            "key": "rzp_test_yGOdC4iCgylsNj", // Enter the Key ID generated from the Dashboard
-            "amount": property_data['total_price'], // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-            "currency": data['currency'],
-            "name": "Trip Villas ",
-            "description": "Property id:" + props.match.params.id.toString(),
-            "order_id": data['id'], //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-            "handler": function (response) {
-                alert(response.razorpay_payment_id);
-                // alert(response.razorpay_order_id);
-                // alert(response.razorpay_signature)
-            },
-            "prefill": {
-                "name": "Gaurav Kumar",
-                "email": "gaurav.kumar@example.com",
-                "contact": "9999999999"
-            },
-            "notes": {
-                "address": "Razorpay Corporate Office"
-            },
-            "theme": {
-                "color": "#F37254"
-            }
-        };
-        var rzp1 = new window.Razorpay(options);
-        rzp1.open()
+            let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
+            let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
+
+            dispatch(LoadBookingData([{
+                "property": property_data[0], "check_in": sd,
+                "check_out": ed,
+                "guests": 1,
+                "units": 1,
+                "total_cost": {
+                    "sub_total": property_data[0]['total_price'],
+                    "discount": "0",
+                    "tax": "1500",
+                    "cleaning_tax": "400",
+                    "total": property_data[0]['total_price'] + 1500 + 400
+                }
+            }]))
+            history.push('/book/' + props.match.params.id)
+        }
     }
-
-
 
 
     const handleChange1 = (date) => {
@@ -101,7 +143,7 @@ export const Propertypage = (props) => {
         let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
         let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
         dispatch(Specific_Hotel_Available_On_Date({ "check_in": sd, "check_out": ed, "hotel_id": props.match.params['id'] }))
-        console.log('handle 1 clicked date is', startDate)
+        console.log('start date clicked date is', startDate)
     }
 
     const handleChange2 = (date) => {
@@ -114,8 +156,15 @@ export const Propertypage = (props) => {
         let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
         let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
         dispatch(Specific_Hotel_Available_On_Date({ "check_in": sd, "check_out": ed, "hotel_id": props.match.params['id'] }))
-
+        console.log('end date clicked')
     }
+
+    // useEffect(() => {
+    //     let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
+    //     let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
+    //     dispatch(Specific_Hotel_Available_On_Date({ "check_in": sd, "check_out": ed, "hotel_id": props.match.params['id'] }))
+
+    // }, startDate)
 
     return (
         <div>
@@ -787,22 +836,26 @@ export const Propertypage = (props) => {
                                     <option selected value='0'>
                                         Select Units
                       </option>
-                                    <option value='1 unit'>1 units</option>
-                                    <option value='2 units'>2 units</option>
-                                    <option value='3 units'>3 units</option>
+                                    {}
+                                    {Array.from(Array(item.number_of_rooms), (e, i) => {
+                                        return <option value='{i+1} unit'>{i + 1} units</option>
+                                    })}
+
+                                    {/* <option value='2 units'>2 units</option>
+                                    <option value='3 units'>3 units</option> */}
                                 </select>
 
                                 <DatePicker
                                     className={styles.datepick}
                                     selected={startDate}
                                     value={startDate}
-                                    onChange={handleChange1}
+                                    onSelect={handleChange1}
                                 />
                                 <DatePicker
                                     className={styles.datepick1}
                                     selected={endDate}
                                     value={endDate}
-                                    onChange={handleChange2}
+                                    onSelect={handleChange2}
                                 />
 
                                 <select
@@ -855,7 +908,7 @@ export const Propertypage = (props) => {
                                             class='btn btn-primary mt-3'
                                             style={{ borderRadius: '0px' }}
                                             disabled={!message_flag}
-                                            onClick={displayRazorpay}
+                                            onClick={handleBook}
                                         >
                                             INSTANT BOOK
                         </button>

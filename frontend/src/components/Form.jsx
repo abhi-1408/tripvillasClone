@@ -1,8 +1,97 @@
 import React from 'react'
 import styles from './Form.module.css'
 import dum3 from './imgurl/dum3.jpeg'
+<<<<<<< HEAD
 import data from './data1.json'
 export const Form = () => {
+=======
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { Update_in_Booking } from '../Redux/common/action'
+
+
+export const Form = (props) => {
+
+  let common = useSelector((state) => state.common)
+  const { booking_data, booking_confirmed_details, booking_flag } = common
+  let dispatch = useDispatch()
+
+  let history = useHistory()
+
+  const loadRazorpay = () => {
+    return new Promise((resolve => {
+
+      const script = document.createElement('script')
+      script.src = "https://checkout.razorpay.com/v1/checkout.js"
+      script.onload = () => {
+        resolve(true)
+      }
+      script.onerror = () => {
+        resolve(false)
+      }
+      document.body.appendChild(script)
+    }))
+
+
+  }
+
+
+
+  async function displayRazorpay() {
+
+    const res = await loadRazorpay()
+
+    if (!res) {
+      alert('RAZOR PAY NOT AVAILABLE')
+      return
+    }
+
+    const data = await fetch('http://64651181e1b6.ngrok.io/admin/rorder', {
+      method: 'POST', body: JSON.stringify(booking_data[0])
+    }).then(t => t.json())
+    console.log('got data from razor pay as on frontend', data)
+    var options = {
+      "key": "rzp_test_yGOdC4iCgylsNj", // Enter the Key ID generated from the Dashboard
+      "amount": parseInt(booking_data[0]['total_cost']['total']), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": 'INR',
+      "name": "Trip Villas ",
+      "description": "Property id:" + booking_data[0]['property']['id'],
+      "order_id": data['id'], //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      "handler": function (response) {
+        // alert(response.razorpay_payment_id);
+        dispatch(Update_in_Booking({ ...booking_data[0], "order_id": response.razorpay_order_id }))
+        // if (booking_flag) {
+
+        //   setTimeout(() => {
+        //     history.push('/booking-confirm')
+
+        //   }, 1000)
+        // }
+
+        // alert(response.razorpay_order_id);
+        // alert(response.razorpay_signature)
+      },
+      "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9999999999"
+      },
+      "notes": {
+        "address": "Razorpay Corporate Office"
+      },
+      "theme": {
+        "color": "#F37254"
+      }
+    };
+    var rzp1 = new window.Razorpay(options);
+    rzp1.open()
+  }
+
+  if (booking_flag) {
+    history.push('/booking-confirm/' + booking_confirmed_details['order_number'])
+  }
+
+>>>>>>> 9f21fd769497ae0cf4f4b172d511d9d7f65584b7
   return (
     <div className='pl-5 pr-5 pb-5 pt-4 mt-3'>
       <div className='row p-2'>
@@ -131,7 +220,6 @@ export const Form = () => {
               fee.................................................................................................................
               {data.totol_cost.cleaning_tax}
             </div>
-
             <div className='mt-4'>
               <hr />
               Total..............................................................................................................................
@@ -171,6 +259,9 @@ export const Form = () => {
           >
             <div className='text-center ml-5 p-2' style={{ color: 'orange' }}>
               <b>Book fast.</b> Your dates might get booked by someone else.
+            </div>
+            <div>
+              {/* BOOKING FLAG {booking_flag ? "true" : "false"} */}
             </div>
           </div>
 
@@ -306,7 +397,11 @@ export const Form = () => {
                 height: '60px',
                 background: 'rgb(30,135,240)',
                 color: 'white',
+
               }}
+
+              // disabled={!message_flag}
+              onClick={displayRazorpay}
             >
               AGREE & CONTINUE
             </button>

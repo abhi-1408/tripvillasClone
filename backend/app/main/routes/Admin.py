@@ -4,6 +4,7 @@ import json
 from ..services.hotel import create_hotel,get_hotel,create_booking,available,specific_hotel_available
 from ..services.roommeta import create_room
 from ..services.filterdata import filter_data
+from ..services.paymentgateway import add_to_payment_gateway
 import razorpay
 import hmac
 import hashlib
@@ -25,7 +26,8 @@ def r_verf():
     print('type of rrr*****',type(rr))
     ss = bytes(secret, 'utf-8') 
     # message =request.get_json()
-    # mss = json.loads(message)
+    mss = json.loads(rr)
+    # print('IN VERN JSON FORMAT',mss)
     signature = hmac.new(
     ss,
     msg=bytes(rr),
@@ -35,13 +37,14 @@ def r_verf():
     headers = flask.request.headers
     # all_data = flask.request
     # print('header******',headers['x-razorpay-signature'])
-
+    print('NOW IN VERIFICATION RAZORPAY BACKEND')
     if headers['x-razorpay-signature'] == signature:
+        res = add_to_payment_gateway(mss)
         print('LEGIT REQUEST')
     # rr1 = request.form
     # print('data*******',rr,'data in form :********',rr1)
     return json.dumps({"status":"ok"})
-    return '',200
+    # return '',200
 
 @admin.route('/rall',methods = ['GET'])
 def r_all():
@@ -50,7 +53,13 @@ def r_all():
 
 @admin.route('/rorder',methods = ['POST'])
 def r_order():
-    order_amount = 50000
+    data1 = request.data
+    data2 = json.loads(data1)
+    cost = int(data2['total_cost']['total'])*100
+    print('COST IS',cost)
+    print('IN ORDER RAZOR PAY BACKEND')
+    # print('RORDER DATA IS',data2)
+    order_amount = int(cost)
     order_currency = 'INR'
     order_receipt = 'order_rcptid_11'
     notes = {'Shipping address': 'Bommanahalli, Bangalore'}   # OPTIONAL
@@ -102,6 +111,8 @@ def a_all_hotel():
 @admin.route('/create_booking',methods=['POST'])
 def a_book():
     data = request.get_json()
+    # print("***************data from create bookinh",data)
+    # return json.dumps("good booking")
     res = create_booking(data)
 
     return json.dumps(res)
