@@ -8,6 +8,13 @@ export const Apply_Data = (data) => {
     }
 }
 
+export const LoadBookingData = (data) => {
+    return {
+        type: "LOAD_BOOKING_DATA",
+        payload: data
+    }
+}
+
 export const Load_Data = (info) => {
     return dispatch => {
         return axios({

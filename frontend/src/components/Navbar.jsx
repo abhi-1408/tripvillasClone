@@ -56,15 +56,19 @@ export const Navbar = () => {
     }
   }
 
+
   const handleClickLogin = () => {
     console.log('login clicked', l_email, l_password)
     dispatch(Login_Fetch({ email: l_email, password: l_password }))
   }
 
-  const responseGoogle = (response) => {
-    console.log('GOOGLE RESPONSE', typeof JSON.stringify(response))
-    dispatch(Login_Google_Fetch(response))
-  }
+    const responseGoogle = (response) => {
+        console.log('GOOGLE RESPONSE', (response))
+        dispatch(Login_Google_Fetch(response))
+    }
+
+
+  
 
   useEffect(() => {
     if (auth_logged) {
@@ -235,95 +239,50 @@ export const Navbar = () => {
         </div>
       </nav>
 
-      {/* sign in modal */}
-      <div
-        class='modal fade'
-        id='exampleModal'
-        tabindex='-1'
-        role='dialog'
-        aria-labelledby='exampleModalLabel'
-        aria-hidden='true'
-      >
-        <div class='modal-dialog'>
-          <div class='modal-content'>
-            <div class='modal-header'>
-              <h5 class='modal-title text-center' id='exampleModalLabel'>
-                Sign In
-              </h5>
-              <button
-                type='button'
-                class='close'
-                data-dismiss='modal'
-                aria-label='Close'
-              >
-                <span aria-hidden='true'>&times;</span>
-              </button>
-            </div>
-            <div class='modal-body'>
-              {/* <form> */}
-              <div class='form-group'>
-                {/* logged in user:
+
+
+            {/* sign in modal */}
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-center" id="exampleModalLabel">Sign In</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {/* <form> */}
+                            <div class="form-group">
+                                {/* logged in user:
                                 {auth_logged ? <h2>{user_loggedin}</h2> : ""} */}
-                {error_logged ? (
-                  <div
-                    className='text-center p-2'
-                    style={{
-                      border: '1px solid red',
-                      color: 'red',
-                      backgroundColor: 'pink',
-                    }}
-                  >
-                    {message_logged}
-                  </div>
-                ) : (
-                  ''
-                )}
-              </div>
-              <div class='form-group'>
-                <label for='exampleInputEmail1'>Email address</label>
-                <input
-                  type='email'
-                  name='l_email'
-                  value={l_email}
-                  onChange={(e) => handleChgLogin(e)}
-                  class='form-control'
-                  id='exampleInputEmail1'
-                  aria-describedby='emailHelp'
-                />
-                <small id='emailHelp' class='form-text text-muted'>
-                  We'll never share your email with anyone else.
-                </small>
-              </div>
-              <div class='form-group'>
-                <label for='exampleInputPassword1'>Password</label>
-                <input
-                  type='password'
-                  name='l_password'
-                  value={l_password}
-                  onChange={(e) => handleChgLogin(e)}
-                  class='form-control'
-                  id='exampleInputPassword1'
-                />
-              </div>
-              <button
-                type='submit'
-                onClick={handleClickLogin}
-                class='btn btn-primary m-2'
-                style={{ float: 'left' }}
-              >
-                Sign in
-              </button>
-              <div>
-                <GoogleLogin
-                  clientId='222606975118-9e6c9p3ek68d8ei2in3i1l6ator9ait5.apps.googleusercontent.com'
-                  buttonText=''
-                  onSuccess={responseGoogle}
-                  onFailure={responseGoogle}
-                  cookiePolicy={'single_host_origin'}
-                  style={{ textAlign: 'center' }}
-                />
-              </div>
-              {/* </form> */}
+                                {error_logged ? <div className="text-center p-2" style={{ border: "1px solid red", color: "red", backgroundColor: "pink" }}>{message_logged}</div> : ""}
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" name="l_email" value={l_email} onChange={(e) => handleChgLogin(e)} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" name="l_password" value={l_password} onChange={(e) => handleChgLogin(e)} class="form-control" id="exampleInputPassword1" />
+                            </div>
+                            <button type="submit" onClick={handleClickLogin} class="btn btn-primary m-2" style={{ float: "left" }}>Sign in</button>
+                            <div>
+                                <GoogleLogin
+                                    clientId="222606975118-9e6c9p3ek68d8ei2in3i1l6ator9ait5.apps.googleusercontent.com"
+                                    buttonText="SignIN with GOOGLE"
+                                    onSuccess={responseGoogle}
+                                    onFailure={responseGoogle}
+                                    cookiePolicy={'single_host_origin'}
+                                    style={{ textAlign: "center" }}
+                                />
+                            </div>
+                            {/* </form> */}
+                        </div>
+                    </div>
+                </div>
+
             </div>
           </div>
         </div>

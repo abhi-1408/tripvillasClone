@@ -9,7 +9,10 @@ import home from './imgurl/home.jpg'
 import dum3 from './imgurl/dum3.jpeg'
 import dum2 from './imgurl/dum2.jpeg'
 import { useDispatch, useSelector } from "react-redux";
-import { Load_Specific_Property, Specific_Hotel_Available_On_Date } from '../Redux/common/action'
+import { Load_Specific_Property, Specific_Hotel_Available_On_Date, LoadBookingData } from '../Redux/common/action'
+import { useHistory } from 'react-router'
+
+
 export const Propertypage = (props) => {
     console.log('props of property page', props)
     const [startDate, setStartDate] = useState(new Date())
@@ -30,63 +33,83 @@ export const Propertypage = (props) => {
     }, [])
 
 
-    const loadRazorpay = () => {
-        return new Promise((resolve => {
+    // const loadRazorpay = () => {
+    //     return new Promise((resolve => {
 
-            const script = document.createElement('script')
-            script.src = "https://checkout.razorpay.com/v1/checkout.js"
-            script.onload = () => {
-                resolve(true)
+    //         const script = document.createElement('script')
+    //         script.src = "https://checkout.razorpay.com/v1/checkout.js"
+    //         script.onload = () => {
+    //             resolve(true)
+    //         }
+    //         script.onerror = () => {
+    //             resolve(false)
+    //         }
+    //         document.body.appendChild(script)
+    //     }))
+
+
+    // }
+
+    // async function displayRazorpay() {
+
+    //     const res = await loadRazorpay()
+
+    //     if (!res) {
+    //         alert('RAZOR PAY NOT AVAILABLE')
+    //         return
+    //     }
+
+    //     const data = await fetch('http://c562fcfe8d0c.ngrok.io/admin/rorder', { method: 'POST' }).then(t => t.json())
+    //     console.log('got data from razor pay as', data)
+    //     var options = {
+    //         "key": "rzp_test_yGOdC4iCgylsNj", // Enter the Key ID generated from the Dashboard
+    //         "amount": property_data['total_price'], // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    //         "currency": data['currency'],
+    //         "name": "Trip Villas ",
+    //         "description": "Property id:" + props.match.params.id.toString(),
+    //         "order_id": data['id'], //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    //         "handler": function (response) {
+    //             alert(response.razorpay_payment_id);
+    //             // alert(response.razorpay_order_id);
+    //             // alert(response.razorpay_signature)
+    //         },
+    //         "prefill": {
+    //             "name": "Gaurav Kumar",
+    //             "email": "gaurav.kumar@example.com",
+    //             "contact": "9999999999"
+    //         },
+    //         "notes": {
+    //             "address": "Razorpay Corporate Office"
+    //         },
+    //         "theme": {
+    //             "color": "#F37254"
+    //         }
+    //     };
+    //     var rzp1 = new window.Razorpay(options);
+    //     rzp1.open()
+    // }
+
+    let history = useHistory()
+
+    const handleBook = () => {
+        let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
+        let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
+
+        dispatch(LoadBookingData([{
+            "property": property_data[0], "check_in": sd,
+            "check_out": ed,
+            "guests": 1,
+            "units": 1,
+            "total_cost": {
+                "sub_total": property_data[0]['total_price'],
+                "discount": "0",
+                "tax": "1500",
+                "cleaning_tax": "400",
+                "total": property_data[0]['total_price'] + 1500 + 400
             }
-            script.onerror = () => {
-                resolve(false)
-            }
-            document.body.appendChild(script)
-        }))
-
-
+        }]))
+        history.push('/book/' + props.match.params.id)
     }
-
-    async function displayRazorpay() {
-
-        const res = await loadRazorpay()
-
-        if (!res) {
-            alert('RAZOR PAY NOT AVAILABLE')
-            return
-        }
-
-        const data = await fetch('http://c562fcfe8d0c.ngrok.io/admin/rorder', { method: 'POST' }).then(t => t.json())
-        console.log('got data from razor pay as', data)
-        var options = {
-            "key": "rzp_test_yGOdC4iCgylsNj", // Enter the Key ID generated from the Dashboard
-            "amount": property_data['total_price'], // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-            "currency": data['currency'],
-            "name": "Trip Villas ",
-            "description": "Property id:" + props.match.params.id.toString(),
-            "order_id": data['id'], //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-            "handler": function (response) {
-                alert(response.razorpay_payment_id);
-                // alert(response.razorpay_order_id);
-                // alert(response.razorpay_signature)
-            },
-            "prefill": {
-                "name": "Gaurav Kumar",
-                "email": "gaurav.kumar@example.com",
-                "contact": "9999999999"
-            },
-            "notes": {
-                "address": "Razorpay Corporate Office"
-            },
-            "theme": {
-                "color": "#F37254"
-            }
-        };
-        var rzp1 = new window.Razorpay(options);
-        rzp1.open()
-    }
-
-
 
 
     const handleChange1 = (date) => {
@@ -855,7 +878,7 @@ export const Propertypage = (props) => {
                                             class='btn btn-primary mt-3'
                                             style={{ borderRadius: '0px' }}
                                             disabled={!message_flag}
-                                            onClick={displayRazorpay}
+                                            onClick={handleBook}
                                         >
                                             INSTANT BOOK
                         </button>
