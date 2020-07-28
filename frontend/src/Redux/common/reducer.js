@@ -9,7 +9,8 @@ const initialState = {
     recommended_review: [],
     message: "available on selected dates",
     message_flag: true,
-    property_review: []
+    property_review: [],
+    booking_data: []
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -28,6 +29,11 @@ export default (state = initialState, { type, payload }) => {
                 property_data: payload
             }
 
+        case "LOAD_BOOKING_DATA":
+            return {
+                ...state,
+                booking_data: payload
+            }
         case "SAVE_FILTER":
             return {
                 ...state,
@@ -68,7 +74,8 @@ export default (state = initialState, { type, payload }) => {
                 filters: { "swimming_pool": false, "ac": false, "internet": false, "television": false, "parking": false, "housekeeping": false, "functional_kitchen": false, "washing_machine": false, "dish_washer": false, "sort_by": false, "check_in": false, "check_out": false, "start_date": new Date(), "end_date": new Date(), "state": "" },
                 property_data: [],
                 recommended_state: [],
-                recommended_review: []
+                recommended_review: [],
+                booking_data: []
             }
         default:
             return state
