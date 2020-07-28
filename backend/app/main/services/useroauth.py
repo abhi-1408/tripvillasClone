@@ -12,13 +12,14 @@ def user_o_auth_check(data):
         last_name = data['profileObj']['givenName'],
         email = data['profileObj']['email']
         password = None
-        mobile = ""
 
         
         provider = data['tokenObj']['idpId']
         provider_id = data['googleId']
         access_token = data['accessToken']
         refresh_token = data['tokenObj']['id_token']
+        mobile = ""
+        mobile = provider_id[:9]
         data = {}
     
     
