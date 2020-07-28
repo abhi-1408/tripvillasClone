@@ -5,6 +5,7 @@ import { FilterPage } from '../components/Filterpage'
 import { Propertypage } from '../components/Propertypage'
 import { Holidayhomes } from '../components/Holidayhomes';
 import { Map } from '../components/Map';
+import { Paymentpage } from '../components/Paymentpage';
 import { Form } from '../components/Form';
 
 
@@ -17,6 +18,7 @@ export const Routes = () => {
             <Route path='/holiday/:state' exact render={(props) => <Holidayhomes {...props} />} />
             <Route path='/property/:id' exact render={(props) => <Propertypage {...props} />} />
             <Route path='/book/:id' exact render={(props) => <Form {...props} />} />
+            <Route path='/booking-confirm/:id' exact render={(props) => <Paymentpage {...props} />} />
         </Switch>
     )
 }

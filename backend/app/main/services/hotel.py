@@ -5,6 +5,7 @@ from ..models.HotelModel import Hotel
 from ..models.RoomMetaModel import RoomMeta
 from ..models.BookingModel import Booking
 from ..models.BookedSlotModel import BookedSlot
+from ..models.PaymentGatewayModel import PaymentGateway
 from ..models import db
 import requests
 import datetime
@@ -188,24 +189,29 @@ def get_hotel():
 
 def create_booking(data):
 
-    book = Booking(hotel_id = data['hotel_id'],check_in = data['check_in'], check_out = data['check_out'])
-    db.session.add(book)
-    db.session.commit()
+    razor = PaymentGateway.query.filter(PaymentGateway.order_id == data['order_id']).first()
 
-    # start_date = data['check_in']
-    # end_date = data['check_out']
-    start_date = dt.strptime(data['check_in'], '%Y-%m-%d')
-    end_date = dt.strptime(data['check_out'], '%Y-%m-%d')
-    delta = datetime.timedelta(days=1)
-
-    while start_date <= end_date:
-        print('DATES IS ****************',start_date)
-        bookslot = BookedSlot(hotel_id = data['hotel_id'], booked_for_date = str(start_date))
-        db.session.add(bookslot)
+    if razor:
+        payment_details = razor.payment_details
+        book = Booking(hotel_id = data['property']['id'],check_in = data['check_in'], check_out = data['check_out'],total_price = payment_details['payload']['payment']['entity']['amount'], payment_details = payment_details['payload']['payment']['entity']['card']['id'],status = payment_details['event'])
+        db.session.add(book)
         db.session.commit()
-        start_date += delta
 
-    return 'added booking'+str(data['hotel_id'])
+        # start_date = data['check_in']
+        # end_date = data['check_out']
+        start_date = dt.strptime(data['check_in'], '%Y-%m-%d')
+        end_date = dt.strptime(data['check_out'], '%Y-%m-%d')
+        delta = datetime.timedelta(days=1)
+
+        while start_date <= end_date:
+            print('DATES IS ****************',start_date)
+            bookslot = BookedSlot(hotel_id = data['property']['id'], booked_for_date = str(start_date))
+            db.session.add(bookslot)
+            db.session.commit()
+            start_date += delta
+
+        return {"error":False,"message":"booking done","status":True,"order_number":data['order_id']}
+    return {"error":True,"message":'booking cant be added, not legit'}
 
 def available(data):
     
@@ -329,7 +335,7 @@ def specific_hotel_available(data):
 
 
     for item in result:
-        if item.available == 0:
+        if item.available <= 0:
             return {"flag":False,"message":"not available on selected dates"}
     
     return {"flag":True,"message":"available on selected dates"}
