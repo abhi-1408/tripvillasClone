@@ -412,14 +412,15 @@ export const FilterPage = (props) => {
           {/* applyfilter modal */}
 
           <div
-            class='modal fade'
+            class='modal fade '
             id='applyfilter'
             tabindex='-1'
             role='dialog'
             aria-labelledby='exampleModalLabel'
             aria-hidden='true'
+            style={{ height: '600px' }}
           >
-            <div class='modal-dialog  modal-lg' role='document'>
+            <div class='modal-dialog  modal-lg ' role='document'>
               <div class='modal-content'>
                 <div
                   style={{
@@ -1014,8 +1015,8 @@ export const FilterPage = (props) => {
 
                   {/* filterbutton */}
 
-                  <div class='modal-footer '>
-                    <div>
+                  <div class='modal-footer ' id={styles.last}>
+                    {/* <div>
                       <button
                         type='button'
                         class='btn btn-outline-secondary '
@@ -1023,7 +1024,7 @@ export const FilterPage = (props) => {
                       >
                         CANCEL
                       </button>
-                    </div>
+                    </div> */}
                     <div>
                       <button
                         type='button'

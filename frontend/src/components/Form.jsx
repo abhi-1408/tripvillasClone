@@ -1,6 +1,10 @@
 import React from 'react'
 import styles from './Form.module.css'
 import dum3 from './imgurl/dum3.jpeg'
+<<<<<<< HEAD
+import data from './data1.json'
+export const Form = () => {
+=======
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Update_in_Booking } from '../Redux/common/action'
@@ -87,6 +91,7 @@ export const Form = (props) => {
     history.push('/booking-confirm/' + booking_confirmed_details['order_number'])
   }
 
+>>>>>>> 9f21fd769497ae0cf4f4b172d511d9d7f65584b7
   return (
     <div className='pl-5 pr-5 pb-5 pt-4 mt-3'>
       <div className='row p-2'>
@@ -114,84 +119,130 @@ export const Form = (props) => {
             </ul>
           </div>
 
-          <div className='row mt-3'>
+          <div className='row mt-3  shadow bg-white rounded'>
             <div
               className='col-6'
               style={{
-                border: '1px solid black',
-                backgroundImage: booking_data[0]['property']["image_medium"][0],
+                backgroundImage: `url(${data.image_medium[0]})`,
+                backgroundRepeat: 'no-repeat',
                 height: '160.283px',
                 width: '300px',
               }}
-            >
-              {/* image */}
-            </div>
+            ></div>
 
             <div className='col-6'>
               <div className='m-1'>
-                <small className='text-muted'>Propertyid {booking_data[0]['property']['id']}</small>
-                <h3 className='mt-3'>{booking_data[0]['property']['title']}</h3>
-                <small className='text-muted'>{booking_data[0]['property']['location_name']}</small>
+                <small className='text-muted'>Property Ref Id #{data.id}</small>
                 <p>
-                  <small className='text-muted'>{booking_data[0]['property']['city'], booking_data[0]['property']['state'], booking_data[0]['property']['country']}</small>
+                  <b className='mt-3'>{data.title}</b>
+                  <br />
+                  <small className='text-muted'>{data.location_name}</small>
+                </p>
+
+                <p>
+                  <small className='text-muted'>
+                    {data.property_type} | Accommodates {data.prop_tags[3]} |{' '}
+                    {data.number_of_rooms} Bedroom(s) |{' '}
+                    {data.number_of_bathrooms} Bathroom(s)
+                  </small>
                 </p>
                 {/* mapping ammenties */}
               </div>
             </div>
           </div>
 
-          <div className='row mt-3'>
-            <div className='col-2 text-center p-3 shadow bg-white rounded'>
-              <h2>{booking_data[0]['check_in']}</h2>
-              <p>
-                <small className='text-muted'>checkin </small>
-              </p>
+          <div className='row mt-3 '>
+            <div className='col-3'>
+              <div className='text-center shadow bg-white rounded p-4 '>
+                <p className='mt-2'>
+                  {' '}
+                  <b>{data.check_in}</b>
+                </p>
+                <p>
+                  <small>Check in </small>
+                </p>
+              </div>
             </div>
-            <div
-              className='col-2 shadow bg-white rounded p-3 text-center'
-              style={{ marginLeft: '22px' }}
-            >
-              {' '}
-              <h2>{booking_data[0]['check_out']}</h2>
-              <p>
-                <small className='text-muted'>checkout date </small>
-              </p>
+
+            <div className='col-3'>
+              <div className='text-center shadow bg-white rounded p-4 '>
+                <p className='mt-2'>
+                  {' '}
+                  <b>{data.check_out}</b>
+                </p>
+                <p>
+                  <small>Check in </small>
+                </p>
+              </div>
             </div>
-            <div
-              className='col-2 p-3 shadow bg-white rounded  text-center'
-              style={{ marginLeft: '22px' }}
-            >
-              <h2>1</h2>
-              <p>
-                <small className='text-muted'>units</small>
-              </p>
+
+            <div className='col-3'>
+              <div className='text-center shadow bg-white rounded p-4 '>
+                <p className='mt-2'>
+                  {' '}
+                  <b>{data.guests}</b>
+                </p>
+                <p>
+                  <small>Guests</small>
+                </p>
+              </div>
             </div>
-            <div
-              className='col-2 shadow bg-white rounded p-3 text-center'
-              style={{ marginLeft: '22px' }}
-            >
-              <h2>1</h2>
-              <p>
-                <small className='text-muted'>Max. Guests </small>
-              </p>
+
+            <div className='col-3'>
+              <div className='text-center shadow bg-white rounded p-4 '>
+                <p className='mt-2'>
+                  {' '}
+                  <b>{data.units}</b>
+                </p>
+                <p>
+                  <small>Units </small>
+                </p>
+              </div>
             </div>
           </div>
           <div className='row mt-3 '>
             <div className='mt-4'>
               Sub
-              Total.....................................................................................................................{booking_data[0]['total_cost']['sub_total']}
+              Total.....................................................................................................................
+              {data.totol_cost.sub_totol}
             </div>
             <div className='mt-4'>
-              Discount.....................................................................................................................{booking_data[0]['total_cost']['discount']}
+              Discount......................................................................................................................
+              {data.totol_cost.discount}
             </div>
             <div className='mt-4'>
-              Tax...................................................................................................................................{booking_data[0]['total_cost']['tax']}
+              Tax................................................................................................................................
+              {data.totol_cost.tax}
+            </div>
+
+            <div className='mt-4'>
+              Cleaning
+              fee.................................................................................................................
+              {data.totol_cost.cleaning_tax}
             </div>
             <div className='mt-4'>
-              Cleaning Tax...................................................................................................................................{booking_data[0]['total_cost']['cleaning_tax']}
+              <hr />
+              Total..............................................................................................................................
+              {data.totol_cost.total}
+              <hr />
             </div>
-            <div className='mt-4'>
-              Total...................................................................................................................................{booking_data[0]['total_cost']['total']}
+
+            <div className='mt-5' style={{ color: 'grey', fontSize: '15px' }}>
+              <b>Rate Plan</b>
+              <p className='mb-4'>No meals provided (European Plan) </p>
+              <b>Non Refundable Cancellation Policy</b>
+              <p className='mb-4'>
+                This is the strictest clause. As soon the booking is confirmed &
+                payment is accepted, booking becomes non-refundable. Zero amount
+                will be refunded to the customer if she or he cancels the
+                booking.{' '}
+              </p>
+              <b>House Rules</b>
+              <p className='mb-4'>
+                Unmarried Couples not allowed. Loud Music not allowed. Pets not
+                allowed. Guest with local ID ,unmarried couples are not allowed
+                . We don't allow partying in the house .
+              </p>
             </div>
           </div>
 
@@ -214,52 +265,73 @@ export const Form = (props) => {
             </div>
           </div>
 
-          <div className=' mr-3 mb-3 ml-3 p-2 shadow bg-white rounded'>
+          <div className=' mr-3 mb-3 ml-3 p-3 shadow bg-white rounded'>
             <div>
+              <i class='fas fa-id-badge ml-2 mr-2'></i>
               <b>Enter your contact information</b>
             </div>
             <hr style={{ color: 'black' }} />
             <form>
-              <p>
-                <select>
-                  <option value='+91'>+91</option>
-                  <option value='+1'>+1</option>
-                  <option value='+20'>+20</option>
-                  <option value='+27'>+27</option>
-                  <option value='+30'>+30</option>
-                  <option value='+31'>+31</option>
-                  <option value='+32'>+32</option>
-                  <option value='+33'>+33</option>
-                  <option value='+34'>+34</option>
-                  <option value='+35'>+35</option>
-                  <option value='+36'>+36</option>
-                  <option value='+37'>+37</option>
-                  <option value='+38'>+38</option>
-                </select>
+              <div class='input-group mb-3'>
+                <div class='input-group-prepend'>
+                  <select>
+                    <option value='+91'>+91</option>
+                    <option value='+1'>+1</option>
+                    <option value='+20'>+20</option>
+                    <option value='+27'>+27</option>
+                    <option value='+30'>+30</option>
+                    <option value='+31'>+31</option>
+                    <option value='+32'>+32</option>
+                    <option value='+33'>+33</option>
+                    <option value='+34'>+34</option>
+                    <option value='+35'>+35</option>
+                    <option value='+36'>+36</option>
+                    <option value='+37'>+37</option>
+                    <option value='+38'>+38</option>
+                  </select>
+                </div>
                 <input
                   type='text'
-                  className='ml-3'
-                  placeholder='Mobile Number'
+                  class='form-control'
+                  aria-label='Text input with dropdown button'
                 />
-              </p>
+              </div>
 
-              <p>
-                <input type='text' placeholder='First Name' />
-                <input type='text' placeholder='Last Name' className='ml-2' />
-              </p>
+              <div class='row'>
+                <div class='col'>
+                  <input
+                    type='text'
+                    class='form-control'
+                    placeholder='First name'
+                  />
+                </div>
+                <div class='col'>
+                  <input
+                    type='text'
+                    class='form-control'
+                    placeholder='Last name'
+                  />
+                </div>
+              </div>
 
-              <p>
+              <div class='form-group mt-3'>
                 <input
                   type='email'
                   class='form-control'
-                  placeholder='Email Address'
+                  id='Email'
+                  aria-describedby='emailHelp'
+                  placeholder='Enter email'
                 />
-              </p>
+                <small id='emailHelp' class='form-text text-muted'>
+                  We'll never share your email with anyone else.
+                </small>
+              </div>
             </form>
           </div>
 
           <div className=' mr-3 mb-3 ml-3 p-2 shadow bg-white rounded'>
             <div>
+              <i class='far fa-comment ml-2 mr-2'></i>
               <b>Are there any special requests?</b>
             </div>
             <hr style={{ color: 'black' }} />
@@ -276,7 +348,8 @@ export const Form = (props) => {
 
           <div className=' mr-3 mb-3 ml-3 p-2 shadow bg-white rounded'>
             <div>
-              <b>Are there any special requests?</b>
+              <i class='fas fa-id-badge ml-2 mr-2'></i>
+              <b>Booking Options</b>
             </div>
             <hr style={{ color: 'black' }} />
             <div className='p-3'>
@@ -284,7 +357,12 @@ export const Form = (props) => {
                 className='row p-2'
                 style={{ border: '5px solid rgb(30,135,240)' }}
               >
-                <div className='col-2'>ticl</div>
+                <div
+                  className='col-2 mt-2'
+                  style={{ color: 'rgb(30,135,240)' }}
+                >
+                  <i class='fa fa-check fa-3x' aria-hidden='true'></i>
+                </div>
                 <div className='col-10'>
                   <h6 className='mt-3'>Pay using credit/debit card.</h6>
 
@@ -409,21 +487,21 @@ export const Form = (props) => {
 
 //         <div style={{marginTop:"15px",border:"0px solid black",height:"50px"}}>
 //             <div style={{float:"left",paddingLeft:"10px"}}>
-//                     <select style={{padding:"12px 0px 12px 10px"}}>
-//                         <option value="+91">+91</option>
-//                         <option value="+1">+1</option>
-//                         <option value="+20">+20</option>
-//                         <option value="+27">+27</option>
-//                         <option value="+30">+30</option>
-//                         <option value="+31">+31</option>
-//                         <option value="+32">+32</option>
-//                         <option value="+33">+33</option>
-//                         <option value="+34">+34</option>
-//                         <option value="+35">+35</option>
-//                         <option value="+36">+36</option>
-//                         <option value="+37">+37</option>
-//                         <option value="+38">+38</option>
-//                     </select>
+// <select style={{padding:"12px 0px 12px 10px"}}>
+//     <option value="+91">+91</option>
+//     <option value="+1">+1</option>
+//     <option value="+20">+20</option>
+//     <option value="+27">+27</option>
+//     <option value="+30">+30</option>
+//     <option value="+31">+31</option>
+//     <option value="+32">+32</option>
+//     <option value="+33">+33</option>
+//     <option value="+34">+34</option>
+//     <option value="+35">+35</option>
+//     <option value="+36">+36</option>
+//     <option value="+37">+37</option>
+//     <option value="+38">+38</option>
+// </select>
 //                     <input type="text"  placeholder="Mobile Number" style={{paddingLeft:"10px",border:"1px solid black",padding:"10px 0px 10px 10px",marginLeft:"10px"}} />
 //             </div>
 //         </div>
