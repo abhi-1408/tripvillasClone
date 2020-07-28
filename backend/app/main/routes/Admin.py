@@ -50,7 +50,12 @@ def r_all():
 
 @admin.route('/rorder',methods = ['POST'])
 def r_order():
-    order_amount = 50000
+    data1 = request.data
+    data2 = json.loads(data1)
+    cost = int(data2['total_cost']['total'])*100
+    print('COST IS',cost)
+    # print('RORDER DATA IS',data2)
+    order_amount = int(cost)
     order_currency = 'INR'
     order_receipt = 'order_rcptid_11'
     notes = {'Shipping address': 'Bommanahalli, Bangalore'}   # OPTIONAL

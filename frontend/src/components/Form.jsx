@@ -1,8 +1,75 @@
 import React from 'react'
 import styles from './Form.module.css'
 import dum3 from './imgurl/dum3.jpeg'
+import { useDispatch, useSelector } from "react-redux";
 
-export const Form = () => {
+
+export const Form = (props) => {
+
+  let common = useSelector((state) => state.common)
+  const { booking_data } = common
+  let dispatch = useDispatch()
+
+  const loadRazorpay = () => {
+    return new Promise((resolve => {
+
+      const script = document.createElement('script')
+      script.src = "https://checkout.razorpay.com/v1/checkout.js"
+      script.onload = () => {
+        resolve(true)
+      }
+      script.onerror = () => {
+        resolve(false)
+      }
+      document.body.appendChild(script)
+    }))
+
+
+  }
+
+  async function displayRazorpay() {
+
+    const res = await loadRazorpay()
+
+    if (!res) {
+      alert('RAZOR PAY NOT AVAILABLE')
+      return
+    }
+
+    const data = await fetch('http://64651181e1b6.ngrok.io/admin/rorder', {
+      method: 'POST', body: JSON.stringify(booking_data[0])
+    }).then(t => t.json())
+    console.log('got data from razor pay as', data)
+    var options = {
+      "key": "rzp_test_yGOdC4iCgylsNj", // Enter the Key ID generated from the Dashboard
+      "amount": parseInt(booking_data[0]['total_cost']['total']), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": 'INR',
+      "name": "Trip Villas ",
+      "description": "Property id:" + booking_data[0]['property']['id'],
+      "order_id": data['id'], //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      "handler": function (response) {
+        alert(response.razorpay_payment_id);
+        // alert(response.razorpay_order_id);
+        // alert(response.razorpay_signature)
+      },
+      "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9999999999"
+      },
+      "notes": {
+        "address": "Razorpay Corporate Office"
+      },
+      "theme": {
+        "color": "#F37254"
+      }
+    };
+    var rzp1 = new window.Razorpay(options);
+    rzp1.open()
+  }
+
+
+
   return (
     <div className='pl-5 pr-5 pb-5 pt-4 mt-3'>
       <div className='row p-2'>
@@ -35,7 +102,7 @@ export const Form = () => {
               className='col-6'
               style={{
                 border: '1px solid black',
-                backgroundImage: `url(${dum3})`,
+                backgroundImage: booking_data[0]['property']["image_medium"][0],
                 height: '160.283px',
                 width: '300px',
               }}
@@ -45,11 +112,11 @@ export const Form = () => {
 
             <div className='col-6'>
               <div className='m-1'>
-                <small className='text-muted'>Propertyid</small>
-                <h3 className='mt-3'>title</h3>
-                <small className='text-muted'>Location</small>
+                <small className='text-muted'>Propertyid {booking_data[0]['property']['id']}</small>
+                <h3 className='mt-3'>{booking_data[0]['property']['title']}</h3>
+                <small className='text-muted'>{booking_data[0]['property']['location_name']}</small>
                 <p>
-                  <small className='text-muted'>Location</small>
+                  <small className='text-muted'>{booking_data[0]['property']['city'], booking_data[0]['property']['state'], booking_data[0]['property']['country']}</small>
                 </p>
                 {/* mapping ammenties */}
               </div>
@@ -58,7 +125,7 @@ export const Form = () => {
 
           <div className='row mt-3'>
             <div className='col-2 text-center p-3 shadow bg-white rounded'>
-              <h2>1</h2>
+              <h2>{booking_data[0]['check_in']}</h2>
               <p>
                 <small className='text-muted'>checkin </small>
               </p>
@@ -68,7 +135,7 @@ export const Form = () => {
               style={{ marginLeft: '22px' }}
             >
               {' '}
-              <h2>1</h2>
+              <h2>{booking_data[0]['check_out']}</h2>
               <p>
                 <small className='text-muted'>checkout date </small>
               </p>
@@ -95,17 +162,19 @@ export const Form = () => {
           <div className='row mt-3 '>
             <div className='mt-4'>
               Sub
-              Total.....................................................................................................................
+              Total.....................................................................................................................{booking_data[0]['total_cost']['sub_total']}
             </div>
             <div className='mt-4'>
-              Discount.....................................................................................................................
+              Discount.....................................................................................................................{booking_data[0]['total_cost']['discount']}
             </div>
             <div className='mt-4'>
-              Tax...................................................................................................................................
+              Tax...................................................................................................................................{booking_data[0]['total_cost']['tax']}
             </div>
-
             <div className='mt-4'>
-              Total...................................................................................................................................
+              Cleaning Tax...................................................................................................................................{booking_data[0]['total_cost']['cleaning_tax']}
+            </div>
+            <div className='mt-4'>
+              Total...................................................................................................................................{booking_data[0]['total_cost']['total']}
             </div>
           </div>
 
@@ -230,7 +299,11 @@ export const Form = () => {
                 height: '60px',
                 background: 'rgb(30,135,240)',
                 color: 'white',
+
               }}
+
+              // disabled={!message_flag}
+              onClick={displayRazorpay}
             >
               AGREE & CONTINUE
             </button>

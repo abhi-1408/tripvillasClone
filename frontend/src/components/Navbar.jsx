@@ -59,7 +59,7 @@ export const Navbar = () => {
     }
 
     const responseGoogle = (response) => {
-        console.log('GOOGLE RESPONSE', typeof (JSON.stringify(response)))
+        console.log('GOOGLE RESPONSE', (response))
         dispatch(Login_Google_Fetch(response))
     }
 
@@ -124,13 +124,14 @@ export const Navbar = () => {
 
 
 
+
             {/* sign in modal */}
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title text-center" id="exampleModalLabel">Sign In</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -154,7 +155,7 @@ export const Navbar = () => {
                             <div>
                                 <GoogleLogin
                                     clientId="222606975118-9e6c9p3ek68d8ei2in3i1l6ator9ait5.apps.googleusercontent.com"
-                                    buttonText=""
+                                    buttonText="SignIN with GOOGLE"
                                     onSuccess={responseGoogle}
                                     onFailure={responseGoogle}
                                     cookiePolicy={'single_host_origin'}
