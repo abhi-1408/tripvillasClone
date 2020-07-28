@@ -30,6 +30,63 @@ export const Propertypage = (props) => {
     }, [])
 
 
+    const loadRazorpay = () => {
+        return new Promise((resolve => {
+
+            const script = document.createElement('script')
+            script.src = "https://checkout.razorpay.com/v1/checkout.js"
+            script.onload = () => {
+                resolve(true)
+            }
+            script.onerror = () => {
+                resolve(false)
+            }
+            document.body.appendChild(script)
+        }))
+
+
+    }
+
+    async function displayRazorpay() {
+
+        const res = await loadRazorpay()
+
+        if (!res) {
+            alert('RAZOR PAY NOT AVAILABLE')
+            return
+        }
+
+        const data = await fetch('http://c562fcfe8d0c.ngrok.io/admin/rorder', { method: 'POST' }).then(t => t.json())
+        console.log('got data from razor pay as', data)
+        var options = {
+            "key": "rzp_test_yGOdC4iCgylsNj", // Enter the Key ID generated from the Dashboard
+            "amount": property_data['total_price'], // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": data['currency'],
+            "name": "Trip Villas ",
+            "description": "Property id:" + props.match.params.id.toString(),
+            "order_id": data['id'], //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response) {
+                alert(response.razorpay_payment_id);
+                // alert(response.razorpay_order_id);
+                // alert(response.razorpay_signature)
+            },
+            "prefill": {
+                "name": "Gaurav Kumar",
+                "email": "gaurav.kumar@example.com",
+                "contact": "9999999999"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#F37254"
+            }
+        };
+        var rzp1 = new window.Razorpay(options);
+        rzp1.open()
+    }
+
+
 
 
     const handleChange1 = (date) => {
@@ -70,7 +127,7 @@ export const Propertypage = (props) => {
                                 <div>
                                     <small className='text-muted ' style={{ marginTop: '40px' }}>
                                         <a href=''>{item.country}</a> / <a href=''>{item.state}</a>{' '}
-                        / <a href=''>{item.city}</a>{' '}
+                        / <a href=''>{item.city}</a>{' '}  / Property #<a href=''>{item.id}</a>{' '}
                                     </small>
                                 </div>
                             </div>
@@ -186,6 +243,7 @@ export const Propertypage = (props) => {
                                 <div class='col-5 pl-5 pr-5 pb-5 '>
                                     <h3>{item.title}</h3>
                                     <div className='text-muted'>{item.location_name}</div>
+                                    {item.review_count > 0 ? <div style={{ color: "blue" }}>{item.review_count} reviews</div> : ""}
                                     <hr />
                                     {/* map amenties */}
                                     {item.prop_tags.map((ele) => {
@@ -796,6 +854,8 @@ export const Propertypage = (props) => {
                                             type='button'
                                             class='btn btn-primary mt-3'
                                             style={{ borderRadius: '0px' }}
+                                            disabled={!message_flag}
+                                            onClick={displayRazorpay}
                                         >
                                             INSTANT BOOK
                         </button>

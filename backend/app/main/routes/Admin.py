@@ -1,13 +1,72 @@
 from . import admin
-from flask import request,redirect,jsonify
+from flask import request,redirect,jsonify,render_template
 import json
 from ..services.hotel import create_hotel,get_hotel,create_booking,available,specific_hotel_available
 from ..services.roommeta import create_room
 from ..services.filterdata import filter_data
+import razorpay
+import hmac
+import hashlib
+import flask
+
+razorpay_client = razorpay.Client(auth=("rzp_test_yGOdC4iCgylsNj", "zx2jlZ4LzYjajqSc7wJ3UVvp"))
+
+# app = Flask(__name__,static_folder = "static", static_url_path='')
 
 @admin.route('/')
 def a_home():
     return 'admin home'
+
+@admin.route('/verification',methods = ['POST'])
+def r_verf():
+
+    secret = "123456"
+    rr = request.data
+    print('type of rrr*****',type(rr))
+    ss = bytes(secret, 'utf-8') 
+    # message =request.get_json()
+    # mss = json.loads(message)
+    signature = hmac.new(
+    ss,
+    msg=bytes(rr),
+    digestmod=hashlib.sha256
+    ).hexdigest()
+    # print('sign is ',signature)
+    headers = flask.request.headers
+    # all_data = flask.request
+    # print('header******',headers['x-razorpay-signature'])
+
+    if headers['x-razorpay-signature'] == signature:
+        print('LEGIT REQUEST')
+    # rr1 = request.form
+    # print('data*******',rr,'data in form :********',rr1)
+    return json.dumps({"status":"ok"})
+    return '',200
+
+@admin.route('/rall',methods = ['GET'])
+def r_all():
+    resp  = razorpay_client.order.fetch_all()
+    return json.dumps(resp)
+
+@admin.route('/rorder',methods = ['POST'])
+def r_order():
+    order_amount = 50000
+    order_currency = 'INR'
+    order_receipt = 'order_rcptid_11'
+    notes = {'Shipping address': 'Bommanahalli, Bangalore'}   # OPTIONAL
+    
+    try :
+        res = razorpay_client.order.create(dict(amount=order_amount, currency=order_currency, receipt=order_receipt, notes=notes, payment_capture='1'))
+    except:
+        print('error is',err)
+    return json.dumps(res)
+#     # secret = '123456'
+
+#     # return 'admin home'
+#     amount = 5100
+#     payment_id = request.form['razorpay_payment_id']
+#     razorpay_client.payment.capture(payment_id, amount)
+#     return json.dumps(razorpay_client.payment.fetch(payment_id))
 
 @admin.route('/createhotel',methods=['POST'])
 def a_c_hotel():

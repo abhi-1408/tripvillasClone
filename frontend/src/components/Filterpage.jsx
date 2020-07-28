@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { Load_Data, Save_Filter, Load_Filtered_Data } from '../Redux/common/action'
 import { useParams, useHistory } from "react-router";
 import { Link, Switch, Route } from 'react-router-dom'
+import { Map } from './Map'
 import $ from "jquery";
 
 
@@ -737,6 +738,7 @@ export const FilterPage = (props) => {
 
                     <div className="col">
                         {/* space for map */}
+                        {data.length > 0 ? <Map {...data} /> : ""}
                     </div>
 
                 </div >
