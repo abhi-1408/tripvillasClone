@@ -20,16 +20,17 @@ export const Map = (props) => {
     })
 
     const [viewport, setViewport] = useState({
-        latitute: 28.6517178,
-        longitude: 77.2219388,
+        // latitute: 28.6517178,
+        // longitude: 77.2219388,
+        latitude: parseFloat(data[0]['lat']),
+        longitude: parseFloat(data[0]['lng']),
         width: "80vw",
         height: "80vh",
-
-        zoom: 2
+        zoom: 9
     })
 
     const [selectHotel, setSelectedHotel] = useState(null)
-
+    // latitude={parseFloat(data[0]['lat'])} longitude={parseFloat(data[0]['lng'])}
     if (data.length > 0) {
 
         return (
@@ -38,14 +39,14 @@ export const Map = (props) => {
 
                     <ReactMapGL {...viewport} mapboxApiAccessToken={'pk.eyJ1IjoiYWJoaW9ubmV0IiwiYSI6ImNrZDR0aDg1cjAzdTgyeG55c3NnaGQ4MW0ifQ.0f-6HhYjCCRm_6ngb9JmMA'}
                         mapStyle="mapbox://styles/mapbox/streets-v11"
-                        latitude={parseFloat(data[0]['lat'])} longitude={parseFloat(data[0]['lng'])}
+
                         onViewportChange={viewport => {
                             setViewport(viewport)
                         }}
                     >
 
                         {data && data.map(ele => (
-                            <Marker key={ele['id']} latitude={parseFloat(ele['lat'])} longitude={parseFloat(ele['lng'])} offsetLeft={-20} offsetTop={-10}>
+                            <Marker key={ele['id']} latitude={parseFloat(ele['lat'])} longitude={parseFloat(ele['lng'])} offsetLeft={-10} offsetTop={-10}>
                                 <button style={{ background: "None", border: "None", "cursor": "pointer" }} onClick={e => {
                                     e.preventDefault()
                                     setSelectedHotel(ele)

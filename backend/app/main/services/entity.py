@@ -397,7 +397,6 @@ def get_recommended_property_by_city(data):
         temp_dict['min_night'] = hotel.min_night,
         temp_dict['min_night'] =temp_dict['min_night'][0]
         temp_dict['min_lead_time'] = hotel.min_lead_time
-        
 
         temp_dict['units'] = room.units
         temp_dict['total_price'] = room.total_price
