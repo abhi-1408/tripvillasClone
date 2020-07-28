@@ -379,7 +379,10 @@ export const Homepage = (props) => {
                     backgroundRepeat: 'no-repeat',
                   }}
                 >
-                  <h1 id={styles.smallcard}>{title[ind]}</h1>
+                  <div>
+                    {' '}
+                    <h6 id={styles.smallcard}>{title[ind]}</h6>
+                  </div>
                 </div>
               </div>
             ))}
