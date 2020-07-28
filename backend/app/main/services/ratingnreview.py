@@ -33,6 +33,7 @@ def add_review(data):
 
     hotel = Hotel.query.filter(Hotel.id == data['hotel_id']).first()
     hotel.review_rating = answer
+    hotel.review_count = count
     db.session.commit() 
 
 
