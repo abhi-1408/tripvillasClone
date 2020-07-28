@@ -12,7 +12,7 @@ export const Load_Data = (info) => {
     return dispatch => {
         return axios({
             method: "post",
-            url: "http://c562fcfe8d0c.ngrok.io/admin/allhotel",
+            url: "http://64651181e1b6.ngrok.io/admin/allhotel",
             data: {}
         })
             .then((res) => res.data)
@@ -45,7 +45,7 @@ export const Apply_Filters = (info) => {
     return dispatch => {
         return axios({
             method: "get",
-            url: "http://c562fcfe8d0c.ngrok.io/admin/filter",
+            url: "http://64651181e1b6.ngrok.io/admin/filter",
             params: info
         })
             .then((res) => res.data)
@@ -64,7 +64,7 @@ export const Load_Filtered_Data = (info) => {
     return dispatch => {
         return axios({
             method: "get",
-            url: "http://c562fcfe8d0c.ngrok.io/admin/filter",
+            url: "http://64651181e1b6.ngrok.io/admin/filter",
             params: info
         })
             .then((res) => res.data.data)
@@ -85,16 +85,45 @@ export const Apply_Specific = (data) => {
     }
 }
 
+export const Apply_Review = (data) => {
+    return {
+        type: "DATA_SPECIFIC",
+        payload: data
+    }
+}
+
+export const Load_Specific_Review = (info) => {
+    return dispatch => {
+        return axios({
+            method: "post",
+            url: "http://64651181e1b6.ngrok.io/entity/getreview",
+            data: info
+        })
+            .then((res) => res.data)
+            .then((data) => {
+                dispatch(Apply_Review(data))
+
+            })
+            .catch((err) => {
+                console.log(err)
+
+            })
+    }
+}
+
 export const Load_Specific_Property = (info) => {
     return dispatch => {
         return axios({
             method: "post",
-            url: "http://c562fcfe8d0c.ngrok.io/entity/getprop",
+            url: "http://64651181e1b6.ngrok.io/entity/getprop",
             data: info
         })
             .then((res) => res.data)
             .then((data) => {
                 dispatch(Apply_Specific(data))
+                // if (data[0]["review_count"] > 0) {
+                //     dispatch(Load_Specific_Review({ "hotel_id": data[0]['id'] }))
+                // }
             })
             .catch((err) => {
                 console.log(err)
@@ -128,7 +157,7 @@ export const Load_Recommended_Rating = (info) => {
     return dispatch => {
         return axios({
             method: "post",
-            url: "http://c562fcfe8d0c.ngrok.io/entity/getrecommendrating",
+            url: "http://64651181e1b6.ngrok.io/entity/getrecommendrating",
             data: info
         })
             .then((res) => res.data)
@@ -148,7 +177,7 @@ export const Load_Recommended_State = (info) => {
     return dispatch => {
         return axios({
             method: "post",
-            url: "http://c562fcfe8d0c.ngrok.io/entity/getrecommendcity",
+            url: "http://64651181e1b6.ngrok.io/entity/getrecommendcity",
             data: info
         })
             .then((res) => res.data)
@@ -174,7 +203,7 @@ export const Specific_Hotel_Available_On_Date = (info) => {
     return dispatch => {
         return axios({
             method: "post",
-            url: "http://c562fcfe8d0c.ngrok.io/admin/avaispecific",
+            url: "http://64651181e1b6.ngrok.io/admin/avaispecific",
             data: info
         })
             .then((res) => res.data)
