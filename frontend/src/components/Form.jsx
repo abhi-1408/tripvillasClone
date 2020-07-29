@@ -79,7 +79,7 @@ export const Form = (props) => {
       "order_id": data['id'], //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
       "handler": function (response) {
         // alert(response.razorpay_payment_id);
-        dispatch(Update_in_Booking({ ...booking_data[0], "booking_date": new Date().toISOString().slice(0, 19).replace('T', ' '), "order_id": response.razorpay_order_id, "customer_details": { "customer_name": first_name + last_name, "customer_mobile": mobile, "customer_email": email }, "user_id": user_id_loggedin }))
+        dispatch(Update_in_Booking({ ...booking_data[0], "booking_date": new Date().toISOString().slice(0, 19).replace('T', ' '), "order_id": response.razorpay_order_id, "customer_details": { "customer_name": first_name + " " + last_name, "customer_mobile": mobile, "customer_email": email }, "user_id": user_id_loggedin }))
         // if (booking_flag) {
 
         //   setTimeout(() => {

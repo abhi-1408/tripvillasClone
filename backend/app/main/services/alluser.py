@@ -50,36 +50,36 @@ def register_user(data):
 
 
 def login_user(credentials):
-    try:
-        email = credentials['email']
-        password = credentials['password']
-    except KeyError as err:
-        return ({'error': True, 'error_found': format(err)})
-    except TypeError as err:
-        return ({'error': True, 'error_found': format(err)})
-    except Exception as err:
-        return ({'error': True, 'error_found': format(err)})
+    # try:
+    email = credentials['email']
+    password = credentials['password']
+    # except KeyError as err:
+    #     return ({'error': True, 'error_found': format(err)})
+    # except TypeError as err:
+    #     return ({'error': True, 'error_found': format(err)})
+    # except Exception as err:
+    #     return ({'error': True, 'error_found': format(err)})
 
-    try:
-        key = 'masai'
-        results = AllUser.query.filter(AllUser.email==email).first()
-        flag = 0
-        first_name = ""
-        if results != None:
-            decode_pwd = jwt.decode(results.password,key)
-            if password == decode_pwd['password']:
-                first_name = results.first_name
-                user_id = results.id
-                flag=1
-            
+    # try:
+    key = 'masai'
+    results = AllUser.query.filter(AllUser.email==email).first()
+    flag = 0
+    first_name = ""
+    if results != None:
+        decode_pwd = jwt.decode(results.password,key)
+        if password == decode_pwd['password']:
+            first_name = results.first_name
+            user_id = results.id
+            flag=1
+        
 
-        if(flag==1):
-            return ({'error':False,'message':'login successful','status':True,'username':first_name,'user_id':user_id})
-        else:
-            return ({'error':False,'message':'credentials mismatch','status':False})
+    if(flag==1):
+        return ({'error':False,'message':'login successful','status':True,'username':first_name,'user_id':user_id})
+    else:
+        return ({'error':False,'message':'credentials mismatch','status':False})
     
-    except Exception as err:
-        return ({'error': True, 'error_found': format(err)})
+    # except Exception as err:
+    #     return ({'error': True, 'error_found': format(err)})
 
 
 def logout_user():

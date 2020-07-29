@@ -16,6 +16,7 @@ razorpay_client = razorpay.Client(auth=("rzp_test_yGOdC4iCgylsNj", "zx2jlZ4LzYja
 
 @admin.route('/')
 def a_home():
+    
     return 'admin home'
 
 @admin.route('/verification',methods = ['POST'])
