@@ -8,6 +8,7 @@ class Booking(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     hotel_id = db.Column(db.Integer,db.ForeignKey(Hotel.id))
     user_id = db.Column(db.Integer,db.ForeignKey(AllUser.id))
+    booking_id = db.Column(db.String(200))
     customer_name = db.Column(db.String(200))
     customer_mobile = db.Column(db.String(10))
     customer_email = db.Column(db.String(100))
