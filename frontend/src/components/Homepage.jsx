@@ -178,7 +178,7 @@ export const Homepage = (props) => {
                 id={styles.datp}
                 onChange={handleChange1}
               />
-              <DatePicker selected={endDate} onChange={handleChange2} />
+              <DatePicker selected={endDate} onChange={handleChange2} id={styles.datp} />
 
               {/* <input type="text" class="form-control input-lg input-search" placeholder="checkin checkout" /> */}
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import styles from './Form.module.css'
+// import styles from './Form.module.css'
 import dum3 from './imgurl/dum3.jpeg'
 
 import { useDispatch, useSelector } from "react-redux";
@@ -7,12 +7,6 @@ import { useHistory } from "react-router-dom";
 import { Update_in_Booking } from '../Redux/common/action'
 import ReactGa from 'react-ga'
 
-
-import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
-
-
-import { Update_in_Booking } from '../Redux/common/action'
 
 export const Form = (props) => {
   let common = useSelector((state) => state.common)
