@@ -36,7 +36,7 @@ def user_o_auth_check(data):
         result = AllUser.query.filter(AllUser.email == email).first()
 
         if result != None:
-            return {'error': False, 'message': 'login successfully','status':True,'username':first_name}
+            return {'error': False, 'message': 'login successfully','status':True,'username':first_name, "user_id":result.id}
             #already registered in my db from oauth
         else:
             user = AllUser(first_name = first_name, last_name = last_name, email = email, password = password, mobile = mobile)
@@ -53,7 +53,7 @@ def user_o_auth_check(data):
             
 
         return (
-            {'error': False, 'message': 'login & registered successfully','status':True,'username':first_name}
+            {'error': False, 'message': 'login & registered successfully','status':True,'username':first_name,"user_id":user_id}
         )
     except Exception as err:
         return {'error': True, 'error_found': format(err)}
