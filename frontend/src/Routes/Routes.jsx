@@ -14,11 +14,11 @@ export const Routes = () => {
         <Switch>
             {/* <Route path='/' exact render={(props) => <Form {...props} />} /> */}
             <Route path='/homepage' render={(props) => <Homepage {...props} />} />
-            <Route path='/filterby' exact render={(props) => <FilterPage {...props} />} />
-            <Route path='/holiday/:state' exact render={(props) => <Holidayhomes {...props} />} />
-            <Route path='/property/:id' exact render={(props) => <Propertypage {...props} />} />
-            <Route path='/book/:id' exact render={(props) => <Form {...props} />} />
-            <Route path='/booking-confirm/:id' exact render={(props) => <Paymentpage {...props} />} />
+            <Route path='/filterby' render={(props) => <FilterPage {...props} />} />
+            <Route path='/holiday/:state' render={(props) => <Holidayhomes {...props} />} />
+            <Route path='/property/:id' render={(props) => <Propertypage {...props} />} />
+            <Route path='/book/:id' render={(props) => <Form {...props} />} />
+            <Route path='/booking-confirm/:id' render={(props) => <Paymentpage {...props} />} />
         </Switch>
     )
 }

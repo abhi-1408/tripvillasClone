@@ -12,6 +12,9 @@ import {
 } from '../Redux/common/action'
 import { Link, useHistory } from 'react-router-dom'
 
+import ReactGa from 'react-ga'
+
+
 export const Holidayhomes = (props) => {
   console.log('PROPS IN HOLDAY HOME', props)
   const [startDate, setStartDate] = useState(new Date())
@@ -43,6 +46,10 @@ export const Holidayhomes = (props) => {
   let history = useHistory()
 
   const handleSearch = () => {
+    ReactGa.event({
+      category: "HOLIDAY HOME SEARCH CLICKED",
+      action: "searched by date"
+    })
     console.log('handle search clicked')
     let sd =
       startDate.getFullYear() +
@@ -85,6 +92,9 @@ export const Holidayhomes = (props) => {
   }
 
   useEffect(() => {
+    ReactGa.initialize('UA-173941004-2')
+
+    ReactGa.pageview(window.location.pathname + window.location.search)
     let info = props.match.params
     console.log('params are', info)
     dispatch(Load_Recommended_State(info))

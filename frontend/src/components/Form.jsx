@@ -1,6 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './Form.module.css'
 import dum3 from './imgurl/dum3.jpeg'
+
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { Update_in_Booking } from '../Redux/common/action'
+import ReactGa from 'react-ga'
+
 
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -16,6 +22,13 @@ export const Form = (props) => {
   const { user_id_loggedin } = login
 
   let dispatch = useDispatch()
+
+  useEffect(() => {
+    ReactGa.initialize('UA-173941004-2')
+
+    ReactGa.pageview(window.location.pathname + window.location.search)
+  }, [])
+
 
   let history = useHistory()
   const [first_name, setFirstName] = useState("")
@@ -60,6 +73,7 @@ export const Form = (props) => {
       alert('RAZOR PAY NOT AVAILABLE')
       return
     }
+
 
     const data = await fetch('http://64651181e1b6.ngrok.io/admin/rorder', {
       method: 'POST',

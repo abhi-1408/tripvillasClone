@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './App.css'
 import { Link, Switch, Route } from 'react-router-dom'
 import { Navbar } from './components/Navbar'
@@ -8,12 +8,22 @@ import { Propertypage } from './components/Propertypage'
 import { Holidayhomes } from './components/Holidayhomes'
 import { FilterPage } from './components/Filterpage'
 import { Routes } from './Routes/Routes'
-import { Form } from './components/Form'
+
+import ReactGa from 'react-ga'
+
 function App() {
-  return (
-    <div>
-      {/* <Navbar /> */}
-      {/* <Link to='/homepage' >HOMEPAGE</Link>
+    useEffect(() => {
+        // ReactGa.initialize('UA-173941004-1')
+        ReactGa.initialize('UA-173941004-2')
+
+        ReactGa.pageview(window.location.pathname + window.location.search)
+    }, [])
+
+    return (
+        <div>
+            <Navbar />
+            {/* <Link to='/homepage' >HOMEPAGE</Link>
+
       <Link to='/filterby' >FILTER BY</Link>
       <Switch>
         <Route path='/homepage' render={(props) => <Homepage {...props} />} />
@@ -26,7 +36,7 @@ function App() {
         <Link to='/homepage' >HOMEPAGE</Link>
         <Link to='/filterby?state=delhi' >FILTER BY</Link>
       </div> */}
-      <Navbar />
+    
       <div>
         <Routes />
       </div>

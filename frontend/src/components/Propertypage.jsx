@@ -15,6 +15,127 @@ import {
   LoadBookingData,
 } from '../Redux/common/action'
 import { useHistory } from 'react-router'
+import ReactGa from 'react-ga'
+
+export const Propertypage = (props) => {
+    console.log('props of property page', props)
+    const [startDate, setStartDate] = useState(new Date())
+    const [endDate, setEndDate] = useState(new Date())
+
+    let log = useSelector((state) => state.login);
+    let { auth_logged } = log
+    let common = useSelector((state) => state.common);
+    const { property_data, filters, message, message_flag } = common
+    let dispatch = useDispatch()
+
+    useEffect(() => {
+        ReactGa.initialize('UA-173941004-2')
+
+        ReactGa.pageview(window.location.pathname + window.location.search)
+        setStartDate(filters['start_date'])
+        setEndDate(filters['end_date'])
+        dispatch(Load_Specific_Property({ "id": props.match.params.id }))
+        let sd = filters['start_date'].getFullYear() + "-" + (filters['start_date'].getMonth() + 1) + "-" + filters['start_date'].getDate();
+        let ed = filters['end_date'].getFullYear() + "-" + (filters['end_date'].getMonth() + 1) + "-" + filters['end_date'].getDate();
+        dispatch(Specific_Hotel_Available_On_Date({ "check_in": sd, "check_out": ed, "hotel_id": props.match.params['id'] }))
+
+    }, [])
+
+    // useEffect(() => {
+    //     if (!auth_logged) {
+    //         console.log('NOT LOGGED IN')
+    //         window.$('#exampleModal').modal('open')
+    //         // alert('hi')
+    //     }
+    // })
+
+
+    // const loadRazorpay = () => {
+    //     return new Promise((resolve => {
+
+    //         const script = document.createElement('script')
+    //         script.src = "https://checkout.razorpay.com/v1/checkout.js"
+    //         script.onload = () => {
+    //             resolve(true)
+    //         }
+    //         script.onerror = () => {
+    //             resolve(false)
+    //         }
+    //         document.body.appendChild(script)
+    //     }))
+
+
+    // }
+
+    // async function displayRazorpay() {
+
+    //     const res = await loadRazorpay()
+
+    //     if (!res) {
+    //         alert('RAZOR PAY NOT AVAILABLE')
+    //         return
+    //     }
+
+    //     const data = await fetch('http://c562fcfe8d0c.ngrok.io/admin/rorder', { method: 'POST' }).then(t => t.json())
+    //     console.log('got data from razor pay as', data)
+    //     var options = {
+    //         "key": "rzp_test_yGOdC4iCgylsNj", // Enter the Key ID generated from the Dashboard
+    //         "amount": property_data['total_price'], // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    //         "currency": data['currency'],
+    //         "name": "Trip Villas ",
+    //         "description": "Property id:" + props.match.params.id.toString(),
+    //         "order_id": data['id'], //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    //         "handler": function (response) {
+    //             alert(response.razorpay_payment_id);
+    //             // alert(response.razorpay_order_id);
+    //             // alert(response.razorpay_signature)
+    //         },
+    //         "prefill": {
+    //             "name": "Gaurav Kumar",
+    //             "email": "gaurav.kumar@example.com",
+    //             "contact": "9999999999"
+    //         },
+    //         "notes": {
+    //             "address": "Razorpay Corporate Office"
+    //         },
+    //         "theme": {
+    //             "color": "#F37254"
+    //         }
+    //     };
+    //     var rzp1 = new window.Razorpay(options);
+    //     rzp1.open()
+    // }
+
+    let history = useHistory()
+
+    const handleBook = () => {
+        if (!auth_logged) {
+            console.log('NOT LOGGED IN')
+            window.$('#exampleModal').modal('show')
+
+            // alert('hi')
+        }
+        else {
+
+            let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
+            let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
+
+            dispatch(LoadBookingData([{
+                "property": property_data[0], "check_in": sd,
+                "check_out": ed,
+                "guests": 1,
+                "units": 1,
+                "total_cost": {
+                    "sub_total": property_data[0]['total_price'],
+                    "discount": "0",
+                    "tax": "1500",
+                    "cleaning_tax": "400",
+                    "total": property_data[0]['total_price'] + 1500 + 400
+                }
+            }]))
+            history.push('/book/' + props.match.params.id)
+        }
+
 
 export const Propertypage = (props) => {
   console.log('props of property page', props)
@@ -156,6 +277,7 @@ export const Propertypage = (props) => {
         ])
       )
       history.push('/book/' + props.match.params.id)
+
     }
   }
 
