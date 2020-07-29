@@ -69,11 +69,12 @@ def login_user(credentials):
             decode_pwd = jwt.decode(results.password,key)
             if password == decode_pwd['password']:
                 first_name = results.first_name
+                user_id = results.id
                 flag=1
             
 
         if(flag==1):
-            return ({'error':False,'message':'login successful','status':True,'username':first_name})
+            return ({'error':False,'message':'login successful','status':True,'username':first_name,'user_id':user_id})
         else:
             return ({'error':False,'message':'credentials mismatch','status':False})
     

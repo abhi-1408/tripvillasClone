@@ -14,16 +14,16 @@ from datetime import datetime as dt
 
 def load_hotel():
     # link = "https://www.tripvillas.com/api/webapp/search/?q=Delhi,%20India&lat=28.68627380000001&lng=77.2217831&check_in=26-Jul-2020&check_out=28-Jul-2020"
-    # link ="https://www.tripvillas.com/api/webapp/search/?q=Delhi%20India&lat=28.68627380000001&lng=77.2217831&check_in=26-Jul-2020&check_out=28-Jul-2020"
-    # link = "https://www.tripvillas.com/api/webapp/search/?q=Goa,INDIA&check_in=28-Jul-2020&check_out=30-Jul-2020"
-    # link = "https://www.tripvillas.com/api/webapp/search/?q=Galle,Southern%20Province,SRI%20LANKA&check_in=28-Jul-2020&check_out=30-Jul-2020"
-    # link = "https://www.tripvillas.com/api/webapp/search/?q=Phuket,THAILAND&check_in=28-Jul-2020&check_out=30-Jul-2020"
-    # link = "https://www.tripvillas.com/api/webapp/search/?q=Kandy,Central%20Province,SRI%20LANKA&check_in=28-Jul-2020&check_out=30-Jul-2020"
-    # link = "https://www.tripvillas.com/api/webapp/search/?q=Lonavala,Maharashtra,INDIA&check_in=28-Jul-2020&check_out=30-Jul-2020"
-    # link = "https://www.tripvillas.com/api/webapp/search/?q=Kerala,INDIA&check_in=28-Jul-2020&check_out=30-Jul-2020"
-    # link = "https://www.tripvillas.com/api/webapp/search/?q=Himachal%20Pradesh,INDIA&check_in=28-Jul-2020&check_out=30-Jul-2020"
-    # link = "https://www.tripvillas.com/api/webapp/search/?q=Bali,INDONESIA&check_in=28-Jul-2020&check_out=30-Jul-2020"
-    link = "https://www.tripvillas.com/api/webapp/search/?q=Cape%20Town,Western%20Cape,SOUTH%20AFRICA&check_in=28-Jul-2020&check_out=30-Jul-2020"
+    # link ="https://www.tripvillas.com/api/webapp/search/?q=Delhi%20India&lat=28.68627380000001&lng=77.2217831&check_in=29-Jul-2020&check_out=31-Jul-2020"
+    # link = "https://www.tripvillas.com/api/webapp/search/?q=Goa,INDIA&check_in=29-Jul-2020&check_out=31-Jul-2020"
+    # link = "https://www.tripvillas.com/api/webapp/search/?q=Galle,Southern%20Province,SRI%20LANKA&check_in=29-Jul-2020&check_out=31-Jul-2020"
+    # link = "https://www.tripvillas.com/api/webapp/search/?q=Phuket,THAILAND&check_in=29-Jul-2020&check_out=31-Jul-2020"
+    # link = "https://www.tripvillas.com/api/webapp/search/?q=Kandy,Central%20Province,SRI%20LANKA&check_in=29-Jul-2020&check_out=31-Jul-2020"
+    # link = "https://www.tripvillas.com/api/webapp/search/?q=Lonavala,Maharashtra,INDIA&check_in=29-Jul-2020&check_out=31-Jul-2020"
+    # link = "https://www.tripvillas.com/api/webapp/search/?q=Kerala,INDIA&check_in=29-Jul-2020&check_out=31-Jul-2020"
+    # link = "https://www.tripvillas.com/api/webapp/search/?q=Himachal%20Pradesh,INDIA&check_in=29-Jul-2020&check_out=31-Jul-2020"
+    link = "https://www.tripvillas.com/api/webapp/search/?q=Bali,INDONESIA&check_in=29-Jul-2020&check_out=31-Jul-2020"
+    # link = "https://www.tripvillas.com/api/webapp/search/?q=Cape%20Town,Western%20Cape,SOUTH%20AFRICA&check_in=29-Jul-2020&check_out=31-Jul-2020"
     r = requests.get(url = link)
     data = r.json()
 
@@ -193,7 +193,7 @@ def create_booking(data):
 
     if razor:
         payment_details = razor.payment_details
-        book = Booking(hotel_id = data['property']['id'],check_in = data['check_in'], check_out = data['check_out'],total_price = payment_details['payload']['payment']['entity']['amount'], payment_details = payment_details['payload']['payment']['entity']['card']['id'],status = payment_details['event'])
+        book = Booking(hotel_id = data['property']['id'],check_in = data['check_in'], check_out = data['check_out'],booking_date = data['booking_date'],total_price = payment_details['payload']['payment']['entity']['amount'], payment_detail = payment_details['payload']['payment'],status = payment_details['event'],customer_name = data['customer_details']['customer_name'], customer_mobile = data['customer_details']['customer_mobile'], customer_email = data['customer_details']['customer_email'], user_id = int(data['user_id']))
         db.session.add(book)
         db.session.commit()
 
