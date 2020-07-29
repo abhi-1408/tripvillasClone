@@ -14,8 +14,9 @@ def s_home():
 @user.route('/signin',methods=['POST'])
 def signin():
     credentials = request.get_json()
+    # print('credentials are',credentials)
     res = login_user(credentials)
-
+    # return ({'error':False,'message':'login successful','status':True,'username':"first_name",'user_id':"user_id"})
     return json.dumps(res)
 
 @user.route('/signup',methods=['POST'])

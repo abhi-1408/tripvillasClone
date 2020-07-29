@@ -1,16 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './Form.module.css'
 import dum3 from './imgurl/dum3.jpeg'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+
+
 import { Update_in_Booking } from '../Redux/common/action'
 
 export const Form = (props) => {
   let common = useSelector((state) => state.common)
   const { booking_data, booking_confirmed_details, booking_flag } = common
+
+  let login = useSelector((state) => state.login)
+  const { user_id_loggedin } = login
+
   let dispatch = useDispatch()
 
   let history = useHistory()
+  const [first_name, setFirstName] = useState("")
+  const [last_name, setLastName] = useState("")
+  const [mobile, setMobile] = useState("")
+  const [email, setEmail] = useState("")
+
+  const handleInputChange = e => {
+    if (e.target.name == "email") {
+      setEmail(e.target.value)
+    }
+    else if (e.target.name == "mobile") {
+      setMobile(e.target.value)
+    }
+    else if (e.target.name == "first_name") {
+      setFirstName(e.target.value)
+    }
+    else if (e.target.name == "last_name") {
+      setLastName(e.target.value)
+    }
+  }
+
 
   const loadRazorpay = () => {
     return new Promise((resolve) => {
@@ -48,12 +75,9 @@ export const Form = (props) => {
       order_id: data['id'], //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
       handler: function (response) {
         // alert(response.razorpay_payment_id);
-        dispatch(
-          Update_in_Booking({
-            ...booking_data[0],
-            order_id: response.razorpay_order_id,
-          })
-        )
+
+        dispatch(Update_in_Booking({ ...booking_data[0], "booking_date": new Date().toISOString().slice(0, 19).replace('T', ' '), "order_id": response.razorpay_order_id, "customer_details": { "customer_name": first_name + " " + last_name, "customer_mobile": mobile, "customer_email": email }, "user_id": user_id_loggedin }))
+
         // if (booking_flag) {
 
         //   setTimeout(() => {
@@ -127,6 +151,7 @@ export const Form = (props) => {
 
             <div className='col-6'>
               <div className='m-1'>
+
                 <small className='text-muted'>
                   Property Ref Id #{booking_data[0].property.id}
                 </small>
@@ -136,12 +161,17 @@ export const Form = (props) => {
                   <small className='text-muted'>
                     {booking_data[0].property.location_name}
                   </small>
+
+
                 </p>
 
                 <p>
                   <small className='text-muted'>
+
                     {booking_data[0].property.property_type} | Accommodates{' '}
                     {booking_data[0].property.prop_tags[3]} |{' '}
+
+
                     {booking_data[0].property.number_of_rooms} Bedroom(s) |{' '}
                     {booking_data[0].property.number_of_bathrooms} Bathroom(s)
                   </small>
@@ -171,7 +201,9 @@ export const Form = (props) => {
                   <b>{booking_data[0].check_out}</b>
                 </p>
                 <p>
+
                   <small>Check out</small>
+
                 </p>
               </div>
             </div>
@@ -192,7 +224,10 @@ export const Form = (props) => {
               <div className='text-center shadow bg-white rounded p-4 '>
                 <p className='mt-2'>
                   {' '}
+
                   <b>{booking_data[0][`property`][`total_units`]}</b>
+
+
                 </p>
                 <p>
                   <small>Units </small>
@@ -292,6 +327,11 @@ export const Form = (props) => {
                   type='text'
                   class='form-control'
                   aria-label='Text input with dropdown button'
+                  value={mobile}
+                  name="mobile"
+                  required
+                  onChange={e => handleInputChange(e)}
+
                 />
               </div>
 
@@ -301,6 +341,11 @@ export const Form = (props) => {
                     type='text'
                     class='form-control'
                     placeholder='First name'
+                    required
+                    name="first_name"
+                    value={first_name}
+                    onChange={e => handleInputChange(e)}
+
                   />
                 </div>
                 <div class='col'>
@@ -308,6 +353,9 @@ export const Form = (props) => {
                     type='text'
                     class='form-control'
                     placeholder='Last name'
+                    name="last_name"
+                    value={last_name}
+                    onChange={e => handleInputChange(e)}
                   />
                 </div>
               </div>
@@ -319,6 +367,10 @@ export const Form = (props) => {
                   id='Email'
                   aria-describedby='emailHelp'
                   placeholder='Enter email'
+                  required
+                  name="email"
+                  value={email}
+                  onChange={e => handleInputChange(e)}
                 />
                 <small id='emailHelp' class='form-text text-muted'>
                   We'll never share your email with anyone else.
