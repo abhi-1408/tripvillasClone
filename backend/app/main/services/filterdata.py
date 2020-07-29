@@ -12,6 +12,7 @@ from sqlalchemy.orm import sessionmaker
 
 
 def filter_data(data):
+    print('filtered _data',data)
     # try:
     # Session = sessionmaker()
     # Session.configure(bind=engine)
