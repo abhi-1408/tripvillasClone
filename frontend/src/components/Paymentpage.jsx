@@ -19,7 +19,7 @@ export const Paymentpage = (props) => {
           </div>
         </div>
         <div className='col-12 text-center '>
-          <div style={{ height: '20%', backgroundColor: 'blue' }}>
+          <div style={{ height: '20%' }} >
             <img src={buil} />
           </div>
         </div>
