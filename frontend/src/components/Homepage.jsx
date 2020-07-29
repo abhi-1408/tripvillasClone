@@ -11,6 +11,19 @@ import dum4 from './imgurl/dum4.jpeg'
 import dum5 from './imgurl/dum5.jpeg'
 import dum6 from './imgurl/dum6.jpeg'
 import dum7 from './imgurl/dum7.jpeg'
+import ho1 from './imgurl/ho1.svg'
+import ho2 from './imgurl/ho2.svg'
+import ho3 from './imgurl/ho3.svg'
+import ho4 from './imgurl/ho4.svg'
+import s1 from './imgurl/s1.svg'
+import s2 from './imgurl/s2.svg'
+import s3 from './imgurl/s3.svg'
+import s4 from './imgurl/s4.svg'
+import s5 from './imgurl/s5.svg'
+import s6 from './imgurl/s6.svg'
+import s7 from './imgurl/s7.svg'
+import s8 from './imgurl/s8.svg'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import { Login_Fetch, Logout_User } from '../Redux/login/action'
@@ -136,14 +149,14 @@ export const Homepage = (props) => {
     <div>
       {/* adding searchbar and larger image */}
 
-      <div id={styles.largeimg} style={{ height: '446px', width: '100%' }}>
+      <div id={styles.largeimg} style={{ height: '450px' }}>
         <div style={{ padding: '10%', marginLeft: '30px', color: 'white' }}>
-          <h3 className='mt-3'>
+          <h3 className='mt-3' id={styles.searchele}>
             Book <strike>Hotels</strike> Vacation Rentals
           </h3>
           <h3>Top Holiday Homes - Villas, Apartments & Homestays</h3>
           <form
-            class='form-inline text-center'
+            class='form-inline text-center '
             role='form'
             style={{
               padding: '10px',
@@ -152,9 +165,6 @@ export const Homepage = (props) => {
             }}
           >
             <div class='form-group'>
-              <label class='sr-only' for='searchZipcode'>
-                Zipcode
-              </label>
               <input
                 type='text'
                 class='form-control input-lg input-search'
@@ -164,15 +174,11 @@ export const Homepage = (props) => {
               />
 
               <DatePicker
-                className={styles.datepick}
                 selected={startDate}
+                id={styles.datp}
                 onChange={handleChange1}
               />
-              <DatePicker
-                className={styles.datepick}
-                selected={endDate}
-                onChange={handleChange2}
-              />
+              <DatePicker selected={endDate} onChange={handleChange2} />
 
               {/* <input type="text" class="form-control input-lg input-search" placeholder="checkin checkout" /> */}
 
@@ -236,31 +242,39 @@ export const Homepage = (props) => {
             showSides={true}
             sidesOpacity={0.5}
             sideSize={0.1}
-            slidesToScroll={4}
-            slidesToShow={4}
+            slidesToScroll={1}
+            slidesToShow={5}
             scrollOnDevice={true}
           >
             {arr.map((item, ind) => (
               <div>
                 <div
-                  className='text-center'
+                  className=' col-12 '
                   style={{
                     color: 'white',
                     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(${item})`,
-                    height: '170px',
-                    width: '240px',
+                    height: '150px',
+                    width: '214.8px',
                     backgroundRepeat: 'no-repeat',
                   }}
                 >
-                  <h1 id={styles.smallcard}>
+                  <p id={styles.smallcard}>
                     <Link
-                      class='text-light'
-                      style={{ textDecoration: 'none' }}
+                      class='text-light  text-center'
+                      style={{
+                        textDecoration: 'none',
+                        fontSize: '18px',
+                        textTransform: 'uppercase',
+                      }}
                       to={`/holiday/${title[ind]}`}
                     >
                       {title[ind]}
                     </Link>
-                  </h1>
+
+                    <p>
+                      <small>Vacation Rentals</small>
+                    </p>
+                  </p>
                 </div>
               </div>
             ))}
@@ -269,43 +283,409 @@ export const Homepage = (props) => {
       </div>
 
       {/* manage cards */}
+      <div className='row'>
+        <div
+          className='col-3 mt-5 text-center pt-4 pl-5  pb-5  pr-5 shadow  bg-white rounded'
+          style={{
+            marginLeft: '65px',
+          }}
+        >
+          <div style={{ fontSize: '19.2px' }}>
+            Fully Managed Communities By Tripvillas
+          </div>
+          <div className='row mt-5'>
+            <div className='col-6'>
+              <img src={ho1} height='50px' width='50px' />
+              <p className='mt-3 text-muted'>
+                <small>High Quality housekeeping</small>
+              </p>
+            </div>
 
-      <div>
-        <div className='row container-fluid'>
-          <div className='col p-5 '>
-            <div
-              class='card shadow-lg p-3 mb-5 bg-white rounded '
-              style={{ width: '28rem', height: '400px', marginLeft: '90px' }}
-            >
-              <div class='card-body'>
-                <h5 class='card-title text-center'>
-                  Fully Managed Communities By Tripvillas
-                </h5>
-                {/* static icons */}
+            <div className='col-6'>
+              <img src={ho2} height='50px' width='50px' />
+              <p className='mt-3 text-muted'>
+                <small>Comfortable Linen and Toiletries</small>
+              </p>
+            </div>
+          </div>
+
+          <div className='row mt-5'>
+            <div className='col-6'>
+              <img src={ho3} height='50px' width='50px' />
+              <p className='mt-3 text-muted'>
+                <small>Quality Furniture & Fittings</small>
+              </p>
+            </div>
+
+            <div className='col-6'>
+              <img src={ho4} height='50px' width='50px' />
+              <p className='mt-3 text-muted'>
+                <small>Food Delivery Or Central Restaurant</small>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className='col-8 mt-5'>
+          <div className='row'>
+            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+              <div
+                className='m-3'
+                style={{
+                  height: '150px',
+                  width: '172.25px',
+
+                  color: 'white',
+                  backgroundImage: `linear-gradient( rgba(34, 34, 34, 0.6),rgba(34, 34, 34, 0.6)),url(${dum1})`,
+                }}
+              >
+                <Link
+                  class='text-light  text-center'
+                  style={{ textDecoration: 'none' }}
+                >
+                  <p id={styles.smallcard}>
+                    Sparsh Resort
+                    <p>
+                      <small>Karjat, Maharastra</small>
+                    </p>
+                  </p>
+                </Link>
+              </div>
+            </div>
+
+            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+              <div
+                className='m-3'
+                style={{
+                  height: '150px',
+                  width: '172.25px',
+
+                  color: 'white',
+                  backgroundImage: `linear-gradient( rgba(34, 34, 34, 0.6),rgba(34, 34, 34, 0.6)),url(${dum2})`,
+                }}
+              >
+                <Link
+                  class='text-light  text-center'
+                  style={{ textDecoration: 'none' }}
+                >
+                  <p id={styles.smallcard}>
+                    Lavasa
+                    <p>
+                      <small>lavasa, Maharastra</small>
+                    </p>
+                  </p>
+                </Link>
+              </div>
+            </div>
+
+            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+              <div
+                className='m-3'
+                style={{
+                  height: '150px',
+                  width: '172.25px',
+
+                  color: 'white',
+                  backgroundImage: `linear-gradient( rgba(34, 34, 34, 0.6),rgba(34, 34, 34, 0.6)),url(${dum3})`,
+                }}
+              >
+                <Link
+                  class='text-light  text-center'
+                  style={{ textDecoration: 'none' }}
+                >
+                  <p id={styles.smallcard}>
+                    Tata Rio De Goa
+                    <p>
+                      <small>Dabolim,Goa</small>
+                    </p>
+                  </p>
+                </Link>
+              </div>
+            </div>
+
+            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+              <div
+                className='m-3'
+                style={{
+                  height: '150px',
+                  width: '172.25px',
+                  color: 'white',
+                  backgroundImage: `linear-gradient( rgba(34, 34, 34, 0.6),rgba(34, 34, 34, 0.6)),url(${dum4})`,
+                }}
+              >
+                <Link
+                  class='text-light  text-center'
+                  style={{ textDecoration: 'none' }}
+                >
+                  <p id={styles.smallcard}>
+                    Puravankara Goa
+                    <p>
+                      <small>Dabolim,Goa</small>
+                    </p>
+                  </p>
+                </Link>
               </div>
             </div>
           </div>
 
-          <div class='col' style={{ border: '1px solid black' }}></div>
+          <div className='row mt-4'>
+            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+              <div
+                className='m-3'
+                style={{
+                  height: '150px',
+                  width: '172.25px',
+
+                  color: 'white',
+                  backgroundImage: `linear-gradient( rgba(34, 34, 34, 0.6),rgba(34, 34, 34, 0.6)),url(${dum5})`,
+                }}
+              >
+                <Link
+                  class='text-light  text-center'
+                  style={{ textDecoration: 'none' }}
+                >
+                  <p id={styles.smallcard}>
+                    White villas
+                    <p>
+                      <small>Shahpur, Maharastra</small>
+                    </p>
+                  </p>
+                </Link>
+              </div>
+            </div>
+
+            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+              <div
+                className='m-3'
+                style={{
+                  height: '150px',
+                  width: '172.25px',
+
+                  color: 'white',
+                  backgroundImage: `linear-gradient( rgba(34, 34, 34, 0.6),rgba(34, 34, 34, 0.6)),url(${dum6})`,
+                }}
+              >
+                <Link
+                  class='text-light  text-center'
+                  style={{ textDecoration: 'none' }}
+                >
+                  <p id={styles.smallcard}>
+                    White Villas
+                    <p>
+                      <small>kasara, Maharastra</small>
+                    </p>
+                  </p>
+                </Link>
+              </div>
+            </div>
+
+            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+              <div
+                className='m-3'
+                style={{
+                  height: '150px',
+                  width: '172.25px',
+
+                  color: 'white',
+                  backgroundImage: `linear-gradient( rgba(34, 34, 34, 0.6),rgba(34, 34, 34, 0.6)),url(${dum7})`,
+                }}
+              >
+                <Link
+                  class='text-light  text-center'
+                  style={{ textDecoration: 'none' }}
+                >
+                  <p id={styles.smallcard}>
+                    Kenisha Holiday
+                    <p>
+                      <small>Pawasalawadi,Maharastra</small>
+                    </p>
+                  </p>
+                </Link>
+              </div>
+            </div>
+
+            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+              <div
+                className='m-3'
+                style={{
+                  height: '150px',
+                  width: '172.25px',
+                  color: 'white',
+                  backgroundImage: `linear-gradient( rgba(34, 34, 34, 0.6),rgba(34, 34, 34, 0.6)),url(${dum1})`,
+                }}
+              >
+                <Link
+                  class='text-light  text-center'
+                  style={{ textDecoration: 'none' }}
+                >
+                  <p id={styles.smallcard}>
+                    Umiya Serene
+                    <p>
+                      <small>Nerul,Goa</small>
+                    </p>
+                  </p>
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <div className='row mt-4'>
+            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+              <div
+                className='m-3'
+                style={{
+                  height: '150px',
+                  width: '172.25px',
+
+                  color: 'white',
+                  backgroundImage: `linear-gradient( rgba(34, 34, 34, 0.6),rgba(34, 34, 34, 0.6)),url(${dum2})`,
+                }}
+              >
+                <Link
+                  class='text-light  text-center'
+                  style={{ textDecoration: 'none' }}
+                >
+                  <p id={styles.smallcard}>
+                    Oasis Alibaug
+                    <p>
+                      <small>Alibaug, Maharastra</small>
+                    </p>
+                  </p>
+                </Link>
+              </div>
+            </div>
+
+            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+              <div
+                className='m-3'
+                style={{
+                  height: '150px',
+                  width: '172.25px',
+
+                  color: 'white',
+                  backgroundImage: `linear-gradient( rgba(34, 34, 34, 0.6),rgba(34, 34, 34, 0.6)),url(${dum3})`,
+                }}
+              >
+                <Link
+                  class='text-light  text-center'
+                  style={{ textDecoration: 'none' }}
+                >
+                  <p id={styles.smallcard}>
+                    Dreamz Shiroda
+                    <p>
+                      <small>Shiroda, Maharastra</small>
+                    </p>
+                  </p>
+                </Link>
+              </div>
+            </div>
+
+            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+              <div
+                className='m-3'
+                style={{
+                  height: '150px',
+                  width: '172.25px',
+
+                  color: 'white',
+                  backgroundImage: `linear-gradient( rgba(34, 34, 34, 0.6),rgba(34, 34, 34, 0.6)),url(${dum3})`,
+                }}
+              >
+                <Link
+                  class='text-light  text-center'
+                  style={{ textDecoration: 'none' }}
+                >
+                  <p id={styles.smallcard}>
+                    Pristine Bay
+                    <p>
+                      <small>Tamilnadu</small>
+                    </p>
+                  </p>
+                </Link>
+              </div>
+            </div>
+
+            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+              <div
+                className='m-3'
+                style={{
+                  height: '150px',
+                  width: '172.25px',
+                  color: 'white',
+                  backgroundImage: `linear-gradient( rgba(34, 34, 34, 0.6),rgba(34, 34, 34, 0.6)),url(${dum4})`,
+                }}
+              >
+                <Link
+                  class='text-light  text-center'
+                  style={{ textDecoration: 'none' }}
+                >
+                  <p id={styles.smallcard}>
+                    Ampelon
+                    <p>
+                      <small>Karnataka</small>
+                    </p>
+                  </p>
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* two static card */}
+      <div>
+        <div className='row ml-5 mt-5 mr-5'>
+          <div className='col-12 col-sm-12 col-md-6 col-lg-6 p-3'>
+            <div
+              style={{ marginLeft: '-16px' }}
+              className='p-5 text-center shadow  bg-white rounded'
+            >
+              <h4>Holiday Home Investment Opportunities</h4>
+              <div className='row'>
+                <div className='col-3 mt-4 text-center'>
+                  <img src={s1} height='40px' width='40px' />
+                  <p className='mt-3'>
+                    <small className='text-muted '>
+                      Low Cost High Appreciation
+                    </small>
+                  </p>
+                </div>
 
-      <div className='container p-5'>
-        <div className='row'>
-          <div class='col '>
-            <div class='card ' style={{ width: '30rem' }}>
-              <div class='card-body'>
-                <h5 class='card-title text-center'>
-                  Holiday Home Investment Opportunities
-                </h5>
-                <p class='card-text'>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <div className='text-center'>
-                  <button type='button' class='btn btn-primary'>
+                <div className='col-3 mt-4 text-center'>
+                  <img src={s2} height='40px' width='40px' />
+                  <p className='mt-3'>
+                    <small className='text-muted '>
+                      Professionally Managed
+                    </small>
+                  </p>
+                </div>
+
+                <div className='col-3 mt-4 text-center'>
+                  <img src={s3} height='40px' width='40px' />
+                  <p className='mt-3'>
+                    <small className='text-muted '>
+                      Guaranteed To Produce Income
+                    </small>
+                  </p>
+                </div>
+
+                <div className='col-3 mt-4 text-center'>
+                  <img src={s4} height='40px' width='40px' />
+                  <p className='mt-3'>
+                    <small className='text-muted '>
+                      We Designed Floor Plans
+                    </small>
+                  </p>
+                </div>
+                <div className=' mt-3' style={{ marginLeft: '100px' }}>
+                  <button
+                    type='button'
+                    class='btn btn-primary '
+                    style={{
+                      borderRadius: '0px',
+                      width: '350px',
+                    }}
+                  >
                     EXPLORE INVESTMENT OPPORTUNITIES
                   </button>
                 </div>
@@ -313,18 +693,61 @@ export const Homepage = (props) => {
             </div>
           </div>
 
-          <div className='col '>
-            <div class='card ' style={{ width: '30rem' }}>
-              <div class='card-body'>
-                <h5 class='card-title text-center'>
-                  Are you a holiday home owner/manager?
-                </h5>
-                <p class='card-text'>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <div className='text-center'>
-                  <button type='button' class='btn btn-primary'>
+          <div className='col-12 col-sm-12 col-md-6 col-lg-6 '>
+            <div
+              style={{ marginLeft: '-16px' }}
+              className='p-5 text-center mt-3 ml-4 shadow  bg-white rounded'
+            >
+              <h4>Are you a holiday home owner/manager?</h4>
+              <div className='row'>
+                <div className='col-3 mt-4 text-center'>
+                  <img src={s5} height='40px' width='40px' />
+                  <p className='mt-3'>
+                    <small className='text-muted '>Get Bookings</small>
+                  </p>
+                </div>
+
+                <div className='col-3 mt-4 text-center'>
+                  <img src={s6} height='40px' width='40px' />
+                  <p className='mt-3'>
+                    <small className='text-muted '>
+                      One Dashboard - Total Control
+                    </small>
+                  </p>
+                </div>
+
+                <div className='col-3 mt-4 text-center'>
+                  <img src={s7} height='40px' width='40px' />
+                  <p className='mt-3'>
+                    <small className='text-muted '>Instant Book</small>
+                  </p>
+                </div>
+
+                <div className='col-3 mt-4 text-center'>
+                  <img src={s8} height='40px' width='40px' />
+                  <p className='mt-3'>
+                    <small className='text-muted '>
+                      Both iOS & Android App
+                    </small>
+                  </p>
+                </div>
+                <div
+                  className=' mt-3'
+                  style={{
+                    marginLeft: '180px',
+                    borderRadius: '0px',
+                    width: '200px',
+                  }}
+                >
+                  <button
+                    type='button'
+                    class='btn btn-primary '
+                    style={{
+                      borderRadius: '0px',
+                      width: '250px',
+                      marginLeft: '-45px',
+                    }}
+                  >
                     LIST YOUR PROPERTY
                   </button>
                 </div>
@@ -362,27 +785,39 @@ export const Homepage = (props) => {
             showSides={true}
             sidesOpacity={0.5}
             sideSize={0.1}
-            slidesToScroll={4}
-            slidesToShow={4}
+            slidesToScroll={1}
+            slidesToShow={5}
             scrollOnDevice={true}
           >
             {arr.map((item, ind) => (
               <div>
                 <div
-                  className='text-center'
+                  className=' col-12 '
                   style={{
-                    fontSize: '10px',
                     color: 'white',
                     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(${item})`,
-                    height: '170px',
-                    width: '240px',
+                    height: '150px',
+                    width: '214.8px',
                     backgroundRepeat: 'no-repeat',
                   }}
                 >
-                  <div>
-                    {' '}
-                    <h6 id={styles.smallcard}>{title[ind]}</h6>
-                  </div>
+                  <p id={styles.smallcard}>
+                    <Link
+                      class='text-light  text-center'
+                      style={{
+                        textDecoration: 'none',
+                        fontSize: '18px',
+                        textTransform: 'uppercase',
+                      }}
+                      to={`/holiday/${title[ind]}`}
+                    >
+                      {title[ind]}
+                    </Link>
+
+                    <p>
+                      <small>Vacation Rentals</small>
+                    </p>
+                  </p>
                 </div>
               </div>
             ))}

@@ -3,16 +3,17 @@
 }
 
 #topdestination {
-  font-size: 70px;
+  font-size: 1.5rem;
+  font-weight: 300;
 }
 
 .cara {
-  padding: 50px;
+  margin: 15px;
 }
 
 .head {
   padding: 10px;
-  margin-left: 70px;
+  margin-left: 50px;
   margin-top: 20px;
 }
 
@@ -26,12 +27,53 @@
   background-size: 100% 145%;
   /* background-attachment: fixed; */
   background-position: center;
+
+  height: '530px';
+  width: '100%';
 }
 
 #smallcard {
   color: 'white';
+  padding-top: 40px;
+  text-align: center;
 }
 
 .datepick {
   width: 190px;
+}
+
+#datp {
+  border-radius: 0px !important;
+  width: 190px;
+  padding: 6px;
+  color: rgb(102, 101, 101);
+}
+
+#datp1 {
+  border-radius: 0px !important;
+  width: 190px;
+  padding: 6px;
+  color: rgb(102, 101, 101);
+}
+
+#pro:hover {
+  box-shadow: 0 0 11px rgba(24, 23, 23, 0.2);
+}
+
+@media only screen and (min-width: 600px) {
+  /* For tablets: */
+}
+
+@media only screen and (max-width: 600px) {
+  #largeimg {
+    height: 500px;
+  }
+
+  #searchele {
+    margin-top: 80px;
+  }
+
+  #destin {
+    margin: 50px;
+  }
 }
