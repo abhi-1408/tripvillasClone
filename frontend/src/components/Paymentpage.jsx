@@ -3,12 +3,11 @@ import styles from './css/Payement.module.css'
 import buil from './imgurl/buil.gif'
 import { useHistory } from 'react-router'
 
-
 export const Paymentpage = (props) => {
   let history = useHistory()
   setTimeout(() => {
     history.push('/homepage')
-  }, 4000);
+  }, 4000)
 
   return (
     <div>
