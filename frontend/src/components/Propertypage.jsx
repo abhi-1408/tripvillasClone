@@ -11,7 +11,7 @@ import dum2 from './imgurl/dum2.jpeg'
 import { useDispatch, useSelector } from "react-redux";
 import { Load_Specific_Property, Specific_Hotel_Available_On_Date, LoadBookingData } from '../Redux/common/action'
 import { useHistory } from 'react-router'
-
+import ReactGa from 'react-ga'
 
 export const Propertypage = (props) => {
     console.log('props of property page', props)
@@ -25,6 +25,9 @@ export const Propertypage = (props) => {
     let dispatch = useDispatch()
 
     useEffect(() => {
+        ReactGa.initialize('UA-173941004-2')
+
+        ReactGa.pageview(window.location.pathname + window.location.search)
         setStartDate(filters['start_date'])
         setEndDate(filters['end_date'])
         dispatch(Load_Specific_Property({ "id": props.match.params.id }))

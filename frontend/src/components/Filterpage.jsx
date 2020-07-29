@@ -14,6 +14,7 @@ import { useParams, useHistory } from 'react-router'
 import { Link, Switch, Route } from 'react-router-dom'
 import { Map } from './Map'
 import $ from 'jquery'
+import ReactGa from 'react-ga'
 
 export const FilterPage = (props) => {
   console.log('PROPS ARE:', props)
@@ -51,6 +52,9 @@ export const FilterPage = (props) => {
   let history = useHistory()
   // let params = useParams()
   useEffect(() => {
+    ReactGa.initialize('UA-173941004-2')
+
+    ReactGa.pageview(window.location.pathname + window.location.search)
     console.log('props are', props)
     console.log('******history is****', history)
     // console.log('*******params *******', params)
@@ -116,12 +120,17 @@ export const FilterPage = (props) => {
   }, [])
 
   const handleCheck = (e) => {
+    ReactGa.event({
+      category: "FILTER CLICKED",
+      action: e.target.checked ? "filtered by " + e.target.name.toString() : "filtered by " + e.target.name.toString() + " removed"
+    })
     console.log('checkbox filter is', filters)
     filters[e.target.name] = e.target.checked
     dispatch(Save_Filter(filters))
   }
 
   const handleApplyFilter = (e) => {
+
     window.$('#applyfilter').modal('hide')
     setFlag(0)
     let temp_dict = {}
@@ -155,6 +164,13 @@ export const FilterPage = (props) => {
   }
 
   const handleSortBy = (e) => {
+    ReactGa.event({
+      category: "SORT BUTTON",
+      action: "sorted by " + e.target.value.toString()
+    })
+    // ReactGa.initialize('UA-173941004-2')
+
+    // ReactGa.pageview(window.location.pathname + window.location.search)
     setFlag(0)
     let temp_dict = {}
     let s = '?'
@@ -216,6 +232,10 @@ export const FilterPage = (props) => {
   }
 
   const handleModifySearch = () => {
+    ReactGa.event({
+      category: "SEARCH MODIFIED",
+      action: "search dates changed"
+    })
     window.$('#modify').modal('hide')
     setFlag(0)
     console.log('handle search clicked')
