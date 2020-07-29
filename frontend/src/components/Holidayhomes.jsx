@@ -7,7 +7,7 @@ import dum3 from './imgurl/dum3.jpeg'
 import { useDispatch, useSelector } from 'react-redux'
 import { Load_Recommended_State, Load_Filtered_Data, Save_Filter } from '../Redux/common/action'
 import { Link, useHistory } from 'react-router-dom'
-
+import ReactGa from 'react-ga'
 
 export const Holidayhomes = (props) => {
   console.log('PROPS IN HOLDAY HOME', props)
@@ -45,6 +45,10 @@ export const Holidayhomes = (props) => {
 
 
   const handleSearch = () => {
+    ReactGa.event({
+      category: "HOLIDAY HOME SEARCH CLICKED",
+      action: "searched by date"
+    })
     console.log('handle search clicked')
     let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
     let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
@@ -65,6 +69,9 @@ export const Holidayhomes = (props) => {
 
 
   useEffect(() => {
+    ReactGa.initialize('UA-173941004-2')
+
+    ReactGa.pageview(window.location.pathname + window.location.search)
     let info = props.match.params
     console.log('params are', info)
     dispatch(Load_Recommended_State(info))
