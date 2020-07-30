@@ -11,6 +11,8 @@ import {
   Save_Filter,
 } from '../Redux/common/action'
 import { Link, useHistory } from 'react-router-dom'
+import Button from '@material-ui/core/Button';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 import ReactGa from 'react-ga'
 
@@ -18,6 +20,7 @@ export const Holidayhomes = (props) => {
   console.log('PROPS IN HOLDAY HOME', props)
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
+  const [flag, setFlag] = useState(true)
 
   const handleChange1 = (date) => {
     if (endDate < date) {
@@ -96,7 +99,20 @@ export const Holidayhomes = (props) => {
     ReactGa.pageview(window.location.pathname + window.location.search)
     let info = props.match.params
     console.log('params are', info)
-    dispatch(Load_Recommended_State(info))
+
+
+    // let timeout = setTimeout(() => {
+    //   setFlag(false)
+    // }, 1000000)
+
+
+    if (flag) {
+
+      dispatch(Load_Recommended_State(info))
+      // clearTimeout(timeout)
+    }
+
+
   }, [])
 
   const title = [
@@ -185,6 +201,7 @@ export const Holidayhomes = (props) => {
             </div>
           </div>
         </div>
+
         <div>
           <h5
             style={{
@@ -565,10 +582,139 @@ export const Holidayhomes = (props) => {
             </div>
           </div>
         </div>
+        <h5 style={{
+          paddingLeft: '60px',
+          marginTop: '30px',
+          marginBottom: '20px',
+        }}>
 
-        <div class='spinner-border' role='status'>
+          <Skeleton className="py-2" variant="text" width={250} />
+        </h5>
+
+        <InfiniteCarousel
+          breakpoints={[
+            {
+              breakpoint: 500,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+              },
+            },
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+              },
+            },
+          ]}
+          dots={true}
+          showSides={true}
+          sidesOpacity={0.5}
+          sideSize={0.1}
+          slidesToScroll={4}
+          slidesToShow={4}
+          scrollOnDevice={true}
+        >
+          {/* map cards */}
+          {Array.from(Array(10), (e, i) => {
+            return (
+              <div className='col-12' id={styles.pro}>
+                {/* <div
+                  style={{
+                    backgroundImage: `url(${ele['image_medium'][1]})`,
+                    backgroundRepeat: 'no-repeat',
+                    height: '200px',
+                    width: '276px',
+                  }}
+                ></div> */}
+                <Skeleton variant="rect" width={276} height={200} />
+                <div style={{ height: '200px' }}>
+                  {/* <Link to={`/property/${ele['id']}`}> */}
+                  <Skeleton variant="text" width={200} />
+
+                  <Skeleton variant="text" width={100} />
+
+                  <Skeleton variant="rect" width={276} height={40} />
+
+                  <Skeleton variant="text" width={100} />
+                  {/* </Link> */}
+                </div>
+              </div>
+            )
+          })}
+        </InfiniteCarousel>
+
+
+        <h5 style={{
+          paddingLeft: '60px',
+          marginTop: '30px',
+          marginBottom: '20px',
+        }}>
+
+          <Skeleton className="py-2" variant="text" width={250} />
+        </h5>
+
+        <InfiniteCarousel
+          breakpoints={[
+            {
+              breakpoint: 500,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+              },
+            },
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+              },
+            },
+          ]}
+          dots={true}
+          showSides={true}
+          sidesOpacity={0.5}
+          sideSize={0.1}
+          slidesToScroll={4}
+          slidesToShow={4}
+          scrollOnDevice={true}
+        >
+          {/* map cards */}
+          {Array.from(Array(10), (e, i) => {
+            return (
+              <div className='col-12' id={styles.pro}>
+                {/* <div
+                  style={{
+                    backgroundImage: `url(${ele['image_medium'][1]})`,
+                    backgroundRepeat: 'no-repeat',
+                    height: '200px',
+                    width: '276px',
+                  }}
+                ></div> */}
+                <Skeleton variant="rect" width={276} height={200} />
+                <div style={{ height: '200px' }}>
+                  {/* <Link to={`/property/${ele['id']}`}> */}
+                  <Skeleton variant="text" width={200} />
+
+                  <Skeleton variant="text" width={100} />
+
+                  <Skeleton variant="rect" width={276} height={40} />
+
+                  <Skeleton variant="text" width={100} />
+                  {/* </Link> */}
+                </div>
+              </div>
+            )
+          })}
+        </InfiniteCarousel>
+
+        {/* {Array.from(Array(item.number_of_rooms), (e, i) => {
+                                        return <option value='{i+1} unit'>{i + 1} units</option>
+                                    })} */}
+        {/* <div class='spinner-border' role='status'>
           <span class='sr-only'>Loading...</span>
-        </div>
+        </div> */}
       </div>
     )
   }

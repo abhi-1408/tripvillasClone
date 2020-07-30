@@ -44,6 +44,7 @@
 
 #datp {
   border-radius: 0px !important;
+  border-color: rgb(163, 157, 157) !important;
   width: 190px;
   padding: 6px;
   color: rgb(102, 101, 101);
