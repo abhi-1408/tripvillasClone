@@ -4,13 +4,13 @@ import dum3 from './imgurl/dum3.jpeg'
 
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Update_in_Booking } from '../Redux/common/action'
+import { Update_in_Booking, Update_Payment_Flag } from '../Redux/common/action'
 import ReactGa from 'react-ga'
-
+import $ from 'jquery'
 
 export const Form = (props) => {
   let common = useSelector((state) => state.common)
-  const { booking_data, booking_confirmed_details, booking_flag } = common
+  const { booking_data, booking_confirmed_details, booking_flag, payment_success, booking_sms_email_flag } = common
 
   let login = useSelector((state) => state.login)
   const { user_id_loggedin } = login
@@ -83,7 +83,7 @@ export const Form = (props) => {
       order_id: data['id'], //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
       handler: function (response) {
         // alert(response.razorpay_payment_id);
-
+        dispatch(Update_Payment_Flag())
         dispatch(Update_in_Booking({ ...booking_data[0], "booking_date": new Date().toISOString().slice(0, 19).replace('T', ' '), "order_id": response.razorpay_order_id, "customer_details": { "customer_name": first_name + " " + last_name, "customer_mobile": mobile, "customer_email": email }, "user_id": user_id_loggedin }))
 
         // if (booking_flag) {
@@ -113,14 +113,52 @@ export const Form = (props) => {
     rzp1.open()
   }
 
-  if (booking_flag) {
+
+  const modal = () => {
+    window.$('#loadingModal').modal('show')
+    // setTimeout(() => {
+    //   console.log('completed')
+    //   window.$('#loadingModal').modal('hide')
+    // }, 3000)
+  }
+  $(document).ready(function () {
+    window.$('#loadingModal').modal({
+      show: false,
+      backdrop: 'static',
+    })
+  })
+
+  if (payment_success == true && booking_sms_email_flag == false) {
+    //loader
+    modal()
+  }
+  else if (payment_success == true && booking_sms_email_flag == true) {
+    window.$('#loadingModal').modal('hide')
     history.push(
       '/booking-confirm/' + booking_confirmed_details['order_number']
     )
   }
 
+
+  // if (booking_flag) {
+  //   history.push(
+  //     '/booking-confirm/' + booking_confirmed_details['order_number']
+  //   )
+  // }
+
   return (
+
     <div className='pl-5 pr-5 pb-5 pt-4 mt-3'>
+      <div class='modal fade' id='loadingModal' tabindex='-1' role='dialog'>
+        <div
+          class='modal-dialog modal-dialog-centered d-flex justify-content-center'
+          role='document'
+        >
+          <div class='spinner-border' role='status'>
+            <span class='sr-only'>Loading...</span>
+          </div>
+        </div>
+      </div>
       <div className='row p-2'>
         <div className='col-6 pl-3 pb-3 pr-3'>
           <div

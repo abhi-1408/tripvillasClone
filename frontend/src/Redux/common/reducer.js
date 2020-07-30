@@ -13,7 +13,11 @@ const initialState = {
     booking_data: [],
     booking_confirmed_details: {},
     booking_flag: false,
-    temp: []
+    temp: [],
+    filter_page_flag: false,
+    booking_sms_email_flag: false,
+    payment_success: false,
+    specific_property_flag: false
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -23,9 +27,32 @@ export default (state = initialState, { type, payload }) => {
         case "DATA_LOAD":
             return {
                 ...state,
-                data: payload
+                data: payload,
+                filter_page_flag: true
             }
 
+        case "RESET_FILTER_PAGE_FLAG":
+            return {
+                ...state,
+                filter_page_flag: false
+            }
+
+        case "UPDATE_PAYMENT_FLAG":
+            return {
+                ...state,
+                payment_success: true
+            }
+        case "RESET_BOOKING_SMS_EMAIL_FLAG":
+            return {
+                ...state,
+                booking_sms_email_flag: false
+            }
+
+        case "UPDATE_SPECIFIC_PROP_FLAG":
+            return {
+                ...state,
+                specific_property_flag: false
+            }
         case "CHECK":
             return {
                 ...state,
@@ -35,14 +62,16 @@ export default (state = initialState, { type, payload }) => {
         case "DATA_SPECIFIC":
             return {
                 ...state,
-                property_data: payload
+                property_data: payload,
+                specific_property_flag: true
             }
 
         case "BOOKING_CONFIRMED":
             return {
                 ...state,
                 booking_flag: !payload['error'],
-                booking_confirmed_details: { ...payload }
+                booking_confirmed_details: { ...payload },
+                booking_sms_email_flag: true
             }
 
         case "LOAD_BOOKING_DATA":
@@ -93,7 +122,9 @@ export default (state = initialState, { type, payload }) => {
                 recommended_review: [],
                 booking_data: [],
                 booking_confirmed_details: {},
-                booking_flag: false
+                booking_flag: false,
+                booking_sms_email_flag: false,
+                payment_success: false
             }
         default:
             return state
