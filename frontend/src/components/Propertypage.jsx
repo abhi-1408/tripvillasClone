@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react'
 import home from './imgurl/home.jpg'
 import dum3 from './imgurl/dum3.jpeg'
 import dum2 from './imgurl/dum2.jpeg'
+import { WrappedStaticMap } from './StaticMap'
 import { useDispatch, useSelector } from 'react-redux'
 import {
     Load_Specific_Property,
@@ -198,6 +199,7 @@ export const Propertypage = (props) => {
         )
         console.log('end date clicked')
     }
+
 
     // useEffect(() => {
     //     let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
@@ -1133,8 +1135,22 @@ export const Propertypage = (props) => {
                                 {/* map */}
 
                                 <div style={{ marginTop: '50px' }} className='ml-4 mr-4 '>
-                                    <h3 id='map'>Map</h3>
-                                    <hr style={{ marginTop: '40px' }} />
+                                    <h3>Maps</h3>
+                                    {/* <h3 id='map'><WrappedStaticMap {...mapdata} googleMapURL={"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCcS0j7hDpSs-F4xDi2q6AkTD_sWqECR9M"}
+                                        loadingElement={<div style={{ height: "100%" }} />}
+                                        containerElement={<div style={{ height: "100%" }} />}
+                                        mapElement={<div style={{ height: "100%" }} />} /></h3>
+                                    <hr style={{ marginTop: '40px' }} /> */}
+                                    <h3>
+                                        <div style={{ width: "60vw", height: "100vh" }}>
+                                            <WrappedStaticMap {...{ "lat": item['lat'], "lng": item['lng'] }} googleMapURL={"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCcS0j7hDpSs-F4xDi2q6AkTD_sWqECR9M"}
+                                                loadingElement={<div style={{ height: "100%" }} />}
+                                                containerElement={<div style={{ height: "100%" }} />}
+                                                mapElement={<div style={{ height: "100%" }} />}
+                                            />
+                                        </div>
+                                    </h3>
+
                                 </div>
 
                                 {/* policies and fees */}
