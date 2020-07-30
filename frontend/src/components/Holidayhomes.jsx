@@ -16,7 +16,6 @@ import Skeleton from '@material-ui/lab/Skeleton';
 
 import ReactGa from 'react-ga'
 
-
 export const Holidayhomes = (props) => {
   console.log('PROPS IN HOLDAY HOME', props)
   const [startDate, setStartDate] = useState(new Date())
@@ -50,8 +49,8 @@ export const Holidayhomes = (props) => {
 
   const handleSearch = () => {
     ReactGa.event({
-      category: "HOLIDAY HOME SEARCH CLICKED",
-      action: "searched by date"
+      category: 'HOLIDAY HOME SEARCH CLICKED',
+      action: 'searched by date',
     })
     console.log('handle search clicked')
     let sd =
@@ -330,11 +329,11 @@ export const Holidayhomes = (props) => {
                   style={{
                     backgroundImage: `url(${ele['image_medium'][1]})`,
                     backgroundRepeat: 'no-repeat',
-                    height: '200px',
+                    height: '150px',
                     width: '276px',
                   }}
                 ></div>
-                <div className='p-3' style={{ height: '200px' }}>
+                <div className='p-3' style={{ height: '150px' }}>
                   <Link to={`/property/${ele['id']}`}>
                     <p>
                       <b>Rated {ele['review_rating']}/5</b>

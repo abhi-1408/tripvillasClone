@@ -145,6 +145,21 @@ export const Homepage = (props) => {
     'himachal pradesh',
   ]
 
+  const modal = () => {
+    window.$('#loadingModal').modal('show')
+    setTimeout(() => {
+      console.log('completed')
+      window.$('#loadingModal').modal('hide')
+    }, 3000)
+  }
+
+  $(document).ready(function () {
+    window.$('#loadingModal').modal({
+      show: false,
+      backdrop: 'static',
+    })
+  })
+
   return (
     <div>
       {/* adding searchbar and larger image */}
@@ -155,7 +170,7 @@ export const Homepage = (props) => {
             Book <strike>Hotels</strike> Vacation Rentals
           </h3>
           <h3>Top Holiday Homes - Villas, Apartments & Homestays</h3>
-          <form
+          {/* <form
             class='form-inline text-center '
             role='form'
             style={{
@@ -178,9 +193,12 @@ export const Homepage = (props) => {
                 id={styles.datp}
                 onChange={handleChange1}
               />
-              <DatePicker selected={endDate} onChange={handleChange2} id={styles.datp} />
+              <DatePicker
+                selected={endDate}
+                onChange={handleChange2}
+                id={styles.datp}
+              />
 
-              {/* <input type="text" class="form-control input-lg input-search" placeholder="checkin checkout" /> */}
 
               <select
                 class='custom-select'
@@ -211,7 +229,67 @@ export const Homepage = (props) => {
                 SEARCH
               </button>
             </div>
-          </form>
+          </form> */}
+
+          <div
+            className='row'
+            style={{
+              padding: '10px',
+              border: '1px solid black',
+              backgroundColor: 'white',
+              width: '97%',
+            }}
+          >
+            <form class='form-inline'>
+              <input
+                type='text'
+                class='form-control input-lg input-search'
+                value={search_location}
+                onChange={(e) => handleLocationChg(e)}
+                placeholder='location'
+              />
+
+              <div>
+                <DatePicker
+                  selected={startDate}
+                  id={styles.datp}
+                  onChange={handleChange1}
+                />
+              </div>
+              <DatePicker
+                selected={endDate}
+                onChange={handleChange2}
+                id={styles.datp}
+              />
+              <select
+                class='custom-select'
+                style={{ width: '180px', borderRadius: '0px' }}
+              >
+                <option selected value='0'>
+                  Select Guests
+                </option>
+                <option value='1'>1 guest</option>
+                <option value='2'>2 guests</option>
+                <option value='3'>3 guests</option>
+                <option value='4'>4 guests</option>
+                <option value='5'>5 guests</option>
+                <option value='6'>6 guests</option>
+                <option value='7'>7 guests</option>
+                <option value='8'>8 guests</option>
+                <option value='9'>9 guests</option>
+                <option value='10'>10 guests</option>
+              </select>
+              <button
+                id={styles.searchbut}
+                type='button'
+                class='btn btn-primary'
+                style={{ borderRadius: '0px' }}
+                onClick={handleSearch}
+              >
+                SEARCH
+              </button>
+            </form>
+          </div>
         </div>
       </div>
 
@@ -640,7 +718,7 @@ export const Homepage = (props) => {
               style={{ marginLeft: '-16px' }}
               className='p-5 text-center shadow  bg-white rounded'
             >
-              <h4>Holiday Home Investment Opportunities</h4>
+              <h5>Holiday Home Investment Opportunities</h5>
               <div className='row'>
                 <div className='col-3 mt-4 text-center'>
                   <img src={s1} height='40px' width='40px' />
@@ -698,7 +776,7 @@ export const Homepage = (props) => {
               style={{ marginLeft: '-16px' }}
               className='p-5 text-center mt-3 ml-4 shadow  bg-white rounded'
             >
-              <h4>Are you a holiday home owner/manager?</h4>
+              <h5>Are you a holiday home owner/manager?</h5>
               <div className='row'>
                 <div className='col-3 mt-4 text-center'>
                   <img src={s5} height='40px' width='40px' />
@@ -711,7 +789,7 @@ export const Homepage = (props) => {
                   <img src={s6} height='40px' width='40px' />
                   <p className='mt-3'>
                     <small className='text-muted '>
-                      One Dashboard - Total Control
+                      Dashboard - Total Control
                     </small>
                   </p>
                 </div>
@@ -937,6 +1015,21 @@ export const Homepage = (props) => {
 
       {/* <DatePicker selected={this.state.startDate} onChange={this.handleChange1} />
       <DatePicker selected={this.state.endDate} onChange={this.handleChange2} /> */}
+
+      <button type='button' class='btn btn-primary' onClick={modal}>
+        loader
+      </button>
+
+      <div class='modal fade' id='loadingModal' tabindex='-1' role='dialog'>
+        <div
+          class='modal-dialog modal-dialog-centered d-flex justify-content-center'
+          role='document'
+        >
+          <div class='spinner-border' role='status'>
+            <span class='sr-only'>Loading...</span>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
