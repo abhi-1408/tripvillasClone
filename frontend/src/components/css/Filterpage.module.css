@@ -6,3 +6,7 @@
 .location {
   width: 300px;
 }
+
+#prov:hover {
+  box-shadow: 0 0 11px #727172;
+}

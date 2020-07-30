@@ -121,8 +121,10 @@ export const FilterPage = (props) => {
 
   const handleCheck = (e) => {
     ReactGa.event({
-      category: "FILTER CLICKED",
-      action: e.target.checked ? "filtered by " + e.target.name.toString() : "filtered by " + e.target.name.toString() + " removed"
+      category: 'FILTER CLICKED',
+      action: e.target.checked
+        ? 'filtered by ' + e.target.name.toString()
+        : 'filtered by ' + e.target.name.toString() + ' removed',
     })
     console.log('checkbox filter is', filters)
     filters[e.target.name] = e.target.checked
@@ -130,7 +132,6 @@ export const FilterPage = (props) => {
   }
 
   const handleApplyFilter = (e) => {
-
     window.$('#applyfilter').modal('hide')
     setFlag(0)
     let temp_dict = {}
@@ -165,8 +166,8 @@ export const FilterPage = (props) => {
 
   const handleSortBy = (e) => {
     ReactGa.event({
-      category: "SORT BUTTON",
-      action: "sorted by " + e.target.value.toString()
+      category: 'SORT BUTTON',
+      action: 'sorted by ' + e.target.value.toString(),
     })
     // ReactGa.initialize('UA-173941004-2')
 
@@ -233,8 +234,8 @@ export const FilterPage = (props) => {
 
   const handleModifySearch = () => {
     ReactGa.event({
-      category: "SEARCH MODIFIED",
-      action: "search dates changed"
+      category: 'SEARCH MODIFIED',
+      action: 'search dates changed',
     })
     window.$('#modify').modal('hide')
     setFlag(0)
@@ -363,8 +364,9 @@ export const FilterPage = (props) => {
               data.map((item) => {
                 return (
                   <div
-                    class='card mb-3 shadow-sm p-3 mb-5 bg-white rounded'
+                    class='card mb-3 '
                     style={{ maxWidth: '740px' }}
+                    id={styles.prov}
                   >
                     <div class='row no-gutters'>
                       <div class='col-md-4 mt-4'>
