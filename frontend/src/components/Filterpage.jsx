@@ -13,7 +13,8 @@ import {
 } from '../Redux/common/action'
 import { useParams, useHistory } from 'react-router'
 import { Link, Switch, Route } from 'react-router-dom'
-import { Map } from './Map'
+// import { Map } from './Map'
+import { WrappedMap } from './GoogleMaps'
 import $ from 'jquery'
 import ReactGa from 'react-ga'
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -1161,7 +1162,7 @@ export const FilterPage = (props) => {
           <div className='col'>
             {/* space for map */}
             <div className='position-fixed'>
-              {data.length > 0 ? <Map {...data} /> : ''}
+              {data.length > 0 ? "" : ''}
             </div>
           </div>
         </div>
@@ -2024,7 +2025,13 @@ export const FilterPage = (props) => {
             <div className='col'>
               {/* space for map */}
               <div className='position-fixed'>
-                {data.length > 0 ? <Map {...data} /> : ''}
+                {data.length > 0 ? <div style={{ width: "50vw", height: "100vh" }}>
+                  <WrappedMap googleMapURL={"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCcS0j7hDpSs-F4xDi2q6AkTD_sWqECR9M"}
+                    loadingElement={<div style={{ height: "100%" }} />}
+                    containerElement={<div style={{ height: "100%" }} />}
+                    mapElement={<div style={{ height: "100%" }} />}
+                  />
+                </div> : ''}
               </div>
             </div>
           </div>
