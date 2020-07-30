@@ -9,12 +9,14 @@ import {
   Load_Data,
   Save_Filter,
   Load_Filtered_Data,
+  Apply_Data
 } from '../Redux/common/action'
 import { useParams, useHistory } from 'react-router'
 import { Link, Switch, Route } from 'react-router-dom'
 import { Map } from './Map'
 import $ from 'jquery'
 import ReactGa from 'react-ga'
+import Skeleton from '@material-ui/lab/Skeleton';
 
 export const FilterPage = (props) => {
   console.log('PROPS ARE:', props)
@@ -22,6 +24,8 @@ export const FilterPage = (props) => {
   const [endDate, setEndDate] = useState(new Date())
   const [flag, setFlag] = useState(0)
   const [location_search, setLocationSearch] = useState('')
+  const [dispFlag, setDispFlag] = useState(false)
+
 
   const handleChange1 = (date) => {
     // console.log(date)
@@ -46,7 +50,7 @@ export const FilterPage = (props) => {
 
   // const [data,setData] = useState([])
   let common = useSelector((state) => state.common)
-  const { data, filters, filter_list } = common
+  const { data, filters, filter_list, filter_page_flag } = common
   let dispatch = useDispatch()
 
   let history = useHistory()
@@ -113,11 +117,21 @@ export const FilterPage = (props) => {
       setEndDate(filters['end_date'])
       dispatch(Save_Filter(filters))
       dispatch(Load_Filtered_Data(temp_dict))
+      // loadall(temp_dict)
     } else {
       dispatch(Load_Data())
     }
     console.log('*****data', data)
   }, [])
+
+  // async function loadall(temp_dict) {
+  //   let data1 = await dispatch(Load_Filtered_Data(temp_dict))
+  //   if (data1.length > 0) {
+  //     // dispatch(Apply_Data(data1))
+  //     console.log('changede flag')
+  //     setDispFlag(true)
+  //   }
+  // }
 
   const handleCheck = (e) => {
     ReactGa.event({
@@ -301,8 +315,9 @@ export const FilterPage = (props) => {
   //     return <div><h2>nothing</h2></div>
   // }
   // if (data.length > 1000) {
-  return (
-    <div>
+
+  if (filter_page_flag == false) {
+    return (<div>
       {/* <Link to={{ pathname: '/user/bob', query: { "showAge": true } }} activeClassName="active">Bob With Query Params</Link> */}
 
       {/* container fluid */}
@@ -321,7 +336,7 @@ export const FilterPage = (props) => {
                     data-target='#applyfilter'
                   >
                     APPLY FILTERS
-                  </button>
+                </button>
                 </div>
                 <div className='col'>
                   <button
@@ -331,7 +346,7 @@ export const FilterPage = (props) => {
                     data-target='#modify'
                   >
                     MODIFY SEARCH
-                  </button>
+                </button>
                 </div>
               </div>
             </div>
@@ -360,75 +375,66 @@ export const FilterPage = (props) => {
 
             {/* datamap */}
 
-            {data &&
-              data.map((item) => {
-                return (
-                  <div
-                    class='card mb-3 '
-                    style={{ maxWidth: '740px' }}
-                    id={styles.prov}
-                  >
-                    <div class='row no-gutters'>
-                      <div class='col-md-4 mt-4'>
-                        <div
-                          style={{
-                            backgroundImage: `url(${item.image_mid_large[0]})`,
-                            height: '100%',
-                            backgroundSize: 'cover',
-                          }}
-                        ></div>
-                        {/* <img src={item.images_mid_large[0]} class="card-img" alt="..." /> */}
-                      </div>
-                      <div class='col-md-8'>
-                        <div class='card-body'>
-                          <h5 class='card-title'>
-                            {/* <a style={{ color: "black" }} href=""> */}
-                            <Link to={`/property/${item.id}`}>
-                              {item.title}
-                            </Link>
-                            {/* </a> */}
-                          </h5>
-                          <h6>
-                            <a href=''>{item.location_name}</a>
-                          </h6>
-                          {item.prop_tags.map((ele) => {
-                            return (
-                              <div
-                                style={{
-                                  float: 'left',
-                                  margin: '10px',
-                                  border: '1px solid grey',
-                                  padding: '5px',
-                                }}
-                              >
-                                <small class='text-muted'>{ele}</small>
-                              </div>
-                            )
-                          })}
-                          <div style={{ clear: 'both' }}>
-                            <p>
-                              <h5>$ {item.total_price}</h5>
-                            </p>
-                            <small
-                              class='text-muted mt-3'
+
+            {Array.from(Array(10), (e, i) => {
+              return (
+                <div
+                  class='card mb-3 shadow-sm p-3 mb-5 bg-white rounded'
+                  style={{ maxWidth: '740px' }}
+                >
+                  <div class='row no-gutters'>
+                    <div class='col-md-4 mt-4'>
+
+                      <Skeleton variant="rect" width={200} height={200} />
+                      {/* <img src={item.images_mid_large[0]} class="card-img" alt="..." /> */}
+                    </div>
+                    <div class='col-md-8'>
+                      <div class='card-body'>
+                        <h5 class='card-title'>
+                          {/* <a style={{ color: "black" }} href=""> */}
+                          <Skeleton variant="text" width={200} />
+                          {/* </a> */}
+                        </h5>
+                        <h6>
+                          <Skeleton variant="text" width={150} />
+                        </h6>
+                        {Array.from(Array(4), (e, i) => {
+                          return (
+                            <div
+
                               style={{
-                                border: '1px solid orange',
+                                float: 'left',
+                                margin: '10px',
                                 padding: '5px',
-                                textTransform: 'uppercase',
-                                color: 'orange',
-                                width: '230px',
                               }}
                             >
-                              {item.cancellation_policy_name} CANCELLATION
-                              POLICY
-                            </small>
-                          </div>
+                              <Skeleton variant="text" width={20} />
+                            </div>
+                          )
+                        })}
+                        <div style={{ clear: 'both' }}>
+                          <p>
+                            <Skeleton variant="text" width={100} />
+                          </p>
+                          <small
+                            class='text-muted mt-3'
+                            style={{
+
+                              padding: '5px',
+                              textTransform: 'uppercase',
+                              color: 'orange',
+                              width: '230px',
+                            }}
+                          >
+                            <Skeleton variant="text" width={100} />
+                          </small>
                         </div>
                       </div>
                     </div>
                   </div>
-                )
-              })}
+                </div>
+              )
+            })}
           </div>
 
           {/* applyfilter modal */}
@@ -483,7 +489,7 @@ export const FilterPage = (props) => {
                     <div className='col'>
                       <label class='form-check-label' for='exampleCheck1'>
                         PROPERTY TYPE
-                      </label>
+                    </label>
                       <div class='form-check m-3'>
                         <input
                           type='checkbox'
@@ -493,7 +499,7 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             Luxury Yacht
-                          </label>
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -505,7 +511,7 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             Camping Ground
-                          </label>
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -517,8 +523,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Farm
-                          </label>
+                          Farm
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -530,8 +536,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Homestay
-                          </label>
+                          Homestay
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -543,8 +549,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Apartment
-                          </label>
+                          Apartment
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -556,8 +562,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Villa
-                          </label>
+                          Villa
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -569,7 +575,7 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             Hostel
-                          </label>
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -581,8 +587,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Serviced Apartment
-                          </label>
+                          Serviced Apartment
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -594,8 +600,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Ryokan (Japanese Inn)
-                          </label>
+                          Ryokan (Japanese Inn)
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -607,8 +613,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Bed and Breakfast
-                          </label>
+                          Bed and Breakfast
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -620,8 +626,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Resort
-                          </label>
+                          Resort
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -633,8 +639,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Boutique Hotel
-                          </label>
+                          Boutique Hotel
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -646,8 +652,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Bungalow
-                          </label>
+                          Bungalow
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -659,8 +665,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Caravan
-                          </label>
+                          Caravan
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -672,8 +678,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Chalet
-                          </label>
+                          Chalet
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -685,7 +691,7 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             Guesthouse
-                          </label>
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -697,8 +703,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Hotel
-                          </label>
+                          Hotel
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -710,8 +716,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Cottage
-                          </label>
+                          Cottage
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -723,8 +729,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Castle
-                          </label>
+                          Castle
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -736,8 +742,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            HouseBoats
-                          </label>
+                          HouseBoats
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -749,8 +755,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Home
-                          </label>
+                          Home
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -762,8 +768,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Room
-                          </label>
+                          Room
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -775,7 +781,7 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             Cabin
-                          </label>
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -787,8 +793,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Holiday park
-                          </label>
+                          Holiday park
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -800,8 +806,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Lodge
-                          </label>
+                          Lodge
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -813,8 +819,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Condo
-                          </label>
+                          Condo
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -826,8 +832,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Studio
-                          </label>
+                          Studio
+                        </label>
                         </small>
                       </div>
                       <div class='form-check m-3'>
@@ -839,8 +845,8 @@ export const FilterPage = (props) => {
                         <small class='text-muted'>
                           <label class='form-check-label' for='exampleCheck1'>
                             {' '}
-                            Tent
-                          </label>
+                          Tent
+                        </label>
                         </small>
                       </div>
                     </div>
@@ -856,8 +862,8 @@ export const FilterPage = (props) => {
                               <small class='text-muted'>
                                 <label>
                                   <input type='radio' name='optradio' checked />
-                                  Any
-                                </label>
+                                Any
+                              </label>
                               </small>
                             </div>
                           </div>
@@ -866,31 +872,8 @@ export const FilterPage = (props) => {
                               <small class='text-muted'>
                                 <label>
                                   <input type='radio' name='optradio' checked />
-                                  1+
-                                </label>
-                              </small>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className='row'>
-                          <div className='col'>
-                            <div class='radio'>
-                              <small class='text-muted'>
-                                <label>
-                                  <input type='radio' name='optradio' checked />
-                                  2+
-                                </label>
-                              </small>
-                            </div>
-                          </div>
-                          <div className='col'>
-                            <div class='radio'>
-                              <small class='text-muted'>
-                                <label>
-                                  <input type='radio' name='optradio' checked />
-                                  3+
-                                </label>
+                                1+
+                              </label>
                               </small>
                             </div>
                           </div>
@@ -902,8 +885,8 @@ export const FilterPage = (props) => {
                               <small class='text-muted'>
                                 <label>
                                   <input type='radio' name='optradio' checked />
-                                  4+
-                                </label>
+                                2+
+                              </label>
                               </small>
                             </div>
                           </div>
@@ -912,8 +895,31 @@ export const FilterPage = (props) => {
                               <small class='text-muted'>
                                 <label>
                                   <input type='radio' name='optradio' checked />
-                                  5+
-                                </label>
+                                3+
+                              </label>
+                              </small>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className='row'>
+                          <div className='col'>
+                            <div class='radio'>
+                              <small class='text-muted'>
+                                <label>
+                                  <input type='radio' name='optradio' checked />
+                                4+
+                              </label>
+                              </small>
+                            </div>
+                          </div>
+                          <div className='col'>
+                            <div class='radio'>
+                              <small class='text-muted'>
+                                <label>
+                                  <input type='radio' name='optradio' checked />
+                                5+
+                              </label>
                               </small>
                             </div>
                           </div>
@@ -924,8 +930,8 @@ export const FilterPage = (props) => {
                               <small class='text-muted'>
                                 <label>
                                   <input type='radio' name='optradio' checked />
-                                  6+
-                                </label>
+                                6+
+                              </label>
                               </small>
                             </div>
                           </div>
@@ -942,8 +948,8 @@ export const FilterPage = (props) => {
                               <small class='text-muted'>
                                 <label>
                                   <input type='radio' name='optradio' checked />
-                                  Any
-                                </label>
+                                Any
+                              </label>
                               </small>
                             </div>
                           </div>
@@ -952,31 +958,8 @@ export const FilterPage = (props) => {
                               <small class='text-muted'>
                                 <label>
                                   <input type='radio' name='optradio' checked />
-                                  1+
-                                </label>
-                              </small>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className='row'>
-                          <div className='col'>
-                            <div class='radio'>
-                              <small class='text-muted'>
-                                <label>
-                                  <input type='radio' name='optradio' checked />
-                                  2+
-                                </label>
-                              </small>
-                            </div>
-                          </div>
-                          <div className='col'>
-                            <div class='radio'>
-                              <small class='text-muted'>
-                                <label>
-                                  <input type='radio' name='optradio' checked />
-                                  3+
-                                </label>
+                                1+
+                              </label>
                               </small>
                             </div>
                           </div>
@@ -988,8 +971,8 @@ export const FilterPage = (props) => {
                               <small class='text-muted'>
                                 <label>
                                   <input type='radio' name='optradio' checked />
-                                  4+
-                                </label>
+                                2+
+                              </label>
                               </small>
                             </div>
                           </div>
@@ -998,8 +981,31 @@ export const FilterPage = (props) => {
                               <small class='text-muted'>
                                 <label>
                                   <input type='radio' name='optradio' checked />
-                                  5+
-                                </label>
+                                3+
+                              </label>
+                              </small>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className='row'>
+                          <div className='col'>
+                            <div class='radio'>
+                              <small class='text-muted'>
+                                <label>
+                                  <input type='radio' name='optradio' checked />
+                                4+
+                              </label>
+                              </small>
+                            </div>
+                          </div>
+                          <div className='col'>
+                            <div class='radio'>
+                              <small class='text-muted'>
+                                <label>
+                                  <input type='radio' name='optradio' checked />
+                                5+
+                              </label>
                               </small>
                             </div>
                           </div>
@@ -1010,8 +1016,8 @@ export const FilterPage = (props) => {
                               <small class='text-muted'>
                                 <label>
                                   <input type='radio' name='optradio' checked />
-                                  6+
-                                </label>
+                                6+
+                              </label>
                               </small>
                             </div>
                           </div>
@@ -1039,14 +1045,14 @@ export const FilterPage = (props) => {
 
                   <div class='modal-footer ' id={styles.last}>
                     {/* <div>
-                      <button
-                        type='button'
-                        class='btn btn-outline-secondary '
-                        data-dismiss='modal'
-                      >
-                        CANCEL
-                      </button>
-                    </div> */}
+                    <button
+                      type='button'
+                      class='btn btn-outline-secondary '
+                      data-dismiss='modal'
+                    >
+                      CANCEL
+                    </button>
+                  </div> */}
                     <div>
                       <button
                         type='button'
@@ -1055,7 +1061,7 @@ export const FilterPage = (props) => {
                         onClick={handleApplyFilter}
                       >
                         APPLY
-                      </button>
+                    </button>
                     </div>
                   </div>
                 </div>
@@ -1077,7 +1083,7 @@ export const FilterPage = (props) => {
                 <div class='modal-header'>
                   <h5 class='modal-title' id='exampleModalLabel'>
                     MODIFY SEARCH
-                  </h5>
+                </h5>
                   <button
                     type='button'
                     class='close'
@@ -1135,7 +1141,7 @@ export const FilterPage = (props) => {
                           style={{ borderRadius: '0px' }}
                         >
                           SEARCH
-                        </button>
+                      </button>
 
                         <button
                           type='button'
@@ -1143,7 +1149,7 @@ export const FilterPage = (props) => {
                           data-dismiss='modal'
                         >
                           CANCEL
-                        </button>
+                      </button>
                       </div>
                     </div>
                   </form>
@@ -1161,5 +1167,869 @@ export const FilterPage = (props) => {
         </div>
       </div>
     </div>
-  )
+    )
+  }
+  else {
+
+    return (
+      <div>
+        {/* <Link to={{ pathname: '/user/bob', query: { "showAge": true } }} activeClassName="active">Bob With Query Params</Link> */}
+
+        {/* container fluid */}
+
+        <div className='container-fluid m-4'>
+          <div className='row'>
+            <div class='col'>
+              {/* filter */}
+              <div className='container p-3'>
+                <div className='row'>
+                  <div className='col'>
+                    <button
+                      type='button'
+                      class='btn btn-outline-secondary'
+                      data-toggle='modal'
+                      data-target='#applyfilter'
+                    >
+                      APPLY FILTERS
+                    </button>
+                  </div>
+                  <div className='col'>
+                    <button
+                      type='button'
+                      class='btn btn-outline-secondary ml-5'
+                      data-toggle='modal'
+                      data-target='#modify'
+                    >
+                      MODIFY SEARCH
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <hr />
+
+              <div className='m-3'>
+                <small className='m-3 text-muted mr-5 ml-3'>
+                  Total results {data.length}
+                </small>
+                <div style={{ float: 'right' }}>
+                  <label for='sortby'>
+                    <small className='text-muted '>Sort By</small>
+                  </label>
+                  <select
+                    className='ml-1'
+                    id='sortby'
+                    value={filters['sort_by']}
+                    onChange={(e) => handleSortBy(e)}
+                  >
+                    <option value='relevance'>Relevance</option>
+                    <option value='asc'>Price (Low to High)</option>
+                    <option value='desc'>Price (High to low)</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* datamap */}
+
+              {data &&
+                data.map((item) => {
+                  return (
+                    <div
+                      class='card mb-3 shadow-sm p-3 mb-5 bg-white rounded'
+                      style={{ maxWidth: '740px' }}
+                    >
+                      <div class='row no-gutters'>
+                        <div class='col-md-4 mt-4'>
+                          <div
+                            style={{
+                              backgroundImage: `url(${item.image_mid_large[0]})`,
+                              height: '100%',
+                              backgroundSize: 'cover',
+                            }}
+                          ></div>
+                          {/* <img src={item.images_mid_large[0]} class="card-img" alt="..." /> */}
+                        </div>
+                        <div class='col-md-8'>
+                          <div class='card-body'>
+                            <h5 class='card-title'>
+                              {/* <a style={{ color: "black" }} href=""> */}
+                              <Link to={`/property/${item.id}`}>
+                                {item.title}
+                              </Link>
+                              {/* </a> */}
+                            </h5>
+                            <h6>
+                              <a href=''>{item.location_name}</a>
+                            </h6>
+                            {item.prop_tags.map((ele) => {
+                              return (
+                                <div
+                                  style={{
+                                    float: 'left',
+                                    margin: '10px',
+                                    border: '1px solid grey',
+                                    padding: '5px',
+                                  }}
+                                >
+                                  <small class='text-muted'>{ele}</small>
+                                </div>
+                              )
+                            })}
+                            <div style={{ clear: 'both' }}>
+                              <p>
+                                <h5>$ {item.total_price}</h5>
+                              </p>
+                              <small
+                                class='text-muted mt-3'
+                                style={{
+                                  border: '1px solid orange',
+                                  padding: '5px',
+                                  textTransform: 'uppercase',
+                                  color: 'orange',
+                                  width: '230px',
+                                }}
+                              >
+                                {item.cancellation_policy_name} CANCELLATION
+                                POLICY
+                              </small>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+            </div>
+
+            {/* applyfilter modal */}
+
+            <div
+              class='modal fade '
+              id='applyfilter'
+              tabindex='-1'
+              role='dialog'
+              aria-labelledby='exampleModalLabel'
+              aria-hidden='true'
+              style={{ height: '600px' }}
+            >
+              <div class='modal-dialog  modal-lg ' role='document'>
+                <div class='modal-content'>
+                  <div
+                    style={{
+                      padding: '20px',
+                      margin: '50px',
+                      marginLeft: '90px',
+                      height: '1200px',
+                    }}
+                  >
+                    <div className='row'>
+                      <div className='col'>
+                        <label class='form-check-label' for='exampleCheck1'>
+                          <h5>FEATURES</h5>
+                        </label>
+                        {filter_list.map((ele) => {
+                          return (
+                            <div class='form-check m-3'>
+                              <input
+                                type='checkbox'
+                                class='form-check-input'
+                                id={ele}
+                                name={ele}
+                                checked={filters[ele]}
+                                onChange={(e) => handleCheck(e)}
+                              />
+                              <small class='text-muted'>
+                                <label
+                                  class='form-check-label'
+                                  for='exampleCheck1'
+                                >
+                                  {ele}
+                                </label>
+                              </small>
+                            </div>
+                          )
+                        })}
+                      </div>
+                      <div className='col'>
+                        <label class='form-check-label' for='exampleCheck1'>
+                          PROPERTY TYPE
+                        </label>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              Luxury Yacht
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              Camping Ground
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Farm
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Homestay
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Apartment
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Villa
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              Hostel
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Serviced Apartment
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Ryokan (Japanese Inn)
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Bed and Breakfast
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Resort
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Boutique Hotel
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Bungalow
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Caravan
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Chalet
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              Guesthouse
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Hotel
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Cottage
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Castle
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              HouseBoats
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Home
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Room
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              Cabin
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Holiday park
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Lodge
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Condo
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Studio
+                            </label>
+                          </small>
+                        </div>
+                        <div class='form-check m-3'>
+                          <input
+                            type='checkbox'
+                            class='form-check-input'
+                            id='exampleCheck1'
+                          />
+                          <small class='text-muted'>
+                            <label class='form-check-label' for='exampleCheck1'>
+                              {' '}
+                              Tent
+                            </label>
+                          </small>
+                        </div>
+                      </div>
+
+                      <div className='col'>
+                        {/* bedrooms */}
+                        <div>
+                          <h5>Bedrooms</h5>
+
+                          <div className='row'>
+                            <div className='col'>
+                              <div class='radio'>
+                                <small class='text-muted'>
+                                  <label>
+                                    <input type='radio' name='optradio' checked />
+                                    Any
+                                  </label>
+                                </small>
+                              </div>
+                            </div>
+                            <div className='col'>
+                              <div class='radio'>
+                                <small class='text-muted'>
+                                  <label>
+                                    <input type='radio' name='optradio' checked />
+                                    1+
+                                  </label>
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className='row'>
+                            <div className='col'>
+                              <div class='radio'>
+                                <small class='text-muted'>
+                                  <label>
+                                    <input type='radio' name='optradio' checked />
+                                    2+
+                                  </label>
+                                </small>
+                              </div>
+                            </div>
+                            <div className='col'>
+                              <div class='radio'>
+                                <small class='text-muted'>
+                                  <label>
+                                    <input type='radio' name='optradio' checked />
+                                    3+
+                                  </label>
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className='row'>
+                            <div className='col'>
+                              <div class='radio'>
+                                <small class='text-muted'>
+                                  <label>
+                                    <input type='radio' name='optradio' checked />
+                                    4+
+                                  </label>
+                                </small>
+                              </div>
+                            </div>
+                            <div className='col'>
+                              <div class='radio'>
+                                <small class='text-muted'>
+                                  <label>
+                                    <input type='radio' name='optradio' checked />
+                                    5+
+                                  </label>
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+                          <div className='row'>
+                            <div className='col'>
+                              <div class='radio'>
+                                <small class='text-muted'>
+                                  <label>
+                                    <input type='radio' name='optradio' checked />
+                                    6+
+                                  </label>
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className='mt-5'>
+                          {/* bathroom */}
+                          <h5>Bathrooms</h5>
+
+                          <div className='row'>
+                            <div className='col'>
+                              <div class='radio'>
+                                <small class='text-muted'>
+                                  <label>
+                                    <input type='radio' name='optradio' checked />
+                                    Any
+                                  </label>
+                                </small>
+                              </div>
+                            </div>
+                            <div className='col'>
+                              <div class='radio'>
+                                <small class='text-muted'>
+                                  <label>
+                                    <input type='radio' name='optradio' checked />
+                                    1+
+                                  </label>
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className='row'>
+                            <div className='col'>
+                              <div class='radio'>
+                                <small class='text-muted'>
+                                  <label>
+                                    <input type='radio' name='optradio' checked />
+                                    2+
+                                  </label>
+                                </small>
+                              </div>
+                            </div>
+                            <div className='col'>
+                              <div class='radio'>
+                                <small class='text-muted'>
+                                  <label>
+                                    <input type='radio' name='optradio' checked />
+                                    3+
+                                  </label>
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className='row'>
+                            <div className='col'>
+                              <div class='radio'>
+                                <small class='text-muted'>
+                                  <label>
+                                    <input type='radio' name='optradio' checked />
+                                    4+
+                                  </label>
+                                </small>
+                              </div>
+                            </div>
+                            <div className='col'>
+                              <div class='radio'>
+                                <small class='text-muted'>
+                                  <label>
+                                    <input type='radio' name='optradio' checked />
+                                    5+
+                                  </label>
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+                          <div className='row'>
+                            <div className='col'>
+                              <div class='radio'>
+                                <small class='text-muted'>
+                                  <label>
+                                    <input type='radio' name='optradio' checked />
+                                    6+
+                                  </label>
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* pricemeter */}
+
+                        <form className='mt-5'>
+                          <div class='form-group'>
+                            <label for='formControlRange'>
+                              <h5>Price per Night</h5>
+                            </label>
+                            <input
+                              type='range'
+                              class='form-control-range'
+                              id='formControlRange'
+                            />
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+
+                    {/* filterbutton */}
+
+                    <div class='modal-footer ' id={styles.last}>
+                      {/* <div>
+                        <button
+                          type='button'
+                          class='btn btn-outline-secondary '
+                          data-dismiss='modal'
+                        >
+                          CANCEL
+                        </button>
+                      </div> */}
+                      <div>
+                        <button
+                          type='button'
+                          name='applyfilter'
+                          class='btn btn-primary btn-md'
+                          onClick={handleApplyFilter}
+                        >
+                          APPLY
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* modify search modal */}
+            <div
+              class='modal fade'
+              id='modify'
+              tabindex='-1'
+              role='dialog'
+              aria-labelledby='exampleModalLabel'
+              aria-hidden='true'
+            >
+              <div class='modal-dialog' role='document'>
+                <div class='modal-content'>
+                  <div class='modal-header'>
+                    <h5 class='modal-title' id='exampleModalLabel'>
+                      MODIFY SEARCH
+                    </h5>
+                    <button
+                      type='button'
+                      class='close'
+                      data-dismiss='modal'
+                      aria-label='Close'
+                    >
+                      <span aria-hidden='true'>&times;</span>
+                    </button>
+                  </div>
+                  <div class='modal-body'>
+                    <form>
+                      <div class='form-group'>
+                        <input
+                          type='text'
+                          class=' m-3'
+                          id={styles.location}
+                          value={location_search}
+                          placeholder='LOCATION'
+                        />
+                        <DatePicker
+                          className={styles.datepick}
+                          selected={startDate}
+                          value={startDate}
+                          onChange={handleChange1}
+                        />
+                        <DatePicker
+                          className={styles.datepick}
+                          selected={endDate}
+                          value={endDate}
+                          onChange={handleChange2}
+                        />
+                        <div className='m-3'>
+                          <select
+                            class='custom-select'
+                            style={{ width: '180px', borderRadius: '0px' }}
+                          >
+                            <option selected>Select Guests</option>
+                            <option value='1'>1 guest</option>
+                            <option value='2'>2 guests</option>
+                            <option value='3'>3 guests</option>
+                            <option value='4'>4 guests</option>
+                            <option value='5'>5 guests</option>
+                            <option value='6'>6 guests</option>
+                            <option value='7'>7 guests</option>
+                            <option value='8'>8 guests</option>
+                            <option value='9'>9 guests</option>
+                            <option value='10'>10 guests</option>
+                          </select>
+                        </div>
+                        <div className='m-3'>
+                          <button
+                            type='button'
+                            class='btn btn-primary'
+                            onClick={handleModifySearch}
+                            style={{ borderRadius: '0px' }}
+                          >
+                            SEARCH
+                          </button>
+
+                          <button
+                            type='button'
+                            class='btn btn-secondary ml-3'
+                            data-dismiss='modal'
+                          >
+                            CANCEL
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className='col'>
+              {/* space for map */}
+              <div className='position-fixed'>
+                {data.length > 0 ? <Map {...data} /> : ''}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
