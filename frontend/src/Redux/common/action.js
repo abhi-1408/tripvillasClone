@@ -67,8 +67,15 @@ export const Apply_Filters = (info) => {
 }
 
 
+export const ResetFilterPageFlag = () => {
+    return {
+        type: "RESET_FILTER_PAGE_FLAG",
+    }
+}
+
 export const Load_Filtered_Data = (info) => {
     return dispatch => {
+        dispatch(ResetFilterPageFlag())
         return axios({
             method: "get",
             url: "http://64651181e1b6.ngrok.io/admin/filter",
@@ -76,6 +83,7 @@ export const Load_Filtered_Data = (info) => {
         })
             .then((res) => res.data.data)
             .then((data) => {
+                // return data
                 dispatch(Apply_Data(data))
             })
             .catch((err) => {
@@ -118,8 +126,16 @@ export const Load_Specific_Review = (info) => {
     }
 }
 
+export const Update_Specific_Property_Flag = () => {
+    return {
+        type: "UPDATE_SPECIFIC_PROP_FLAG",
+
+    }
+}
+
 export const Load_Specific_Property = (info) => {
     return dispatch => {
+        dispatch(Update_Specific_Property_Flag())
         return axios({
             method: "post",
             url: "http://64651181e1b6.ngrok.io/entity/getprop",
@@ -186,8 +202,23 @@ export const Booking_Confirmed = (data) => {
     }
 }
 
+export const Update_Payment_Flag = () => {
+    return {
+        type: "UPDATE_PAYMENT_FLAG",
+
+    }
+}
+
+export const ResetBookingFlag = () => {
+    return {
+        type: "RESET_BOOKING_SMS_EMAIL_FLAG",
+
+    }
+}
+
 export const Update_in_Booking = (info) => {
     return dispatch => {
+        dispatch(ResetBookingFlag())
         return axios({
             method: "post",
             url: "http://64651181e1b6.ngrok.io/admin/create_booking",
