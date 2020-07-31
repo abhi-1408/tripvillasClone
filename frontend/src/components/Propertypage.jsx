@@ -15,7 +15,6 @@ import {
     Specific_Hotel_Available_On_Date,
     LoadBookingData,
     Recommend_By_Specific_Hotel
-
 } from '../Redux/common/action'
 import { useHistory } from 'react-router'
 import ReactGa from 'react-ga'
@@ -27,7 +26,6 @@ import { Link } from 'react-router-dom'
 
 
 export const Propertypage = (props) => {
-
     console.log('props of property page', props)
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
@@ -191,26 +189,15 @@ export const Propertypage = (props) => {
             })
         )
         console.log('start date clicked date is', startDate)
-
     }
-    else {
 
-      let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
-      let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
-
-      dispatch(LoadBookingData([{
-        "property": property_data[0], "check_in": sd,
-        "check_out": ed,
-        "guests": 1,
-        "units": units,
-        "total_cost": {
-          "sub_total": property_data[0]['total_price'],
-          "discount": "0",
-          "tax": "1500",
-          "cleaning_tax": "400",
-          "total": property_data[0]['total_price'] + 1500 + 400
+    const handleChange2 = (date) => {
+        if (date >= startDate) {
+            setEndDate(date)
+        } else {
+            setEndDate(startDate)
+            setStartDate(date)
         }
-
         let sd =
             startDate.getFullYear() +
             '-' +
@@ -239,11 +226,7 @@ export const Propertypage = (props) => {
             })
         )
         console.log('end date clicked')
-
-     
     }
-  }
-
 
 
     const handleUnitChg = e => {
@@ -345,32 +328,30 @@ export const Propertypage = (props) => {
                                                 style={{ color: 'grey' }}
                                             >
                                                 OVERVIEW
-
                         </a>
-                    </li>
-                    <li class='nav-item'>
-                      <a
-                        class='nav-link'
-                        href='#amenties'
-                        style={{ color: 'grey' }}
-                      >
-                        AMENTIES
+                                        </li>
+                                        <li class='nav-item'>
+                                            <a
+                                                class='nav-link'
+                                                href='#amenties'
+                                                style={{ color: 'grey' }}
+                                            >
+                                                AMENTIES
                         </a>
-                    </li>
-                    <li class='nav-item'>
-                      <a class='nav-link' href='#map' style={{ color: 'grey' }}>
-                        MAP
+                                        </li>
+                                        <li class='nav-item'>
+                                            <a class='nav-link' href='#map' style={{ color: 'grey' }}>
+                                                MAP
                         </a>
-                    </li>
-                    <li class='nav-item'>
-                      <a
-                        class='nav-link'
-                        href='#policies'
-                        style={{ color: 'grey' }}
-                      >
-                        POLICIES & FEES
+                                        </li>
+                                        <li class='nav-item'>
+                                            <a
+                                                class='nav-link'
+                                                href='#policies'
+                                                style={{ color: 'grey' }}
+                                            >
+                                                POLICIES & FEES
                         </a>
-
                                         </li>
                                         <li class='nav-item'>
                                             <a
@@ -415,201 +396,199 @@ export const Propertypage = (props) => {
                                                 The winter season has come, this home is open for Guest
                                                 who wants to have a great time in Arambol, Looking forward
                                                 to your response.
-
                         </p>
-                      <p style={{ color: 'grey', fontSize: '14px' }}>
-                        The Home is 2mins walks from the golden sand Arambol
-                        beach. Evenings are superb to sit on the beach with
-                        popcorn's or roasted peanuts/grams munching and watch the
-                        Sunset or climb the mountain and get the aerial view of
-                        the beach. Coming to Arambol by train Pernam railway
-                        station is 20kms, and Thivm station is 26kms, we provide
-                        with 6 sitter taxi to the Home with booking in advance
-                        with train or by air flight (Dabolim Airport) arrival date
-                        and time. We provide our guest with the best service and
-                        homely atmosphere which will be remembered always in your
-                        lifetime.
+                                            <p style={{ color: 'grey', fontSize: '14px' }}>
+                                                The Home is 2mins walks from the golden sand Arambol
+                                                beach. Evenings are superb to sit on the beach with
+                                                popcorn's or roasted peanuts/grams munching and watch the
+                                                Sunset or climb the mountain and get the aerial view of
+                                                the beach. Coming to Arambol by train Pernam railway
+                                                station is 20kms, and Thivm station is 26kms, we provide
+                                                with 6 sitter taxi to the Home with booking in advance
+                                                with train or by air flight (Dabolim Airport) arrival date
+                                                and time. We provide our guest with the best service and
+                                                homely atmosphere which will be remembered always in your
+                                                lifetime.
                         </p>
-                      <p style={{ color: 'grey', fontSize: '14px' }}>
-                        <b>Best For</b>
-                      </p>
+                                            <p style={{ color: 'grey', fontSize: '14px' }}>
+                                                <b>Best For</b>
+                                            </p>
 
-                      <div>
+                                            <div>
 
-                        {Array.from(Array(5), (e, i) => {
-                          return (
-                            <div
-                              style={{
-                                float: 'left',
-                                margin: '10px',
+                                                {Array.from(Array(5), (e, i) => {
+                                                    return (
+                                                        <div
+                                                            style={{
+                                                                float: 'left',
+                                                                margin: '10px',
 
-                                padding: '5px',
-                              }}
-                            >
-                              <Skeleton variant="text" width={60} />
+                                                                padding: '5px',
+                                                            }}
+                                                        >
+                                                            <Skeleton variant="text" width={60} />
 
-                            </div>)
-                        })}
+                                                        </div>)
+                                                })}
 
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                {/* key amenties */}
+                                {/* key amenties */}
 
-                <div style={{ marginTop: '80px' }} className='ml-4 mr-4'>
-                  <h3 id='amenties'>Key Amenities</h3>
-                  <hr style={{ marginTop: '40px' }} />
+                                <div style={{ marginTop: '80px' }} className='ml-4 mr-4'>
+                                    <h3 id='amenties'>Key Amenities</h3>
+                                    <hr style={{ marginTop: '40px' }} />
 
-                  <div>
-                    {Array.from(Array(10), (e, i) => {
-                      return (
-                        <div
-                          style={{
-                            float: 'left',
-                            margin: '10px',
+                                    <div>
+                                        {Array.from(Array(10), (e, i) => {
+                                            return (
+                                                <div
+                                                    style={{
+                                                        float: 'left',
+                                                        margin: '10px',
 
-                            padding: '5px',
-                          }}
-                        >
-                          <Skeleton variant="text" width={60} />
+                                                        padding: '5px',
+                                                    }}
+                                                >
+                                                    <Skeleton variant="text" width={60} />
 
-                        </div>
-                      )
-                    })}
-                    < div style={{ clear: 'both' }
-                    }></div>
-                  </div>
-                </div>
+                                                </div>
+                                            )
+                                        })}
+                                        < div style={{ clear: 'both' }
+                                        }></div>
+                                    </div>
+                                </div>
 
-                {/* map */}
+                                {/* map */}
 
-                <div style={{ marginTop: '50px' }} className='ml-4 mr-4 '>
-                  <h3 id='map'>Map</h3>
-                  <hr style={{ marginTop: '40px' }} />
-                </div>
+                                <div style={{ marginTop: '50px' }} className='ml-4 mr-4 '>
+                                    <h3 id='map'>Map</h3>
+                                    <hr style={{ marginTop: '40px' }} />
+                                </div>
 
-                {/* policies and fees */}
+                                {/* policies and fees */}
 
-                <div style={{ marginTop: '50px' }} className='ml-4 mr-4 '>
-                  <h3 id='policies'>Policies & Fees</h3>
-                  <hr style={{ marginTop: '40px' }} />
-                  <div className='row'>
-                    <div
-                      className='col-6'
-                      style={{ color: 'grey', fontSize: '14px' }}
-                    >
-                      <p>
-                        <b>Default Cancellation Policy</b>
-                      </p>
-                      {true === 'Stringent' ? (
-                        <p>
-                          <b>Stringent:</b> No charges will be levied if booking
+                                <div style={{ marginTop: '50px' }} className='ml-4 mr-4 '>
+                                    <h3 id='policies'>Policies & Fees</h3>
+                                    <hr style={{ marginTop: '40px' }} />
+                                    <div className='row'>
+                                        <div
+                                            className='col-6'
+                                            style={{ color: 'grey', fontSize: '14px' }}
+                                        >
+                                            <p>
+                                                <b>Default Cancellation Policy</b>
+                                            </p>
+                                            {true === 'Stringent' ? (
+                                                <p>
+                                                    <b>Stringent:</b> No charges will be levied if booking
                             is canceled 61 days prior to check-in. If cancellation
                             is done between 30 to 60 days prior to check-in, 50% of
                             the total booking amount will be charged. Post that,
                             there will be no refund.
-                        </p>
-                      ) : (
-                          <p>
-                            <b>Non Refundable:</b> This is the strictest clause. As
+                                                </p>
+                                            ) : (
+                                                    <p>
+                                                        <b>Non Refundable:</b> This is the strictest clause. As
                             soon the booking is confirmed & payment is accepted,
                             booking becomes non-refundable. Zero amount will be
                             refunded to the customer if she or he cancels the
                             booking.{' '}
-                          </p>
-                        )}
-                    </div>
-                    <div
-                      className='col-6'
-                      style={{ color: 'grey', fontSize: '14px' }}
-                    >
-                      <p>
-                        <b>House Rules</b>
-                      </p>
-                      <p>
-                        Unmarried Couples not allowed. Loud Music not allowed.
-                        Pets not allowed. Smoking inside Property not allowed.
+                                                    </p>
+                                                )}
+                                        </div>
+                                        <div
+                                            className='col-6'
+                                            style={{ color: 'grey', fontSize: '14px' }}
+                                        >
+                                            <p>
+                                                <b>House Rules</b>
+                                            </p>
+                                            <p>
+                                                Unmarried Couples not allowed. Loud Music not allowed.
+                                                Pets not allowed. Smoking inside Property not allowed.
                         </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-              {/* sideForm */}
-              <div className='col-3 ' style={{ height: '800px' }}>
-                <div style={{ position: 'fixed' }} className='p-3 '>
-                  <h5 className='text-muted'>Starting</h5>
-                  <Skeleton variant="text" className="py-4" width={40} />
-                  <h5 className='text-muted'>Pernight</h5>
-                  <Skeleton variant="text" className="py-4" width={40} />
+                            {/* sideForm */}
+                            <div className='col-3 ' style={{ height: '800px' }}>
+                                <div style={{ position: 'fixed' }} className='p-3 '>
+                                    <h5 className='text-muted'>Starting</h5>
+                                    <Skeleton variant="text" className="py-4" width={40} />
+                                    <h5 className='text-muted'>Pernight</h5>
+                                    <Skeleton variant="text" className="py-4" width={40} />
 
-                  <Skeleton variant="rect" width={276} height={100} />
+                                    <Skeleton variant="rect" width={276} height={100} />
 
-                  <div className='row'>
-                    <div className='col-6'>
-                      <Skeleton variant="text" width={100} />
-                    </div>
-                    <div className='col-6'>
-                      <Skeleton variant="text" width={100} />
-                    </div>
-                  </div>
+                                    <div className='row'>
+                                        <div className='col-6'>
+                                            <Skeleton variant="text" width={100} />
+                                        </div>
+                                        <div className='col-6'>
+                                            <Skeleton variant="text" width={100} />
+                                        </div>
+                                    </div>
 
-                  <Skeleton variant="text" width={200} />
-                  <div class='text-muted mt-2 mb-2'>
-                    <small>Rateplan:No meals provided (European Plan)</small>
-                  </div>
+                                    <Skeleton variant="text" width={200} />
+                                    <div class='text-muted mt-2 mb-2'>
+                                        <small>Rateplan:No meals provided (European Plan)</small>
+                                    </div>
 
-                  <div>
-                    <div style={{ float: 'left', color: 'grey' }}>
-                      <b>Total</b>
-                    </div>
-                    <div
-                      style={{
-                        float: 'right',
-                        marginRight: '20px',
-                        color: 'grey',
-                      }}
-                    >
-                      <Skeleton variant="text" width={20} />
-                    </div>
-                    <div style={{ clear: 'both' }} className='text-muted'>
-                      <small style={{ float: 'left' }}>
-                        {' '}
+                                    <div>
+                                        <div style={{ float: 'left', color: 'grey' }}>
+                                            <b>Total</b>
+                                        </div>
+                                        <div
+                                            style={{
+                                                float: 'right',
+                                                marginRight: '20px',
+                                                color: 'grey',
+                                            }}
+                                        >
+                                            <Skeleton variant="text" width={20} />
+                                        </div>
+                                        <div style={{ clear: 'both' }} className='text-muted'>
+                                            <small style={{ float: 'left' }}>
+                                                {' '}
                           Includes taxes & <br />
                           fees
                         </small>
-                      <small style={{ float: 'right', marginRight: '20px' }}>
+                                            <small style={{ float: 'right', marginRight: '20px' }}>
 
-                      </small>
+                                            </small>
 
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )
-        })
-        }
-      </div >
-    )
-  }
-  else {
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })
+                }
+            </div >
+        )
+    }
+    else {
 
-    return (
-      <div>
-        {property_data.map((item) => {
-          return (
-            <div className='row'>
-              <div className='col-9'>
-                <div className='m-3 p-4 '>
-                  <div>
-                    <small className='text-muted ' style={{ marginTop: '40px' }}>
-                      <a href=''>{item.country}</a> / <a href=''>{item.state}</a>{' '}
+        return (
+            <div>
+                {property_data.map((item) => {
+                    return (
+                        <div className='row'>
+                            <div className='col-9'>
+                                <div className='m-3 p-4 '>
+                                    <div>
+                                        <small className='text-muted ' style={{ marginTop: '40px' }}>
+                                            <a href=''>{item.country}</a> / <a href=''>{item.state}</a>{' '}
                         / <a href=''>{item.city}</a> / Property #
                         <a href=''>{item.id}</a>{' '}
-
                                         </small>
                                     </div>
                                 </div>
@@ -765,111 +744,109 @@ export const Propertypage = (props) => {
                                                 style={{ color: 'grey' }}
                                             >
                                                 OVERVIEW
+                        </a>
+                                        </li>
+                                        <li class='nav-item'>
+                                            <a
+                                                class='nav-link'
+                                                href='#amenties'
+                                                style={{ color: 'grey' }}
+                                            >
+                                                AMENTIES
+                        </a>
+                                        </li>
+                                        <li class='nav-item'>
+                                            <a class='nav-link' href='#map' style={{ color: 'grey' }}>
+                                                MAP
+                        </a>
+                                        </li>
+                                        <li class='nav-item'>
+                                            <a
+                                                class='nav-link'
+                                                href='#policies'
+                                                style={{ color: 'grey' }}
+                                            >
+                                                POLICIES & FEES
+                        </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <hr className='m-4' />
+                                <div className='row m-4'>
+                                    <div className='col-6'>
+                                        <div
+                                            className='row  shadow  bg-white rounded'
+                                            style={{
+                                                padding: '40px',
+                                            }}
+                                        >
+                                            <div
+                                                className='text-center'
+                                                style={{ marginLeft: '120px' }}
+                                            >
+                                                <h2 className=''>{item.property_type}</h2>
+                                                <p>
+                                                    <small className='text-muted'>Type Of Property </small>
+                                                </p>
+                                            </div>
+                                        </div>
 
-                        </a>
-                    </li>
-                    <li class='nav-item'>
-                      <a
-                        class='nav-link'
-                        href='#amenties'
-                        style={{ color: 'grey' }}
-                      >
-                        AMENTIES
-                        </a>
-                    </li>
-                    <li class='nav-item'>
-                      <a class='nav-link' href='#map' style={{ color: 'grey' }}>
-                        MAP
-                        </a>
-                    </li>
-                    <li class='nav-item'>
-                      <a
-                        class='nav-link'
-                        href='#policies'
-                        style={{ color: 'grey' }}
-                      >
-                        POLICIES & FEES
-                        </a>
-                    </li>
-                  </ul>
-                </div>
-                <hr className='m-4' />
-                <div className='row m-4'>
-                  <div className='col-6'>
-                    <div
-                      className='row  shadow  bg-white rounded'
-                      style={{
-                        padding: '40px',
-                      }}
-                    >
-                      <div
-                        className='text-center'
-                        style={{ marginLeft: '120px' }}
-                      >
-                        <h2 className=''>{item.property_type}</h2>
-                        <p>
-                          <small className='text-muted'>Type Of Property </small>
+                                        <div className='row'>
+                                            <div className='col-6 mt-3 p-4 shadow  bg-white rounded'>
+                                                <div className='text-center'>
+                                                    <h2 className=''>{item.number_of_bathrooms}</h2>
+                                                    <p>
+                                                        <small className='text-muted'>Bathrooms </small>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div className='col-6  mt-3  p-4 shadow  bg-white rounded'>
+                                                <div className='text-center'>
+                                                    <h2 className=''>{item.occupancy}</h2>
+                                                    <p>
+                                                        <small className='text-muted'>Max. Guests </small>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className='row'>
+                                            <div
+                                                className='col-6  mt-3  p-4 shadow  bg-white rounded'
+                                                style={{ marginLeft: '110px' }}
+                                            >
+                                                <div className='text-center'>
+                                                    <h2 className=''>{item.units}</h2>
+                                                    <p>
+                                                        <small className='text-muted'>
+                                                            Total Bookable Units{' '}
+                                                        </small>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className='col'>
+                                        <div className='m-3'>
+                                            <p style={{ color: 'grey', fontSize: '14px' }}>
+                                                The winter season has come, this home is open for Guest
+                                                who wants to have a great time in Arambol, Looking forward
+                                                to your response.
                         </p>
-                      </div>
-                    </div>
-
-                    <div className='row'>
-                      <div className='col-6 mt-3 p-4 shadow  bg-white rounded'>
-                        <div className='text-center'>
-                          <h2 className=''>{item.number_of_bathrooms}</h2>
-                          <p>
-                            <small className='text-muted'>Bathrooms </small>
-                          </p>
-                        </div>
-                      </div>
-                      <div className='col-6  mt-3  p-4 shadow  bg-white rounded'>
-                        <div className='text-center'>
-                          <h2 className=''>{item.occupancy}</h2>
-                          <p>
-                            <small className='text-muted'>Max. Guests </small>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className='row'>
-                      <div
-                        className='col-6  mt-3  p-4 shadow  bg-white rounded'
-                        style={{ marginLeft: '110px' }}
-                      >
-                        <div className='text-center'>
-                          <h2 className=''>{item.units}</h2>
-                          <p>
-                            <small className='text-muted'>
-                              Total Bookable Units{' '}
-                            </small>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className='col'>
-                    <div className='m-3'>
-                      <p style={{ color: 'grey', fontSize: '14px' }}>
-                        The winter season has come, this home is open for Guest
-                        who wants to have a great time in Arambol, Looking forward
-                        to your response.
+                                            <p style={{ color: 'grey', fontSize: '14px' }}>
+                                                The Home is 2mins walks from the golden sand Arambol
+                                                beach. Evenings are superb to sit on the beach with
+                                                popcorn's or roasted peanuts/grams munching and watch the
+                                                Sunset or climb the mountain and get the aerial view of
+                                                the beach. Coming to Arambol by train Pernam railway
+                                                station is 20kms, and Thivm station is 26kms, we provide
+                                                with 6 sitter taxi to the Home with booking in advance
+                                                with train or by air flight (Dabolim Airport) arrival date
+                                                and time. We provide our guest with the best service and
+                                                homely atmosphere which will be remembered always in your
+                                                lifetime.
                         </p>
-                      <p style={{ color: 'grey', fontSize: '14px' }}>
-                        The Home is 2mins walks from the golden sand Arambol
-                        beach. Evenings are superb to sit on the beach with
-                        popcorn's or roasted peanuts/grams munching and watch the
-                        Sunset or climb the mountain and get the aerial view of
-                        the beach. Coming to Arambol by train Pernam railway
-                        station is 20kms, and Thivm station is 26kms, we provide
-                        with 6 sitter taxi to the Home with booking in advance
-                        with train or by air flight (Dabolim Airport) arrival date
-                        and time. We provide our guest with the best service and
-                        homely atmosphere which will be remembered always in your
-                        lifetime.
-                        </p>
-
                                             <p style={{ color: 'grey', fontSize: '14px' }}>
                                                 <b>Best For</b>
                                             </p>
@@ -1214,61 +1191,60 @@ export const Propertypage = (props) => {
                                         containerElement={<div style={{ height: "100%" }} />}
                                         mapElement={<div style={{ height: "100%" }} />} /></h3>
                                     <hr style={{ marginTop: '40px' }} /> */}
-                  <h3>
-                    <div style={{ width: "60vw", height: "100vh" }}>
-                      <WrappedStaticMap {...{ "lat": item['lat'], "lng": item['lng'] }} googleMapURL={"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCcS0j7hDpSs-F4xDi2q6AkTD_sWqECR9M"}
-                        loadingElement={<div style={{ height: "100%" }} />}
-                        containerElement={<div style={{ height: "100%" }} />}
-                        mapElement={<div style={{ height: "100%" }} />}
-                      />
-                    </div>
-                  </h3>
+                                    <h3>
+                                        <div style={{ width: "60vw", height: "100vh" }}>
+                                            <WrappedStaticMap {...{ "lat": item['lat'], "lng": item['lng'] }} googleMapURL={"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCcS0j7hDpSs-F4xDi2q6AkTD_sWqECR9M"}
+                                                loadingElement={<div style={{ height: "100%" }} />}
+                                                containerElement={<div style={{ height: "100%" }} />}
+                                                mapElement={<div style={{ height: "100%" }} />}
+                                            />
+                                        </div>
+                                    </h3>
 
-                </div>
+                                </div>
 
-                {/* policies and fees */}
+                                {/* policies and fees */}
 
-                <div style={{ marginTop: '50px' }} className='ml-4 mr-4 '>
-                  <h3 id='policies'>Policies & Fees</h3>
-                  <hr style={{ marginTop: '40px' }} />
-                  <div className='row'>
-                    <div
-                      className='col-6'
-                      style={{ color: 'grey', fontSize: '14px' }}
-                    >
-                      <p>
-                        <b>Default Cancellation Policy</b>
-                      </p>
-                      {item.cancellation_policy_name === 'Stringent' ? (
-                        <p>
-                          <b>Stringent:</b> No charges will be levied if booking
+                                <div style={{ marginTop: '50px' }} className='ml-4 mr-4 '>
+                                    <h3 id='policies'>Policies & Fees</h3>
+                                    <hr style={{ marginTop: '40px' }} />
+                                    <div className='row'>
+                                        <div
+                                            className='col-6'
+                                            style={{ color: 'grey', fontSize: '14px' }}
+                                        >
+                                            <p>
+                                                <b>Default Cancellation Policy</b>
+                                            </p>
+                                            {item.cancellation_policy_name === 'Stringent' ? (
+                                                <p>
+                                                    <b>Stringent:</b> No charges will be levied if booking
                             is canceled 61 days prior to check-in. If cancellation
                             is done between 30 to 60 days prior to check-in, 50% of
                             the total booking amount will be charged. Post that,
                             there will be no refund.
-                        </p>
-                      ) : (
-                          <p>
-                            <b>Non Refundable:</b> This is the strictest clause. As
+                                                </p>
+                                            ) : (
+                                                    <p>
+                                                        <b>Non Refundable:</b> This is the strictest clause. As
                             soon the booking is confirmed & payment is accepted,
                             booking becomes non-refundable. Zero amount will be
                             refunded to the customer if she or he cancels the
                             booking.{' '}
-                          </p>
-                        )}
-                    </div>
-                    <div
-                      className='col-6'
-                      style={{ color: 'grey', fontSize: '14px' }}
-                    >
-                      <p>
-                        <b>House Rules</b>
-                      </p>
-                      <p>
-                        Unmarried Couples not allowed. Loud Music not allowed.
-                        Pets not allowed. Smoking inside Property not allowed.
+                                                    </p>
+                                                )}
+                                        </div>
+                                        <div
+                                            className='col-6'
+                                            style={{ color: 'grey', fontSize: '14px' }}
+                                        >
+                                            <p>
+                                                <b>House Rules</b>
+                                            </p>
+                                            <p>
+                                                Unmarried Couples not allowed. Loud Music not allowed.
+                                                Pets not allowed. Smoking inside Property not allowed.
                         </p>
-
                                         </div>
                                     </div>
                                 </div>
@@ -1442,92 +1418,92 @@ export const Propertypage = (props) => {
                                             return <option value={`${i}`}>{i + 1} units</option>
                                         })}
 
-                    {/* <option value='2 units'>2 units</option>
+                                        {/* <option value='2 units'>2 units</option>
                                         <option value='3 units'>3 units</option> */}
-                  </select>
+                                    </select>
 
-                  <div className='row'>
-                    <div className='col-6'>
-                      <DatePicker
-                        className={styles.datepick}
-                        selected={startDate}
-                        value={startDate}
-                        onSelect={handleChange1}
-                      />
-                    </div>
-                    <div className='col-6'>
-                      <DatePicker
-                        className={styles.datepick}
-                        selected={endDate}
-                        value={endDate}
-                        onSelect={handleChange2}
-                      />
-                    </div>
-                  </div>
+                                    <div className='row'>
+                                        <div className='col-6'>
+                                            <DatePicker
+                                                className={styles.datepick}
+                                                selected={startDate}
+                                                value={startDate}
+                                                onSelect={handleChange1}
+                                            />
+                                        </div>
+                                        <div className='col-6'>
+                                            <DatePicker
+                                                className={styles.datepick}
+                                                selected={endDate}
+                                                value={endDate}
+                                                onSelect={handleChange2}
+                                            />
+                                        </div>
+                                    </div>
 
-                  <select
-                    class='custom-select mt-4'
-                    style={{ width: '180px', borderRadius: '0px' }}
-                  >
-                    <option selected value='0'>
-                      Select Guests
+                                    <select
+                                        class='custom-select mt-4'
+                                        style={{ width: '180px', borderRadius: '0px' }}
+                                    >
+                                        <option selected value='0'>
+                                            Select Guests
                       </option>
-                    <option value='1'>1 guest</option>
-                    <option value='2'>2 guests</option>
-                    <option value='3'>3 guests</option>
-                    <option value='4'>4 guests</option>
-                    <option value='5'>5 guests</option>
-                    <option value='6'>6 guests</option>
-                    <option value='7'>7 guests</option>
-                    <option value='8'>8 guests</option>
-                    <option value='9'>9 guests</option>
-                    <option value='10'>10 guests</option>
-                  </select>
-                  <div class='text-muted mt-2 mb-2'>
-                    <small>Rateplan:No meals provided (European Plan)</small>
-                  </div>
+                                        <option value='1'>1 guest</option>
+                                        <option value='2'>2 guests</option>
+                                        <option value='3'>3 guests</option>
+                                        <option value='4'>4 guests</option>
+                                        <option value='5'>5 guests</option>
+                                        <option value='6'>6 guests</option>
+                                        <option value='7'>7 guests</option>
+                                        <option value='8'>8 guests</option>
+                                        <option value='9'>9 guests</option>
+                                        <option value='10'>10 guests</option>
+                                    </select>
+                                    <div class='text-muted mt-2 mb-2'>
+                                        <small>Rateplan:No meals provided (European Plan)</small>
+                                    </div>
 
-                  <div>
-                    <div style={{ float: 'left', color: 'grey' }}>
-                      <b>Total</b>
-                    </div>
-                    <div
-                      style={{
-                        float: 'right',
-                        marginRight: '20px',
-                        color: 'grey',
-                      }}
-                    >
-                      <b>{item.total_price}</b>
-                    </div>
-                    <div style={{ clear: 'both' }} className='text-muted'>
-                      <small style={{ float: 'left' }}>
-                        {' '}
+                                    <div>
+                                        <div style={{ float: 'left', color: 'grey' }}>
+                                            <b>Total</b>
+                                        </div>
+                                        <div
+                                            style={{
+                                                float: 'right',
+                                                marginRight: '20px',
+                                                color: 'grey',
+                                            }}
+                                        >
+                                            <b>{item.total_price}</b>
+                                        </div>
+                                        <div style={{ clear: 'both' }} className='text-muted'>
+                                            <small style={{ float: 'left' }}>
+                                                {' '}
                           Includes taxes & <br />
                           fees
                         </small>
-                      <small style={{ float: 'right', marginRight: '20px' }}>
-                        <a href=''>view details</a>
-                      </small>
-                      <button
-                        id={styles.searchbut}
-                        type='button'
-                        class='btn btn-primary mt-3'
-                        style={{ borderRadius: '0px' }}
-                        disabled={!message_flag}
-                        onClick={handleBook}
-                      >
-                        INSTANT BOOK
+                                            <small style={{ float: 'right', marginRight: '20px' }}>
+                                                <a href=''>view details</a>
+                                            </small>
+                                            <button
+                                                id={styles.searchbut}
+                                                type='button'
+                                                class='btn btn-primary mt-3'
+                                                style={{ borderRadius: '0px' }}
+                                                disabled={!message_flag}
+                                                onClick={handleBook}
+                                            >
+                                                INSTANT BOOK
                         </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })}
             </div>
-          )
-        })}
-      </div>
-    )
-  }
+        )
+    }
 }
 
