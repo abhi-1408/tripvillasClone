@@ -11,114 +11,187 @@ import dum2 from './imgurl/dum2.jpeg'
 import { WrappedStaticMap } from './StaticMap'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  Load_Specific_Property,
-  Specific_Hotel_Available_On_Date,
-  LoadBookingData,
+    Load_Specific_Property,
+    Specific_Hotel_Available_On_Date,
+    LoadBookingData,
+    Recommend_By_Specific_Hotel
+
 } from '../Redux/common/action'
 import { useHistory } from 'react-router'
 import ReactGa from 'react-ga'
-import Skeleton from '@material-ui/lab/Skeleton';
+import { Skeleton, Rating } from '@material-ui/lab';
+import InfiniteCarousel from 'react-leaf-carousel'
+import { Link } from 'react-router-dom'
+
 
 
 
 export const Propertypage = (props) => {
-  console.log('props of property page', props)
-  const [startDate, setStartDate] = useState(new Date())
-  const [endDate, setEndDate] = useState(new Date())
-  const [units, setUnits] = useState(1)
 
-  let log = useSelector((state) => state.login);
-  let { auth_logged } = log
-  let common = useSelector((state) => state.common);
-  const { property_data, filters, message, message_flag, specific_property_flag } = common
-  let dispatch = useDispatch()
+    console.log('props of property page', props)
+    const [startDate, setStartDate] = useState(new Date())
+    const [endDate, setEndDate] = useState(new Date())
+    const [unitsVal, setUnits] = useState(1)
 
-  useEffect(() => {
-    ReactGa.initialize('UA-173941004-2')
+    let log = useSelector((state) => state.login);
+    let { auth_logged } = log
+    let common = useSelector((state) => state.common);
+    const { property_data, filters, message, message_flag, specific_property_flag, recommend_specific_flag, recommended_specific } = common
+    let dispatch = useDispatch()
 
-    ReactGa.pageview(window.location.pathname + window.location.search)
-    setStartDate(filters['start_date'])
-    setEndDate(filters['end_date'])
-    dispatch(Load_Specific_Property({ "id": props.match.params.id }))
-    let sd = filters['start_date'].getFullYear() + "-" + (filters['start_date'].getMonth() + 1) + "-" + filters['start_date'].getDate();
-    let ed = filters['end_date'].getFullYear() + "-" + (filters['end_date'].getMonth() + 1) + "-" + filters['end_date'].getDate();
-    dispatch(Specific_Hotel_Available_On_Date({ "check_in": sd, "check_out": ed, "hotel_id": props.match.params['id'] }))
+    useEffect(() => {
+        ReactGa.initialize('UA-173941004-2')
 
-  }, [])
+        ReactGa.pageview(window.location.pathname + window.location.search)
+        setStartDate(filters['start_date'])
+        setEndDate(filters['end_date'])
+        dispatch(Load_Specific_Property({ "id": props.match.params.id }))
+        let sd = filters['start_date'].getFullYear() + "-" + (filters['start_date'].getMonth() + 1) + "-" + filters['start_date'].getDate();
+        let ed = filters['end_date'].getFullYear() + "-" + (filters['end_date'].getMonth() + 1) + "-" + filters['end_date'].getDate();
+        dispatch(Specific_Hotel_Available_On_Date({ "check_in": sd, "check_out": ed, "hotel_id": props.match.params['id'] }))
+        dispatch(
+            Recommend_By_Specific_Hotel({
+                check_in: sd,
+                check_out: ed,
+                hotel_id: props.match.params['id'],
 
-  // useEffect(() => {
-  //     if (!auth_logged) {
-  //         console.log('NOT LOGGED IN')
-  //         window.$('#exampleModal').modal('open')
-  //         // alert('hi')
-  //     }
-  // })
+            })
+        )
+    }, [props.match.params.id])
 
-
-  // const loadRazorpay = () => {
-  //     return new Promise((resolve => {
-
-  //         const script = document.createElement('script')
-  //         script.src = "https://checkout.razorpay.com/v1/checkout.js"
-  //         script.onload = () => {
-  //             resolve(true)
-  //         }
-  //         script.onerror = () => {
-  //             resolve(false)
-  //         }
-  //         document.body.appendChild(script)
-  //     }))
+    // useEffect(() => {
+    //     if (!auth_logged) {
+    //         console.log('NOT LOGGED IN')
+    //         window.$('#exampleModal').modal('open')
+    //         // alert('hi')
+    //     }
+    // })
 
 
-  // }
+    // const loadRazorpay = () => {
+    //     return new Promise((resolve => {
 
-  // async function displayRazorpay() {
+    //         const script = document.createElement('script')
+    //         script.src = "https://checkout.razorpay.com/v1/checkout.js"
+    //         script.onload = () => {
+    //             resolve(true)
+    //         }
+    //         script.onerror = () => {
+    //             resolve(false)
+    //         }
+    //         document.body.appendChild(script)
+    //     }))
 
-  //     const res = await loadRazorpay()
 
-  //     if (!res) {
-  //         alert('RAZOR PAY NOT AVAILABLE')
-  //         return
-  //     }
+    // }
 
-  //     const data = await fetch('http://c562fcfe8d0c.ngrok.io/admin/rorder', { method: 'POST' }).then(t => t.json())
-  //     console.log('got data from razor pay as', data)
-  //     var options = {
-  //         "key": "rzp_test_yGOdC4iCgylsNj", // Enter the Key ID generated from the Dashboard
-  //         "amount": property_data['total_price'], // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-  //         "currency": data['currency'],
-  //         "name": "Trip Villas ",
-  //         "description": "Property id:" + props.match.params.id.toString(),
-  //         "order_id": data['id'], //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-  //         "handler": function (response) {
-  //             alert(response.razorpay_payment_id);
-  //             // alert(response.razorpay_order_id);
-  //             // alert(response.razorpay_signature)
-  //         },
-  //         "prefill": {
-  //             "name": "Gaurav Kumar",
-  //             "email": "gaurav.kumar@example.com",
-  //             "contact": "9999999999"
-  //         },
-  //         "notes": {
-  //             "address": "Razorpay Corporate Office"
-  //         },
-  //         "theme": {
-  //             "color": "#F37254"
-  //         }
-  //     };
-  //     var rzp1 = new window.Razorpay(options);
-  //     rzp1.open()
-  // }
+    // async function displayRazorpay() {
 
-  let history = useHistory()
+    //     const res = await loadRazorpay()
 
-  const handleBook = () => {
-    if (!auth_logged) {
-      console.log('NOT LOGGED IN')
-      window.$('#exampleModal').modal('show')
+    //     if (!res) {
+    //         alert('RAZOR PAY NOT AVAILABLE')
+    //         return
+    //     }
 
-      // alert('hi')
+    //     const data = await fetch('http://c562fcfe8d0c.ngrok.io/admin/rorder', { method: 'POST' }).then(t => t.json())
+    //     console.log('got data from razor pay as', data)
+    //     var options = {
+    //         "key": "rzp_test_yGOdC4iCgylsNj", // Enter the Key ID generated from the Dashboard
+    //         "amount": property_data['total_price'], // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    //         "currency": data['currency'],
+    //         "name": "Trip Villas ",
+    //         "description": "Property id:" + props.match.params.id.toString(),
+    //         "order_id": data['id'], //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    //         "handler": function (response) {
+    //             alert(response.razorpay_payment_id);
+    //             // alert(response.razorpay_order_id);
+    //             // alert(response.razorpay_signature)
+    //         },
+    //         "prefill": {
+    //             "name": "Gaurav Kumar",
+    //             "email": "gaurav.kumar@example.com",
+    //             "contact": "9999999999"
+    //         },
+    //         "notes": {
+    //             "address": "Razorpay Corporate Office"
+    //         },
+    //         "theme": {
+    //             "color": "#F37254"
+    //         }
+    //     };
+    //     var rzp1 = new window.Razorpay(options);
+    //     rzp1.open()
+    // }
+
+    let history = useHistory()
+
+    const handleBook = () => {
+        if (!auth_logged) {
+            console.log('NOT LOGGED IN')
+            window.$('#exampleModal').modal('show')
+
+            // alert('hi')
+        }
+        else {
+
+            let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
+            let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
+
+            dispatch(LoadBookingData([{
+                "property": property_data[0], "check_in": sd,
+                "check_out": ed,
+                "guests": 1,
+                "units": unitsVal,
+                "total_cost": {
+                    "sub_total": property_data[0]['total_price'],
+                    "discount": "0",
+                    "tax": "1500",
+                    "cleaning_tax": "400",
+                    "total": property_data[0]['total_price'] + 1500 + 400
+                }
+            }]))
+            history.push('/book/' + props.match.params.id)
+        }
+    }
+
+
+    const handleChange1 = (date) => {
+        if (endDate < date) {
+            setEndDate(date)
+            setStartDate(date)
+        } else {
+            setStartDate(date)
+        }
+        let sd =
+            startDate.getFullYear() +
+            '-' +
+            (startDate.getMonth() + 1) +
+            '-' +
+            startDate.getDate()
+        let ed =
+            endDate.getFullYear() +
+            '-' +
+            (endDate.getMonth() + 1) +
+            '-' +
+            endDate.getDate()
+        dispatch(
+            Specific_Hotel_Available_On_Date({
+                check_in: sd,
+                check_out: ed,
+                hotel_id: props.match.params['id'],
+            })
+        )
+        dispatch(
+            Recommend_By_Specific_Hotel({
+                check_in: sd,
+                check_out: ed,
+                hotel_id: props.match.params['id'],
+
+            })
+        )
+        console.log('start date clicked date is', startDate)
+
     }
     else {
 
@@ -137,165 +210,142 @@ export const Propertypage = (props) => {
           "cleaning_tax": "400",
           "total": property_data[0]['total_price'] + 1500 + 400
         }
-      }]))
-      history.push('/book/' + props.match.params.id)
+
+        let sd =
+            startDate.getFullYear() +
+            '-' +
+            (startDate.getMonth() + 1) +
+            '-' +
+            startDate.getDate()
+        let ed =
+            endDate.getFullYear() +
+            '-' +
+            (endDate.getMonth() + 1) +
+            '-' +
+            endDate.getDate()
+        dispatch(
+            Specific_Hotel_Available_On_Date({
+                check_in: sd,
+                check_out: ed,
+                hotel_id: props.match.params['id'],
+            })
+        )
+        dispatch(
+            Recommend_By_Specific_Hotel({
+                check_in: sd,
+                check_out: ed,
+                hotel_id: props.match.params['id'],
+
+            })
+        )
+        console.log('end date clicked')
+
+     
     }
   }
 
 
-  const handleChange1 = (date) => {
-    if (endDate < date) {
-      setEndDate(date)
-      setStartDate(date)
-    } else {
-      setStartDate(date)
+
+    const handleUnitChg = e => {
+        console.log('unit changed ', e, e.target.value)
+        setUnits(parseInt(e.target.value) + 1)
     }
-    let sd =
-      startDate.getFullYear() +
-      '-' +
-      (startDate.getMonth() + 1) +
-      '-' +
-      startDate.getDate()
-    let ed =
-      endDate.getFullYear() +
-      '-' +
-      (endDate.getMonth() + 1) +
-      '-' +
-      endDate.getDate()
-    dispatch(
-      Specific_Hotel_Available_On_Date({
-        check_in: sd,
-        check_out: ed,
-        hotel_id: props.match.params['id'],
-      })
-    )
-    console.log('start date clicked date is', startDate)
-  }
-
-  const handleChange2 = (date) => {
-    if (date >= startDate) {
-      setEndDate(date)
-    } else {
-      setEndDate(startDate)
-      setStartDate(date)
+    // let history = useHistory()
+    const handlePath = e => {
+        console.log('handle path clicked', e.target.name)
+        history.push('/property/' + e.target.name)
     }
-    let sd =
-      startDate.getFullYear() +
-      '-' +
-      (startDate.getMonth() + 1) +
-      '-' +
-      startDate.getDate()
-    let ed =
-      endDate.getFullYear() +
-      '-' +
-      (endDate.getMonth() + 1) +
-      '-' +
-      endDate.getDate()
-    dispatch(
-      Specific_Hotel_Available_On_Date({
-        check_in: sd,
-        check_out: ed,
-        hotel_id: props.match.params['id'],
-      })
-    )
-    console.log('end date clicked')
-  }
 
 
-  const handleUnitChg = e => {
-    console.log('unit changed ', e, e.target.value)
-    setUnits(e.target.value + 1)
-  }
+    // useEffect(() => {
+    //     let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
+    //     let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
+    //     dispatch(Specific_Hotel_Available_On_Date({ "check_in": sd, "check_out": ed, "hotel_id": props.match.params['id'] }))
 
+    // }, startDate)
+    if (specific_property_flag == false) {
+        return (
+            <div>
+                {Array.from(Array(1), (e, i) => {
+                    return (
+                        <div className='row'>
+                            <div className='col-9'>
+                                <div className='m-3 p-4 '>
+                                    <div>
+                                        <small className='text-muted ' style={{ marginTop: '40px' }}>
+                                            <Skeleton variant="text" width={150} />
+                                        </small>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div className='row m-3'>
+                                    {/* image */}
+                                    <div class='col-7'>
+                                        <div
+                                            style={{
+                                                width: '558px',
+                                                height: '446px',
+                                            }}
+                                        >
+                                            <Skeleton variant="rect" width={558} height={298} />
+                                            <div
+                                                style={{
+                                                    width: '278px',
+                                                    height: '145px',
+                                                    border: '1.5px solid white',
+                                                    float: 'left',
 
-  // useEffect(() => {
-  //     let sd = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
-  //     let ed = endDate.getFullYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
-  //     dispatch(Specific_Hotel_Available_On_Date({ "check_in": sd, "check_out": ed, "hotel_id": props.match.params['id'] }))
+                                                }}
+                                            >
+                                                <Skeleton variant="rect" width={275} height={145} /></div>
+                                            <div
+                                                style={{
+                                                    width: '280px',
+                                                    height: '145px',
+                                                    border: '1.5px solid white',
+                                                    float: 'left',
 
-  // }, startDate)
-  if (specific_property_flag == false) {
-    return (
-      <div>
-        {Array.from(Array(1), (e, i) => {
-          return (
-            <div className='row'>
-              <div className='col-9'>
-                <div className='m-3 p-4 '>
-                  <div>
-                    <small className='text-muted ' style={{ marginTop: '40px' }}>
-                      <Skeleton variant="text" width={150} />
-                    </small>
-                  </div>
-                </div>
-                <hr />
-                <div className='row m-3'>
-                  {/* image */}
-                  <div class='col-7'>
-                    <div
-                      style={{
-                        width: '558px',
-                        height: '446px',
-                      }}
-                    >
-                      <Skeleton variant="rect" width={558} height={298} />
-                      <div
-                        style={{
-                          width: '278px',
-                          height: '145px',
-                          border: '1.5px solid white',
-                          float: 'left',
+                                                }}
+                                            >
+                                                <Skeleton variant="rect" width={275} height={145} /></div>
 
-                        }}
-                      >
-                        <Skeleton variant="rect" width={275} height={145} /></div>
-                      <div
-                        style={{
-                          width: '280px',
-                          height: '145px',
-                          border: '1.5px solid white',
-                          float: 'left',
+                                        </div>
+                                    </div>
 
-                        }}
-                      >
-                        <Skeleton variant="rect" width={275} height={145} /></div>
+                                    {/* location and amenties */}
+                                    <div class='col-5 pl-5 pr-5 pb-5 '>
+                                        <Skeleton variant="rect" width={276} height={20} />
+                                        <Skeleton variant="text" width={200} />
+                                        <hr />
+                                        {/* map amenties */}
+                                        {Array.from(Array(5), (e, i) => {
+                                            return (
+                                                <div
+                                                    style={{
+                                                        float: 'left',
+                                                        margin: '10px',
 
-                    </div>
-                  </div>
+                                                        textTransform: 'uppercase',
+                                                        padding: '3px',
+                                                    }}
+                                                >
+                                                    <Skeleton variant="text" width={60} />
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
+                                {/* navbar */}
+                                <div className='m-4'>
+                                    <ul class='nav'>
+                                        <li class='nav-item active'>
+                                            <a
+                                                class='nav-link active'
+                                                href='#'
+                                                style={{ color: 'grey' }}
+                                            >
+                                                OVERVIEW
 
-                  {/* location and amenties */}
-                  <div class='col-5 pl-5 pr-5 pb-5 '>
-                    <Skeleton variant="rect" width={276} height={20} />
-                    <Skeleton variant="text" width={200} />
-                    <hr />
-                    {/* map amenties */}
-                    {Array.from(Array(5), (e, i) => {
-                      return (
-                        <div
-                          style={{
-                            float: 'left',
-                            margin: '10px',
-
-                            textTransform: 'uppercase',
-                            padding: '3px',
-                          }}
-                        >
-                          <Skeleton variant="text" width={60} />
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-                {/* navbar */}
-                <div className='m-4'>
-                  <ul class='nav'>
-                    <li class='nav-item active'>
-                      <a
-                        class='nav-link active'
-                        href='#'
-                        style={{ color: 'grey' }}
-                      >
-                        OVERVIEW
                         </a>
                     </li>
                     <li class='nav-item'>
@@ -320,41 +370,52 @@ export const Propertypage = (props) => {
                       >
                         POLICIES & FEES
                         </a>
-                    </li>
-                  </ul>
-                </div>
-                <hr className='m-4' />
-                <div className='row m-4'>
-                  <div className='col-6'>
-                    <Skeleton variant="rect" width={500} height={200} />
 
-                    <div className='row'>
-                      <div className='col-6 mt-3 p-4 shadow  bg-white rounded'>
-                        <Skeleton variant="rect" width={208} height={200} />
-                      </div>
-                      <div className='col-6  mt-3  p-4 shadow  bg-white rounded'>
-                        <Skeleton variant="rect" width={208} height={200} />
-                      </div>
-                    </div>
+                                        </li>
+                                        <li class='nav-item'>
+                                            <a
+                                                class='nav-link'
+                                                href='#recommend'
+                                                style={{ color: 'grey' }}
+                                            >
+                                                RECOMMENDED
+                        </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <hr className='m-4' />
+                                <div className='row m-4'>
+                                    <div className='col-6'>
+                                        <Skeleton variant="rect" width={500} height={200} />
 
-                    <div className='row'>
-                      <div
-                        className='col-6  mt-3  p-4 shadow  bg-white rounded'
-                        style={{ marginLeft: '110px' }}
-                      >
-                        <div className='text-center'>
-                          <Skeleton variant="rect" width={200} height={100} />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                                        <div className='row'>
+                                            <div className='col-6 mt-3 p-4 shadow  bg-white rounded'>
+                                                <Skeleton variant="rect" width={208} height={200} />
+                                            </div>
+                                            <div className='col-6  mt-3  p-4 shadow  bg-white rounded'>
+                                                <Skeleton variant="rect" width={208} height={200} />
+                                            </div>
+                                        </div>
 
-                  <div className='col'>
-                    <div className='m-3'>
-                      <p style={{ color: 'grey', fontSize: '14px' }}>
-                        The winter season has come, this home is open for Guest
-                        who wants to have a great time in Arambol, Looking forward
-                        to your response.
+                                        <div className='row'>
+                                            <div
+                                                className='col-6  mt-3  p-4 shadow  bg-white rounded'
+                                                style={{ marginLeft: '110px' }}
+                                            >
+                                                <div className='text-center'>
+                                                    <Skeleton variant="rect" width={200} height={100} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className='col'>
+                                        <div className='m-3'>
+                                            <p style={{ color: 'grey', fontSize: '14px' }}>
+                                                The winter season has come, this home is open for Guest
+                                                who wants to have a great time in Arambol, Looking forward
+                                                to your response.
+
                         </p>
                       <p style={{ color: 'grey', fontSize: '14px' }}>
                         The Home is 2mins walks from the golden sand Arambol
@@ -548,159 +609,163 @@ export const Propertypage = (props) => {
                       <a href=''>{item.country}</a> / <a href=''>{item.state}</a>{' '}
                         / <a href=''>{item.city}</a> / Property #
                         <a href=''>{item.id}</a>{' '}
-                    </small>
-                  </div>
-                </div>
-                <hr />
-                <div className='row m-3'>
-                  {/* image */}
-                  <div class='col-7'>
-                    <div
-                      style={{
-                        width: '558px',
-                        height: '446px',
-                      }}
-                    >
-                      <Carousel>
-                        <div>
-                          <div
-                            style={{
-                              width: '558px',
-                              height: '298px',
-                              border: '1.5px solid white',
-                              background: `url(${item.image_large[0]})`,
-                              backgroundSize: '100% 125%',
-                            }}
-                          ></div>
-                          <div
-                            style={{
-                              width: '278px',
-                              height: '145px',
-                              border: '1.5px solid white',
-                              float: 'left',
-                              background: `url(${item.image_medium[0]})`,
-                            }}
-                          ></div>
-                          <div
-                            style={{
-                              width: '280px',
-                              height: '145px',
-                              border: '1.5px solid white',
-                              float: 'left',
-                              background: `url(${item.image_mid_large[0]})`,
-                            }}
-                          >
-                            {' '}
-                          </div>
-                        </div>
-                        <div>
-                          <div
-                            style={{
-                              width: '558px',
-                              height: '298px',
-                              border: '1.5px solid white',
-                              background: `url(${item.image_large[1]})`,
-                              backgroundSize: '100% 125%',
-                            }}
-                          ></div>
-                          <div
-                            style={{
-                              width: '280px',
-                              height: '145px',
-                              border: '1.5px solid white',
-                              float: 'left',
-                              background: `url(${item.image_medium[1]})`,
-                            }}
-                          ></div>
-                          <div
-                            style={{
-                              width: '278px',
-                              height: '145px',
-                              border: '1.5px solid white',
-                              float: 'left',
-                              background: `url(${item.image_mid_large[1]})`,
-                            }}
-                          >
-                            {' '}
-                          </div>
-                        </div>
-                        <div>
-                          <div
-                            style={{
-                              width: '558px',
-                              height: '298px',
-                              border: '1.5px solid white',
-                              background: `url(${item.image_large[2]})`,
-                              backgroundSize: '100% 125%',
-                            }}
-                          ></div>
-                          <div
-                            style={{
-                              width: '278px',
-                              height: '145px',
-                              border: '2px solid white',
-                              float: 'left',
-                              background: `url(${item.image_medium[2]})`,
-                            }}
-                          ></div>
-                          <div
-                            style={{
-                              width: '280px',
-                              height: '145px',
-                              border: '2px solid white',
-                              float: 'left',
-                              background: `url(${item.image_mid_large[2]})`,
-                            }}
-                          >
-                            {' '}
-                          </div>
-                        </div>
-                      </Carousel>
-                    </div>
-                  </div>
 
-                  {/* location and amenties */}
-                  <div class='col-5 pl-5 pr-5 pb-5 '>
-                    <h3>{item.title}</h3>
-                    <div className='text-muted'>{item.location_name}</div>
-                    {item.review_count > 0 ? (
-                      <div style={{ color: 'blue' }}>
-                        {item.review_count} reviews
-                      </div>
-                    ) : (
-                        ''
-                      )}
-                    <hr />
-                    {/* map amenties */}
-                    {item.prop_tags.map((ele) => {
-                      return (
-                        <div
-                          style={{
-                            float: 'left',
-                            margin: '10px',
-                            border: '1px solid #0275d8 ',
-                            textTransform: 'uppercase',
-                            padding: '3px',
-                          }}
-                        >
-                          <small class='p-3' style={{ color: '#0275d8 ' }}>
-                            {ele}
-                          </small>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-                {/* navbar */}
-                <div className='m-4'>
-                  <ul class='nav'>
-                    <li class='nav-item active'>
-                      <a
-                        class='nav-link active'
-                        href='#'
-                        style={{ color: 'grey' }}
-                      >
-                        OVERVIEW
+                                        </small>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div className='row m-3'>
+                                    {/* image */}
+                                    <div class='col-7'>
+                                        <div
+                                            style={{
+                                                width: '558px',
+                                                height: '446px',
+                                            }}
+                                        >
+                                            <Carousel>
+                                                <div>
+                                                    <div
+                                                        style={{
+                                                            width: '558px',
+                                                            height: '298px',
+                                                            border: '1.5px solid white',
+                                                            background: `url(${item.image_large[0]})`,
+                                                            backgroundSize: '100% 125%',
+                                                        }}
+                                                    ></div>
+                                                    <div
+                                                        style={{
+                                                            width: '278px',
+                                                            height: '145px',
+                                                            border: '1.5px solid white',
+                                                            float: 'left',
+                                                            background: `url(${item.image_medium[0]})`,
+                                                        }}
+                                                    ></div>
+                                                    <div
+                                                        style={{
+                                                            width: '280px',
+                                                            height: '145px',
+                                                            border: '1.5px solid white',
+                                                            float: 'left',
+                                                            background: `url(${item.image_mid_large[0]})`,
+                                                        }}
+                                                    >
+                                                        {' '}
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div
+                                                        style={{
+                                                            width: '558px',
+                                                            height: '298px',
+                                                            border: '1.5px solid white',
+                                                            background: `url(${item.image_large[1]})`,
+                                                            backgroundSize: '100% 125%',
+                                                        }}
+                                                    ></div>
+                                                    <div
+                                                        style={{
+                                                            width: '280px',
+                                                            height: '145px',
+                                                            border: '1.5px solid white',
+                                                            float: 'left',
+                                                            background: `url(${item.image_medium[1]})`,
+                                                        }}
+                                                    ></div>
+                                                    <div
+                                                        style={{
+                                                            width: '278px',
+                                                            height: '145px',
+                                                            border: '1.5px solid white',
+                                                            float: 'left',
+                                                            background: `url(${item.image_mid_large[1]})`,
+                                                        }}
+                                                    >
+                                                        {' '}
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div
+                                                        style={{
+                                                            width: '558px',
+                                                            height: '298px',
+                                                            border: '1.5px solid white',
+                                                            background: `url(${item.image_large[2]})`,
+                                                            backgroundSize: '100% 125%',
+                                                        }}
+                                                    ></div>
+                                                    <div
+                                                        style={{
+                                                            width: '278px',
+                                                            height: '145px',
+                                                            border: '2px solid white',
+                                                            float: 'left',
+                                                            background: `url(${item.image_medium[2]})`,
+                                                        }}
+                                                    ></div>
+                                                    <div
+                                                        style={{
+                                                            width: '280px',
+                                                            height: '145px',
+                                                            border: '2px solid white',
+                                                            float: 'left',
+                                                            background: `url(${item.image_mid_large[2]})`,
+                                                        }}
+                                                    >
+                                                        {' '}
+                                                    </div>
+                                                </div>
+                                            </Carousel>
+                                        </div>
+                                    </div>
+
+                                    {/* location and amenties */}
+                                    <div class='col-5 pl-5 pr-5 pb-5 '>
+                                        <h3>{item.title}</h3>
+                                        <div className='text-muted'>{item.location_name}</div>
+                                        {item.review_count > 0 ? (<>
+                                            <div style={{ color: 'blue' }}>
+                                                {item.review_count} reviews
+                                            </div>
+                                            <Rating value={parseFloat(item.review_rating)} readOnly precision={0.1} />
+                                        </>
+                                        ) : (
+                                                ''
+                                            )}
+                                        <hr />
+                                        {/* map amenties */}
+                                        {item.prop_tags.map((ele) => {
+                                            return (
+                                                <div
+                                                    style={{
+                                                        float: 'left',
+                                                        margin: '10px',
+                                                        border: '1px solid #0275d8 ',
+                                                        textTransform: 'uppercase',
+                                                        padding: '3px',
+                                                    }}
+                                                >
+                                                    <small class='p-3' style={{ color: '#0275d8 ' }}>
+                                                        {ele}
+                                                    </small>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
+                                {/* navbar */}
+                                <div className='m-4'>
+                                    <ul class='nav'>
+                                        <li class='nav-item active'>
+                                            <a
+                                                class='nav-link active'
+                                                href='#'
+                                                style={{ color: 'grey' }}
+                                            >
+                                                OVERVIEW
+
                         </a>
                     </li>
                     <li class='nav-item'>
@@ -804,346 +869,347 @@ export const Propertypage = (props) => {
                         homely atmosphere which will be remembered always in your
                         lifetime.
                         </p>
-                      <p style={{ color: 'grey', fontSize: '14px' }}>
-                        <b>Best For</b>
-                      </p>
 
-                      <div>
-                        <div
-                          style={{
-                            float: 'left',
-                            margin: '10px 10px 10px 0px',
-                            border: '1px solid rgb(190, 190, 190)',
+                                            <p style={{ color: 'grey', fontSize: '14px' }}>
+                                                <b>Best For</b>
+                                            </p>
 
-                            padding: '5px',
-                          }}
-                        >
-                          <small class='text-muted '>BACK TO NATURE</small>
-                        </div>
+                                            <div>
+                                                <div
+                                                    style={{
+                                                        float: 'left',
+                                                        margin: '10px 10px 10px 0px',
+                                                        border: '1px solid rgb(190, 190, 190)',
 
-                        <div
-                          style={{
-                            float: 'left',
-                            margin: '10px',
-                            border: '1px solid rgb(190, 190, 190)',
+                                                        padding: '5px',
+                                                    }}
+                                                >
+                                                    <small class='text-muted '>BACK TO NATURE</small>
+                                                </div>
 
-                            padding: '5px',
-                          }}
-                        >
-                          <small class='text-muted '>ROMANCE</small>
-                        </div>
+                                                <div
+                                                    style={{
+                                                        float: 'left',
+                                                        margin: '10px',
+                                                        border: '1px solid rgb(190, 190, 190)',
 
-                        <div
-                          style={{
-                            float: 'left',
-                            margin: '10px',
-                            border: '1px solid rgb(190, 190, 190)',
+                                                        padding: '5px',
+                                                    }}
+                                                >
+                                                    <small class='text-muted '>ROMANCE</small>
+                                                </div>
 
-                            padding: '5px',
-                          }}
-                        >
-                          <small class='text-muted '>FAMILY GET-TOGETHER</small>
-                        </div>
+                                                <div
+                                                    style={{
+                                                        float: 'left',
+                                                        margin: '10px',
+                                                        border: '1px solid rgb(190, 190, 190)',
 
-                        <div
-                          style={{
-                            float: 'left',
-                            margin: '10px 10px 10px 0px',
-                            border: '1px solid rgb(190, 190, 190)',
+                                                        padding: '5px',
+                                                    }}
+                                                >
+                                                    <small class='text-muted '>FAMILY GET-TOGETHER</small>
+                                                </div>
 
-                            padding: '5px',
-                          }}
-                        >
-                          <small class='text-muted p-1'>ADVENTURE SPORTS</small>
-                        </div>
+                                                <div
+                                                    style={{
+                                                        float: 'left',
+                                                        margin: '10px 10px 10px 0px',
+                                                        border: '1px solid rgb(190, 190, 190)',
 
-                        <div
-                          style={{
-                            float: 'left',
-                            margin: '10px',
-                            border: '1px solid rgb(190, 190, 190)',
+                                                        padding: '5px',
+                                                    }}
+                                                >
+                                                    <small class='text-muted p-1'>ADVENTURE SPORTS</small>
+                                                </div>
 
-                            padding: '5px',
-                          }}
-                        >
-                          <small class='text-muted p-1'>BUDGET STAY</small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                                                <div
+                                                    style={{
+                                                        float: 'left',
+                                                        margin: '10px',
+                                                        border: '1px solid rgb(190, 190, 190)',
 
-                {/* key amenties */}
+                                                        padding: '5px',
+                                                    }}
+                                                >
+                                                    <small class='text-muted p-1'>BUDGET STAY</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                <div style={{ marginTop: '80px' }} className='ml-4 mr-4'>
-                  <h3 id='amenties'>Key Amenities</h3>
-                  <hr style={{ marginTop: '40px' }} />
+                                {/* key amenties */}
 
-                  <div>
-                    {item.ac ? (
-                      <div
-                        style={{
-                          float: 'left',
-                          margin: '10px',
-                          border: '1px solid rgb(190, 190, 190)',
+                                <div style={{ marginTop: '80px' }} className='ml-4 mr-4'>
+                                    <h3 id='amenties'>Key Amenities</h3>
+                                    <hr style={{ marginTop: '40px' }} />
 
-                          padding: '5px',
-                        }}
-                      >
-                        <small class='text-muted p-4'>AC</small>
-                      </div>
-                    ) : (
-                        ''
-                      )}
+                                    <div>
+                                        {item.ac ? (
+                                            <div
+                                                style={{
+                                                    float: 'left',
+                                                    margin: '10px',
+                                                    border: '1px solid rgb(190, 190, 190)',
 
-                    {item.cook_on_call ? (
-                      <div
-                        style={{
-                          float: 'left',
-                          margin: '10px',
-                          border: '1px solid rgb(190, 190, 190)',
+                                                    padding: '5px',
+                                                }}
+                                            >
+                                                <small class='text-muted p-4'>AC</small>
+                                            </div>
+                                        ) : (
+                                                ''
+                                            )}
 
-                          padding: '5px',
-                        }}
-                      >
-                        <small class='text-muted p-4'>COOK ON CALL</small>
-                      </div>
-                    ) : (
-                        ''
-                      )}
+                                        {item.cook_on_call ? (
+                                            <div
+                                                style={{
+                                                    float: 'left',
+                                                    margin: '10px',
+                                                    border: '1px solid rgb(190, 190, 190)',
 
-                    {item.parking ? (
-                      <div
-                        style={{
-                          float: 'left',
-                          margin: '10px',
-                          border: '1px solid rgb(190, 190, 190)',
+                                                    padding: '5px',
+                                                }}
+                                            >
+                                                <small class='text-muted p-4'>COOK ON CALL</small>
+                                            </div>
+                                        ) : (
+                                                ''
+                                            )}
 
-                          padding: '5px',
-                        }}
-                      >
-                        <small class='text-muted p-4'>PARKING</small>
-                      </div>
-                    ) : (
-                        ''
-                      )}
+                                        {item.parking ? (
+                                            <div
+                                                style={{
+                                                    float: 'left',
+                                                    margin: '10px',
+                                                    border: '1px solid rgb(190, 190, 190)',
 
-                    {item.spa ? (
-                      <div
-                        style={{
-                          float: 'left',
-                          margin: '10px',
-                          border: '1px solid rgb(190, 190, 190)',
+                                                    padding: '5px',
+                                                }}
+                                            >
+                                                <small class='text-muted p-4'>PARKING</small>
+                                            </div>
+                                        ) : (
+                                                ''
+                                            )}
 
-                          padding: '5px',
-                        }}
-                      >
-                        <small class='text-muted p-4'>SPA</small>
-                      </div>
-                    ) : (
-                        ''
-                      )}
+                                        {item.spa ? (
+                                            <div
+                                                style={{
+                                                    float: 'left',
+                                                    margin: '10px',
+                                                    border: '1px solid rgb(190, 190, 190)',
 
-                    {item.internet ? (
-                      <div
-                        style={{
-                          float: 'left',
-                          margin: '10px',
-                          border: '1px solid rgb(190, 190, 190)',
+                                                    padding: '5px',
+                                                }}
+                                            >
+                                                <small class='text-muted p-4'>SPA</small>
+                                            </div>
+                                        ) : (
+                                                ''
+                                            )}
 
-                          padding: '5px',
-                        }}
-                      >
-                        <small class='text-muted p-4'>INTERNET</small>
-                      </div>
-                    ) : (
-                        ''
-                      )}
+                                        {item.internet ? (
+                                            <div
+                                                style={{
+                                                    float: 'left',
+                                                    margin: '10px',
+                                                    border: '1px solid rgb(190, 190, 190)',
 
-                    {item.functional_kitchen ? (
-                      <div
-                        style={{
-                          float: 'left',
-                          margin: '10px',
-                          border: '1px solid rgb(190, 190, 190)',
+                                                    padding: '5px',
+                                                }}
+                                            >
+                                                <small class='text-muted p-4'>INTERNET</small>
+                                            </div>
+                                        ) : (
+                                                ''
+                                            )}
 
-                          padding: '5px',
-                        }}
-                      >
-                        <small class='text-muted p-4'>FUNCTIOINAL KITCHEN</small>
-                      </div>
-                    ) : (
-                        ''
-                      )}
+                                        {item.functional_kitchen ? (
+                                            <div
+                                                style={{
+                                                    float: 'left',
+                                                    margin: '10px',
+                                                    border: '1px solid rgb(190, 190, 190)',
 
-                    {item.pets ? (
-                      <div
-                        style={{
-                          float: 'left',
-                          margin: '10px',
-                          border: '1px solid rgb(190, 190, 190)',
+                                                    padding: '5px',
+                                                }}
+                                            >
+                                                <small class='text-muted p-4'>FUNCTIOINAL KITCHEN</small>
+                                            </div>
+                                        ) : (
+                                                ''
+                                            )}
 
-                          padding: '5px',
-                        }}
-                      >
-                        <small class='text-muted p-4'>PETS ALLOWED</small>
-                      </div>
-                    ) : (
-                        ''
-                      )}
+                                        {item.pets ? (
+                                            <div
+                                                style={{
+                                                    float: 'left',
+                                                    margin: '10px',
+                                                    border: '1px solid rgb(190, 190, 190)',
 
-                    {item.dish_washer ? (
-                      <div
-                        style={{
-                          float: 'left',
-                          margin: '10px',
-                          border: '1px solid rgb(190, 190, 190)',
+                                                    padding: '5px',
+                                                }}
+                                            >
+                                                <small class='text-muted p-4'>PETS ALLOWED</small>
+                                            </div>
+                                        ) : (
+                                                ''
+                                            )}
 
-                          padding: '5px',
-                        }}
-                      >
-                        <small class='text-muted p-4'>DISH WASHER</small>
-                      </div>
-                    ) : (
-                        ''
-                      )}
+                                        {item.dish_washer ? (
+                                            <div
+                                                style={{
+                                                    float: 'left',
+                                                    margin: '10px',
+                                                    border: '1px solid rgb(190, 190, 190)',
 
-                    {item.instant_bookable ? (
-                      <div
-                        style={{
-                          float: 'left',
-                          margin: '10px',
-                          border: '1px solid rgb(190, 190, 190)',
+                                                    padding: '5px',
+                                                }}
+                                            >
+                                                <small class='text-muted p-4'>DISH WASHER</small>
+                                            </div>
+                                        ) : (
+                                                ''
+                                            )}
 
-                          padding: '5px',
-                        }}
-                      >
-                        <small class='text-muted p-4'>INSTANT BOOK </small>
-                      </div>
-                    ) : (
-                        ''
-                      )}
+                                        {item.instant_bookable ? (
+                                            <div
+                                                style={{
+                                                    float: 'left',
+                                                    margin: '10px',
+                                                    border: '1px solid rgb(190, 190, 190)',
 
-                    {item.premium ? (
-                      <div
-                        style={{
-                          float: 'left',
-                          margin: '10px',
-                          border: '1px solid rgb(190, 190, 190)',
+                                                    padding: '5px',
+                                                }}
+                                            >
+                                                <small class='text-muted p-4'>INSTANT BOOK </small>
+                                            </div>
+                                        ) : (
+                                                ''
+                                            )}
 
-                          padding: '5px',
-                        }}
-                      >
-                        <small class='text-muted p-4'>PREMIUIM</small>
-                      </div>
-                    ) : (
-                        ''
-                      )}
+                                        {item.premium ? (
+                                            <div
+                                                style={{
+                                                    float: 'left',
+                                                    margin: '10px',
+                                                    border: '1px solid rgb(190, 190, 190)',
 
-                    {item.gym ? (
-                      <div
-                        style={{
-                          float: 'left',
-                          margin: '10px',
-                          border: '1px solid rgb(190, 190, 190)',
+                                                    padding: '5px',
+                                                }}
+                                            >
+                                                <small class='text-muted p-4'>PREMIUIM</small>
+                                            </div>
+                                        ) : (
+                                                ''
+                                            )}
 
-                          padding: '5px',
-                        }}
-                      >
-                        <small class='text-muted p-4'>GYM</small>
-                      </div>
-                    ) : (
-                        ''
-                      )}
+                                        {item.gym ? (
+                                            <div
+                                                style={{
+                                                    float: 'left',
+                                                    margin: '10px',
+                                                    border: '1px solid rgb(190, 190, 190)',
 
-                    {item.refrigerator ? (
-                      <div
-                        style={{
-                          float: 'left',
-                          margin: '10px',
-                          border: '1px solid rgb(190, 190, 190)',
+                                                    padding: '5px',
+                                                }}
+                                            >
+                                                <small class='text-muted p-4'>GYM</small>
+                                            </div>
+                                        ) : (
+                                                ''
+                                            )}
 
-                          padding: '5px',
-                        }}
-                      >
-                        <small class='text-muted p-4'>REFRIGERATOR</small>
-                      </div>
-                    ) : (
-                        ''
-                      )}
+                                        {item.refrigerator ? (
+                                            <div
+                                                style={{
+                                                    float: 'left',
+                                                    margin: '10px',
+                                                    border: '1px solid rgb(190, 190, 190)',
 
-                    {item.television ? (
-                      <div
-                        style={{
-                          float: 'left',
-                          margin: '10px',
-                          border: '1px solid rgb(190, 190, 190)',
+                                                    padding: '5px',
+                                                }}
+                                            >
+                                                <small class='text-muted p-4'>REFRIGERATOR</small>
+                                            </div>
+                                        ) : (
+                                                ''
+                                            )}
 
-                          padding: '5px',
-                        }}
-                      >
-                        <small class='text-muted p-4'>TELEVISION</small>
-                      </div>
-                    ) : (
-                        ''
-                      )}
+                                        {item.television ? (
+                                            <div
+                                                style={{
+                                                    float: 'left',
+                                                    margin: '10px',
+                                                    border: '1px solid rgb(190, 190, 190)',
 
-                    {item.housekeeping ? (
-                      <div
-                        style={{
-                          float: 'left',
-                          margin: '10px',
-                          border: '1px solid rgb(190, 190, 190)',
+                                                    padding: '5px',
+                                                }}
+                                            >
+                                                <small class='text-muted p-4'>TELEVISION</small>
+                                            </div>
+                                        ) : (
+                                                ''
+                                            )}
 
-                          padding: '5px',
-                        }}
-                      >
-                        <small class='text-muted p-4'>HOUSEKEEPING</small>
-                      </div>
-                    ) : (
-                        ''
-                      )}
+                                        {item.housekeeping ? (
+                                            <div
+                                                style={{
+                                                    float: 'left',
+                                                    margin: '10px',
+                                                    border: '1px solid rgb(190, 190, 190)',
 
-                    {item.washing_machine ? (
-                      <div
-                        style={{
-                          float: 'left',
-                          margin: '10px',
-                          border: '1px solid rgb(190, 190, 190)',
+                                                    padding: '5px',
+                                                }}
+                                            >
+                                                <small class='text-muted p-4'>HOUSEKEEPING</small>
+                                            </div>
+                                        ) : (
+                                                ''
+                                            )}
 
-                          padding: '5px',
-                        }}
-                      >
-                        <small class='text-muted p-4'>WASHING MACHINE</small>
-                      </div>
-                    ) : (
-                        ''
-                      )}
+                                        {item.washing_machine ? (
+                                            <div
+                                                style={{
+                                                    float: 'left',
+                                                    margin: '10px',
+                                                    border: '1px solid rgb(190, 190, 190)',
 
-                    {item.swimming_pool ? (
-                      <div
-                        style={{
-                          float: 'left',
-                          margin: '10px',
-                          border: '1px solid rgb(190, 190, 190)',
+                                                    padding: '5px',
+                                                }}
+                                            >
+                                                <small class='text-muted p-4'>WASHING MACHINE</small>
+                                            </div>
+                                        ) : (
+                                                ''
+                                            )}
 
-                          padding: '5px',
-                        }}
-                      >
-                        <small class='text-muted p-4'>SWIMMING POOL</small>
-                      </div>
-                    ) : (
-                        ''
-                      )}
-                    <div style={{ clear: 'both' }}></div>
-                  </div>
-                </div>
+                                        {item.swimming_pool ? (
+                                            <div
+                                                style={{
+                                                    float: 'left',
+                                                    margin: '10px',
+                                                    border: '1px solid rgb(190, 190, 190)',
 
-                {/* map */}
+                                                    padding: '5px',
+                                                }}
+                                            >
+                                                <small class='text-muted p-4'>SWIMMING POOL</small>
+                                            </div>
+                                        ) : (
+                                                ''
+                                            )}
+                                        <div style={{ clear: 'both' }}></div>
+                                    </div>
+                                </div>
 
-                <div style={{ marginTop: '50px' }} className='ml-4 mr-4 '>
-                  <h3>Maps</h3>
-                  {/* <h3 id='map'><WrappedStaticMap {...mapdata} googleMapURL={"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCcS0j7hDpSs-F4xDi2q6AkTD_sWqECR9M"}
+                                {/* map */}
+
+                                <div style={{ marginTop: '50px' }} className='ml-4 mr-4 ' id="map">
+                                    <h3>Maps</h3>
+                                    {/* <h3 id='map'><WrappedStaticMap {...mapdata} googleMapURL={"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCcS0j7hDpSs-F4xDi2q6AkTD_sWqECR9M"}
                                         loadingElement={<div style={{ height: "100%" }} />}
                                         containerElement={<div style={{ height: "100%" }} />}
                                         mapElement={<div style={{ height: "100%" }} />} /></h3>
@@ -1202,40 +1268,179 @@ export const Propertypage = (props) => {
                         Unmarried Couples not allowed. Loud Music not allowed.
                         Pets not allowed. Smoking inside Property not allowed.
                         </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              {/* sideForm */}
-              <div className='col-3 ' style={{ height: '800px' }}>
-                <div style={{ position: 'fixed' }} className='p-3 '>
-                  <h5 className='text-muted'>Starting</h5>
-                  <h1>$ {item.total_price}</h1>
-                  <h5 className='text-muted'>Pernight</h5>
-                  {message_flag ? (
-                    <h5 style={{ color: 'green' }}>{message}</h5>
-                  ) : (
-                      <h5 style={{ color: 'red' }}>{message}</h5>
-                    )}
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* recommended hotel */}
+                                <div style={{ marginTop: '50px' }} className='ml-4 mr-4 '>
 
-                  <select
-                    class='custom-select '
-                    style={{
-                      width: '180px',
-                      borderRadius: '0px',
-                      width: '260px',
-                      marginTop: '50px',
-                    }}
-                    onChange={e => handleUnitChg(e)}
-                  >
-                    <option selected value='0'>
-                      Select Units
+                                    <h3 id='recommend'>Recommended</h3>
+                                    <hr style={{ marginTop: '40px' }} />
+
+                                    {/* {recommend_specific_flag ? <><h1>flagistrue</h1>
+                                        {recommend_specific.map((eee) => {
+                                            return <h1>eleis{eee.id}</h1>
+                                        })}</>
+                                        : "flag false"} */}
+                                    {recommend_specific_flag ? <>
+                                        {/* <h2>flag is true</h2><div>{recommended_specific.map((ee) => {
+                                        return (<h2>id#{ee.id}</h2>)
+                                    })}</div> */}
+                                        <InfiniteCarousel
+                                            breakpoints={[
+                                                {
+                                                    breakpoint: 500,
+                                                    settings: {
+                                                        slidesToShow: 2,
+                                                        slidesToScroll: 2,
+                                                    },
+                                                },
+                                                {
+                                                    breakpoint: 768,
+                                                    settings: {
+                                                        slidesToShow: 3,
+                                                        slidesToScroll: 3,
+                                                    },
+                                                },
+                                            ]}
+                                            dots={true}
+                                            showSides={true}
+                                            sidesOpacity={0.5}
+                                            sideSize={0.1}
+                                            slidesToScroll={4}
+                                            slidesToShow={4}
+                                            scrollOnDevice={true}
+                                        >
+                                            {/* map cards */}
+                                            {recommended_specific && recommended_specific.map((ele) => (
+
+                                                <div className='col-12' id={styles.pro}>
+                                                    <div
+                                                        style={{
+                                                            backgroundImage: `url(${ele['image_medium'][1]})`,
+                                                            backgroundRepeat: 'no-repeat',
+                                                            height: '180px',
+                                                            width: '180px',
+                                                        }}
+                                                    ></div>
+                                                    <div className='p-3' style={{ height: '250px' }}>
+                                                        <Link to={`/property/${ele['id']}`}>
+                                                            <small className='text-muted mb-2'>
+                                                                {/* <button name={`${ele['id']}`} onClick={e => handlePath(e)}> */}
+                                                                Ref Id#{ele['id']}
+                                                                {/* </button> */}
+                                                            </small>
+                                                        </Link>
+                                                        <p style={{ fontSize: '14px' }}>
+                                                            {ele['title']}
+                                                            <p>
+                                                                <p className='text-muted'>{ele['location_name']}</p>
+                                                            </p>
+                                                        </p>
+
+                                                        <p>
+                                                            <small>
+                                                                {ele['property_type']} | {ele['number_of_bathrooms']}{' '}
+                                           Bath | {ele['number_of_rooms']} BR | {ele['occupancy']}{' '}
+                                           Guests
+                                         </small>
+                                                        </p>
+                                                        <p>
+                                                            ${ele['total_price']}
+                                                            <small className='text-muted'> pernight</small>
+                                                        </p>
+
+                                                    </div>
+                                                </div>
+                                            )
+                                            )}
+                                        </InfiniteCarousel>
+                                    </>
+                                        :
+                                        <InfiniteCarousel
+                                            breakpoints={[
+                                                {
+                                                    breakpoint: 500,
+                                                    settings: {
+                                                        slidesToShow: 2,
+                                                        slidesToScroll: 2,
+                                                    },
+                                                },
+                                                {
+                                                    breakpoint: 768,
+                                                    settings: {
+                                                        slidesToShow: 3,
+                                                        slidesToScroll: 3,
+                                                    },
+                                                },
+                                            ]}
+                                            dots={true}
+                                            showSides={true}
+                                            sidesOpacity={0.5}
+                                            sideSize={0.1}
+                                            slidesToScroll={4}
+                                            slidesToShow={4}
+                                            scrollOnDevice={true}
+                                        >
+
+                                            {Array.from(Array(5), (e, i) => {
+                                                return (
+                                                    <div className='col-12' id={styles.pro}>
+
+
+                                                        <Skeleton variant="rect" width={180} height={200} />
+                                                        <div style={{ height: '200px' }}>
+
+                                                            <Skeleton variant="text" width={150} />
+
+                                                            <Skeleton variant="text" width={100} />
+
+                                                            <Skeleton variant="rect" width={150} height={40} />
+
+                                                            <Skeleton variant="text" width={100} />
+
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })}
+                                        </InfiniteCarousel>
+                                    }
+                                </div>
+
+                                <div style={{ marginTop: '50px', marginBottom: "100px" }} className='ml-4 mr-4 '></div>
+                            </div>
+
+
+                            {/* sideForm */}
+                            <div className='col-3 ' style={{ height: '800px' }}>
+                                <div style={{ position: 'fixed' }} className='p-3 '>
+                                    <h5 className='text-muted'>Starting</h5>
+                                    <h1>$ {item.total_price}</h1>
+                                    <h5 className='text-muted'>Pernight</h5>
+                                    {message_flag ? (
+                                        <h5 style={{ color: 'green' }}>{message}</h5>
+                                    ) : (
+                                            <h5 style={{ color: 'red' }}>{message}</h5>
+                                        )}
+
+                                    <select
+                                        class='custom-select '
+                                        style={{
+                                            width: '180px',
+                                            borderRadius: '0px',
+                                            width: '260px',
+                                            marginTop: '50px',
+                                        }}
+                                        onChange={e => handleUnitChg(e)}
+                                    >
+                                        <option selected value='0'>
+                                            Select Units
                       </option>
-                    {}
-                    {Array.from(Array(item.number_of_rooms), (e, i) => {
-                      return <option value={`${i}`}>{i + 1} units</option>
-                    })}
+                                        {}
+                                        {Array.from(Array(item.number_of_rooms), (e, i) => {
+                                            return <option value={`${i}`}>{i + 1} units</option>
+                                        })}
 
                     {/* <option value='2 units'>2 units</option>
                                         <option value='3 units'>3 units</option> */}

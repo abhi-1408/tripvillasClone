@@ -19,7 +19,9 @@ export const Load_Data = (info) => {
     return dispatch => {
         return axios({
             method: "post",
-            url: "http://b339dbc6e266.ngrok.io/admin/allhotel",
+
+            url: "http://tripvilla-api.abhisheksaklani.co/admin/allhotel",
+
             data: {}
         })
             .then((res) => res.data)
@@ -52,7 +54,9 @@ export const Apply_Filters = (info) => {
     return dispatch => {
         return axios({
             method: "get",
-            url: "http://b339dbc6e266.ngrok.io/admin/filter",
+
+            url: "http://tripvilla-api.abhisheksaklani.co/admin/filter",
+
             params: info
         })
             .then((res) => res.data)
@@ -78,7 +82,9 @@ export const Load_Filtered_Data = (info) => {
         dispatch(ResetFilterPageFlag())
         return axios({
             method: "get",
-            url: "http://b339dbc6e266.ngrok.io/admin/filter",
+
+            url: "http://tripvilla-api.abhisheksaklani.co/admin/filter",
+
             params: info
         })
             .then((res) => res.data.data)
@@ -111,7 +117,9 @@ export const Load_Specific_Review = (info) => {
     return dispatch => {
         return axios({
             method: "post",
-            url: "http://b339dbc6e266.ngrok.io/entity/getreview",
+
+            url: "http://tripvilla-api.abhisheksaklani.co/entity/getreview",
+
             data: info
         })
             .then((res) => res.data)
@@ -138,7 +146,9 @@ export const Load_Specific_Property = (info) => {
         dispatch(Update_Specific_Property_Flag())
         return axios({
             method: "post",
-            url: "http://b339dbc6e266.ngrok.io/entity/getprop",
+
+            url: "http://tripvilla-api.abhisheksaklani.co/entity/getprop",
+
             data: info
         })
             .then((res) => res.data)
@@ -180,12 +190,49 @@ export const Load_Recommended_Rating = (info) => {
     return dispatch => {
         return axios({
             method: "post",
-            url: "http://b339dbc6e266.ngrok.io/entity/getrecommendrating",
+
+            url: "http://tripvilla-api.abhisheksaklani.co/entity/getrecommendrating",
+
             data: info
         })
             .then((res) => res.data)
             .then((data) => {
                 dispatch(Apply_Recommended_Review(data))
+            })
+            .catch((err) => {
+                console.log(err)
+
+            })
+    }
+}
+
+
+export const Loading_Recommend_Specific = () => {
+    return {
+        type: "LOAD_RECOMMENDED_SPECIFIC",
+
+    }
+}
+
+export const Apply_Recommended_Specific = (data) => {
+    return {
+        type: "APPLY_RECOMMENDED_SPECIFIC",
+        payload: data
+    }
+}
+
+
+export const Recommend_By_Specific_Hotel = (info) => {
+    return dispatch => {
+        dispatch(Loading_Recommend_Specific())
+        return axios({
+            method: "post",
+            url: "http://tripvilla-api.abhisheksaklani.co/entity/getrecommend",
+            data: info
+        })
+            .then((res) => res.data)
+            .then((data) => {
+                dispatch(Apply_Recommended_Specific(data))
             })
             .catch((err) => {
                 console.log(err)
@@ -221,7 +268,9 @@ export const Update_in_Booking = (info) => {
         dispatch(ResetBookingFlag())
         return axios({
             method: "post",
-            url: "http://b339dbc6e266.ngrok.io/admin/create_booking",
+
+            url: "http://tripvilla-api.abhisheksaklani.co/admin/create_booking",
+
             data: info
         })
             .then((res) => res.data)
@@ -241,7 +290,9 @@ export const Load_Recommended_State = (info) => {
     return dispatch => {
         return axios({
             method: "post",
-            url: "http://b339dbc6e266.ngrok.io/entity/getrecommendcity",
+
+            url: "http://tripvilla-api.abhisheksaklani.co/entity/getrecommendcity",
+
             data: info
         })
             .then((res) => res.data)
@@ -276,7 +327,9 @@ export const Specific_Hotel_Available_On_Date = (info) => {
         dispatch(Event_Check(info))
         return axios({
             method: "post",
-            url: "http://b339dbc6e266.ngrok.io/admin/avaispecific",
+
+            url: "http://tripvilla-api.abhisheksaklani.co/admin/avaispecific",
+
             data: info
         })
             .then((res) => res.data)

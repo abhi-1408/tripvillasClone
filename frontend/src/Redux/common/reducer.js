@@ -17,7 +17,9 @@ const initialState = {
     filter_page_flag: false,
     booking_sms_email_flag: false,
     payment_success: false,
-    specific_property_flag: false
+    specific_property_flag: false,
+    recommend_specific_flag: false,
+    recommended_specific: []
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -35,6 +37,19 @@ export default (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 filter_page_flag: false
+            }
+
+        case "LOAD_RECOMMENDED_SPECIFIC":
+            return {
+                ...state,
+                recommend_specific_flag: false
+            }
+
+        case "APPLY_RECOMMENDED_SPECIFIC":
+            return {
+                ...state,
+                recommend_specific_flag: true,
+                recommended_specific: payload
             }
 
         case "UPDATE_PAYMENT_FLAG":

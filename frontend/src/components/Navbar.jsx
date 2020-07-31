@@ -85,8 +85,10 @@ export const Navbar = () => {
         class='navbar navbar-expand-lg navbar-dark '
         style={{ backgroundColor: 'rgb(38,38,38)', height: "60px" }}
       >
+
         <a class='navbar-brand' href='/homepage'>
           <img src={triplo} alt="logo" height="25px" width="141.017px" />
+
         </a>
         <button
           class='navbar-toggler'
@@ -145,6 +147,7 @@ export const Navbar = () => {
                     aria-expanded='false'
                   >
 
+
                     <img src={pro1} alt="profile" height="25px" width="20px" />
                   </a>
                   <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
@@ -162,6 +165,7 @@ export const Navbar = () => {
                     >
                       SIGNUP
                   </a>
+
                   </div>
                 </li>
               )}
