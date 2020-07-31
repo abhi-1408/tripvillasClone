@@ -19,6 +19,7 @@
     "react-google-maps": "^9.4.5",
     "react-leaf-carousel": "^2.0.3",
     "react-map-gl": "^5.2.7",
+    "react-places-autocomplete": "^7.3.0",
     "react-redux": "^7.2.1",
     "react-responsive-carousel": "^3.2.9",
     "react-router": "^5.2.0",
@@ -33,6 +34,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "homepage": "http://tripvilla.abhisheksaklani.co",
   "eslintConfig": {
     "extends": "react-app"
   },

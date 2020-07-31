@@ -198,7 +198,7 @@ def create_booking(data):
 
     if razor:
         payment_details = razor.payment_details
-        book = Booking(hotel_id = data['property']['id'],booking_id = data['order_id'],check_in = data['check_in'], check_out = data['check_out'],booking_date = data['booking_date'],total_price = payment_details['payload']['payment']['entity']['amount'], payment_detail = payment_details['payload']['payment'],status = payment_details['event'],customer_name = data['customer_details']['customer_name'], customer_mobile = data['customer_details']['customer_mobile'], customer_email = data['customer_details']['customer_email'], user_id = int(data['user_id']))
+        book = Booking(hotel_id = data['property']['id'],number_of_units= data["units"],booking_id = data['order_id'],check_in = data['check_in'], check_out = data['check_out'],booking_date = data['booking_date'],total_price = payment_details['payload']['payment']['entity']['amount'], payment_detail = payment_details['payload']['payment'],status = payment_details['event'],customer_name = data['customer_details']['customer_name'], customer_mobile = data['customer_details']['customer_mobile'], customer_email = data['customer_details']['customer_email'], user_id = int(data['user_id']))
         db.session.add(book)
         db.session.commit()
 
@@ -210,9 +210,10 @@ def create_booking(data):
 
         while start_date <= end_date:
             print('DATES IS ****************',start_date)
-            bookslot = BookedSlot(hotel_id = data['property']['id'],booked_for_date = str(start_date))
-            db.session.add(bookslot)
-            db.session.commit()
+            for i in range(int(data['units'])):
+                bookslot = BookedSlot(hotel_id = data['property']['id'],booked_for_date = str(start_date))
+                db.session.add(bookslot)
+                db.session.commit()
             start_date += delta
 
         send_msg("+91"+data['customer_details']['customer_mobile'],"hey "+str(data['customer_details']['customer_name'])+", booking is confirmed,"+" Paid Rs "+str((payment_details['payload']['payment']['entity']['amount'])/100)+", order id is:"+str(data['order_id'])+", booked hotel id: "+str(data['property']['id'])+ ", check in date: "+str(data['check_in'])+" check out date: "+ str(data['check_out'])+' Thanks for booking with TRIPVILLAS')

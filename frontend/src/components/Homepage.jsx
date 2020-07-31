@@ -35,6 +35,7 @@ import {
 import { Redirect, useHistory, Link } from 'react-router-dom'
 import { Reset_All } from '../Redux/common/action'
 import $ from 'jquery'
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 
 export const Homepage = (props) => {
   // responseGoogle = (response) => {
@@ -44,7 +45,8 @@ export const Homepage = (props) => {
 
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
-  const [search_location, setSearchLocation] = useState('delhi')
+  const [search_location, setSearchLocation] = useState('')
+  const [search_location1, setSearchLocation1] = useState('')
   const [guest, setGuest] = useState(0)
   // const [location, setLocation] = useState('')
 
@@ -77,6 +79,14 @@ export const Homepage = (props) => {
     setSearchLocation(e.target.value)
   }
 
+  const [coordinate, setCoordinates] = useState({ "lat": null, "lng": null })
+  const handleLocnSelect = async (value) => {
+    const results = await geocodeByAddress(value)
+    setSearchLocation(results[0]['formatted_address'])
+    setSearchLocation1(results[0]['address_components'][0]['long_name'].toLowerCase())
+    console.log('resul', results)
+  }
+
   let dispatch = useDispatch()
   let history = useHistory()
   let com = useSelector((state) => state.common)
@@ -97,13 +107,13 @@ export const Homepage = (props) => {
       '-' +
       endDate.getDate()
     dispatch(Reset_filter())
-    filters['state'] = search_location
+    filters['state'] = search_location1
     filters['start_date'] = startDate
     filters['end_date'] = endDate
     dispatch(Save_Filter(filters))
     dispatch(
       Load_Filtered_Data({
-        state: search_location,
+        state: search_location1,
         check_in: sd,
         check_out: ed,
       })
@@ -114,7 +124,7 @@ export const Homepage = (props) => {
       s =
         s +
         '?state=' +
-        search_location +
+        search_location1 +
         '&' +
         'check_in=' +
         sd +
@@ -240,15 +250,33 @@ export const Homepage = (props) => {
               width: '97%',
             }}
           >
+
             <form class='form-inline'>
-              <input
+              {/* <input
                 type='text'
                 class='form-control input-lg input-search'
                 value={search_location}
                 onChange={(e) => handleLocationChg(e)}
                 placeholder='location'
-              />
+              /> */}
+              <PlacesAutocomplete value={search_location} onChange={setSearchLocation} onSelect={handleLocnSelect} debounce={500}>
 
+                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (<div style={{ color: "black" }}>
+                  <input {...getInputProps({ placeholder: "Location" })} />
+                  <div>
+                    {loading ? <div>...loading</div> : null}
+                    {suggestions.map((suggestion) => {
+                      const style = {
+                        backgroundColor: suggestion.active ? "grey" : "white"
+                      }
+                      // console.log('suggestions*******', suggestion)
+                      return <div {...getSuggestionItemProps(suggestion, { style })}>
+                        {suggestion.description}</div>
+                    })}
+                  </div>
+                </div>)}
+
+              </PlacesAutocomplete>
               <div>
                 <DatePicker
                   selected={startDate}

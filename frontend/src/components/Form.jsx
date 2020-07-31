@@ -69,7 +69,7 @@ export const Form = (props) => {
     }
 
 
-    const data = await fetch('http://64651181e1b6.ngrok.io/admin/rorder', {
+    const data = await fetch('http://tripvilla-api.abhisheksaklani.co/admin/rorder', {
       method: 'POST',
       body: JSON.stringify(booking_data[0]),
     }).then((t) => t.json())
@@ -98,9 +98,9 @@ export const Form = (props) => {
         // alert(response.razorpay_signature)
       },
       prefill: {
-        name: 'Gaurav Kumar',
-        email: 'gaurav.kumar@example.com',
-        contact: '9999999999',
+        name: first_name + " " + last_name,
+        email: email,
+        contact: mobile,
       },
       notes: {
         address: 'Razorpay Corporate Office',
@@ -133,10 +133,13 @@ export const Form = (props) => {
     modal()
   }
   else if (payment_success == true && booking_sms_email_flag == true) {
-    window.$('#loadingModal').modal('hide')
-    history.push(
-      '/booking-confirm/' + booking_confirmed_details['order_number']
-    )
+    setTimeout(() => {
+
+      window.$('#loadingModal').modal('hide')
+      history.push(
+        '/booking-confirm/' + booking_confirmed_details['order_number']
+      )
+    }, 2000);
   }
 
 
@@ -154,11 +157,29 @@ export const Form = (props) => {
           class='modal-dialog modal-dialog-centered d-flex justify-content-center'
           role='document'
         >
-          <div class='spinner-border' role='status'>
-            <span class='sr-only'>Loading...</span>
+          <div class="modal-body">
+
+            <div class="body-message">
+
+              <p>{payment_success ? <> <img width="80px" height="60px" src="https://www.flightslogic.com/public/images/tick.gif" />
+        Payment confirmed</> : ""}
+              </p>
+            </div>
+            <div class="body-message">
+
+              <p>{payment_success && booking_sms_email_flag ? <> < img width="80px" height="60px" src="https://www.flightslogic.com/public/images/tick.gif" />
+        Email & SMS</> : "Sending SMS & EMAIL"}
+              </p>
+              <p>{payment_success && booking_sms_email_flag ? <> < img width="80px" height="60px" src="https://www.flightslogic.com/public/images/tick.gif" />
+        Order Confirmed</> : ""}
+              </p>
+
+            </div>
           </div>
+
         </div>
       </div>
+
       <div className='row p-2'>
         <div className='col-6 pl-3 pb-3 pr-3'>
           <div
@@ -502,7 +523,7 @@ export const Form = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 
