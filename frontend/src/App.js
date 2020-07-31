@@ -11,12 +11,12 @@ import { Routes } from './Routes/Routes'
 import ReactGa from 'react-ga'
 
 function App() {
-    useEffect(() => {
-        // ReactGa.initialize('UA-173941004-1')
-        ReactGa.initialize('UA-173941004-2')
+  useEffect(() => {
+    // ReactGa.initialize('UA-173941004-1')
+    ReactGa.initialize('UA-173941004-2')
 
-        ReactGa.pageview(window.location.pathname + window.location.search)
-    }, [])
+    ReactGa.pageview(window.location.pathname + window.location.search)
+  }, [])
 
     return (
         <div>
@@ -31,6 +31,7 @@ function App() {
 
         </div>
     )
+
 }
 
 export default App

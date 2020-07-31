@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import DatePicker from 'react-datepicker'
-import styles from './css/Homepage.module.css'
+import styles from './css/Holidayhome.module.css'
 import InfiniteCarousel from 'react-leaf-carousel'
 import { useState } from 'react'
 import dum3 from './imgurl/dum3.jpeg'
@@ -11,8 +11,8 @@ import {
   Save_Filter,
 } from '../Redux/common/action'
 import { Link, useHistory } from 'react-router-dom'
-import Button from '@material-ui/core/Button';
-import Skeleton from '@material-ui/lab/Skeleton';
+//import Button from '@material-ui/core/Button';
+import Skeleton from '@material-ui/lab/Skeleton'
 
 import ReactGa from 'react-ga'
 
@@ -21,6 +21,8 @@ export const Holidayhomes = (props) => {
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
   const [flag, setFlag] = useState(true)
+
+
 
   const handleChange1 = (date) => {
     if (endDate < date) {
@@ -100,19 +102,14 @@ export const Holidayhomes = (props) => {
     let info = props.match.params
     console.log('params are', info)
 
-
     // let timeout = setTimeout(() => {
     //   setFlag(false)
     // }, 1000000)
 
-
     if (flag) {
-
       dispatch(Load_Recommended_State(info))
       // clearTimeout(timeout)
     }
-
-
   }, [])
 
   const title = [
@@ -144,7 +141,7 @@ export const Holidayhomes = (props) => {
             }}
           >
             <div>
-              <h3 className='text-center'>Goa Holiday Homes</h3>
+              <h3 className='text-center' style={{ transform: "capitalize" }}>{props.match.params.state.charAt(0).toUpperCase() + props.match.params.state.slice(1)} Holiday Homes</h3>
               <h4 className='text-center mt-3'>
                 <small style={{ color: ' rgb(83, 81, 81)' }}>
                   We have 300 Vacation Rentals - search by dates for
@@ -155,48 +152,69 @@ export const Holidayhomes = (props) => {
                 className='row mt-4 mb-5'
                 style={{ justifyContent: 'center' }}
               >
-                {' '}
-                <form class='form-inline'>
-                  <DatePicker
-                    placeholderText='check-in'
-                    id={styles.datp}
-                    value={startDate}
-                    onChange={handleChange1}
-                  />
-                  <DatePicker
-                    id={styles.datp1}
-                    placeholderText='check-out'
-                    value={endDate}
-                    onChange={handleChange2}
-                  />
-                  <select
-                    class='custom-select'
-                    style={{ width: '180px', borderRadius: '0px' }}
-                  >
-                    <option selected value='0'>
-                      Select Guests
-                    </option>
-                    <option value='1'>1 guest</option>
-                    <option value='2'>2 guests</option>
-                    <option value='3'>3 guests</option>
-                    <option value='4'>4 guests</option>
-                    <option value='5'>5 guests</option>
-                    <option value='6'>6 guests</option>
-                    <option value='7'>7 guests</option>
-                    <option value='8'>8 guests</option>
-                    <option value='9'>9 guests</option>
-                    <option value='10'>10 guests</option>
-                  </select>
-                  <button
-                    id={styles.searchbut}
-                    type='button'
-                    class='btn btn-primary'
-                    style={{ borderRadius: '0px' }}
-                    onClick={handleSearch}
-                  >
-                    SEARCH
-                  </button>
-                </form>
+                <div className="row border">
+                  <div className="col-3 border">
+                    <div>
+                      <DatePicker
+                        id={styles.datp}
+                        value={startDate}
+                        selected={startDate}
+                        minDate={Date.now()}
+                        onChange={handleChange1}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-3 border">
+                    <div>
+                      <DatePicker
+                        id={styles.datp1}
+                        placeholderText='check-out'
+                        value={endDate}
+                        selected={endDate}
+                        onChange={handleChange2}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-3 border">
+                    <div>
+                      <select
+                        className='custom-select '
+                        style={{
+                          width: '150px',
+                          borderRadius: '0px',
+                          border: 'none',
+                          marginLeft: '-11px',
+                          fontSize: "14px",
+
+                        }}
+                      >
+                        <option selected value='0' >
+                          Select Guests
+                  </option>
+                        <option value='1'>1 guest</option>
+                        <option value='2'>2 guests</option>
+                        <option value='3'>3 guests</option>
+                        <option value='4'>4 guests</option>
+                        <option value='5'>5 guests</option>
+                        <option value='6'>6 guests</option>
+                        <option value='7'>7 guests</option>
+                        <option value='8'>8 guests</option>
+                        <option value='9'>9 guests</option>
+                        <option value='10'>10 guests</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="col-3 border">
+                    <button
+                      type='button'
+                      class='btn btn-primary pl-5 '
+                      style={{ borderRadius: '0px', marginLeft: "-15px", paddingTop: "10px", paddingRight: "60px", paddingBottom: "11px", fontSize: "12px" }}
+                      onClick={handleSearch}
+                    >
+                      SEARCH
+                </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -210,7 +228,7 @@ export const Holidayhomes = (props) => {
               marginBottom: '20px',
             }}
           >
-            City holiday homes
+            {props.match.params.state.charAt(0).toUpperCase() + props.match.params.state.slice(1)}  holiday homes
           </h5>
 
           <InfiniteCarousel
@@ -230,7 +248,7 @@ export const Holidayhomes = (props) => {
                 },
               },
             ]}
-            dots={true}
+            dots={false}
             showSides={true}
             sidesOpacity={0.5}
             sideSize={0.1}
@@ -313,7 +331,7 @@ export const Holidayhomes = (props) => {
               },
             },
           ]}
-          dots={true}
+          dots={false}
           showSides={true}
           sidesOpacity={0.5}
           sideSize={0.1}
@@ -333,7 +351,7 @@ export const Holidayhomes = (props) => {
                     width: '276px',
                   }}
                 ></div>
-                <div className='p-3' style={{ height: '150px' }}>
+                <div className='p-3' style={{ height: '200px' }}>
                   <Link to={`/property/${ele['id']}`}>
                     <p>
                       <b>Rated {ele['review_rating']}/5</b>
@@ -348,16 +366,6 @@ export const Holidayhomes = (props) => {
           })}
         </InfiniteCarousel>
 
-        <h5
-          style={{
-            paddingLeft: '60px',
-            marginTop: '30px',
-            marginBottom: '20px',
-          }}
-        >
-          Explore On The Map
-        </h5>
-        <div></div>
 
         <h5
           style={{
@@ -525,7 +533,7 @@ export const Holidayhomes = (props) => {
             }}
           >
             <div>
-              <h3 className='text-center'>Goa Holiday Homes</h3>
+              <h3 className='text-center'>{props.match.params.state.charAt(0).toUpperCase() + props.match.params.state.slice(1)} Holiday Homes</h3>
               <h4 className='text-center mt-3'>
                 <small style={{ color: ' rgb(83, 81, 81)' }}>
                   We have 300 Vacation Rentals - search by dates for
@@ -536,7 +544,7 @@ export const Holidayhomes = (props) => {
                 className='row mt-4 mb-5'
                 style={{ justifyContent: 'center' }}
               >
-                {' '}
+                {/* {' '}
                 <form class='form-inline'>
                   <DatePicker
                     placeholderText='check-in'
@@ -577,18 +585,19 @@ export const Holidayhomes = (props) => {
                   >
                     SEARCH
                   </button>
-                </form>
+                </form> */}
               </div>
             </div>
           </div>
         </div>
-        <h5 style={{
-          paddingLeft: '60px',
-          marginTop: '30px',
-          marginBottom: '20px',
-        }}>
-
-          <Skeleton className="py-2" variant="text" width={250} />
+        <h5
+          style={{
+            paddingLeft: '60px',
+            marginTop: '30px',
+            marginBottom: '20px',
+          }}
+        >
+          <Skeleton className='py-2' variant='text' width={250} />
         </h5>
 
         <InfiniteCarousel
@@ -608,7 +617,7 @@ export const Holidayhomes = (props) => {
               },
             },
           ]}
-          dots={true}
+          dots={false}
           showSides={true}
           sidesOpacity={0.5}
           sideSize={0.1}
@@ -628,16 +637,16 @@ export const Holidayhomes = (props) => {
                     width: '276px',
                   }}
                 ></div> */}
-                <Skeleton variant="rect" width={276} height={200} />
+                <Skeleton variant='rect' width={276} height={200} />
                 <div style={{ height: '200px' }}>
                   {/* <Link to={`/property/${ele['id']}`}> */}
-                  <Skeleton variant="text" width={200} />
+                  <Skeleton variant='text' width={200} />
 
-                  <Skeleton variant="text" width={100} />
+                  <Skeleton variant='text' width={100} />
 
-                  <Skeleton variant="rect" width={276} height={40} />
+                  <Skeleton variant='rect' width={276} height={40} />
 
-                  <Skeleton variant="text" width={100} />
+                  <Skeleton variant='text' width={100} />
                   {/* </Link> */}
                 </div>
               </div>
@@ -645,14 +654,14 @@ export const Holidayhomes = (props) => {
           })}
         </InfiniteCarousel>
 
-
-        <h5 style={{
-          paddingLeft: '60px',
-          marginTop: '30px',
-          marginBottom: '20px',
-        }}>
-
-          <Skeleton className="py-2" variant="text" width={250} />
+        <h5
+          style={{
+            paddingLeft: '60px',
+            marginTop: '30px',
+            marginBottom: '20px',
+          }}
+        >
+          <Skeleton className='py-2' variant='text' width={250} />
         </h5>
 
         <InfiniteCarousel
@@ -672,7 +681,7 @@ export const Holidayhomes = (props) => {
               },
             },
           ]}
-          dots={true}
+          dots={false}
           showSides={true}
           sidesOpacity={0.5}
           sideSize={0.1}
@@ -692,16 +701,16 @@ export const Holidayhomes = (props) => {
                     width: '276px',
                   }}
                 ></div> */}
-                <Skeleton variant="rect" width={276} height={200} />
+                <Skeleton variant='rect' width={276} height={200} />
                 <div style={{ height: '200px' }}>
                   {/* <Link to={`/property/${ele['id']}`}> */}
-                  <Skeleton variant="text" width={200} />
+                  <Skeleton variant='text' width={200} />
 
-                  <Skeleton variant="text" width={100} />
+                  <Skeleton variant='text' width={100} />
 
-                  <Skeleton variant="rect" width={276} height={40} />
+                  <Skeleton variant='rect' width={276} height={40} />
 
-                  <Skeleton variant="text" width={100} />
+                  <Skeleton variant='text' width={100} />
                   {/* </Link> */}
                 </div>
               </div>

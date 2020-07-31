@@ -155,101 +155,189 @@ export const Homepage = (props) => {
     'himachal pradesh',
   ]
 
-  const modal = () => {
-    window.$('#loadingModal').modal('show')
-    setTimeout(() => {
-      console.log('completed')
-      window.$('#loadingModal').modal('hide')
-    }, 3000)
-  }
-
-  $(document).ready(function () {
-    window.$('#loadingModal').modal({
-      show: false,
-      backdrop: 'static',
-    })
-  })
-
   return (
     <div>
       {/* adding searchbar and larger image */}
 
-      <div id={styles.largeimg} style={{ height: '450px' }}>
-        <div style={{ padding: '10%', marginLeft: '30px', color: 'white' }}>
-          <h3 className='mt-3' id={styles.searchele}>
+      <div id={styles.largeimg}
+        style={{
+          paddingLeft: "15%",
+          paddingRight: "15%",
+          paddingTop: "10%",
+          paddingBottom: "10%"
+
+        }}>
+        <div className="row">
+          <h3 className='mt-3' style={{ color: "white" }}>
             Book <strike>Hotels</strike> Vacation Rentals
           </h3>
-          <h3>Top Holiday Homes - Villas, Apartments & Homestays</h3>
-          {/* <form
-            class='form-inline text-center '
-            role='form'
-            style={{
-              padding: '10px',
-              border: '1px solid black',
-              backgroundColor: 'white',
-            }}
+          <h3 style={{ color: "white" }}>Top Holiday Homes - Villas, Apartments & Homestays</h3>
+        </div>
+        <div>
+
+
+
+          <div class="row p-2"
+            style={{ backgroundColor: "white", border: "1px solid black" }}
           >
-            <div class='form-group'>
-              <input
-                type='text'
-                class='form-control input-lg input-search'
-                value={search_location}
-                onChange={(e) => handleLocationChg(e)}
-                placeholder='location'
-              />
+            <div class="col-4 border ">
+              <div className="pt-2">
 
-              <DatePicker
-                selected={startDate}
-                id={styles.datp}
-                onChange={handleChange1}
-              />
-              <DatePicker
-                selected={endDate}
-                onChange={handleChange2}
-                id={styles.datp}
-              />
+                <input
+                  type='text'
+                  id={styles.kol}
+                  class=' input-search input-lg text-muted '
 
-
-              <select
-                class='custom-select'
-                onChange={(e) => handleGuestChg(e)}
-                style={{ width: '180px', borderRadius: '0px' }}
-              >
-                <option selected value='0'>
-                  Select Guests
-                </option>
-                <option value='1'>1 guest</option>
-                <option value='2'>2 guests</option>
-                <option value='3'>3 guests</option>
-                <option value='4'>4 guests</option>
-                <option value='5'>5 guests</option>
-                <option value='6'>6 guests</option>
-                <option value='7'>7 guests</option>
-                <option value='8'>8 guests</option>
-                <option value='9'>9 guests</option>
-                <option value='10'>10 guests</option>
-              </select>
-              <button
-                id={styles.searchbut}
-                type='button'
-                class='btn btn-primary'
-                style={{ borderRadius: '0px' }}
-                onClick={handleSearch}
-              >
-                SEARCH
-              </button>
+                  value={search_location}
+                  style={{ paddingRight: "120px" }}
+                  onChange={(e) => handleLocationChg(e)}
+                />
+              </div>
             </div>
-          </form> */}
 
+            <div class="col-2 border">
+              <div >
+                <DatePicker
+                  placeholderText='check In'
+                  id={styles.datp}
+                  value={startDate}
+                  selected={startDate}
+                  minDate={Date.now()}
+                  onChange={handleChange1}
+                />
+              </div>
+            </div>
+            <div class="col-2 border">
+              <div >
+                <DatePicker
+                  id={styles.datp1}
+                  selected={endDate}
+                  value={endDate}
+                  onSelect={handleChange2}
+                />
+              </div>
+            </div>
+            <div class="col-2 border ">
+              <div className="pt-2">
+                <select
+                  className='custom-select '
+                  style={{
+                    width: '150px',
+                    borderRadius: '0px',
+                    border: 'none',
+                    marginLeft: '-11px',
+                    fontSize: "14px",
+                    marginTop: "-5px"
+                  }}
+                >
+                  <option selected value='0' >
+                    Select Guests
+                  </option>
+                  <option value='1'>1 guest</option>
+                  <option value='2'>2 guests</option>
+                  <option value='3'>3 guests</option>
+                  <option value='4'>4 guests</option>
+                  <option value='5'>5 guests</option>
+                  <option value='6'>6 guests</option>
+                  <option value='7'>7 guests</option>
+                  <option value='8'>8 guests</option>
+                  <option value='9'>9 guests</option>
+                  <option value='10'>10 guests</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="col-2 border">
+              <div>
+                <button
+                  type='button'
+                  class='btn btn-primary pl-5 '
+                  style={{ borderRadius: '0px', marginLeft: "-15px", paddingTop: "10px", paddingRight: "60px", paddingBottom: "11px", fontSize: "12px" }}
+                  onClick={handleSearch}
+                >
+                  SEARCH
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      {/* <h3 className='mt-3' id={styles.searchele}>
+            Book <strike>Hotels</strike> Vacation Rentals
+          </h3>
+          <h3>Top Holiday Homes - Villas, Apartments & Homestays</h3> */}
+
+      {/* <div
+        className='row'
+        style={{
+          padding: '10px',
+          border: '1px solid black',
+          backgroundColor: 'white',
+        }}
+      >
+        <form class='form-inline'>
+          <input
+            type='text'
+            class='form-control input-lg input-search'
+            value={search_location}
+            onChange={(e) => handleLocationChg(e)}
+            placeholder='location'
+          />
+
+          <div>
+            <DatePicker
+              selected={startDate}
+              id={styles.datp}
+              onChange={handleChange1}
+            />
+          </div>
+          <DatePicker
+            selected={endDate}
+            onChange={handleChange2}
+            id={styles.datp}
+          />
+          <select
+            class='custom-select'
+            style={{ width: '180px', borderRadius: '0px' }}
+          >
+            <option selected value='0'>
+              Select Guests
+                </option>
+            <option value='1'>1 guest</option>
+            <option value='2'>2 guests</option>
+            <option value='3'>3 guests</option>
+            <option value='4'>4 guests</option>
+            <option value='5'>5 guests</option>
+            <option value='6'>6 guests</option>
+            <option value='7'>7 guests</option>
+            <option value='8'>8 guests</option>
+            <option value='9'>9 guests</option>
+            <option value='10'>10 guests</option>
+          </select>
+          <button
+            id={styles.searchbut}
+            type='button'
+            class='btn btn-primary'
+            style={{ borderRadius: '0px' }}
+            onClick={handleSearch}
+          >
+            SEARCH
+              </button>
+        </form>
+      </div> */}
+
+      {/* <div className='row  mt-3'>
           <div
-            className='row'
+            className='col-12 '
             style={{
-              padding: '10px',
               border: '1px solid black',
               backgroundColor: 'white',
-              width: '97%',
+              color: 'black',
             }}
           >
+
 
             <form class='form-inline'>
               {/* <input
@@ -278,56 +366,72 @@ export const Homepage = (props) => {
 
               </PlacesAutocomplete>
               <div>
+
                 <DatePicker
-                  selected={startDate}
+                  placeholderText='check In'
                   id={styles.datp}
                   onChange={handleChange1}
                 />
               </div>
-              <DatePicker
-                selected={endDate}
-                onChange={handleChange2}
-                id={styles.datp}
-              />
-              <select
-                class='custom-select'
-                style={{ width: '180px', borderRadius: '0px' }}
-              >
-                <option selected value='0'>
-                  Select Guests
-                </option>
-                <option value='1'>1 guest</option>
-                <option value='2'>2 guests</option>
-                <option value='3'>3 guests</option>
-                <option value='4'>4 guests</option>
-                <option value='5'>5 guests</option>
-                <option value='6'>6 guests</option>
-                <option value='7'>7 guests</option>
-                <option value='8'>8 guests</option>
-                <option value='9'>9 guests</option>
-                <option value='10'>10 guests</option>
-              </select>
-              <button
-                id={styles.searchbut}
-                type='button'
-                class='btn btn-primary'
-                style={{ borderRadius: '0px' }}
-                onClick={handleSearch}
-              >
-                SEARCH
-              </button>
-            </form>
+              <div className='col-2 ' style={{ border: '1px solid #666' }}>
+                <i class='fas fa-door-closed text-muted'></i>
+                <DatePicker
+                  placeholderText='check Out'
+                  onChange={handleChange2}
+                  id={styles.datp}
+                />
+              </div>
+
+              <div className='col-2' style={{ border: '1px solid #666' }}>
+                <select
+                  className='custom-select'
+                  style={{
+                    width: '160px',
+                    borderRadius: '0px',
+                    border: 'none',
+                    marginLeft: '-11px',
+                  }}
+                >
+                  <option selected value='0'>
+                    Select Guests
+                  </option>
+                  <option value='1'>1 guest</option>
+                  <option value='2'>2 guests</option>
+                  <option value='3'>3 guests</option>
+                  <option value='4'>4 guests</option>
+                  <option value='5'>5 guests</option>
+                  <option value='6'>6 guests</option>
+                  <option value='7'>7 guests</option>
+                  <option value='8'>8 guests</option>
+                  <option value='9'>9 guests</option>
+                  <option value='10'>10 guests</option>
+                </select>
+              </div>
+
+              <div className='col-2' style={{ border: '1px solid grey' }}>
+                <button
+                  id={styles.searchbut}
+                  type='button'
+                  class='btn btn-primary'
+                  style={{ borderRadius: '0px' }}
+                  onClick={handleSearch}
+                >
+                  SEARCH
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Top destination cards */}
       <div className={styles.topdes}>
         <div className={styles.head}>
-          <div style={{ fontSize: '25px' }}>Top Destinations</div>
+          <div style={{ fontSize: '22px' }}>Top Destinations</div>
         </div>
         <div className={styles.cara}>
           <InfiniteCarousel
+
             breakpoints={[
               {
                 breakpoint: 500,
@@ -344,7 +448,7 @@ export const Homepage = (props) => {
                 },
               },
             ]}
-            dots={true}
+            dots={false}
             showSides={true}
             sidesOpacity={0.5}
             sideSize={0.1}
@@ -355,7 +459,7 @@ export const Homepage = (props) => {
             {arr.map((item, ind) => (
               <div>
                 <div
-                  className=' col-12 '
+                  className=' col-11 '
                   style={{
                     color: 'white',
                     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(${item})`,
@@ -370,7 +474,7 @@ export const Homepage = (props) => {
                       style={{
                         textDecoration: 'none',
                         fontSize: '18px',
-                        textTransform: 'uppercase',
+                        textTransform: 'capitalize',
                       }}
                       to={`/holiday/${title[ind]}`}
                     >
@@ -391,52 +495,53 @@ export const Homepage = (props) => {
       {/* manage cards */}
       <div className='row'>
         <div
-          className='col-3 mt-5 text-center pt-4 pl-5  pb-5  pr-5 shadow  bg-white rounded'
-          style={{
-            marginLeft: '65px',
-          }}
-        >
-          <div style={{ fontSize: '19.2px' }}>
-            Fully Managed Communities By Tripvillas
+          className='col-4 mt-5 '
+
+        > <div className="text-center p-3 shadow  bg-white rounded" style={{
+          marginLeft: '65px',
+        }}>
+            <div style={{ fontSize: '19.2px', color: " rgb(53, 51, 51)", fontWeight: "unset" }}>
+              Fully Managed Communities By Tripvillas
           </div>
-          <div className='row mt-5'>
-            <div className='col-6'>
-              <img src={ho1} height='50px' width='50px' />
-              <p className='mt-3 text-muted'>
-                <small>High Quality housekeeping</small>
-              </p>
+            <div className='row mt-5'>
+              <div className='col-6'>
+                <img src={ho1} height='50px' width='50px' />
+                <p className='mt-3 text-muted'>
+                  <small>High Quality housekeeping</small>
+                </p>
+              </div>
+
+              <div className='col-6'>
+                <img src={ho2} height='50px' width='50px' />
+                <p className='mt-3 text-muted'>
+                  <small>Comfortable Linen and Toiletries</small>
+                </p>
+              </div>
             </div>
 
-            <div className='col-6'>
-              <img src={ho2} height='50px' width='50px' />
-              <p className='mt-3 text-muted'>
-                <small>Comfortable Linen and Toiletries</small>
-              </p>
-            </div>
-          </div>
+            <div className='row mt-5'>
+              <div className='col-6'>
+                <img src={ho3} height='50px' width='50px' />
+                <p className='mt-3 text-muted'>
+                  <small>Quality Furniture & Fittings</small>
+                </p>
+              </div>
 
-          <div className='row mt-5'>
-            <div className='col-6'>
-              <img src={ho3} height='50px' width='50px' />
-              <p className='mt-3 text-muted'>
-                <small>Quality Furniture & Fittings</small>
-              </p>
-            </div>
-
-            <div className='col-6'>
-              <img src={ho4} height='50px' width='50px' />
-              <p className='mt-3 text-muted'>
-                <small>Food Delivery Or Central Restaurant</small>
-              </p>
+              <div className='col-6'>
+                <img src={ho4} height='50px' width='50px' />
+                <p className='mt-3 text-muted'>
+                  <small>Food Delivery Or Central Restaurant</small>
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className='col-8 mt-5'>
-          <div className='row'>
-            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+        <div className='col-8 mt-5' >
+          <div className="row" >
+            <div className="col-3">
               <div
-                className='m-3'
+
                 style={{
                   height: '150px',
                   width: '172.25px',
@@ -459,9 +564,9 @@ export const Homepage = (props) => {
               </div>
             </div>
 
-            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+            <div className="col-3">
               <div
-                className='m-3'
+
                 style={{
                   height: '150px',
                   width: '172.25px',
@@ -482,11 +587,12 @@ export const Homepage = (props) => {
                   </p>
                 </Link>
               </div>
+
             </div>
 
-            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+            <div className="col-3">
               <div
-                className='m-3'
+
                 style={{
                   height: '150px',
                   width: '172.25px',
@@ -507,11 +613,12 @@ export const Homepage = (props) => {
                   </p>
                 </Link>
               </div>
+
             </div>
 
-            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+            <div className="col-3">
               <div
-                className='m-3'
+
                 style={{
                   height: '150px',
                   width: '172.25px',
@@ -534,10 +641,10 @@ export const Homepage = (props) => {
             </div>
           </div>
 
-          <div className='row mt-4'>
-            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+
+          <div className="row mt-5" >
+            <div className="col-3">
               <div
-                className='m-3'
                 style={{
                   height: '150px',
                   width: '172.25px',
@@ -560,9 +667,9 @@ export const Homepage = (props) => {
               </div>
             </div>
 
-            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+
+            <div className="col-3">
               <div
-                className='m-3'
                 style={{
                   height: '150px',
                   width: '172.25px',
@@ -583,11 +690,12 @@ export const Homepage = (props) => {
                   </p>
                 </Link>
               </div>
+
             </div>
 
-            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+            <div className="col-3">
               <div
-                className='m-3'
+
                 style={{
                   height: '150px',
                   width: '172.25px',
@@ -608,11 +716,12 @@ export const Homepage = (props) => {
                   </p>
                 </Link>
               </div>
+
             </div>
 
-            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+            <div className="col-3">
               <div
-                className='m-3'
+
                 style={{
                   height: '150px',
                   width: '172.25px',
@@ -632,13 +741,19 @@ export const Homepage = (props) => {
                   </p>
                 </Link>
               </div>
+
+
             </div>
+
           </div>
 
-          <div className='row mt-4'>
-            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+
+
+
+          <div className="row mt-5">
+            <div className="col-3">
               <div
-                className='m-3'
+
                 style={{
                   height: '150px',
                   width: '172.25px',
@@ -659,11 +774,12 @@ export const Homepage = (props) => {
                   </p>
                 </Link>
               </div>
+
             </div>
 
-            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+            <div className="col-3">
               <div
-                className='m-3'
+
                 style={{
                   height: '150px',
                   width: '172.25px',
@@ -684,11 +800,11 @@ export const Homepage = (props) => {
                   </p>
                 </Link>
               </div>
-            </div>
 
-            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+            </div>
+            <div className="col-3">
               <div
-                className='m-3'
+
                 style={{
                   height: '150px',
                   width: '172.25px',
@@ -709,11 +825,11 @@ export const Homepage = (props) => {
                   </p>
                 </Link>
               </div>
-            </div>
 
-            <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+            </div>
+            <div className="col-3">
               <div
-                className='m-3'
+
                 style={{
                   height: '150px',
                   width: '172.25px',
@@ -733,20 +849,22 @@ export const Homepage = (props) => {
                   </p>
                 </Link>
               </div>
+
             </div>
           </div>
-        </div>
-      </div>
+
+        </div >
+      </div >
 
       {/* two static card */}
       <div>
         <div className='row ml-5 mt-5 mr-5'>
           <div className='col-12 col-sm-12 col-md-6 col-lg-6 p-3'>
             <div
-              style={{ marginLeft: '-16px' }}
+
               className='p-5 text-center shadow  bg-white rounded'
             >
-              <h5>Holiday Home Investment Opportunities</h5>
+              <h6 style={{ color: " rgb(53, 51, 51)", fontWeight: "lighter", fontSize: "19px" }}>Holiday Home Investment Opportunities</h6>
               <div className='row'>
                 <div className='col-3 mt-4 text-center'>
                   <img src={s1} height='40px' width='40px' />
@@ -783,13 +901,19 @@ export const Homepage = (props) => {
                     </small>
                   </p>
                 </div>
-                <div className=' mt-3' style={{ marginLeft: '100px' }}>
+
+              </div>
+
+              <div className="row mt-3">
+                <div className="col-12" >
                   <button
                     type='button'
-                    class='btn btn-primary '
+                    class='btn btn-primary p-2 pr-4 pl-4'
                     style={{
                       borderRadius: '0px',
-                      width: '350px',
+
+                      fontSize: "12px",
+
                     }}
                   >
                     EXPLORE INVESTMENT OPPORTUNITIES
@@ -804,7 +928,7 @@ export const Homepage = (props) => {
               style={{ marginLeft: '-16px' }}
               className='p-5 text-center mt-3 ml-4 shadow  bg-white rounded'
             >
-              <h5>Are you a holiday home owner/manager?</h5>
+              <h6 style={{ color: " rgb(53, 51, 51)", fontWeight: "lighter", fontSize: "19px" }}>Are you a holiday home owner/manager?</h6>
               <div className='row'>
                 <div className='col-3 mt-4 text-center'>
                   <img src={s5} height='40px' width='40px' />
@@ -837,27 +961,24 @@ export const Homepage = (props) => {
                     </small>
                   </p>
                 </div>
-                <div
-                  className=' mt-3'
-                  style={{
-                    marginLeft: '180px',
-                    borderRadius: '0px',
-                    width: '200px',
-                  }}
-                >
+              </div>
+
+              <div className="row mt-3">
+                <div className="col-12" >
                   <button
                     type='button'
-                    class='btn btn-primary '
+                    class='btn btn-primary p-2 pl-4 pr-4'
                     style={{
                       borderRadius: '0px',
-                      width: '250px',
-                      marginLeft: '-45px',
+                      fontSize: "12px",
+
                     }}
                   >
-                    LIST YOUR PROPERTY
+                    LIST YOUR PROPERTIES
                   </button>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -867,7 +988,7 @@ export const Homepage = (props) => {
 
       <div className={styles.topdes}>
         <div className={styles.head}>
-          <div style={{ fontSize: '25px' }}>Vacation Ideas</div>
+          <div style={{ fontSize: '22px' }}>Vacation Ideas</div>
         </div>
         <div className={styles.cara}>
           <InfiniteCarousel
@@ -887,7 +1008,7 @@ export const Homepage = (props) => {
                 },
               },
             ]}
-            dots={true}
+            dots={false}
             showSides={true}
             sidesOpacity={0.5}
             sideSize={0.1}
@@ -898,7 +1019,7 @@ export const Homepage = (props) => {
             {arr.map((item, ind) => (
               <div>
                 <div
-                  className=' col-12 '
+                  className=' col-11 '
                   style={{
                     color: 'white',
                     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(${item})`,
@@ -913,7 +1034,7 @@ export const Homepage = (props) => {
                       style={{
                         textDecoration: 'none',
                         fontSize: '18px',
-                        textTransform: 'uppercase',
+                        textTransform: "capitalize",
                       }}
                       to={`/holiday/${title[ind]}`}
                     >
@@ -931,133 +1052,14 @@ export const Homepage = (props) => {
         </div>
       </div>
 
-      {/* footer */}
 
-      <ul class='nav nav-tabs' id='myTab' role='tablist'>
-        <li class='nav-item'>
-          <a
-            class='nav-link active'
-            id='home-tab'
-            data-toggle='tab'
-            href='#home'
-            role='tab'
-            aria-controls='home'
-            aria-selected='true'
-          >
-            Asia
-          </a>
-        </li>
-        <li class='nav-item'>
-          <a
-            class='nav-link'
-            id='profile-tab'
-            data-toggle='tab'
-            href='#profile'
-            role='tab'
-            aria-controls='profile'
-            aria-selected='false'
-          >
-            Europe
-          </a>
-        </li>
-        <li class='nav-item'>
-          <a
-            class='nav-link'
-            id='contact-tab'
-            data-toggle='tab'
-            href='#contact'
-            role='tab'
-            aria-controls='contact'
-            aria-selected='false'
-          >
-            North America
-          </a>
-        </li>
-
-        <li class='nav-item'>
-          <a
-            class='nav-link'
-            id='contact-tab'
-            data-toggle='tab'
-            href='#contact'
-            role='tab'
-            aria-controls='contact'
-            aria-selected='false'
-          >
-            South America{' '}
-          </a>
-        </li>
-        <li class='nav-item'>
-          <a
-            class='nav-link'
-            id='contact-tab'
-            data-toggle='tab'
-            href='#contact'
-            role='tab'
-            aria-controls='contact'
-            aria-selected='false'
-          >
-            Africa{' '}
-          </a>
-        </li>
-        <li class='nav-item'>
-          <a
-            class='nav-link'
-            id='contact-tab'
-            data-toggle='tab'
-            href='#contact'
-            role='tab'
-            aria-controls='contact'
-            aria-selected='false'
-          >
-            Oceania{' '}
-          </a>
-        </li>
-      </ul>
-      <div class='tab-content' id='myTabContent'>
-        <div
-          class='tab-pane fade show active'
-          id='home'
-          role='tabpanel'
-          aria-labelledby='home-tab'
-        >
-          ...
-        </div>
-        <div
-          class='tab-pane fade'
-          id='profile'
-          role='tabpanel'
-          aria-labelledby='profile-tab'
-        >
-          ...
-        </div>
-        <div
-          class='tab-pane fade'
-          id='contact'
-          role='tabpanel'
-          aria-labelledby='contact-tab'
-        >
-          ...
-        </div>
-      </div>
 
       {/* <DatePicker selected={this.state.startDate} onChange={this.handleChange1} />
       <DatePicker selected={this.state.endDate} onChange={this.handleChange2} /> */}
-
-      <button type='button' class='btn btn-primary' onClick={modal}>
-        loader
-      </button>
-
-      <div class='modal fade' id='loadingModal' tabindex='-1' role='dialog'>
-        <div
-          class='modal-dialog modal-dialog-centered d-flex justify-content-center'
-          role='document'
-        >
-          <div class='spinner-border' role='status'>
-            <span class='sr-only'>Loading...</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    </div >
   )
 }
+
+
+
+

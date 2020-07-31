@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react'
 import { Register_Fetch } from '../Redux/register/action'
 import { Login_Fetch, Login_Google_Fetch } from '../Redux/login/action'
 import { Logout_User } from '../Redux/login/action'
+import triplo from './imgurl/triplo.png'
+import pro1 from './imgurl/pro1.png'
 
 export const Navbar = () => {
   const [r_email, setREmail] = useState('')
@@ -81,10 +83,12 @@ export const Navbar = () => {
     <div>
       <nav
         class='navbar navbar-expand-lg navbar-dark '
-        style={{ backgroundColor: 'rgb(38,38,38)' }}
+        style={{ backgroundColor: 'rgb(38,38,38)', height: "60px" }}
       >
-        <a class='navbar-brand' href='/'>
-          tripvillas
+
+        <a class='navbar-brand' href='/homepage'>
+          <img src={triplo} alt="logo" height="25px" width="141.017px" />
+
         </a>
         <button
           class='navbar-toggler'
@@ -142,8 +146,10 @@ export const Navbar = () => {
                     aria-haspopup='true'
                     aria-expanded='false'
                   >
-                    Profile
-                </a>
+
+
+                    <img src={pro1} alt="profile" height="25px" width="20px" />
+                  </a>
                   <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
                     <a
                       class='dropdown-item'
@@ -159,6 +165,7 @@ export const Navbar = () => {
                     >
                       SIGNUP
                   </a>
+
                   </div>
                 </li>
               )}

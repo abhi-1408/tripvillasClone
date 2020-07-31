@@ -30,7 +30,9 @@ export const Register_Fetch = (info) => {
     return dispatch => {
         return axios({
             method: "post",
+
             url: "http://tripvilla-api.abhisheksaklani.co/user/signup",
+
             data: info
         })
             .then((res) => res.data)
