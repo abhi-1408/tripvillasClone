@@ -155,6 +155,8 @@ export const Homepage = (props) => {
     'himachal pradesh',
   ]
 
+
+
   return (
     <div>
       {/* adding searchbar and larger image */}
@@ -183,7 +185,7 @@ export const Homepage = (props) => {
             <div class="col-4 border ">
               <div className="pt-2">
 
-                <input
+                {/* <input
                   type='text'
                   id={styles.kol}
                   class=' input-search input-lg text-muted '
@@ -191,7 +193,25 @@ export const Homepage = (props) => {
                   value={search_location}
                   style={{ paddingRight: "120px" }}
                   onChange={(e) => handleLocationChg(e)}
-                />
+                /> */}
+                <PlacesAutocomplete value={search_location} onChange={setSearchLocation} onSelect={handleLocnSelect} debounce={500}>
+
+                  {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (<div style={{ color: "black" }}>
+                    <input {...getInputProps({ placeholder: "Location" })} />
+                    <div>
+                      {loading ? <div>...loading</div> : null}
+                      {suggestions.map((suggestion) => {
+                        const style = {
+                          backgroundColor: suggestion.active ? "grey" : "white"
+                        }
+                        // console.log('suggestions*******', suggestion)
+                        return <div {...getSuggestionItemProps(suggestion, { style })}>
+                          {suggestion.description}</div>
+                      })}
+                    </div>
+                  </div>)}
+
+                </PlacesAutocomplete>
               </div>
             </div>
 
@@ -337,36 +357,26 @@ export const Homepage = (props) => {
               color: 'black',
             }}
           >
+            <div className='row '>
+              <div className='col-4  p-2 ' style={{ border: '1px solid #666' }}>
+                <div>
+                  <i
+                    class='fa fa-search mr-3 text-muted'
+                    aria-hidden='true'
+                  ></i>
 
-
-            <form class='form-inline'>
-              {/* <input
-                type='text'
-                class='form-control input-lg input-search'
-                value={search_location}
-                onChange={(e) => handleLocationChg(e)}
-                placeholder='location'
-              /> */}
-              <PlacesAutocomplete value={search_location} onChange={setSearchLocation} onSelect={handleLocnSelect} debounce={500}>
-
-                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (<div style={{ color: "black" }}>
-                  <input {...getInputProps({ placeholder: "Location" })} />
-                  <div>
-                    {loading ? <div>...loading</div> : null}
-                    {suggestions.map((suggestion) => {
-                      const style = {
-                        backgroundColor: suggestion.active ? "grey" : "white"
-                      }
-                      // console.log('suggestions*******', suggestion)
-                      return <div {...getSuggestionItemProps(suggestion, { style })}>
-                        {suggestion.description}</div>
-                    })}
-                  </div>
-                </div>)}
-
-              </PlacesAutocomplete>
-              <div>
-
+                  <input
+                    style={{ border: 'none' }}
+                    type='text'
+                    class=' input-search input-lg text-muted'
+                    value={search_location}
+                    onChange={(e) => handleLocationChg(e)}
+                    placeholder='location'
+                  />
+                </div>
+              </div>
+              <div className='col-2 ' style={{ border: '1px solid #666' }}>
+                <i class='fas fa-door-open text-muted'></i>
                 <DatePicker
                   placeholderText='check In'
                   id={styles.datp}
