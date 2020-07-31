@@ -1,6 +1,6 @@
 .datepick {
-  width: 190px;
-  margin: 13px;
+ 
+  border: none;
 }
 
 .location {
@@ -8,5 +8,9 @@
 }
 
 #prov:hover {
-  box-shadow: 0 0 11px #727172;
+  box-shadow: 0 0 11px #727172 !important;
+}
+
+.inp{
+  border: none !important;
 }

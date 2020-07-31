@@ -5,6 +5,8 @@ import data1 from './data1.json'
 import styles from './css/Filterpage.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
+import cal from './imgurl/cal.jpeg'
+import filt from './imgurl/filt.png'
 import {
   Load_Data,
   Save_Filter,
@@ -323,31 +325,34 @@ export const FilterPage = (props) => {
 
       {/* container fluid */}
 
-      <div className='container-fluid m-4'>
+      <div className='container-fluid '>
         <div className='row'>
-          <div class='col'>
+          <div class='col-7'>
             {/* filter */}
             <div className='container p-3'>
               <div className='row'>
-                <div className='col'>
+                <div class="col" style={{ float: "left" }}>
                   <button
                     type='button'
-                    class='btn btn-outline-secondary'
+                    class='btn border'
                     data-toggle='modal'
                     data-target='#applyfilter'
-                  >
-                    APPLY FILTERS
-                </button>
+                    style={{ fontSize: "12px" }}
+                  ><img src={filt} height="18px" className="mr-2" width="18px" />
+                      APPLY FILTERS
+                    </button>
                 </div>
-                <div className='col'>
+
+                <div class="col" style={{ float: "right" }}>
                   <button
                     type='button'
-                    class='btn btn-outline-secondary ml-5'
+                    class='btn border ml-5'
                     data-toggle='modal'
                     data-target='#modify'
-                  >
-                    MODIFY SEARCH
-                </button>
+                    style={{ fontSize: "12px" }}
+                  ><img src={cal} height="18px" className="mr-2" width="18px" />
+                      MODIFY SEARCH
+                    </button>
                 </div>
               </div>
             </div>
@@ -355,19 +360,19 @@ export const FilterPage = (props) => {
 
             <div className='m-3'>
               <small className='m-3 text-muted mr-5 ml-3'>
-                Total results {data.length}
+                <b>Total results {data.length}</b>
               </small>
               <div style={{ float: 'right' }}>
                 <label for='sortby'>
                   <small className='text-muted '>Sort By</small>
                 </label>
                 <select
-                  className='ml-1'
+                  className='ml-1 custom-select'
                   id='sortby'
                   value={filters['sort_by']}
                   onChange={(e) => handleSortBy(e)}
-                >
-                  <option value='relevance'>Relevance</option>
+                  style={{ border: "none", width: "120px", fontSize: "14px" }} >
+                  <option value='relevance' className="text-primary">Relevance</option>
                   <option value='asc'>Price (Low to High)</option>
                   <option value='desc'>Price (High to low)</option>
                 </select>
@@ -382,6 +387,7 @@ export const FilterPage = (props) => {
                 <div
                   class='card mb-3 shadow-sm p-3 mb-5 bg-white rounded'
                   style={{ maxWidth: '740px' }}
+
                 >
                   <div class='row no-gutters'>
                     <div class='col-md-4 mt-4'>
@@ -447,7 +453,7 @@ export const FilterPage = (props) => {
             role='dialog'
             aria-labelledby='exampleModalLabel'
             aria-hidden='true'
-            style={{ height: '600px' }}
+            style={{ height: '600px', width: "100%" }}
           >
             <div class='modal-dialog  modal-lg ' role='document'>
               <div class='modal-content'>
@@ -489,8 +495,8 @@ export const FilterPage = (props) => {
                     </div>
                     <div className='col'>
                       <label class='form-check-label' for='exampleCheck1'>
-                        PROPERTY TYPE
-                    </label>
+                        <h5>PROPERTY TYPE</h5>
+                      </label>
                       <div class='form-check m-3'>
                         <input
                           type='checkbox'
@@ -1043,28 +1049,23 @@ export const FilterPage = (props) => {
                   </div>
 
                   {/* filterbutton */}
-
-                  <div class='modal-footer ' id={styles.last}>
-                    {/* <div>
-                    <button
-                      type='button'
-                      class='btn btn-outline-secondary '
-                      data-dismiss='modal'
-                    >
-                      CANCEL
-                    </button>
-                  </div> */}
-                    <div>
-                      <button
-                        type='button'
-                        name='applyfilter'
-                        class='btn btn-primary btn-md'
-                        onClick={handleApplyFilter}
-                      >
-                        APPLY
-                    </button>
-                    </div>
+                  <div class="modal-footer" style={{ marginTop: "-20px" }}>
+                    <button type="button" name='applyfilter' class='btn btn-primary p-2 pr-4 pl-4'
+                      onClick={handleApplyFilter}
+                      style={{
+                        borderRadius: '0px',
+                        fontSize: "12px",
+                      }}
+                    >Apply</button>
+                    <button type="button" class="btn btn-secondary p-2 pr-4 pl-4" data-dismiss="modal"
+                      style={{
+                        borderRadius: '0px',
+                        fontSize: "12px",
+                      }}
+                    >Close</button>
                   </div>
+
+
                 </div>
               </div>
             </div>
@@ -1094,72 +1095,96 @@ export const FilterPage = (props) => {
                     <span aria-hidden='true'>&times;</span>
                   </button>
                 </div>
-                <div class='modal-body'>
-                  <form>
-                    <div class='form-group'>
-                      <input
-                        type='text'
-                        class=' m-3'
-                        id={styles.location}
-                        value={location_search}
-                        placeholder='LOCATION'
-                      />
-                      <DatePicker
-                        className={styles.datepick}
-                        selected={startDate}
-                        value={startDate}
-                        onChange={handleChange1}
-                      />
-                      <DatePicker
-                        className={styles.datepick}
-                        selected={endDate}
-                        value={endDate}
-                        onChange={handleChange2}
-                      />
-                      <div className='m-3'>
-                        <select
-                          class='custom-select'
-                          style={{ width: '180px', borderRadius: '0px' }}
-                        >
-                          <option selected>Select Guests</option>
-                          <option value='1'>1 guest</option>
-                          <option value='2'>2 guests</option>
-                          <option value='3'>3 guests</option>
-                          <option value='4'>4 guests</option>
-                          <option value='5'>5 guests</option>
-                          <option value='6'>6 guests</option>
-                          <option value='7'>7 guests</option>
-                          <option value='8'>8 guests</option>
-                          <option value='9'>9 guests</option>
-                          <option value='10'>10 guests</option>
-                        </select>
-                      </div>
-                      <div className='m-3'>
-                        <button
-                          type='button'
-                          class='btn btn-primary'
-                          onClick={handleModifySearch}
-                          style={{ borderRadius: '0px' }}
-                        >
-                          SEARCH
-                      </button>
-
-                        <button
-                          type='button'
-                          class='btn btn-secondary ml-3'
-                          data-dismiss='modal'
-                        >
-                          CANCEL
-                      </button>
+                <div class='modal-body '>
+                  <div className="p-3">
+                    <div className="row">
+                      <div className="col-12 p-2">
+                        <div className="border p-2">
+                          <input type="text" class="form-control" className={styles.inp} value={location_search} placeholder="Enter Location" />
+                        </div>
                       </div>
                     </div>
-                  </form>
+                    <div className="row">
+                      <div className="col-6 p-2">
+                        <div className="border p-2">
+                          <DatePicker
+                            className={styles.datepick}
+                            value={startDate}
+                            onChange={handleChange1}
+                            minDate={Date.now()}
+                            selected={startDate}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="col-6 p-2">
+                        <div className="border p-2">
+                          <DatePicker
+                            className={styles.datepick}
+                            value={endDate}
+                            selected={endDate}
+                            onChange={handleChange2}
+
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="row">
+                      <div className="col-12 p-2">
+                        <div className="border ">
+                          <select
+                            class='custom-select'
+                            style={{ border: "none" }}
+                          >
+                            <option selected>Select Guests</option>
+                            <option value='1'>1 guest</option>
+                            <option value='2'>2 guests</option>
+                            <option value='3'>3 guests</option>
+                            <option value='4'>4 guests</option>
+                            <option value='5'>5 guests</option>
+                            <option value='6'>6 guests</option>
+                            <option value='7'>7 guests</option>
+                            <option value='8'>8 guests</option>
+                            <option value='9'>9 guests</option>
+                            <option value='10'>10 guests</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button
+                    type='button'
+                    class='btn btn-primary p-2 pr-4 pl-4'
+                    onClick={handleModifySearch}
+                    style={{
+                      borderRadius: '0px',
+                      fontSize: "12px",
+                    }}
+                  >
+                    Save Changes
+                  </button>
+
+                  <button
+                    type='button'
+                    class='btn btn-secondary p-2 pr-4 pl-4'
+                    data-dismiss="modal"
+                    style={{
+                      borderRadius: '0px',
+                      fontSize: "12px",
+                    }}
+                  >
+                    Close
+                  </button>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className='col'>
+          <div className='col-5'>
             {/* space for map */}
             <div className='position-fixed'>
               {data.length > 0 ? "" : ''}
@@ -1167,7 +1192,7 @@ export const FilterPage = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
     )
   }
   else {
@@ -1178,51 +1203,58 @@ export const FilterPage = (props) => {
 
         {/* container fluid */}
 
-        <div className='container-fluid m-4'>
+
+        <div className='container-fluid'>
           <div className='row'>
-            <div class='col'>
+            <div class='col-7'>
               {/* filter */}
               <div className='container p-3'>
-                <div className='row'>
-                  <div className='col'>
+                <div className='row ' >
+
+                  <div class="col" style={{ float: "left" }}>
                     <button
                       type='button'
-                      class='btn btn-outline-secondary'
+                      class='btn border'
                       data-toggle='modal'
                       data-target='#applyfilter'
-                    >
+                      style={{ fontSize: "12px" }}
+                    ><img src={filt} height="18px" className="mr-2" width="18px" />
                       APPLY FILTERS
                     </button>
                   </div>
-                  <div className='col'>
+
+                  <div class="col" style={{ float: "right" }}>
                     <button
                       type='button'
-                      class='btn btn-outline-secondary ml-5'
+                      class='btn border ml-5'
                       data-toggle='modal'
                       data-target='#modify'
-                    >
+                      style={{ fontSize: "12px" }}
+                    ><img src={cal} height="18px" className="mr-2" width="18px" />
                       MODIFY SEARCH
                     </button>
                   </div>
+
                 </div>
               </div>
               <hr />
 
               <div className='m-3'>
                 <small className='m-3 text-muted mr-5 ml-3'>
-                  Total results {data.length}
+                  <b>Total results {data.length}</b>
                 </small>
                 <div style={{ float: 'right' }}>
                   <label for='sortby'>
                     <small className='text-muted '>Sort By</small>
                   </label>
+
                   <select
-                    className='ml-1'
+                    className='ml-1 custom-select'
                     id='sortby'
                     value={filters['sort_by']}
                     onChange={(e) => handleSortBy(e)}
-                  >
-                    <option value='relevance'>Relevance</option>
+                    style={{ border: "none", width: "120px", fontSize: "14px" }} >
+                    <option value='relevance' className="text-primary">Relevance</option>
                     <option value='asc'>Price (Low to High)</option>
                     <option value='desc'>Price (High to low)</option>
                   </select>
@@ -1236,49 +1268,60 @@ export const FilterPage = (props) => {
                   return (
                     <div
                       class='card mb-3 shadow-sm p-3 mb-5 bg-white rounded'
+                      id={styles.prov}
                       style={{ maxWidth: '740px' }}
                     >
                       <div class='row no-gutters'>
-                        <div class='col-md-4 mt-4'>
+                        <div class='col-md-4 '>
                           <div
                             style={{
-                              backgroundImage: `url(${item.image_mid_large[0]})`,
-                              height: '100%',
+                              backgroundImage: `url(${item.image_large[2]})`,
+                              height: '110%',
+                              width: "300px",
                               backgroundSize: 'cover',
+                              padding: "0px",
+                              backgroundPosition: "center",
+                              marginTop: "-17px",
+                              marginLeft: "-15px"
                             }}
                           ></div>
                           {/* <img src={item.images_mid_large[0]} class="card-img" alt="..." /> */}
                         </div>
                         <div class='col-md-8'>
-                          <div class='card-body'>
-                            <h5 class='card-title'>
-                              {/* <a style={{ color: "black" }} href=""> */}
-                              <Link to={`/property/${item.id}`}>
+                          <div class='card-body ml-5'>
+                            <Link to={`/property/${item.id}`}>
+                              <p><small className="text-muted" >Ref#{item.id}</small></p>
+                              <h5 class='card-title' style={{ color: "black" }}>
+                                {/* <a  href=""> */}
+
                                 {item.title}
-                              </Link>
-                              {/* </a> */}
-                            </h5>
-                            <h6>
-                              <a href=''>{item.location_name}</a>
-                            </h6>
-                            {item.prop_tags.map((ele) => {
-                              return (
-                                <div
-                                  style={{
-                                    float: 'left',
-                                    margin: '10px',
-                                    border: '1px solid grey',
-                                    padding: '5px',
-                                  }}
-                                >
-                                  <small class='text-muted'>{ele}</small>
-                                </div>
-                              )
-                            })}
-                            <div style={{ clear: 'both' }}>
-                              <p>
-                                <h5>$ {item.total_price}</h5>
-                              </p>
+
+                                {/* </a> */}
+                              </h5>
+                              <h6>
+                                <a href=''>{item.location_name}</a>
+                              </h6>
+                              {item.prop_tags.map((ele) => {
+                                return (
+                                  <div
+                                    style={{
+                                      float: 'left',
+                                      margin: '10px',
+                                      padding: '5px',
+                                    }}
+                                    className="border"
+                                  >
+                                    <small style={{ color: "black" }}>{ele}</small>
+                                  </div>
+                                )
+                              })}
+                              <div style={{ clear: 'both' }}>
+                                <p>
+                                  <div style={{ color: "black", fontSize: "19px" }}><b>$ {item.total_price}</b></div>
+                                </p>
+                              </div>
+                            </Link>
+                            <div>
                               <small
                                 class='text-muted mt-3'
                                 style={{
@@ -1293,7 +1336,9 @@ export const FilterPage = (props) => {
                                 POLICY
                               </small>
                             </div>
+
                           </div>
+
                         </div>
                       </div>
                     </div>
@@ -1907,26 +1952,20 @@ export const FilterPage = (props) => {
 
                     {/* filterbutton */}
 
-                    <div class='modal-footer ' id={styles.last}>
-                      {/* <div>
-                        <button
-                          type='button'
-                          class='btn btn-outline-secondary '
-                          data-dismiss='modal'
-                        >
-                          CANCEL
-                        </button>
-                      </div> */}
-                      <div>
-                        <button
-                          type='button'
-                          name='applyfilter'
-                          class='btn btn-primary btn-md'
-                          onClick={handleApplyFilter}
-                        >
-                          APPLY
-                        </button>
-                      </div>
+                    <div class="modal-footer" style={{ marginTop: "-20px" }}>
+                      <button type="button" name='applyfilter' class='btn btn-primary p-2 pr-4 pl-4'
+                        onClick={handleApplyFilter}
+                        style={{
+                          borderRadius: '0px',
+                          fontSize: "12px",
+                        }}
+                      >Apply</button>
+                      <button type="button" class="btn btn-secondary p-2 pr-4 pl-4" data-dismiss="modal"
+                        style={{
+                          borderRadius: '0px',
+                          fontSize: "12px",
+                        }}
+                      >Close</button>
                     </div>
                   </div>
                 </div>
@@ -1957,72 +1996,96 @@ export const FilterPage = (props) => {
                       <span aria-hidden='true'>&times;</span>
                     </button>
                   </div>
-                  <div class='modal-body'>
-                    <form>
-                      <div class='form-group'>
-                        <input
-                          type='text'
-                          class=' m-3'
-                          id={styles.location}
-                          value={location_search}
-                          placeholder='LOCATION'
-                        />
-                        <DatePicker
-                          className={styles.datepick}
-                          selected={startDate}
-                          value={startDate}
-                          onChange={handleChange1}
-                        />
-                        <DatePicker
-                          className={styles.datepick}
-                          selected={endDate}
-                          value={endDate}
-                          onChange={handleChange2}
-                        />
-                        <div className='m-3'>
-                          <select
-                            class='custom-select'
-                            style={{ width: '180px', borderRadius: '0px' }}
-                          >
-                            <option selected>Select Guests</option>
-                            <option value='1'>1 guest</option>
-                            <option value='2'>2 guests</option>
-                            <option value='3'>3 guests</option>
-                            <option value='4'>4 guests</option>
-                            <option value='5'>5 guests</option>
-                            <option value='6'>6 guests</option>
-                            <option value='7'>7 guests</option>
-                            <option value='8'>8 guests</option>
-                            <option value='9'>9 guests</option>
-                            <option value='10'>10 guests</option>
-                          </select>
-                        </div>
-                        <div className='m-3'>
-                          <button
-                            type='button'
-                            class='btn btn-primary'
-                            onClick={handleModifySearch}
-                            style={{ borderRadius: '0px' }}
-                          >
-                            SEARCH
-                          </button>
 
-                          <button
-                            type='button'
-                            class='btn btn-secondary ml-3'
-                            data-dismiss='modal'
-                          >
-                            CANCEL
-                          </button>
+                  <div class='modal-body '>
+                    <div className="p-3">
+                      <div className="row">
+                        <div className="col-12 p-2">
+                          <div className="border p-2">
+                            <input type="text" class="form-control" className={styles.inp} value={location_search} placeholder="Enter Location" />
+                          </div>
                         </div>
                       </div>
-                    </form>
+                      <div className="row">
+                        <div className="col-6 p-2">
+                          <div className="border p-2">
+                            <DatePicker
+                              className={styles.datepick}
+                              value={startDate}
+                              onChange={handleChange1}
+                              minDate={Date.now()}
+                              selected={endDate}
+                            />
+                          </div>
+                        </div>
+
+                        <div className="col-6 p-2">
+                          <div className="border p-2">
+                            <DatePicker
+                              className={styles.datepick}
+                              value={endDate}
+                              onChange={handleChange2}
+                              selected={endDate}
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="row">
+                        <div className="col-12 p-2">
+                          <div className="border ">
+                            <select
+                              class='custom-select'
+                              style={{ border: "none" }}
+                            >
+                              <option selected>Select Guests</option>
+                              <option value='1'>1 guest</option>
+                              <option value='2'>2 guests</option>
+                              <option value='3'>3 guests</option>
+                              <option value='4'>4 guests</option>
+                              <option value='5'>5 guests</option>
+                              <option value='6'>6 guests</option>
+                              <option value='7'>7 guests</option>
+                              <option value='8'>8 guests</option>
+                              <option value='9'>9 guests</option>
+                              <option value='10'>10 guests</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                  <div class="modal-footer">
+                    <button
+                      type='button'
+                      class='btn btn-primary p-2 pr-4 pl-4'
+                      onClick={handleModifySearch}
+                      style={{
+                        borderRadius: '0px',
+                        fontSize: "12px",
+                      }}
+                    >
+                      Save Changes
+                  </button>
+
+                    <button
+                      type='button'
+                      class='btn btn-secondary p-2 pr-4 pl-4'
+                      data-dismiss="modal"
+                      style={{
+                        borderRadius: '0px',
+                        fontSize: "12px",
+                      }}
+                    >
+                      Close
+                  </button>
+                  </div>
+
                 </div>
               </div>
             </div>
 
-            <div className='col'>
+            <div className='col-5' style={{ backgroundColor: "rgb(232,232,232)" }}>
               {/* space for map */}
               <div className='position-fixed'>
                 {data.length > 0 ? <div style={{ width: "50vw", height: "100vh" }}>
