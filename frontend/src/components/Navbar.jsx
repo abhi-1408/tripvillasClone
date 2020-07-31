@@ -1,5 +1,6 @@
 import React from 'react'
 import $ from 'jquery'
+import { Link } from 'react-router-dom'
 import GoogleLogin from 'react-google-login'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
@@ -86,10 +87,8 @@ export const Navbar = () => {
         style={{ backgroundColor: 'rgb(38,38,38)', height: "60px" }}
       >
 
-        <a class='navbar-brand' href='/homepage'>
-          <img src={triplo} alt="logo" height="25px" width="141.017px" />
-
-        </a>
+        <Link to="/homepage" className='navbar-brand'>          <img src={triplo} alt="logo" height="25px" width="141.017px" />
+        </Link>
         <button
           class='navbar-toggler'
           type='button'

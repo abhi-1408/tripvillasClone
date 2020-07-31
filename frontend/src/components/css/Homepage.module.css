@@ -26,7 +26,7 @@
   background-repeat: no-repeat;
   background-size: 100% 145%;
   background-position: center;
-  
+ 
 }
 
 #child {
@@ -52,7 +52,7 @@
 }
 
 #datp {
-  width: 85px;
+  width: 115px;
   height: 42px;
   padding: 6px;
   border: none;
@@ -61,7 +61,7 @@
 }
 
 #datp1 {
-  width: 85px;
+  width: 115px;
   height: 42px;
   padding: 6px;
   border: none;
@@ -87,6 +87,11 @@
   -webkit-appearance:none; /* Safari and Chrome */
   appearance:none;
   
+}
+
+
+#auto{
+border: none;
 }
 
 

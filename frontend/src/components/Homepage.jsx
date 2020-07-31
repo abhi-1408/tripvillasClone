@@ -170,118 +170,118 @@ export const Homepage = (props) => {
 
         }}>
         <div className="row">
-          <h3 className='mt-3' style={{ color: "white" }}>
-            Book <strike>Hotels</strike> Vacation Rentals
+          <div className="col-12">
+            <h3 className='mt-3' style={{ color: "white" }}>
+              Book <strike>Hotels</strike> Vacation Rentals
           </h3>
-          <h3 style={{ color: "white" }}>Top Holiday Homes - Villas, Apartments & Homestays</h3>
-        </div>
-        <div>
-
-
-
-          <div class="row p-2"
-            style={{ backgroundColor: "white", border: "1px solid black" }}
-          >
-            <div class="col-4 border ">
-              <div className="pt-2">
-
-                {/* <input
-                  type='text'
-                  id={styles.kol}
-                  class=' input-search input-lg text-muted '
-
-                  value={search_location}
-                  style={{ paddingRight: "120px" }}
-                  onChange={(e) => handleLocationChg(e)}
-                /> */}
-                <PlacesAutocomplete value={search_location} onChange={setSearchLocation} onSelect={handleLocnSelect} debounce={500}>
-
-                  {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (<div style={{ color: "black" }}>
-                    <input {...getInputProps({ placeholder: "Location" })} />
-                    <div>
-                      {loading ? <div>...loading</div> : null}
-                      {suggestions.map((suggestion) => {
-                        const style = {
-                          backgroundColor: suggestion.active ? "grey" : "white"
-                        }
-                        // console.log('suggestions*******', suggestion)
-                        return <div {...getSuggestionItemProps(suggestion, { style })}>
-                          {suggestion.description}</div>
-                      })}
-                    </div>
-                  </div>)}
-
-                </PlacesAutocomplete>
-              </div>
-            </div>
-
-            <div class="col-2 border">
-              <div >
-                <DatePicker
-                  placeholderText='check In'
-                  id={styles.datp}
-                  value={startDate}
-                  selected={startDate}
-                  minDate={Date.now()}
-                  onChange={handleChange1}
-                />
-              </div>
-            </div>
-            <div class="col-2 border">
-              <div >
-                <DatePicker
-                  id={styles.datp1}
-                  selected={endDate}
-                  value={endDate}
-                  onSelect={handleChange2}
-                />
-              </div>
-            </div>
-            <div class="col-2 border ">
-              <div className="pt-2">
-                <select
-                  className='custom-select '
-                  style={{
-                    width: '150px',
-                    borderRadius: '0px',
-                    border: 'none',
-                    marginLeft: '-11px',
-                    fontSize: "14px",
-                    marginTop: "-5px"
-                  }}
-                >
-                  <option selected value='0' >
-                    Select Guests
-                  </option>
-                  <option value='1'>1 guest</option>
-                  <option value='2'>2 guests</option>
-                  <option value='3'>3 guests</option>
-                  <option value='4'>4 guests</option>
-                  <option value='5'>5 guests</option>
-                  <option value='6'>6 guests</option>
-                  <option value='7'>7 guests</option>
-                  <option value='8'>8 guests</option>
-                  <option value='9'>9 guests</option>
-                  <option value='10'>10 guests</option>
-                </select>
-
-              </div>
-            </div>
-            <div class="col-2 border">
-              <div>
-                <button
-                  type='button'
-                  class='btn btn-primary pl-5 '
-                  style={{ borderRadius: '0px', marginLeft: "-15px", paddingTop: "10px", paddingRight: "60px", paddingBottom: "11px", fontSize: "12px" }}
-                  onClick={handleSearch}
-                >
-                  SEARCH
-                </button>
-              </div>
-            </div>
+          </div>
+          <div className="col-12">
+            <h3 style={{ color: "white" }}>Top Holiday Homes - Villas, Apartments & Homestays</h3>
           </div>
         </div>
+
+        <div>
+
+          <PlacesAutocomplete value={search_location} style={{ width: "100%%", height: "47px" }} className="form-control" id={styles.auto} onChange={setSearchLocation} onSelect={handleLocnSelect} debounce={500}>
+            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (<div style={{ color: "black" }}>
+              <div class="row p-2"
+                style={{ backgroundColor: "white", border: "1px solid black" }}
+              >
+                <div class="col-4 border ">
+                  <div className="p-2">
+                    <input {...getInputProps({ placeholder: "Location" })} id={styles.auto} />
+
+                  </div>
+                </div>
+
+                <div class="col-2 border">
+                  <div >
+                    <DatePicker
+                      placeholderText='check In'
+                      id={styles.datp}
+                      value={startDate}
+                      selected={startDate}
+                      minDate={Date.now()}
+                      onChange={handleChange1}
+                    />
+                  </div>
+                </div>
+                <div class="col-2 border">
+                  <div >
+                    <DatePicker
+                      id={styles.datp1}
+                      selected={endDate}
+                      value={endDate}
+                      onSelect={handleChange2}
+                    />
+                  </div>
+                </div>
+                <div class="col-2 border ">
+                  <div className="pt-2">
+                    <select
+                      className='custom-select '
+                      style={{
+                        width: '150px',
+                        borderRadius: '0px',
+                        border: 'none',
+                        marginLeft: '-11px',
+                        fontSize: "14px",
+                        marginTop: "-5px"
+                      }}
+                    >
+                      <option selected value='0' >
+                        Select Guests
+                  </option>
+                      <option value='1'>1 guest</option>
+                      <option value='2'>2 guests</option>
+                      <option value='3'>3 guests</option>
+                      <option value='4'>4 guests</option>
+                      <option value='5'>5 guests</option>
+                      <option value='6'>6 guests</option>
+                      <option value='7'>7 guests</option>
+                      <option value='8'>8 guests</option>
+                      <option value='9'>9 guests</option>
+                      <option value='10'>10 guests</option>
+                    </select>
+
+                  </div>
+                </div>
+                <div class="col-2 border">
+                  <div>
+                    <button
+                      type='button'
+                      class='btn btn-primary pl-5 '
+                      style={{ borderRadius: '0px', marginLeft: "-15px", paddingTop: "10px", paddingRight: "60px", paddingBottom: "11px", fontSize: "12px" }}
+                      onClick={handleSearch}
+                    >
+                      SEARCH
+                </button>
+                  </div>
+                </div>
+              </div>
+              <div style={{ height: "0px", width: "300px", backgroundColor: "white" }}>
+                <div>
+
+                  {suggestions.map((suggestion) => {
+                    const style = {
+                      backgroundColor: suggestion.active ? "grey" : "white"
+                    }
+                    // console.log('suggestions*******', suggestion)
+                    return <div {...getSuggestionItemProps(suggestion, { style })}>
+                      <i class="fa fa-map-marker mr-2  ml-2 mt-1 text-muted" aria-hidden="true"></i>
+
+                      {suggestion.description} </div>
+                  })}
+                </div>
+
+              </div>
+            </div>)}
+          </PlacesAutocomplete>
+          {/* remaining */}
+        </div>
       </div>
+
+
 
 
       {/* <h3 className='mt-3' id={styles.searchele}>
