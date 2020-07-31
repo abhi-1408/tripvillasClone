@@ -19,7 +19,9 @@ export const Load_Data = (info) => {
     return dispatch => {
         return axios({
             method: "post",
+
             url: "http://tripvilla-api.abhisheksaklani.co/admin/allhotel",
+
             data: {}
         })
             .then((res) => res.data)
@@ -52,7 +54,9 @@ export const Apply_Filters = (info) => {
     return dispatch => {
         return axios({
             method: "get",
+
             url: "http://tripvilla-api.abhisheksaklani.co/admin/filter",
+
             params: info
         })
             .then((res) => res.data)
@@ -78,7 +82,9 @@ export const Load_Filtered_Data = (info) => {
         dispatch(ResetFilterPageFlag())
         return axios({
             method: "get",
+
             url: "http://tripvilla-api.abhisheksaklani.co/admin/filter",
+
             params: info
         })
             .then((res) => res.data.data)
@@ -111,7 +117,9 @@ export const Load_Specific_Review = (info) => {
     return dispatch => {
         return axios({
             method: "post",
+
             url: "http://tripvilla-api.abhisheksaklani.co/entity/getreview",
+
             data: info
         })
             .then((res) => res.data)
@@ -138,7 +146,9 @@ export const Load_Specific_Property = (info) => {
         dispatch(Update_Specific_Property_Flag())
         return axios({
             method: "post",
+
             url: "http://tripvilla-api.abhisheksaklani.co/entity/getprop",
+
             data: info
         })
             .then((res) => res.data)
@@ -180,7 +190,9 @@ export const Load_Recommended_Rating = (info) => {
     return dispatch => {
         return axios({
             method: "post",
+
             url: "http://tripvilla-api.abhisheksaklani.co/entity/getrecommendrating",
+
             data: info
         })
             .then((res) => res.data)
@@ -256,7 +268,9 @@ export const Update_in_Booking = (info) => {
         dispatch(ResetBookingFlag())
         return axios({
             method: "post",
+
             url: "http://tripvilla-api.abhisheksaklani.co/admin/create_booking",
+
             data: info
         })
             .then((res) => res.data)
@@ -276,7 +290,9 @@ export const Load_Recommended_State = (info) => {
     return dispatch => {
         return axios({
             method: "post",
+
             url: "http://tripvilla-api.abhisheksaklani.co/entity/getrecommendcity",
+
             data: info
         })
             .then((res) => res.data)
@@ -311,7 +327,9 @@ export const Specific_Hotel_Available_On_Date = (info) => {
         dispatch(Event_Check(info))
         return axios({
             method: "post",
+
             url: "http://tripvilla-api.abhisheksaklani.co/admin/avaispecific",
+
             data: info
         })
             .then((res) => res.data)

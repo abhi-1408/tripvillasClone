@@ -1,16 +1,16 @@
-import React from 'react';
-import { Route, Switch } from "react-router-dom"
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
 import { Homepage } from '../components/Homepage'
 import { FilterPage } from '../components/Filterpage'
 import { Propertypage } from '../components/Propertypage'
-import { Holidayhomes } from '../components/Holidayhomes';
-import { Map } from '../components/Map';
-import { WrappedMap } from '../components/GoogleMaps';
-import { Paymentpage } from '../components/Paymentpage';
-import { Form } from '../components/Form';
-
+import { Holidayhomes } from '../components/Holidayhomes'
+import { Map } from '../components/Map'
+import { WrappedMap } from '../components/GoogleMaps'
+import { Paymentpage } from '../components/Paymentpage'
+import { Form } from '../components/Form'
 
 export const Routes = () => {
+
     return (
         <Switch>
             {/* <Route path='/homepage' render={() => <div>HOMEPAGE</div>} /> */}
