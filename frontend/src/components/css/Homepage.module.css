@@ -25,11 +25,20 @@
     url('../imgurl/home.jpg');
   background-repeat: no-repeat;
   background-size: 100% 145%;
-  /* background-attachment: fixed; */
   background-position: center;
+  
+}
 
-  height: '530px';
-  width: '100%';
+#child {
+  width: 300px;
+  height: 100px;
+  padding: 20px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  margin: -70px 0 0 -170px;
 }
 
 #smallcard {
@@ -43,19 +52,43 @@
 }
 
 #datp {
-  border-radius: 0px !important;
-  border-color: rgb(163, 157, 157) !important;
-  width: 190px;
+  width: 85px;
+  height: 42px;
   padding: 6px;
-  color: rgb(102, 101, 101);
+  border: none;
+  color: #666;
+  padding-left: 8px;
 }
 
 #datp1 {
-  border-radius: 0px !important;
-  width: 190px;
+  width: 85px;
+  height: 42px;
   padding: 6px;
-  color: rgb(102, 101, 101);
+  border: none;
+  color: #666;
+  padding-left: 8px;
 }
+
+
+
+#bod{
+  
+  padding:10px;
+  width: "1000px";
+  
+}
+#kol
+{
+  border:none
+}
+#sel{
+  border:none;
+  -moz-appearance:none; /* Firefox */
+  -webkit-appearance:none; /* Safari and Chrome */
+  appearance:none;
+  
+}
+
 
 #pro:hover {
   box-shadow: 0 0 11px rgba(24, 23, 23, 0.2);
@@ -63,6 +96,6 @@
 
 @media (max-width: 320px) and (max-width: 480px) {
   body {
-    background-color: rgb(168, 187, 58);
+    background-color: rgb(53, 51, 51);
   }
 }

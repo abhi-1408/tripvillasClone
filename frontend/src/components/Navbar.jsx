@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react'
 import { Register_Fetch } from '../Redux/register/action'
 import { Login_Fetch, Login_Google_Fetch } from '../Redux/login/action'
 import { Logout_User } from '../Redux/login/action'
+import triplo from './imgurl/triplo.png'
+import pro1 from './imgurl/pro1.png'
 
 export const Navbar = () => {
   const [r_email, setREmail] = useState('')
@@ -81,10 +83,10 @@ export const Navbar = () => {
     <div>
       <nav
         class='navbar navbar-expand-lg navbar-dark '
-        style={{ backgroundColor: 'rgb(38,38,38)' }}
+        style={{ backgroundColor: 'rgb(38,38,38)', height: "60px" }}
       >
         <a class='navbar-brand' href='/homepage'>
-          tripvillas
+          <img src={triplo} alt="logo" height="25px" width="141.017px" />
         </a>
         <button
           class='navbar-toggler'
@@ -132,36 +134,37 @@ export const Navbar = () => {
                 </div>
               </li>
             ) : (
-              <li class='nav-item dropdown'>
-                <a
-                  class='nav-link dropdown-toggle '
-                  href='#'
-                  id='navbarDropdown'
-                  role='button'
-                  data-toggle='dropdown'
-                  aria-haspopup='true'
-                  aria-expanded='false'
-                >
-                  Profile
-                </a>
-                <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                <li class='nav-item dropdown'>
                   <a
-                    class='dropdown-item'
-                    data-toggle='modal'
-                    data-target='#exampleModal'
+                    class='nav-link dropdown-toggle '
+                    href='#'
+                    id='navbarDropdown'
+                    role='button'
+                    data-toggle='dropdown'
+                    aria-haspopup='true'
+                    aria-expanded='false'
                   >
-                    SIGNIN
+
+                    <img src={pro1} alt="profile" height="25px" width="20px" />
                   </a>
-                  <a
-                    class='dropdown-item'
-                    data-toggle='modal'
-                    data-target='#exampleModal1'
-                  >
-                    SIGNUP
+                  <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                    <a
+                      class='dropdown-item'
+                      data-toggle='modal'
+                      data-target='#exampleModal'
+                    >
+                      SIGNIN
                   </a>
-                </div>
-              </li>
-            )}
+                    <a
+                      class='dropdown-item'
+                      data-toggle='modal'
+                      data-target='#exampleModal1'
+                    >
+                      SIGNUP
+                  </a>
+                  </div>
+                </li>
+              )}
 
             <li class='nav-item dropdown'>
               <a
@@ -276,8 +279,8 @@ export const Navbar = () => {
                     {message_logged}
                   </div>
                 ) : (
-                  ''
-                )}
+                    ''
+                  )}
               </div>
               <div class='form-group'>
                 <label for='exampleInputEmail1'>Email address</label>

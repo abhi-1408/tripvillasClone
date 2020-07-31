@@ -26,7 +26,7 @@ const GoogleMaps = (props) => {
                     position={{ "lat": parseFloat(selectedHotel['lat']), "lng": parseFloat(selectedHotel['lng']) }}
                     onCloseClick={() => { setSelectedHotel(null) }}
                 >
-                    <div><h3>PropID#{selectedHotel['id']}</h3><h5>{selectedHotel['title']}</h5></div></InfoWindow>)}
+                    <div><p><b>PropID#{selectedHotel['id']}</b></p> <h5 class="text-primary">{selectedHotel['title']}</h5></div></InfoWindow>)}
             </GoogleMap>
 
 
