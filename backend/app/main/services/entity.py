@@ -138,7 +138,7 @@ def get_all_review_of_a_property(data):
 
 def get_recommended_property(data):
 
-
+    print('got data as',data)
     all_unav = []
     if 'check_in' and 'check_out' in data:
         res11 = Hotel.query.all()
@@ -160,11 +160,17 @@ def get_recommended_property(data):
         print('unavailable***************',unavailable)
 
         all_unav = list(unavailable)
+        all_unav.append(int(data['hotel_id']))
 
     # matching the number of max amenities that are same
-    item = RoomMeta.query.filter(RoomMeta.hotel_id == data['hotel_id']).first()
+    item = RoomMeta.query.filter(RoomMeta.hotel_id == int(data['hotel_id'])).first()
 
-    results1 = Hotel.query.filter(Hotel.state.like(data['state'])).all()
+    state_data = Hotel.query.filter(Hotel.id==int(data['hotel_id'])).first()
+    state = state_data.state 
+    price = item.total_price
+    # print("states r same22",state,data['state'])
+    # return state
+    results1 = Hotel.query.filter(Hotel.state.like(state)).all()
 
     
     for hotel in results1:
@@ -206,6 +212,7 @@ def get_recommended_property(data):
         if item.washing_machine == room.washing_machine:
             hotel.matching = hotel.matching + 1
 
+
         db.session.add(hotel)
         db.session.commit()
        
@@ -214,16 +221,16 @@ def get_recommended_property(data):
 
 
 
-    results = Hotel.query.filter(Hotel.state.like(data['state'])).order_by(desc(Hotel.matching)).all()
+    results = Hotel.query.filter(Hotel.state.like(state)).order_by(desc(Hotel.matching)).all()
 
     res = []
     added_in_res = set()
     for hotel in results:
         temp_dict = {}
         hotel_id = hotel.id
-        if hotel_id not in unavailable:
+        if hotel_id not in all_unav:
             room = RoomMeta.query.filter(RoomMeta.hotel_id==hotel_id).first()
-            if room.total_price <= data['total_price'] + 100  and room.total_price >= data['total_price'] - 100:
+            if room.total_price <= price + 100  and room.total_price >= price - 100:
                 temp_dict['id'] = hotel.id
                 added_in_res.add(hotel.id)
                 temp_dict['title'] = hotel.title
@@ -287,11 +294,11 @@ def get_recommended_property(data):
                 res.append(temp_dict)
     
     if len(res)<5:
-        results = Hotel.query.filter(Hotel.state.like(data['state'])).order_by(func.rand()).all()
+        results = Hotel.query.filter(Hotel.state.like(state)).order_by(func.rand()).all()
         for hotel in results:
             temp_dict = {}
             hotel_id = hotel.id
-            if hotel_id not in added_in_res:
+            if hotel_id not in added_in_res and hotel_id not in all_unav:
                 room = RoomMeta.query.filter(RoomMeta.hotel_id==hotel_id).first()
                 temp_dict['id'] = hotel.id
                 temp_dict['title'] = hotel.title

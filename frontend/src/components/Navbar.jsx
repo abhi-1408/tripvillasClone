@@ -83,7 +83,7 @@ export const Navbar = () => {
         class='navbar navbar-expand-lg navbar-dark '
         style={{ backgroundColor: 'rgb(38,38,38)' }}
       >
-        <a class='navbar-brand' href='/homepage'>
+        <a class='navbar-brand' href='/'>
           tripvillas
         </a>
         <button
@@ -132,36 +132,36 @@ export const Navbar = () => {
                 </div>
               </li>
             ) : (
-              <li class='nav-item dropdown'>
-                <a
-                  class='nav-link dropdown-toggle '
-                  href='#'
-                  id='navbarDropdown'
-                  role='button'
-                  data-toggle='dropdown'
-                  aria-haspopup='true'
-                  aria-expanded='false'
-                >
-                  Profile
+                <li class='nav-item dropdown'>
+                  <a
+                    class='nav-link dropdown-toggle '
+                    href='#'
+                    id='navbarDropdown'
+                    role='button'
+                    data-toggle='dropdown'
+                    aria-haspopup='true'
+                    aria-expanded='false'
+                  >
+                    Profile
                 </a>
-                <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
-                  <a
-                    class='dropdown-item'
-                    data-toggle='modal'
-                    data-target='#exampleModal'
-                  >
-                    SIGNIN
+                  <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                    <a
+                      class='dropdown-item'
+                      data-toggle='modal'
+                      data-target='#exampleModal'
+                    >
+                      SIGNIN
                   </a>
-                  <a
-                    class='dropdown-item'
-                    data-toggle='modal'
-                    data-target='#exampleModal1'
-                  >
-                    SIGNUP
+                    <a
+                      class='dropdown-item'
+                      data-toggle='modal'
+                      data-target='#exampleModal1'
+                    >
+                      SIGNUP
                   </a>
-                </div>
-              </li>
-            )}
+                  </div>
+                </li>
+              )}
 
             <li class='nav-item dropdown'>
               <a
@@ -276,8 +276,8 @@ export const Navbar = () => {
                     {message_logged}
                   </div>
                 ) : (
-                  ''
-                )}
+                    ''
+                  )}
               </div>
               <div class='form-group'>
                 <label for='exampleInputEmail1'>Email address</label>

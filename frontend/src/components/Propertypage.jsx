@@ -14,10 +14,14 @@ import {
     Load_Specific_Property,
     Specific_Hotel_Available_On_Date,
     LoadBookingData,
+    Recommend_By_Specific_Hotel
 } from '../Redux/common/action'
 import { useHistory } from 'react-router'
 import ReactGa from 'react-ga'
-import Skeleton from '@material-ui/lab/Skeleton';
+import { Skeleton, Rating } from '@material-ui/lab';
+import InfiniteCarousel from 'react-leaf-carousel'
+import { Link } from 'react-router-dom'
+
 
 
 
@@ -25,11 +29,12 @@ export const Propertypage = (props) => {
     console.log('props of property page', props)
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
+    const [unitsVal, setUnits] = useState(1)
 
     let log = useSelector((state) => state.login);
     let { auth_logged } = log
     let common = useSelector((state) => state.common);
-    const { property_data, filters, message, message_flag, specific_property_flag } = common
+    const { property_data, filters, message, message_flag, specific_property_flag, recommend_specific_flag, recommended_specific } = common
     let dispatch = useDispatch()
 
     useEffect(() => {
@@ -42,8 +47,15 @@ export const Propertypage = (props) => {
         let sd = filters['start_date'].getFullYear() + "-" + (filters['start_date'].getMonth() + 1) + "-" + filters['start_date'].getDate();
         let ed = filters['end_date'].getFullYear() + "-" + (filters['end_date'].getMonth() + 1) + "-" + filters['end_date'].getDate();
         dispatch(Specific_Hotel_Available_On_Date({ "check_in": sd, "check_out": ed, "hotel_id": props.match.params['id'] }))
+        dispatch(
+            Recommend_By_Specific_Hotel({
+                check_in: sd,
+                check_out: ed,
+                hotel_id: props.match.params['id'],
 
-    }, [])
+            })
+        )
+    }, [props.match.params.id])
 
     // useEffect(() => {
     //     if (!auth_logged) {
@@ -128,7 +140,7 @@ export const Propertypage = (props) => {
                 "property": property_data[0], "check_in": sd,
                 "check_out": ed,
                 "guests": 1,
-                "units": 1,
+                "units": unitsVal,
                 "total_cost": {
                     "sub_total": property_data[0]['total_price'],
                     "discount": "0",
@@ -168,6 +180,14 @@ export const Propertypage = (props) => {
                 hotel_id: props.match.params['id'],
             })
         )
+        dispatch(
+            Recommend_By_Specific_Hotel({
+                check_in: sd,
+                check_out: ed,
+                hotel_id: props.match.params['id'],
+
+            })
+        )
         console.log('start date clicked date is', startDate)
     }
 
@@ -197,7 +217,26 @@ export const Propertypage = (props) => {
                 hotel_id: props.match.params['id'],
             })
         )
+        dispatch(
+            Recommend_By_Specific_Hotel({
+                check_in: sd,
+                check_out: ed,
+                hotel_id: props.match.params['id'],
+
+            })
+        )
         console.log('end date clicked')
+    }
+
+
+    const handleUnitChg = e => {
+        console.log('unit changed ', e, e.target.value)
+        setUnits(parseInt(e.target.value) + 1)
+    }
+    // let history = useHistory()
+    const handlePath = e => {
+        console.log('handle path clicked', e.target.name)
+        history.push('/property/' + e.target.name)
     }
 
 
@@ -312,6 +351,15 @@ export const Propertypage = (props) => {
                                                 style={{ color: 'grey' }}
                                             >
                                                 POLICIES & FEES
+                        </a>
+                                        </li>
+                                        <li class='nav-item'>
+                                            <a
+                                                class='nav-link'
+                                                href='#recommend'
+                                                style={{ color: 'grey' }}
+                                            >
+                                                RECOMMENDED
                         </a>
                                         </li>
                                     </ul>
@@ -656,10 +704,12 @@ export const Propertypage = (props) => {
                                     <div class='col-5 pl-5 pr-5 pb-5 '>
                                         <h3>{item.title}</h3>
                                         <div className='text-muted'>{item.location_name}</div>
-                                        {item.review_count > 0 ? (
+                                        {item.review_count > 0 ? (<>
                                             <div style={{ color: 'blue' }}>
                                                 {item.review_count} reviews
                                             </div>
+                                            <Rating value={parseFloat(item.review_rating)} readOnly precision={0.1} />
+                                        </>
                                         ) : (
                                                 ''
                                             )}
@@ -1134,7 +1184,7 @@ export const Propertypage = (props) => {
 
                                 {/* map */}
 
-                                <div style={{ marginTop: '50px' }} className='ml-4 mr-4 '>
+                                <div style={{ marginTop: '50px' }} className='ml-4 mr-4 ' id="map">
                                     <h3>Maps</h3>
                                     {/* <h3 id='map'><WrappedStaticMap {...mapdata} googleMapURL={"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCcS0j7hDpSs-F4xDi2q6AkTD_sWqECR9M"}
                                         loadingElement={<div style={{ height: "100%" }} />}
@@ -1198,7 +1248,145 @@ export const Propertypage = (props) => {
                                         </div>
                                     </div>
                                 </div>
+                                {/* recommended hotel */}
+                                <div style={{ marginTop: '50px' }} className='ml-4 mr-4 '>
+
+                                    <h3 id='recommend'>Recommended</h3>
+                                    <hr style={{ marginTop: '40px' }} />
+
+                                    {/* {recommend_specific_flag ? <><h1>flagistrue</h1>
+                                        {recommend_specific.map((eee) => {
+                                            return <h1>eleis{eee.id}</h1>
+                                        })}</>
+                                        : "flag false"} */}
+                                    {recommend_specific_flag ? <>
+                                        {/* <h2>flag is true</h2><div>{recommended_specific.map((ee) => {
+                                        return (<h2>id#{ee.id}</h2>)
+                                    })}</div> */}
+                                        <InfiniteCarousel
+                                            breakpoints={[
+                                                {
+                                                    breakpoint: 500,
+                                                    settings: {
+                                                        slidesToShow: 2,
+                                                        slidesToScroll: 2,
+                                                    },
+                                                },
+                                                {
+                                                    breakpoint: 768,
+                                                    settings: {
+                                                        slidesToShow: 3,
+                                                        slidesToScroll: 3,
+                                                    },
+                                                },
+                                            ]}
+                                            dots={true}
+                                            showSides={true}
+                                            sidesOpacity={0.5}
+                                            sideSize={0.1}
+                                            slidesToScroll={4}
+                                            slidesToShow={4}
+                                            scrollOnDevice={true}
+                                        >
+                                            {/* map cards */}
+                                            {recommended_specific && recommended_specific.map((ele) => (
+
+                                                <div className='col-12' id={styles.pro}>
+                                                    <div
+                                                        style={{
+                                                            backgroundImage: `url(${ele['image_medium'][1]})`,
+                                                            backgroundRepeat: 'no-repeat',
+                                                            height: '180px',
+                                                            width: '180px',
+                                                        }}
+                                                    ></div>
+                                                    <div className='p-3' style={{ height: '250px' }}>
+                                                        <Link to={`/property/${ele['id']}`}>
+                                                            <small className='text-muted mb-2'>
+                                                                {/* <button name={`${ele['id']}`} onClick={e => handlePath(e)}> */}
+                                                                Ref Id#{ele['id']}
+                                                                {/* </button> */}
+                                                            </small>
+                                                        </Link>
+                                                        <p style={{ fontSize: '14px' }}>
+                                                            {ele['title']}
+                                                            <p>
+                                                                <p className='text-muted'>{ele['location_name']}</p>
+                                                            </p>
+                                                        </p>
+
+                                                        <p>
+                                                            <small>
+                                                                {ele['property_type']} | {ele['number_of_bathrooms']}{' '}
+                                           Bath | {ele['number_of_rooms']} BR | {ele['occupancy']}{' '}
+                                           Guests
+                                         </small>
+                                                        </p>
+                                                        <p>
+                                                            ${ele['total_price']}
+                                                            <small className='text-muted'> pernight</small>
+                                                        </p>
+
+                                                    </div>
+                                                </div>
+                                            )
+                                            )}
+                                        </InfiniteCarousel>
+                                    </>
+                                        :
+                                        <InfiniteCarousel
+                                            breakpoints={[
+                                                {
+                                                    breakpoint: 500,
+                                                    settings: {
+                                                        slidesToShow: 2,
+                                                        slidesToScroll: 2,
+                                                    },
+                                                },
+                                                {
+                                                    breakpoint: 768,
+                                                    settings: {
+                                                        slidesToShow: 3,
+                                                        slidesToScroll: 3,
+                                                    },
+                                                },
+                                            ]}
+                                            dots={true}
+                                            showSides={true}
+                                            sidesOpacity={0.5}
+                                            sideSize={0.1}
+                                            slidesToScroll={4}
+                                            slidesToShow={4}
+                                            scrollOnDevice={true}
+                                        >
+
+                                            {Array.from(Array(5), (e, i) => {
+                                                return (
+                                                    <div className='col-12' id={styles.pro}>
+
+
+                                                        <Skeleton variant="rect" width={180} height={200} />
+                                                        <div style={{ height: '200px' }}>
+
+                                                            <Skeleton variant="text" width={150} />
+
+                                                            <Skeleton variant="text" width={100} />
+
+                                                            <Skeleton variant="rect" width={150} height={40} />
+
+                                                            <Skeleton variant="text" width={100} />
+
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })}
+                                        </InfiniteCarousel>
+                                    }
+                                </div>
+
+                                <div style={{ marginTop: '50px', marginBottom: "100px" }} className='ml-4 mr-4 '></div>
                             </div>
+
 
                             {/* sideForm */}
                             <div className='col-3 ' style={{ height: '800px' }}>
@@ -1220,13 +1408,14 @@ export const Propertypage = (props) => {
                                             width: '260px',
                                             marginTop: '50px',
                                         }}
+                                        onChange={e => handleUnitChg(e)}
                                     >
                                         <option selected value='0'>
                                             Select Units
                       </option>
                                         {}
                                         {Array.from(Array(item.number_of_rooms), (e, i) => {
-                                            return <option value='{i+1} unit'>{i + 1} units</option>
+                                            return <option value={`${i}`}>{i + 1} units</option>
                                         })}
 
                                         {/* <option value='2 units'>2 units</option>
