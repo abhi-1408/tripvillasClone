@@ -6,7 +6,7 @@ import { useHistory } from 'react-router'
 export const Paymentpage = (props) => {
   let history = useHistory()
   setTimeout(() => {
-    history.push('/homepage')
+    history.push('/')
   }, 4000)
 
   return (

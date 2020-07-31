@@ -31,7 +31,9 @@ export const Login_Fetch = (info) => {
   return (dispatch) => {
     return axios({
       method: 'post',
-      url: 'http://b339dbc6e266.ngrok.io/user/signin',
+
+      url: 'http://tripvilla-api.abhisheksaklani.co/user/signin',
+
       data: info,
     })
       .then((res) => res.data)
@@ -55,7 +57,9 @@ export const Login_Google_Fetch = (info) => {
   return (dispatch) => {
     return axios({
       method: 'post',
-      url: 'http://b339dbc6e266.ngrok.io/user/oauth_signin',
+
+      url: 'http://tripvilla-api.abhisheksaklani.co/user/oauth_signin',
+
       data: info,
     })
       .then((res) => res.data)
