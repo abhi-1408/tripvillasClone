@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 // import styles from './Form.module.css'
 import dum3 from './imgurl/dum3.jpeg'
-
+import styles from './css/Book.module.css'
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Update_in_Booking, Update_Payment_Flag } from '../Redux/common/action'
 import ReactGa from 'react-ga'
 import $ from 'jquery'
-
+import tick from './imgurl/tick.gif'
 export const Form = (props) => {
   let common = useSelector((state) => state.common)
   const { booking_data, booking_confirmed_details, booking_flag, payment_success, booking_sms_email_flag } = common
@@ -116,6 +116,7 @@ export const Form = (props) => {
 
   const modal = () => {
     window.$('#loadingModal').modal('show')
+    window.$("#blurr").blur()
     // setTimeout(() => {
     //   console.log('completed')
     //   window.$('#loadingModal').modal('hide')
@@ -139,7 +140,7 @@ export const Form = (props) => {
       history.push(
         '/booking-confirm/' + booking_confirmed_details['order_number']
       )
-    }, 2000);
+    }, 5000);
   }
 
 
@@ -151,8 +152,8 @@ export const Form = (props) => {
 
   return (
 
-    <div className='pl-5 pr-5 pb-5 pt-4 mt-3'>
-      <div class='modal fade' id='loadingModal' tabindex='-1' role='dialog'>
+    <div className='pl-5 pr-5 pb-5 pt-4 mt-3' id="blurr">
+      {/* <div class='modal fade' id='loadingModal' tabindex='-1' role='dialog'>
         <div
           class='modal-dialog modal-dialog-centered d-flex justify-content-center'
           role='document'
@@ -178,7 +179,45 @@ export const Form = (props) => {
           </div>
 
         </div>
+      </div> */}
+
+
+      {/* gif modal */}
+
+      <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div style={{ paddingRight: "27%", paddingLeft: "27%", paddingTop: "40%", paddingBottom: "40%" }}>
+            <div style={{ width: "400px", padding: "6px" }}>
+
+              {payment_success ?
+                <h5 className="mb-2" style={{ color: "white" }}>
+                  <img width="40pxpx" height="40pxpx" src={tick} />
+                  <b> Payment confirmed</b></h5> : ""}
+
+              {payment_success && booking_sms_email_flag ?
+                <h5 className="mb-2" style={{ color: "white", fontSize: "20px" }}>
+                  <img width="40pxpx" height="40pxpx" src={tick} />
+                  <b> Email & SMS sent</b></h5> : ""}
+
+              {payment_success && booking_sms_email_flag ?
+                <h5 className="mb-2" style={{ color: "white", fontSize: "20px" }}>
+                  <img width="40pxpx" height="40pxpx" src={tick} />
+                  <b> Order Confirmed</b></h5> : ""}
+
+
+            </div>
+          </div>
+        </div>
       </div>
+
+
+
+
+
+
+
+
+
 
       <div className='row p-2'>
         <div className='col-6 pl-3 pb-3 pr-3'>
