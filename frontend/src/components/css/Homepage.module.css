@@ -2,10 +2,17 @@
   width: 170px;
 }
 
-#topdestination {
-  font-size: 1.5rem;
-  font-weight: 300;
+#topdes {
+ position: relative;
+ z-index: 1;
 }
+
+#debo
+{
+  position: absolute;
+  z-index: 20;
+}
+
 
 .cara {
   margin: 15px;

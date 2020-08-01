@@ -343,4 +343,29 @@ export const Specific_Hotel_Available_On_Date = (info) => {
     }
 }
 
+export const Apply_User_Booking_List = (data) => {
+    return {
+        type: "UPDATE_USER_BOOKING_LIST",
+        payload: data
+    }
+}
 
+export const Load_User_Booking_List = (info) => {
+    return dispatch => {
+        return axios({
+            method: "post",
+
+            url: "http://tripvilla-api.abhisheksaklani.co/user/allbooking",
+
+            data: info
+        })
+            .then((res) => res.data)
+            .then((data) => {
+                dispatch(Apply_User_Booking_List(data))
+            })
+            .catch((err) => {
+                console.log(err)
+
+            })
+    }
+}

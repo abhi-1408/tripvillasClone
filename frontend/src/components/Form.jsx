@@ -318,7 +318,7 @@ export const Form = (props) => {
               <div className='text-center shadow bg-white rounded p-4 '>
                 <p className='mt-2'>
                   {' '}
-                  <b>{booking_data[0].property.max_guests}</b>
+                  <b>2</b>
                 </p>
                 <p>
                   <small>Guests</small>
@@ -331,7 +331,7 @@ export const Form = (props) => {
                 <p className='mt-2'>
                   {' '}
 
-                  <b>{booking_data[0][`property`][`total_units`]}</b>
+                  <b>1</b>
 
 
                 </p>
@@ -341,33 +341,53 @@ export const Form = (props) => {
               </div>
             </div>
           </div>
+
+          <div className="row mt-5" style={{ width: "100%" }}>
+
+            <table style={{ width: "100%" }}>
+              <tr>
+                <td><div style={{ float: "left" }}>Sub Total</div></td>
+                <td> <div style={{ float: "right" }}>{booking_data[0].total_cost.sub_total}</div></td>
+              </tr>
+              <tr>
+                <td> <div style={{ float: "left" }}>Discount</div></td>
+                <td><div style={{ float: "right" }}>
+                  {booking_data[0].total_cost.discount}</div></td>
+              </tr>
+              <tr>
+                <td> <div style={{ float: "left" }}> Tax</div></td>
+                <td><div style={{ float: "right" }}>
+                  {booking_data[0].total_cost.tax}</div></td>
+              </tr>
+              <tr>
+                <td> <div style={{ float: "left" }}> Cleaning
+              fee</div></td>
+                <td><div style={{ float: "right" }}>
+                  {booking_data[0].total_cost.cleaning_tax}</div></td>
+              </tr>
+              <tr>
+                <td> <div style={{ float: "left" }}> <b>Total</b>
+                </div></td>
+                <td><div style={{ float: "right" }}><b>
+                  {booking_data[0].total_cost.total}</b></div></td>
+              </tr>
+
+            </table>
+
+
+
+
+
+
+
+
+
+
+
+          </div>
+
+
           <div className='row mt-3 '>
-            <div className='mt-4'>
-              Sub
-              Total.....................................................................................................................
-              {booking_data[0].total_cost.sub_total}
-            </div>
-            <div className='mt-4'>
-              Discount......................................................................................................................
-              {booking_data[0].total_cost.discount}
-            </div>
-            <div className='mt-4'>
-              Tax................................................................................................................................
-              {booking_data[0].total_cost.tax}
-            </div>
-
-            <div className='mt-4'>
-              Cleaning
-              fee.................................................................................................................
-              {booking_data[0].total_cost.cleaning_tax}
-            </div>
-            <div className='mt-4'>
-              <hr />
-              Total..............................................................................................................................
-              {booking_data[0].total_cost.total}
-              <hr />
-            </div>
-
             <div className='mt-5' style={{ color: 'grey', fontSize: '15px' }}>
               <b>Rate Plan</b>
               <p className='mb-4'>No meals provided (European Plan) </p>
