@@ -3,6 +3,7 @@ from flask import request,redirect,jsonify
 from ..services.alluser import register_user,login_user
 from ..services.useroauth import user_o_auth_check
 from ..services.verification import user_reset_query,user_reset_response
+from ..services.booking import all_booking
 import json
 
 
@@ -56,3 +57,11 @@ def reset_resp(token,email):
 
     return json.dumps(res)
     # return res
+
+
+@user.route('/allbooking',methods=['POST'])
+def get_all_booking():
+    data = request.get_json()
+    res = all_booking(data)
+
+    return json.dumps(res)

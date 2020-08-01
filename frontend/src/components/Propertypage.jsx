@@ -1236,10 +1236,15 @@ export const Propertypage = (props) => {
                             </div>
 
                             {/* sideForm */}
-                            <div className='col-3 ' style={{ height: '800px' }}>
-                                <div style={{ position: 'fixed' }} className='p-3 '>
+                            <div className='col-3' style={{ height: '800px' }}>
+                                <div style={{ position: 'fixed' }} className='p-3'>
                                     <h5 className='text-muted'>Starting</h5>
+
                                     <h2>$ {item.total_price}  </h2>  <h6 className='text-muted'>Pernight</h6>
+
+
+<!--                                     <h1>$ {item.total_price}</h1> -->
+<!--                                     <h5 className='text-muted'>Pernight</h5> -->
 
                                     {!message_flag ? (
                                         <div
@@ -1248,7 +1253,11 @@ export const Propertypage = (props) => {
                                                 backgroundColor: 'rgb(254,244,246) ',
                                             }}
                                         >
+
                                             <div className='text-center m-2 p-3 ' style={{ color: 'rgb(240,80,110) ' }}>
+
+<!--                                             <div className='text-center m-2 p-3' style={{ color: 'rgb(240,80,110) ' }}> -->
+
                                                 <b><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></b> {message}
                                             </div>
                                             <div>{/* BOOKING FLAG {booking_flag ? "true" : "false"} */}</div>
@@ -1266,6 +1275,26 @@ export const Propertypage = (props) => {
                                                 <div>{/* BOOKING FLAG {booking_flag ? "true" : "false"} */}</div>
                                             </div>
                                         )}
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <select
+                                                class='custom-select '
+                                                style={{
+                                                    width: '180px',
+                                                    borderRadius: '0px',
+                                                    width: '260px',
+                                                    marginTop: '50px',
+                                                }}
+                                                onChange={e => handleUnitChg(e)}
+                                            >
+                                                <option selected value='0'>
+                                                    Select Units
+                                                </option>
+                                                {}
+                                                {Array.from(Array(item.number_of_rooms), (e, i) => {
+                                                    return <option value={`${i}`}>{i + 1} units</option>
+                                                })}
+
 
                                     <select
                                         class='custom-select '
@@ -1307,11 +1336,46 @@ export const Propertypage = (props) => {
                                                     selected={endDate}
                                                     value={endDate}
                                                     popperPlacement="left-end"
+
+<!--                                                 {/* <option value='2 units'>2 units</option>
+                                        <option value='3 units'>3 units</option> */}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div className='row pt-4'>
+                                        {/* <div className="col-1"></div> */}
+                                        <div className="row px-4 ">
+
+                                            <div className='col-5 border' style={{ marginLeft: "5px" }}>
+                                                <DatePicker
+                                                    className={styles.datepick1}
+                                                    // id={styles.datp}
+                                                    selected={startDate}
+                                                    value={startDate}
+                                                    minDate={Date.now()}
+                                                    onSelect={handleChange1}
+
+                                                />
+                                            </div>
+
+                                            <div className='col-5 border' style={{}}>
+                                                <DatePicker
+                                                    popperPlacement="bottom-end"
+                                                    className={styles.datepick2}
+                                                    // id={styles.datp1}
+                                                    minDate={Date.now()}
+                                                    selected={endDate}
+                                                    value={endDate} -->
+
                                                     onSelect={handleChange2}
                                                 />
                                             </div>
                                         </div>
+
                                     </div>
+
+
 
                                     <select
                                         class='custom-select mt-2'
@@ -1355,7 +1419,7 @@ export const Propertypage = (props) => {
                           fees
                         </small>
                                             <small style={{ float: 'right', marginRight: '20px' }}>
-                                                <a href=''>view details</a>
+                                                <a href='#'>view details</a>
                                             </small>
                                             <button
                                                 id={styles.searchbut}
