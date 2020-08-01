@@ -171,11 +171,16 @@ export const Homepage = (props) => {
         }}>
         <div className="row">
           <div className="col-12">
+
             <h3 className='mt-3' style={{ color: "white" }}>
               Book <strike>Hotels</strike> Vacation Rentals
           </h3>
           </div>
+
+          {/* <br /> */}
           <div className="col-12">
+
+
             <h3 style={{ color: "white" }}>Top Holiday Homes - Villas, Apartments & Homestays</h3>
           </div>
         </div>
@@ -193,6 +198,7 @@ export const Homepage = (props) => {
 
                   </div>
                 </div>
+
 
                 <div class="col-2 border">
                   <div >
@@ -258,6 +264,7 @@ export const Homepage = (props) => {
                 </button>
                   </div>
                 </div>
+
               </div>
               <div style={{ height: "0px", width: "300px", backgroundColor: "rgb(38,38,38)" }} id={styles.debo}>
                 <div>
