@@ -1,5 +1,6 @@
 import React from 'react'
 import $ from 'jquery'
+import { Link } from 'react-router-dom'
 import GoogleLogin from 'react-google-login'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
@@ -87,13 +88,10 @@ export const Navbar = () => {
         style={{ backgroundColor: 'rgb(38,38,38)', height: "60px" }}
       >
 
-        {/* <a class='navbar-brand' href='/homepage'> */}
-        <Link to="/homepage" className='navbar-brand'>
 
-          <img src={triplo} alt="logo" height="25px" width="141.017px" />
+        <Link to="/homepage" className='navbar-brand'>          <img src={triplo} alt="logo" height="25px" width="141.017px" />
         </Link>
 
-        {/* </a> */}
         <button
           class='navbar-toggler'
           type='button'
@@ -122,16 +120,13 @@ export const Navbar = () => {
                   {user_loggedin}
                 </a>
                 <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
-                  {/* <a
-                    class='dropdown-item'
-                    data-toggle='modal'
-                    data-target='#mybooking'
-                  > */}
-                  <Link to='/allbooking'>
 
+
+                  <Link class='dropdown-item' to='/allbooking'>
                     My Bookings
                   </Link>
-                  {/* </a> */}
+
+
                   <a
                     class='dropdown-item'
                     data-toggle='modal'
@@ -187,7 +182,7 @@ export const Navbar = () => {
                 aria-haspopup='true'
                 aria-expanded='false'
               >
-                AED
+                INR
               </a>
               <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
                 <a class='dropdown-item' href='#'>
@@ -198,27 +193,7 @@ export const Navbar = () => {
                 </a>
               </div>
             </li>
-            <li class='nav-item dropdown'>
-              <a
-                class='nav-link dropdown-toggle'
-                href='#'
-                id='navbarDropdown'
-                role='button'
-                data-toggle='dropdown'
-                aria-haspopup='true'
-                aria-expanded='false'
-              >
-                Dropdown
-              </a>
-              <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
-                <a class='dropdown-item' href='#'>
-                  Action
-                </a>
-                <a class='dropdown-item' href='#'>
-                  Another action
-                </a>
-              </div>
-            </li>
+
 
             {/* <li>
               {auth_logged ? (

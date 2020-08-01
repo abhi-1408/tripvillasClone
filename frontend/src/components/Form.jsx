@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 // import styles from './Form.module.css'
 import dum3 from './imgurl/dum3.jpeg'
-
+import styles from './css/Book.module.css'
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Update_in_Booking, Update_Payment_Flag } from '../Redux/common/action'
 import ReactGa from 'react-ga'
 import $ from 'jquery'
-
+import tick from './imgurl/tick.gif'
 export const Form = (props) => {
   let common = useSelector((state) => state.common)
   const { booking_data, booking_confirmed_details, booking_flag, payment_success, booking_sms_email_flag } = common
@@ -116,6 +116,7 @@ export const Form = (props) => {
 
   const modal = () => {
     window.$('#loadingModal').modal('show')
+    window.$("#blurr").blur()
     // setTimeout(() => {
     //   console.log('completed')
     //   window.$('#loadingModal').modal('hide')
@@ -139,7 +140,7 @@ export const Form = (props) => {
       history.push(
         '/booking-confirm/' + booking_confirmed_details['order_number']
       )
-    }, 2000);
+    }, 5000);
   }
 
 
@@ -151,8 +152,8 @@ export const Form = (props) => {
 
   return (
 
-    <div className='pl-5 pr-5 pb-5 pt-4 mt-3'>
-      <div class='modal fade' id='loadingModal' tabindex='-1' role='dialog'>
+    <div className='pl-5 pr-5 pb-5 pt-4 mt-3' id="blurr">
+      {/* <div class='modal fade' id='loadingModal' tabindex='-1' role='dialog'>
         <div
           class='modal-dialog modal-dialog-centered d-flex justify-content-center'
           role='document'
@@ -178,7 +179,45 @@ export const Form = (props) => {
           </div>
 
         </div>
+      </div> */}
+
+
+      {/* gif modal */}
+
+      <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div style={{ paddingRight: "27%", paddingLeft: "27%", paddingTop: "40%", paddingBottom: "40%" }}>
+            <div style={{ width: "400px", padding: "6px" }}>
+
+              {payment_success ?
+                <h5 className="mb-2" style={{ color: "white" }}>
+                  <img width="40pxpx" height="40pxpx" src={tick} />
+                  <b> Payment confirmed</b></h5> : ""}
+
+              {payment_success && booking_sms_email_flag ?
+                <h5 className="mb-2" style={{ color: "white", fontSize: "20px" }}>
+                  <img width="40pxpx" height="40pxpx" src={tick} />
+                  <b> Email & SMS sent</b></h5> : ""}
+
+              {payment_success && booking_sms_email_flag ?
+                <h5 className="mb-2" style={{ color: "white", fontSize: "20px" }}>
+                  <img width="40pxpx" height="40pxpx" src={tick} />
+                  <b> Order Confirmed</b></h5> : ""}
+
+
+            </div>
+          </div>
+        </div>
       </div>
+
+
+
+
+
+
+
+
+
 
       <div className='row p-2'>
         <div className='col-6 pl-3 pb-3 pr-3'>
@@ -279,7 +318,7 @@ export const Form = (props) => {
               <div className='text-center shadow bg-white rounded p-4 '>
                 <p className='mt-2'>
                   {' '}
-                  <b>{booking_data[0].property.max_guests}</b>
+                  <b>2</b>
                 </p>
                 <p>
                   <small>Guests</small>
@@ -292,7 +331,7 @@ export const Form = (props) => {
                 <p className='mt-2'>
                   {' '}
 
-                  <b>{booking_data[0][`property`][`total_units`]}</b>
+                  <b>1</b>
 
 
                 </p>
@@ -302,33 +341,53 @@ export const Form = (props) => {
               </div>
             </div>
           </div>
+
+          <div className="row mt-5" style={{ width: "100%" }}>
+
+            <table style={{ width: "100%" }}>
+              <tr>
+                <td><div style={{ float: "left" }}>Sub Total</div></td>
+                <td> <div style={{ float: "right" }}>{booking_data[0].total_cost.sub_total}</div></td>
+              </tr>
+              <tr>
+                <td> <div style={{ float: "left" }}>Discount</div></td>
+                <td><div style={{ float: "right" }}>
+                  {booking_data[0].total_cost.discount}</div></td>
+              </tr>
+              <tr>
+                <td> <div style={{ float: "left" }}> Tax</div></td>
+                <td><div style={{ float: "right" }}>
+                  {booking_data[0].total_cost.tax}</div></td>
+              </tr>
+              <tr>
+                <td> <div style={{ float: "left" }}> Cleaning
+              fee</div></td>
+                <td><div style={{ float: "right" }}>
+                  {booking_data[0].total_cost.cleaning_tax}</div></td>
+              </tr>
+              <tr>
+                <td> <div style={{ float: "left" }}> <b>Total</b>
+                </div></td>
+                <td><div style={{ float: "right" }}><b>
+                  {booking_data[0].total_cost.total}</b></div></td>
+              </tr>
+
+            </table>
+
+
+
+
+
+
+
+
+
+
+
+          </div>
+
+
           <div className='row mt-3 '>
-            <div className='mt-4'>
-              Sub
-              Total.....................................................................................................................
-              {booking_data[0].total_cost.sub_total}
-            </div>
-            <div className='mt-4'>
-              Discount......................................................................................................................
-              {booking_data[0].total_cost.discount}
-            </div>
-            <div className='mt-4'>
-              Tax................................................................................................................................
-              {booking_data[0].total_cost.tax}
-            </div>
-
-            <div className='mt-4'>
-              Cleaning
-              fee.................................................................................................................
-              {booking_data[0].total_cost.cleaning_tax}
-            </div>
-            <div className='mt-4'>
-              <hr />
-              Total..............................................................................................................................
-              {booking_data[0].total_cost.total}
-              <hr />
-            </div>
-
             <div className='mt-5' style={{ color: 'grey', fontSize: '15px' }}>
               <b>Rate Plan</b>
               <p className='mb-4'>No meals provided (European Plan) </p>

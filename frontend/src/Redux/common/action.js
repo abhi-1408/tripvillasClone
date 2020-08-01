@@ -355,6 +355,7 @@ export const Load_User_Booking_List = (info) => {
         return axios({
             method: "post",
 
+
             url: "https://tripvilla-api.abhisheksaklani.co/user/allbooking",
 
             data: info

@@ -92,3 +92,21 @@
   width: 270px;
   height: 50px;
 }
+
+#datp {
+  width: 115px;
+  height: 42px;
+  padding: 6px;
+  border: none;
+  color: #666;
+  padding-left: 8px;
+}
+
+#datp1 {
+  width: 115px;
+  height: 42px;
+  padding: 6px;
+  border: none;
+  color: #666;
+  padding-left: 8px;
+}

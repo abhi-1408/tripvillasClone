@@ -29,16 +29,29 @@ export const AllBooking = (props) => {
         dispatch(Load_User_Booking_List({ "id": user_id_loggedin }))
     }, [])
     if (user_booking_flag == true) {
-        return (<div> BOOKING LIST IS
+
+        return (<div className="text-center mt-5  "><h3>
+            <i class='fas fa-hotel mr-2' style={{ fontSize: '36px' }}></i>
+            MY BOOKINGS</h3>
             <TreeView
-                className={makeStyles().root}
+                className={makeStyles({
+                    root: {
+                        maxWidth: "400px",
+                        color: "grey"
+
+                    }
+                }).root}
+
+       
                 defaultCollapseIcon={<ExpandMoreIcon />}
                 defaultExpandIcon={<ChevronRightIcon />}
             >{
 
                     user_booking_list.map((ele, ind) => {
                         return (<>
-                            <TreeItem nodeId={ind * 10 + 0} label={ele.booking_id}>
+
+                            <TreeItem nodeId={ind * 10 + 0} label={ele.booking_id} >
+
                                 <TreeItem nodeId={ind * 10 + 1} label={"hotel id: " + ele.hotel_id} />
                                 <TreeItem nodeId={ind * 10 + 2} label={"customer name: " + ele.customer_name} />
                                 <TreeItem nodeId={ind * 10 + 3} label={"customer_mobile: " + ele.customer_mobile} />

@@ -2,10 +2,17 @@
   width: 170px;
 }
 
-#topdestination {
-  font-size: 1.5rem;
-  font-weight: 300;
+#topdes {
+ position: relative;
+ z-index: 1;
 }
+
+#debo
+{
+  position: absolute;
+  z-index: 20;
+}
+
 
 .cara {
   margin: 15px;
@@ -26,7 +33,7 @@
   background-repeat: no-repeat;
   background-size: 100% 145%;
   background-position: center;
-  
+ 
 }
 
 #child {
@@ -52,7 +59,9 @@
 }
 
 #datp {
-  width: 150px;
+
+  width: 115px;
+
   height: 42px;
   padding: 6px;
   border: none;
@@ -61,7 +70,9 @@
 }
 
 #datp1 {
-  width: 150px;
+
+  width: 115px;
+
   height: 42px;
   padding: 6px;
   border: none;
@@ -87,6 +98,11 @@
   -webkit-appearance:none; /* Safari and Chrome */
   appearance:none;
   
+}
+
+
+#auto{
+border: none;
 }
 
 

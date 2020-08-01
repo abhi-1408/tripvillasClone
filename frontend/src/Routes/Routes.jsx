@@ -1,4 +1,5 @@
 import React from 'react'
+import { AllBooking } from '../components/AllBooking'
 import { Route, Switch } from 'react-router-dom'
 import { Homepage } from '../components/Homepage'
 import { FilterPage } from '../components/Filterpage'
