@@ -8,7 +8,7 @@ import { Holidayhomes } from '../components/Holidayhomes'
 import { Map } from '../components/Map'
 import { WrappedMap } from '../components/GoogleMaps'
 import { Paymentpage } from '../components/Paymentpage'
-import { AllBooking } from '../components/AllBooking'
+
 import { Form } from '../components/Form'
 
 export const Routes = () => {

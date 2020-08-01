@@ -69,7 +69,7 @@ export const Form = (props) => {
     }
 
 
-    const data = await fetch('http://tripvilla-api.abhisheksaklani.co/admin/rorder', {
+    const data = await fetch('https://tripvilla-api.abhisheksaklani.co/admin/rorder', {
       method: 'POST',
       body: JSON.stringify(booking_data[0]),
     }).then((t) => t.json())

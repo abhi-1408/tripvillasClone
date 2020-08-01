@@ -9,7 +9,6 @@ import { Login_Fetch, Login_Google_Fetch } from '../Redux/login/action'
 import { Logout_User } from '../Redux/login/action'
 import triplo from './imgurl/triplo.png'
 import pro1 from './imgurl/pro1.png'
-import { Link } from 'react-router-dom'
 
 export const Navbar = () => {
   const [r_email, setREmail] = useState('')
@@ -309,7 +308,7 @@ export const Navbar = () => {
                 <div className="col-3">
 
                   <GoogleLogin
-                    clientId='222606975118-9e6c9p3ek68d8ei2in3i1l6ator9ait5.apps.googleusercontent.com'
+                    clientId='214013267945-mo0571dsv5dg9en3ko84r3q90rhl4k79.apps.googleusercontent.com'
                     buttonText='Google'
                     onSuccess={responseGoogle}
                     onFailure={responseGoogle}
