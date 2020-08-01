@@ -1,4 +1,5 @@
 import React from 'react'
+import { AllBooking } from '../components/AllBooking'
 import { Route, Switch } from 'react-router-dom'
 import { Homepage } from '../components/Homepage'
 import { FilterPage } from '../components/Filterpage'
@@ -20,6 +21,7 @@ export const Routes = () => {
             <Route path='/holiday/:state' render={(props) => <Holidayhomes {...props} />} />
             <Route path='/property/:id' render={(props) => <Propertypage {...props} />} />
             <Route path='/book/:id' render={(props) => <Form {...props} />} />
+            <Route path='/allbooking' render={(props) => <AllBooking {...props} />} />
             <Route path='/booking-confirm/:id' render={(props) => <Paymentpage {...props} />} />
         </Switch>
     )

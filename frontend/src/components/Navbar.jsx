@@ -117,13 +117,11 @@ export const Navbar = () => {
                   {user_loggedin}
                 </a>
                 <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
-                  <a
-                    class='dropdown-item'
-                    data-toggle='modal'
-                    data-target='#mybooking'
-                  >
+
+                  <Link class='dropdown-item' to='/allbooking'>
                     My Bookings
-                  </a>
+                  </Link>
+
                   <a
                     class='dropdown-item'
                     data-toggle='modal'
@@ -179,7 +177,7 @@ export const Navbar = () => {
                 aria-haspopup='true'
                 aria-expanded='false'
               >
-                AED
+                INR
               </a>
               <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
                 <a class='dropdown-item' href='#'>
@@ -190,27 +188,7 @@ export const Navbar = () => {
                 </a>
               </div>
             </li>
-            <li class='nav-item dropdown'>
-              <a
-                class='nav-link dropdown-toggle'
-                href='#'
-                id='navbarDropdown'
-                role='button'
-                data-toggle='dropdown'
-                aria-haspopup='true'
-                aria-expanded='false'
-              >
-                Dropdown
-              </a>
-              <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
-                <a class='dropdown-item' href='#'>
-                  Action
-                </a>
-                <a class='dropdown-item' href='#'>
-                  Another action
-                </a>
-              </div>
-            </li>
+
 
             {/* <li>
               {auth_logged ? (

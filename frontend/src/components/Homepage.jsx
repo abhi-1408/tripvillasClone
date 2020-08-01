@@ -259,7 +259,7 @@ export const Homepage = (props) => {
                   </div>
                 </div>
               </div>
-              <div style={{ height: "0px", width: "300px", backgroundColor: "white" }}>
+              <div style={{ height: "0px", width: "300px", backgroundColor: "rgb(38,38,38)" }} id={styles.debo}>
                 <div>
 
                   {suggestions.map((suggestion) => {
@@ -267,7 +267,7 @@ export const Homepage = (props) => {
                       backgroundColor: suggestion.active ? "grey" : "white"
                     }
                     // console.log('suggestions*******', suggestion)
-                    return <div {...getSuggestionItemProps(suggestion, { style })}>
+                    return <div style={{ padding: "5px" }} {...getSuggestionItemProps(suggestion, { style })}>
                       <i class="fa fa-map-marker mr-2  ml-2 mt-1 text-muted" aria-hidden="true"></i>
 
                       {suggestion.description} </div>
@@ -435,7 +435,7 @@ export const Homepage = (props) => {
       </div> */}
 
       {/* Top destination cards */}
-      <div className={styles.topdes}>
+      <div id={styles.topdes}>
         <div className={styles.head}>
           <div style={{ fontSize: '22px' }}>Top Destinations</div>
         </div>
