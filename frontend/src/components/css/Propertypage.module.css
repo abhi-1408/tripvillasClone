@@ -13,6 +13,8 @@
   margin-top: 40px;
 }
 
+
+
 .image {
   height: 446px;
   width: 558px;
@@ -64,15 +66,26 @@
   padding: 20px;
 }
 
-.datepick {
-  width: 130px;
-  border-radius: 0;
-  margin-top: 20px;
-}
+
 .datepick1 {
-  width: 130px;
-  border-radius: 0;
-  margin: 20px;
+  width: 100%;
+  /* background-color: blue; */
+  border-radius: 2;
+  padding: 6px;
+  border: none;
+  color: #666;
+  /* padding-right: 10px; */
+  
+  
+}
+.datepick2 {
+  width: 100%;
+  border-radius: 2;
+  /* background-color: green; */
+  padding: 6px;
+  border: none;
+  color: #666;
+  /* margin-left: 15px; */
 }
 
 #searchbut {

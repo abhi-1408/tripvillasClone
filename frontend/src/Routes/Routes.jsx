@@ -7,6 +7,7 @@ import { Holidayhomes } from '../components/Holidayhomes'
 import { Map } from '../components/Map'
 import { WrappedMap } from '../components/GoogleMaps'
 import { Paymentpage } from '../components/Paymentpage'
+import { AllBooking } from '../components/AllBooking'
 import { Form } from '../components/Form'
 
 export const Routes = () => {
@@ -20,6 +21,7 @@ export const Routes = () => {
             <Route path='/holiday/:state' render={(props) => <Holidayhomes {...props} />} />
             <Route path='/property/:id' render={(props) => <Propertypage {...props} />} />
             <Route path='/book/:id' render={(props) => <Form {...props} />} />
+            <Route path='/allbooking' render={(props) => <AllBooking {...props} />} />
             <Route path='/booking-confirm/:id' render={(props) => <Paymentpage {...props} />} />
         </Switch>
     )

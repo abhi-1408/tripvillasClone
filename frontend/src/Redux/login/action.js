@@ -32,7 +32,7 @@ export const Login_Fetch = (info) => {
     return axios({
       method: 'post',
 
-      url: 'http://tripvilla-api.abhisheksaklani.co/user/signin',
+      url: 'https://tripvilla-api.abhisheksaklani.co/user/signin',
 
       data: info,
     })
@@ -58,7 +58,7 @@ export const Login_Google_Fetch = (info) => {
     return axios({
       method: 'post',
 
-      url: 'http://tripvilla-api.abhisheksaklani.co/user/oauth_signin',
+      url: 'https://tripvilla-api.abhisheksaklani.co/user/oauth_signin',
 
       data: info,
     })

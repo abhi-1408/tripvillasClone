@@ -31,7 +31,7 @@ export const Register_Fetch = (info) => {
         return axios({
             method: "post",
 
-            url: "http://tripvilla-api.abhisheksaklani.co/user/signup",
+            url: "https://tripvilla-api.abhisheksaklani.co/user/signup",
 
             data: info
         })
