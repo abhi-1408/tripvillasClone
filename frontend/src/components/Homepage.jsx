@@ -170,10 +170,17 @@ export const Homepage = (props) => {
 
         }}>
         <div className="row">
-          <h3 className='mt-3' style={{ color: "white" }}>
-            Book <strike>Hotels</strike> Vacation Rentals
+          <div className="col-12">
+
+            <h3 className='mt-3' style={{ color: "white" }}>
+              Book <strike>Hotels</strike> Vacation Rentals
           </h3>
-          <h3 style={{ color: "white" }}>Top Holiday Homes - Villas, Apartments & Homestays</h3>
+          </div>
+          {/* <br /> */}
+          <div className="col-12">
+
+            <h3 style={{ color: "white" }}>Top Holiday Homes - Villas, Apartments & Homestays</h3>
+          </div>
         </div>
         <div>
 
@@ -194,7 +201,7 @@ export const Homepage = (props) => {
                   style={{ paddingRight: "120px" }}
                   onChange={(e) => handleLocationChg(e)}
                 /> */}
-                <PlacesAutocomplete value={search_location} onChange={setSearchLocation} onSelect={handleLocnSelect} debounce={500}>
+                <PlacesAutocomplete style={{ width: "100%%", height: "47px" }} className="form-control" value={search_location} onChange={setSearchLocation} onSelect={handleLocnSelect} debounce={500}>
 
                   {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (<div style={{ color: "black" }}>
                     <input {...getInputProps({ placeholder: "Location" })} />
@@ -206,7 +213,7 @@ export const Homepage = (props) => {
                         }
                         // console.log('suggestions*******', suggestion)
                         return <div {...getSuggestionItemProps(suggestion, { style })}>
-                          {suggestion.description}</div>
+                          hello{suggestion.description}</div>
                       })}
                     </div>
                   </div>)}

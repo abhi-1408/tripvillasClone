@@ -20,7 +20,7 @@ export const Load_Data = (info) => {
         return axios({
             method: "post",
 
-            url: "http://tripvilla-api.abhisheksaklani.co/admin/allhotel",
+            url: "https://tripvilla-api.abhisheksaklani.co/admin/allhotel",
 
             data: {}
         })
@@ -55,7 +55,7 @@ export const Apply_Filters = (info) => {
         return axios({
             method: "get",
 
-            url: "http://tripvilla-api.abhisheksaklani.co/admin/filter",
+            url: "https://tripvilla-api.abhisheksaklani.co/admin/filter",
 
             params: info
         })
@@ -83,7 +83,7 @@ export const Load_Filtered_Data = (info) => {
         return axios({
             method: "get",
 
-            url: "http://tripvilla-api.abhisheksaklani.co/admin/filter",
+            url: "https://tripvilla-api.abhisheksaklani.co/admin/filter",
 
             params: info
         })
@@ -118,7 +118,7 @@ export const Load_Specific_Review = (info) => {
         return axios({
             method: "post",
 
-            url: "http://tripvilla-api.abhisheksaklani.co/entity/getreview",
+            url: "https://tripvilla-api.abhisheksaklani.co/entity/getreview",
 
             data: info
         })
@@ -147,7 +147,7 @@ export const Load_Specific_Property = (info) => {
         return axios({
             method: "post",
 
-            url: "http://tripvilla-api.abhisheksaklani.co/entity/getprop",
+            url: "https://tripvilla-api.abhisheksaklani.co/entity/getprop",
 
             data: info
         })
@@ -191,7 +191,7 @@ export const Load_Recommended_Rating = (info) => {
         return axios({
             method: "post",
 
-            url: "http://tripvilla-api.abhisheksaklani.co/entity/getrecommendrating",
+            url: "https://tripvilla-api.abhisheksaklani.co/entity/getrecommendrating",
 
             data: info
         })
@@ -227,7 +227,7 @@ export const Recommend_By_Specific_Hotel = (info) => {
         dispatch(Loading_Recommend_Specific())
         return axios({
             method: "post",
-            url: "http://tripvilla-api.abhisheksaklani.co/entity/getrecommend",
+            url: "https://tripvilla-api.abhisheksaklani.co/entity/getrecommend",
             data: info
         })
             .then((res) => res.data)
@@ -269,7 +269,7 @@ export const Update_in_Booking = (info) => {
         return axios({
             method: "post",
 
-            url: "http://tripvilla-api.abhisheksaklani.co/admin/create_booking",
+            url: "https://tripvilla-api.abhisheksaklani.co/admin/create_booking",
 
             data: info
         })
@@ -291,7 +291,7 @@ export const Load_Recommended_State = (info) => {
         return axios({
             method: "post",
 
-            url: "http://tripvilla-api.abhisheksaklani.co/entity/getrecommendcity",
+            url: "https://tripvilla-api.abhisheksaklani.co/entity/getrecommendcity",
 
             data: info
         })
@@ -328,7 +328,7 @@ export const Specific_Hotel_Available_On_Date = (info) => {
         return axios({
             method: "post",
 
-            url: "http://tripvilla-api.abhisheksaklani.co/admin/avaispecific",
+            url: "https://tripvilla-api.abhisheksaklani.co/admin/avaispecific",
 
             data: info
         })
@@ -343,4 +343,29 @@ export const Specific_Hotel_Available_On_Date = (info) => {
     }
 }
 
+export const Apply_User_Booking_List = (data) => {
+    return {
+        type: "UPDATE_USER_BOOKING_LIST",
+        payload: data
+    }
+}
 
+export const Load_User_Booking_List = (info) => {
+    return dispatch => {
+        return axios({
+            method: "post",
+
+            url: "https://tripvilla-api.abhisheksaklani.co/user/allbooking",
+
+            data: info
+        })
+            .then((res) => res.data)
+            .then((data) => {
+                dispatch(Apply_User_Booking_List(data))
+            })
+            .catch((err) => {
+                console.log(err)
+
+            })
+    }
+}

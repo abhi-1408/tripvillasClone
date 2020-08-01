@@ -19,7 +19,9 @@ const initialState = {
     payment_success: false,
     specific_property_flag: false,
     recommend_specific_flag: false,
-    recommended_specific: []
+    recommended_specific: [],
+    user_booking_flag: false,
+    user_booking_list: []
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -39,6 +41,12 @@ export default (state = initialState, { type, payload }) => {
                 filter_page_flag: false
             }
 
+        case "UPDATE_USER_BOOKING_LIST":
+            return {
+                ...state,
+                user_booking_flag: true,
+                user_booking_list: payload
+            }
         case "LOAD_RECOMMENDED_SPECIFIC":
             return {
                 ...state,
@@ -139,7 +147,9 @@ export default (state = initialState, { type, payload }) => {
                 booking_confirmed_details: {},
                 booking_flag: false,
                 booking_sms_email_flag: false,
-                payment_success: false
+                payment_success: false,
+                user_booking_flag: false,
+                user_booking_list: []
             }
         default:
             return state

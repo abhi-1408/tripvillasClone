@@ -8,6 +8,7 @@ import { Login_Fetch, Login_Google_Fetch } from '../Redux/login/action'
 import { Logout_User } from '../Redux/login/action'
 import triplo from './imgurl/triplo.png'
 import pro1 from './imgurl/pro1.png'
+import { Link } from 'react-router-dom'
 
 export const Navbar = () => {
   const [r_email, setREmail] = useState('')
@@ -86,10 +87,13 @@ export const Navbar = () => {
         style={{ backgroundColor: 'rgb(38,38,38)', height: "60px" }}
       >
 
-        <a class='navbar-brand' href='/homepage'>
-          <img src={triplo} alt="logo" height="25px" width="141.017px" />
+        {/* <a class='navbar-brand' href='/homepage'> */}
+        <Link to="/homepage" className='navbar-brand'>
 
-        </a>
+          <img src={triplo} alt="logo" height="25px" width="141.017px" />
+        </Link>
+
+        {/* </a> */}
         <button
           class='navbar-toggler'
           type='button'
@@ -118,13 +122,16 @@ export const Navbar = () => {
                   {user_loggedin}
                 </a>
                 <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
-                  <a
+                  {/* <a
                     class='dropdown-item'
                     data-toggle='modal'
                     data-target='#mybooking'
-                  >
+                  > */}
+                  <Link to='/allbooking'>
+
                     My Bookings
-                  </a>
+                  </Link>
+                  {/* </a> */}
                   <a
                     class='dropdown-item'
                     data-toggle='modal'
@@ -312,24 +319,32 @@ export const Navbar = () => {
                   id='exampleInputPassword1'
                 />
               </div>
-              <button
-                type='submit'
-                onClick={handleClickLogin}
-                class='btn btn-primary m-2'
-                style={{ float: 'left' }}
-              >
-                Sign in
+              <div className="row">
+                <div className="col-3">
+                  <button
+                    type='submit'
+                    onClick={handleClickLogin}
+                    class='btn btn-primary m-2'
+                    style={{ float: 'left' }}
+                  >
+                    Sign in
               </button>
-              <div>
-                <GoogleLogin
-                  clientId='222606975118-9e6c9p3ek68d8ei2in3i1l6ator9ait5.apps.googleusercontent.com'
-                  buttonText='SignIN with GOOGLE'
-                  onSuccess={responseGoogle}
-                  onFailure={responseGoogle}
-                  cookiePolicy={'single_host_origin'}
-                  style={{ textAlign: 'center' }}
-                />
+
+                </div>
+                <div className="col-3">
+
+                  <GoogleLogin
+                    clientId='222606975118-9e6c9p3ek68d8ei2in3i1l6ator9ait5.apps.googleusercontent.com'
+                    buttonText='Google'
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                    cookiePolicy={'single_host_origin'}
+                    style={{ textAlign: 'center' }}
+                  />
+                </div>
               </div>
+              {/* <div>
+              </div> */}
               {/* </form> */}
             </div>
           </div>
