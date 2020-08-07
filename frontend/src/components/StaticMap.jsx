@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Load_Filtered_Data } from '../Redux/common/action'
+import { Load_Filtered_Data } from '../Redux/filter/action'
 import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow } from 'react-google-maps'
 
 const StaticMap = (props) => {

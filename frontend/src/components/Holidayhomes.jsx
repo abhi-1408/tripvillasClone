@@ -6,10 +6,13 @@ import { useState } from 'react'
 import dum3 from './imgurl/dum3.jpeg'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  Load_Recommended_State,
+
   Load_Filtered_Data,
   Save_Filter,
-} from '../Redux/common/action'
+} from '../Redux/filter/action'
+import {
+  Load_Recommended_State,
+} from '../Redux/recommend/action'
 import { Link, useHistory } from 'react-router-dom'
 //import Button from '@material-ui/core/Button';
 import Skeleton from '@material-ui/lab/Skeleton'

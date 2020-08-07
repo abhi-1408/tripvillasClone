@@ -2,8 +2,8 @@ from . import entity
 from flask import request,redirect,jsonify
 import json
 from ..services.ratingnreview import add_review
-from ..services.entity import get_specific_property_id,get_all_orders,get_all_review_of_a_property,get_recommended_property,get_recommended_property_by_city,get_recommended_property_by_rating
-
+from ..services.entity import get_specific_property_id,get_all_orders,get_all_review_of_a_property
+from ..services.recommend import ,get_recommended_property,get_recommended_property_by_city,get_recommended_property_by_rating
 @entity.route('/')
 def e_home():
     return 'entity home'
