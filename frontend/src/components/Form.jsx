@@ -9,8 +9,10 @@ import ReactGa from 'react-ga'
 import $ from 'jquery'
 import tick from './imgurl/tick.gif'
 export const Form = (props) => {
+  let book = useSelector((state) => state.booking)
+  const { booking_data, booking_confirmed_details, booking_flag, booking_sms_email_flag } = book
   let common = useSelector((state) => state.common)
-  const { booking_data, booking_confirmed_details, booking_flag, payment_success, booking_sms_email_flag } = common
+  const { payment_success } = common
 
   let login = useSelector((state) => state.login)
   const { user_id_loggedin } = login

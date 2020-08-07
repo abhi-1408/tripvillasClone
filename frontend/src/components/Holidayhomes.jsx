@@ -46,9 +46,13 @@ export const Holidayhomes = (props) => {
     }
   }
   let dispatch = useDispatch()
-  let com = useSelector((state) => state.common)
+  let com = useSelector((state) => state.recommend)
 
-  const { recommended_state, recommended_review, filters } = com
+  const { recommended_state, recommended_review } = com
+
+  let filter = useSelector((state) => state.filter)
+
+  const { filter } = filter
 
   let history = useHistory()
 

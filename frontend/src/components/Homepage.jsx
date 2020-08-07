@@ -89,7 +89,7 @@ export const Homepage = (props) => {
 
   let dispatch = useDispatch()
   let history = useHistory()
-  let com = useSelector((state) => state.common)
+  let com = useSelector((state) => state.filter)
   const { filters } = com
 
   const handleSearch = () => {

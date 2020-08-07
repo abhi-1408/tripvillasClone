@@ -19,7 +19,7 @@ export const AllBooking = (props) => {
 
 
     let dispatch = useDispatch()
-    let com = useSelector(state => state.common)
+    let com = useSelector(state => state.booking)
     const { user_booking_flag,
         user_booking_list } = com
     let log = useSelector(state => state.login)
