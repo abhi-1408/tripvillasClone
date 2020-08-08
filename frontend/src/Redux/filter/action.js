@@ -1,4 +1,12 @@
 import axios from "axios"
+// import { Apply_Data } from '../common/action'
+
+export const Apply_Data = (data) => {
+    return {
+        type: "DATA_LOAD",
+        payload: data
+    }
+}
 
 export const Save_Filter = (data) => {
     return {

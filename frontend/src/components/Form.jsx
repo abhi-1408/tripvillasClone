@@ -4,7 +4,8 @@ import dum3 from './imgurl/dum3.jpeg'
 import styles from './css/Book.module.css'
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Update_in_Booking, Update_Payment_Flag } from '../Redux/booking/action'
+import { Update_in_Booking } from '../Redux/booking/action'
+import { Update_Payment_Flag } from '../Redux/payment/action'
 import ReactGa from 'react-ga'
 import $ from 'jquery'
 import tick from './imgurl/tick.gif'

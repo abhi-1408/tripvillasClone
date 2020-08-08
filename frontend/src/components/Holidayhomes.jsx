@@ -52,7 +52,7 @@ export const Holidayhomes = (props) => {
 
   let filter = useSelector((state) => state.filter)
 
-  const { filter } = filter
+  const { filters } = filter
 
   let history = useHistory()
 
