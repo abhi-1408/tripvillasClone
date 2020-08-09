@@ -22,6 +22,7 @@ In the project directory,  A End to End clone of  [Tripvillas](https://tripvilla
 * Google Maps Integrated
 * Google Analytics Integrated
 * RazorPay Integrated for Payment
+* Similar properties suggestion feature
 
 ### `Installation and Setup Instructions`
 Clone down this repository. You will need `node` and `npm` installed globally on your machine.
